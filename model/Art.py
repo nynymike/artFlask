@@ -21,6 +21,8 @@ Art Entity Schema
 +------------+------------+------------------------------------------------------------------------+
 | venue      | string     | Venue id                                                               |
 +------------+------------+------------------------------------------------------------------------+
+| sold       | boolean    | Whether artwork is sold                                                |
++------------+------------+------------------------------------------------------------------------+
 
 Art Entity JSON sample:
 -----------------------
@@ -34,7 +36,8 @@ Art Entity JSON sample:
         'picture': 'http://artAPI.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890',
         'thumbnail': 'http://artAPI.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890?thumbnail=true'
         'ebay': 'http://auction.com/item/3432840932',
-        'venue': 'be77b7ca-3b4b-4ced-8d58-16e23236fea9'
+        'venue': '131c',
+        'sold': 'false'
         }
 
 """
@@ -47,6 +50,7 @@ class ArtWork():
         self.thumbnail = ""
         self.ebay = ""
         self.venue = ""
+        self.sold = False
 
     def not_empty(self, s):
         if s != "": return True
@@ -61,4 +65,5 @@ class ArtWork():
         if self.not_empty(self.thumbnail): d['thumbnail'] = self.thumbnail,
         if self.not_empty(self.ebay): d['ebay'] = self.ebay,
         if self.not_empty(self.venue): d['venue'] = self.venue
+        d['sold'] = self.sold
         return str(d)

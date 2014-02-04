@@ -10,10 +10,11 @@ Welcome to artAPI's documentation!
    :maxdepth: 2
 
 .. automodule:: api.artists
+.. automodule:: api.staff
 .. automodule:: api.art
 .. automodule:: api.venues
 .. automodule:: api.events
-.. automodule:: api.staff
+.. automodule:: api.manage
 .. automodule:: model.Person
 .. automodule:: model.Art
 .. automodule:: model.Venue

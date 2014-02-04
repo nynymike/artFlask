@@ -26,7 +26,7 @@ Event Entity JSON sample:
 .. code-block:: javascript
 
         {
-        'id': 'd0291047-aded-41f1-8ef6-3fc76700e58b',
+        'id': 'east-2014',
         'startDate': 'Feb  3 00:00:00 UTC 2014',
         'endDate': 'Feb  5 00:00:00 UTC 2014',
         'name': 'Happy Tour 2014',

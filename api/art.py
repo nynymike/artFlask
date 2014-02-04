@@ -7,8 +7,8 @@ Art API
 .. http:get:: /art/(art_id)
 .. http:get:: /art/(art_id)/(action)
 
-   Returns the Art entity for the given art_id. If the action is ``picture`` or ``thumbnail``, the
-   binary is returned.
+   Returns the Art entity for the given art_id. If the action is ``picture`` , ``thumbnail``,
+   ``qrcode``, ``view``
 
    **Example request**:
 

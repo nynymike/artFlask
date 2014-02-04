@@ -74,6 +74,33 @@
 </dd></dl>
 
 </div>
+<span class="target" id="module-api.staff"></span><div class="section" id="staff-api">
+<h2>Staff API<a class="headerlink" href="#staff-api" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Staff listing and detail</div></blockquote>
+<dl class="get">
+<dt id="get--staff">
+<tt class="descname">GET </tt><tt class="descname">/staff</tt><a class="headerlink" href="#get--staff" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="get">
+<dt id="get--staff-(staff_id)">
+<tt class="descname">GET </tt><tt class="descname">/staff/</tt><big>(</big><em>staff_id</em><big>)</big><a class="headerlink" href="#get--staff-(staff_id)" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><strong>200</strong> &#8211; no error</li>
+<li><strong>404</strong> &#8211; staff member not found</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 <span class="target" id="module-api.art"></span><div class="section" id="art-api">
 <h2>Art API<a class="headerlink" href="#art-api" title="Permalink to this headline">¶</a></h2>
 <dl class="get">
@@ -84,8 +111,8 @@
 <dl class="get">
 <dt id="get--art-(art_id)-(action)">
 <tt class="descname">GET </tt><tt class="descname">/art/</tt><big>(</big><em>art_id</em><big>)</big><tt class="descname">/</tt><big>(</big><em>action</em><big>)</big><a class="headerlink" href="#get--art-(art_id)-(action)" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the Art entity for the given art_id. If the action is <tt class="docutils literal"><span class="pre">picture</span></tt> or <tt class="docutils literal"><span class="pre">thumbnail</span></tt>, the
-binary is returned.</p>
+<dd><p>Returns the Art entity for the given art_id. If the action is <tt class="docutils literal"><span class="pre">picture</span></tt> , <tt class="docutils literal"><span class="pre">thumbnail</span></tt>,
+<tt class="docutils literal"><span class="pre">qrcode</span></tt>, <tt class="docutils literal"><span class="pre">view</span></tt></p>
 <p><strong>Example request</strong>:</p>
 <div class="highlight-http"><div class="highlight"><pre><span class="nf">GET</span> <span class="nn">/art/68b4f17f-bd76-4338-a59f-15b4a097a31b</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
@@ -150,31 +177,31 @@ binary is returned.</p>
 </dd></dl>
 
 </div>
-<span class="target" id="module-api.staff"></span><div class="section" id="staff-api">
-<h2>Staff API<a class="headerlink" href="#staff-api" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-api.manage"></span><div class="section" id="manage-api">
+<h2>Manage API<a class="headerlink" href="#manage-api" title="Permalink to this headline">¶</a></h2>
 <blockquote>
-<div>Entity write operations. Access to staff APIs is restricted to people with the <tt class="docutils literal"><span class="pre">staff</span></tt> valie
+<div>Entity write operations. Access to <tt class="docutils literal"><span class="pre">/manage</span></tt> APIs are restricted to people with the <tt class="docutils literal"><span class="pre">staff</span></tt> value
 for user claim <tt class="docutils literal"><span class="pre">role</span></tt>.</div></blockquote>
 <dl class="get">
-<dt id="get--staff-event-(event_id)">
-<tt class="descname">GET </tt><tt class="descname">/staff/event/</tt><big>(</big><em>event_id</em><big>)</big><a class="headerlink" href="#get--staff-event-(event_id)" title="Permalink to this definition">¶</a></dt>
+<dt id="get--manage-event-(event_id)">
+<tt class="descname">GET </tt><tt class="descname">/manage/event/</tt><big>(</big><em>event_id</em><big>)</big><a class="headerlink" href="#get--manage-event-(event_id)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="get">
-<dt id="get--staff-venue-(venue_id)">
-<tt class="descname">GET </tt><tt class="descname">/staff/venue/</tt><big>(</big><em>venue_id</em><big>)</big><a class="headerlink" href="#get--staff-venue-(venue_id)" title="Permalink to this definition">¶</a></dt>
+<dt id="get--manage-venue-(venue_id)">
+<tt class="descname">GET </tt><tt class="descname">/manage/venue/</tt><big>(</big><em>venue_id</em><big>)</big><a class="headerlink" href="#get--manage-venue-(venue_id)" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="get">
-<dt id="get--staff-person-(person_id)">
-<tt class="descname">GET </tt><tt class="descname">/staff/person/</tt><big>(</big><em>person_id</em><big>)</big><a class="headerlink" href="#get--staff-person-(person_id)" title="Permalink to this definition">¶</a></dt>
+<dt id="get--manage-person-(person_id)">
+<tt class="descname">GET </tt><tt class="descname">/manage/person/</tt><big>(</big><em>person_id</em><big>)</big><a class="headerlink" href="#get--manage-person-(person_id)" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
 <li><strong>200</strong> &#8211; no error</li>
-<li><strong>404</strong> &#8211; no error</li>
+<li><strong>404</strong> &#8211; entity not found</li>
 </ul>
 </td>
 </tr>
@@ -260,6 +287,10 @@ for user claim <tt class="docutils literal"><span class="pre">role</span></tt>.<
 <td>string</td>
 <td>Venue id</td>
 </tr>
+<tr class="row-odd"><td>sold</td>
+<td>boolean</td>
+<td>Whether artwork is sold</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -272,7 +303,8 @@ for user claim <tt class="docutils literal"><span class="pre">role</span></tt>.<
 <span class="s1">&#39;picture&#39;</span><span class="o">:</span> <span class="s1">&#39;http://artAPI.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890&#39;</span><span class="p">,</span>
 <span class="s1">&#39;thumbnail&#39;</span><span class="o">:</span> <span class="s1">&#39;http://artAPI.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890?thumbnail=true&#39;</span>
 <span class="s1">&#39;ebay&#39;</span><span class="o">:</span> <span class="s1">&#39;http://auction.com/item/3432840932&#39;</span><span class="p">,</span>
-<span class="s1">&#39;venue&#39;</span><span class="o">:</span> <span class="s1">&#39;be77b7ca-3b4b-4ced-8d58-16e23236fea9&#39;</span>
+<span class="s1">&#39;venue&#39;</span><span class="o">:</span> <span class="s1">&#39;131c&#39;</span><span class="p">,</span>
+<span class="s1">&#39;sold&#39;</span><span class="o">:</span> <span class="s1">&#39;false&#39;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -320,17 +352,69 @@ positive, and South and West are negative</td>
 <td>string</td>
 <td>Twitter handle for the venue</td>
 </tr>
-<tr class="row-even"><td>artists</td>
+<tr class="row-even"><td>mail</td>
+<td>string</td>
+<td>Email address for venue</td>
+</tr>
+<tr class="row-odd"><td>phone</td>
+<td>string</td>
+<td>Phone number for venue</td>
+</tr>
+<tr class="row-even"><td>category</td>
+<td>string</td>
+<td>i.e. &#8220;Happenings&#8221;, &#8220;Exhibitions&#8221; or  &#8220;Artists &amp; Studios&#8221;</td>
+</tr>
+<tr class="row-odd"><td>medium</td>
+<td>string</td>
+<td>Primary material used for art</td>
+</tr>
+<tr class="row-even"><td>description</td>
+<td>string</td>
+<td>Brief text about the venue</td>
+</tr>
+<tr class="row-odd"><td>artists</td>
 <td>List&lt;string&gt;</td>
 <td>Person IDs authorized to post work to this venue</td>
 </tr>
-<tr class="row-odd"><td>websites</td>
+<tr class="row-even"><td>websites</td>
 <td>List&lt;string&gt;</td>
 <td>List of URLs for the venue&#8217;s websites</td>
 </tr>
-<tr class="row-even"><td>managers</td>
+<tr class="row-odd"><td>managers</td>
 <td>List&lt;string&gt;</td>
 <td>Person IDs authorized to manage the venue</td>
+</tr>
+<tr class="row-even"><td>ad_1</td>
+<td>Boolean</td>
+<td>Parking: Official parking for the disabled</td>
+</tr>
+<tr class="row-odd"><td>ad_2</td>
+<td>Boolean</td>
+<td>Entrance and interior: Minimum 32&#8221; doorway clearance space</td>
+</tr>
+<tr class="row-even"><td>ad_3</td>
+<td>Boolean</td>
+<td>Entrance and interior: Entry way without stairs, no lip &amp; with a ramp</td>
+</tr>
+<tr class="row-odd"><td>ad_4</td>
+<td>Boolean</td>
+<td>Entrance and interior: Path around studio with minimum 36&#8221; width</td>
+</tr>
+<tr class="row-even"><td>ad_5</td>
+<td>Boolean</td>
+<td>Restrooms: Entry way with minimum 36&#8221; wide clearance space</td>
+</tr>
+<tr class="row-odd"><td>ad_6</td>
+<td>Boolean</td>
+<td>Restrooms: Minimum 56x60 inch clearance space for toilet</td>
+</tr>
+<tr class="row-even"><td>ad_7</td>
+<td>Boolean</td>
+<td>Restrooms: Grab bars</td>
+</tr>
+<tr class="row-odd"><td>ad_8</td>
+<td>Boolean</td>
+<td>Other: Braille or raised letter signage</td>
 </tr>
 </tbody>
 </table>
@@ -338,15 +422,28 @@ positive, and South and West are negative</td>
 <div class="section" id="venue-entity-json-sample">
 <h2>Venue Entity JSON sample:<a class="headerlink" href="#venue-entity-json-sample" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
-<span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="s1">&#39;6ed666a3-4461-4451-b58e-74adf3e76902&#39;</span><span class="p">,</span>
+<span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="s1">&#39;50.2f&#39;</span><span class="p">,</span>
 <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Gallery Happy&#39;</span><span class="p">,</span>
 <span class="s1">&#39;picture&#39;</span><span class="o">:</span> <span class="s1">&#39;http://www.galleryhappy.com/logo.png&#39;</span>
 <span class="s1">&#39;address&#39;</span><span class="o">:</span> <span class="s1">&#39;100 Cesar Chavez\nAustin, TX 78702&#39;</span>
 <span class="s1">&#39;coordinates&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;40.446195&#39;</span><span class="p">,</span> <span class="s1">&#39;-79.982195&#39;</span><span class="p">],</span>
-<span class="s1">&#39;twitter&#39;</span><span class="o">:</span> <span class="s2">&quot;@GalleryHappy&quot;</span><span class="p">,</span>
+<span class="s1">&#39;twitter&#39;</span><span class="o">:</span> <span class="s1">&#39;@GalleryHappy&#39;</span><span class="p">,</span>
+<span class="s1">&#39;mail&#39;</span><span class="o">:</span><span class="s1">&#39;info@galleryhappy.org&#39;</span><span class="p">,</span>
+<span class="s1">&#39;phone&#39;</span><span class="o">:</span><span class="s1">&#39;+1 512-555-1212&#39;</span><span class="p">,</span>
+<span class="s1">&#39;category&#39;</span><span class="o">:</span><span class="s1">&#39;Artists &amp; Studios&#39;</span><span class="p">.</span>
+<span class="s1">&#39;medium&#39;</span><span class="o">:</span><span class="s1">&#39;Ceramics&#39;</span><span class="p">,</span>
+<span class="s1">&#39;description&#39;</span><span class="o">:</span><span class="s1">&#39;Fun stuff made of clay by talented people.&#39;</span><span class="p">,</span>
 <span class="s1">&#39;artists&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;b18af90a-4054-4c13-a382-8987bbaeb58b&#39;</span><span class="p">],</span>
 <span class="s1">&#39;websites&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;http://www.galleryhappy.com&#39;</span><span class="p">],</span>
-<span class="s1">&#39;managers&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;c3491f70-8c92-11e3-a91c-3c970e1b8563&#39;</span><span class="p">]</span>
+<span class="s1">&#39;managers&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;c3491f70-8c92-11e3-a91c-3c970e1b8563&#39;</span><span class="p">],</span>
+<span class="nx">ad_1</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nx">ad_2</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nx">ad_3</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nx">ad_4</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nx">ad_5</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nx">ad_6</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nx">ad_7</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="nx">ad_8</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -396,7 +493,7 @@ positive, and South and West are negative</td>
 <div class="section" id="event-entity-json-sample">
 <h2>Event Entity JSON sample:<a class="headerlink" href="#event-entity-json-sample" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
-<span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="s1">&#39;d0291047-aded-41f1-8ef6-3fc76700e58b&#39;</span><span class="p">,</span>
+<span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="s1">&#39;east-2014&#39;</span><span class="p">,</span>
 <span class="s1">&#39;startDate&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  3 00:00:00 UTC 2014&#39;</span><span class="p">,</span>
 <span class="s1">&#39;endDate&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  5 00:00:00 UTC 2014&#39;</span><span class="p">,</span>
 <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Happy Tour 2014&#39;</span><span class="p">,</span>
@@ -426,10 +523,11 @@ positive, and South and West are negative</td>
   <ul>
 <li><a class="reference internal" href="#">Welcome to artAPI&#8217;s documentation!</a><ul>
 <li><a class="reference internal" href="#artists-api">Artists API</a></li>
+<li><a class="reference internal" href="#staff-api">Staff API</a></li>
 <li><a class="reference internal" href="#art-api">Art API</a></li>
 <li><a class="reference internal" href="#venues-api">Venues API</a></li>
 <li><a class="reference internal" href="#events-api">Events API</a></li>
-<li><a class="reference internal" href="#staff-api">Staff API</a></li>
+<li><a class="reference internal" href="#manage-api">Manage API</a></li>
 <li><a class="reference internal" href="#person-standard-schema">Person Standard Schema</a></li>
 <li><a class="reference internal" href="#person-custom-schema">Person Custom Schema</a></li>
 <li><a class="reference internal" href="#art-entity-schema">Art Entity Schema</a></li>
