@@ -18,6 +18,8 @@ Art API
       Host: example.com
       Accept: application/json, text/javascript
 
+   :query [see schema]: substring for which to search
+
    :statuscode 200: no error
    :statuscode 404: no such art
 
@@ -25,6 +27,7 @@ Art API
 __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
+from flask import Request
 
 def getArt(art_id):
     return {}
@@ -37,7 +40,12 @@ def getPicture(art_id):
 
 class Art(Resource):
     def get(self, art_id=None, action_type=None):
-        if not art_id: return 'Art not found', 404
+        if not art_id:
+            query = Request.args
+            if not len(query):
+                return 'Art not found', 404
+            else:
+                return queryArt(query)
         else:
             if action_type=="thumbnail":
                 return getThumbnail(art_id)

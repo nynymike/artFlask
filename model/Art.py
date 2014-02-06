@@ -4,25 +4,29 @@
 Art Entity Schema
 -----------------
 
-+------------+------------+------------------------------------------------------------------------+
-| member     | type       | description                                                            |
-+============+============+========================================================================+
-| id         | string     | unique identifier for the work                                         |
-+------------+------------+------------------------------------------------------------------------+
-| artist     | string     | artist id                                                              |
-+------------+------------+------------------------------------------------------------------------+
-| title      | string     | Title for the work                                                     |
-+------------+------------+------------------------------------------------------------------------+
-| picture    | string     | URI for a jpg of artwork                                               |
-+------------+------------+------------------------------------------------------------------------+
-| thumbnail  | string     | URI for a tiny  version of the jpg                                     |
-+------------+------------+------------------------------------------------------------------------+
-| ebay       | string     | URI for ebay auction                                                   |
-+------------+------------+------------------------------------------------------------------------+
-| venue      | string     | Venue id                                                               |
-+------------+------------+------------------------------------------------------------------------+
-| sold       | boolean    | Whether artwork is sold                                                |
-+------------+------------+------------------------------------------------------------------------+
++-------------+------------+------------------------------------------------------------------------+
+| member      | type       | description                                                            |
++=============+============+========================================================================+
+| id          | string     | unique identifier for the work                                         |
++-------------+------------+------------------------------------------------------------------------+
+| artist      | string     | artist id                                                              |
++-------------+------------+------------------------------------------------------------------------+
+| title       | string     | Title for the work                                                     |
++-------------+------------+------------------------------------------------------------------------+
+| description | string     | Artwork materials and style                                            |
++-------------+------------+------------------------------------------------------------------------+
+| picture     | string     | URI for a jpg of artwork                                               |
++-------------+------------+------------------------------------------------------------------------+
+| thumbnail   | string     | URI for a tiny  version of the jpg                                     |
++-------------+------------+------------------------------------------------------------------------+
+| ebay        | string     | URI for ebay auction                                                   |
++-------------+------------+------------------------------------------------------------------------+
+| venue       | string     | Venue id                                                               |
++-------------+------------+------------------------------------------------------------------------+
+| medium      | string     | Artwork materials and style                                            |
++-------------+------------+------------------------------------------------------------------------+
+| sold        | boolean    | Whether artwork is sold                                                |
++-------------+------------+------------------------------------------------------------------------+
 
 Art Entity JSON sample:
 -----------------------
@@ -46,10 +50,12 @@ class ArtWork():
         self.id = ""
         self.artist = ""
         self.title = ""
+        self.description = ""
         self.picture = ""
         self.thumbnail = ""
         self.ebay = ""
         self.venue = ""
+        self.medium = ""
         self.sold = False
 
     def not_empty(self, s):
@@ -58,12 +64,14 @@ class ArtWork():
 
     def __str__(self):
         d = {}
-        if self.not_empty(self.id): d['id'] = self.id,
-        if self.not_empty(self.artist): d['artist'] = self.artist,
-        if self.not_empty(self.title): d['title'] = self.title,
-        if self.not_empty(self.picture): d['picture'] = self.picture,
-        if self.not_empty(self.thumbnail): d['thumbnail'] = self.thumbnail,
-        if self.not_empty(self.ebay): d['ebay'] = self.ebay,
+        if self.not_empty(self.id): d['id'] = self.id
+        if self.not_empty(self.artist): d['artist'] = self.artist
+        if self.not_empty(self.title): d['title'] = self.title
+        if self.not_empty(self.description): d['description'] = self.description
+        if self.not_empty(self.picture): d['picture'] = self.picture
+        if self.not_empty(self.thumbnail): d['thumbnail'] = self.thumbnail
+        if self.not_empty(self.ebay): d['ebay'] = self.ebay
         if self.not_empty(self.venue): d['venue'] = self.venue
+        if self.not_empty(self.medium): d['medium'] = self.medium
         d['sold'] = self.sold
         return str(d)

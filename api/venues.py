@@ -8,6 +8,8 @@ Venues API
 
    Returns the Venue entity for the given venue_id.
 
+   :query [see schema]: substring for which to search
+
    :statuscode 200: no error
    :statuscode 404: no such venue
 
@@ -15,12 +17,21 @@ Venues API
 __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
+from flask import Request
 
 def getVenue(venue_id):
     return {}
 
+def queryVenues(query):
+    return {}
+
 class Venues(Resource):
     def get(self, venue_id=None):
-        if not venue_id: return 'Venue not found', 404
+        if not venue_id:
+            query = Request.args
+            if not len(query):
+                return 'Venue or query not found', 404
+            else:
+                return queryVenues(query)
         else:
             return getVenue(venue_id)

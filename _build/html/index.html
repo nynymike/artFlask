@@ -63,7 +63,13 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name" colspan="2">Query Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>[see schema]</strong> &#8211; substring for which to search</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
 <li><strong>200</strong> &#8211; no error</li>
 <li><strong>404</strong> &#8211; no such artist</li>
 </ul>
@@ -123,7 +129,13 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name" colspan="2">Query Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>[see schema]</strong> &#8211; substring for which to search</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
 <li><strong>200</strong> &#8211; no error</li>
 <li><strong>404</strong> &#8211; no such art</li>
 </ul>
@@ -144,7 +156,13 @@
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name" colspan="2">Query Parameters:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ul class="first simple">
+<li><strong>[see schema]</strong> &#8211; substring for which to search</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
 <li><strong>200</strong> &#8211; no error</li>
 <li><strong>404</strong> &#8211; no such venue</li>
 </ul>
@@ -249,8 +267,8 @@ for user claim <tt class="docutils literal"><span class="pre">role</span></tt>.<
 <table border="1" class="docutils">
 <colgroup>
 <col width="13%" />
-<col width="13%" />
-<col width="75%" />
+<col width="12%" />
+<col width="74%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">member</th>
@@ -271,21 +289,29 @@ for user claim <tt class="docutils literal"><span class="pre">role</span></tt>.<
 <td>string</td>
 <td>Title for the work</td>
 </tr>
-<tr class="row-odd"><td>picture</td>
+<tr class="row-odd"><td>description</td>
+<td>string</td>
+<td>Artwork materials and style</td>
+</tr>
+<tr class="row-even"><td>picture</td>
 <td>string</td>
 <td>URI for a jpg of artwork</td>
 </tr>
-<tr class="row-even"><td>thumbnail</td>
+<tr class="row-odd"><td>thumbnail</td>
 <td>string</td>
 <td>URI for a tiny  version of the jpg</td>
 </tr>
-<tr class="row-odd"><td>ebay</td>
+<tr class="row-even"><td>ebay</td>
 <td>string</td>
 <td>URI for ebay auction</td>
 </tr>
-<tr class="row-even"><td>venue</td>
+<tr class="row-odd"><td>venue</td>
 <td>string</td>
 <td>Venue id</td>
+</tr>
+<tr class="row-even"><td>medium</td>
+<td>string</td>
+<td>Artwork materials and style</td>
 </tr>
 <tr class="row-odd"><td>sold</td>
 <td>boolean</td>
