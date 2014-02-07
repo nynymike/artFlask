@@ -11,7 +11,6 @@ from api.profile import Profile
 class Homepage(Resource):
     def get(self):
         return """
-        <pre>
         ______________________
        |                     |
        | (____)              |
@@ -22,14 +21,12 @@ class Homepage(Resource):
        |  ^^             ^^  |
        |---------------------|
        1       artFlask      1
-       </pre>
        """
 
 UPLOAD_FOLDER = "C:\\Users\\mike\\Documents\\GitHub\\artFlask\\upload"
 MAX_CONTENT_LENGTH = 4 * 1024 * 1024 # 4MB max upload size
 
 app = Flask(__name__)
-
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
 

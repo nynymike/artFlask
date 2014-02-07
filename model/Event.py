@@ -36,6 +36,10 @@ Event Entity JSON sample:
 
 """
 
+def not_empty(self, s):
+    if s != "": return True
+    return False
+
 class Event():
     def __init__(self):
         self.id = ""
@@ -45,17 +49,12 @@ class Event():
         self.description = ""
         self.picture = ""
 
-    def not_empty(self, s):
-        if s != "": return True
-        return False
-
     def __str__(self):
         d = {}
-        if self.not_empty(self.id): d['id'] = self.id,
-        if self.not_empty(self.name): d['name'] = self.name,
-        if self.not_empty(self.startDate): d['startDate'] = self.startDate,
-        if self.not_empty(self.endDate): d['endDate'] = self.endDate,
-        if self.not_empty(self.description): d['description'] = self.description,
-        if self.not_empty(self.picture): d['picture'] = self.picture
-
-    return str(d)
+        if not_empty(self.id): d['id'] = self.id,
+        if not_empty(self.name): d['name'] = self.name,
+        if not_empty(self.startDate): d['startDate'] = self.startDate,
+        if not_empty(self.endDate): d['endDate'] = self.endDate,
+        if not_empty(self.description): d['description'] = self.description,
+        if not_empty(self.picture): d['picture'] = self.picture
+        return str(d)
