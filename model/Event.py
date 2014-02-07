@@ -31,20 +31,19 @@ Event Entity JSON sample:
         'startDate': 'Feb  3 00:00:00 UTC 2014',
         'endDate': 'Feb  5 00:00:00 UTC 2014',
         'description': 'This is a tour of all the artwork that you would want to see to make you smile',
-        'picture': 'http://tour.org/logo/happy2014.png'
+        'picture': 'http://happytour.org/happy2014.png'
         }
 
 """
 
-class ArtWork():
+class Event():
     def __init__(self):
         self.id = ""
-        self.artist = ""
-        self.title = ""
+        self.name = ""
+        self.startDate = ""
+        self.endDate = ""
+        self.description = ""
         self.picture = ""
-        self.thumbnail = ""
-        self.ebay = ""
-        self.venue = ""
 
     def not_empty(self, s):
         if s != "": return True
@@ -53,10 +52,10 @@ class ArtWork():
     def __str__(self):
         d = {}
         if self.not_empty(self.id): d['id'] = self.id,
-        if self.not_empty(self.artist): d['artist'] = self.artist,
-        if self.not_empty(self.title): d['title'] = self.title,
-        if self.not_empty(self.picture): d['picture'] = self.picture,
-        if self.not_empty(self.thumbnail): d['thumbnail'] = self.thumbnail,
-        if self.not_empty(self.ebay): d['ebay'] = self.ebay,
-        if self.not_empty(self.venue): d['venue'] = self.venue
-        return str(d)
+        if self.not_empty(self.name): d['name'] = self.name,
+        if self.not_empty(self.startDate): d['startDate'] = self.startDate,
+        if self.not_empty(self.endDate): d['endDate'] = self.endDate,
+        if self.not_empty(self.description): d['description'] = self.description,
+        if self.not_empty(self.picture): d['picture'] = self.picture
+
+    return str(d)

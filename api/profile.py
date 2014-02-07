@@ -26,46 +26,11 @@ __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
 
-class ManageEvent(Resource):
-    def put(self, event_id=None):
-        if not event_id: return 'Event not found', 404
-        else:
-            return None
-    def post(self, event_id=None):
-        if not event_id: return 'Event not found', 404
-        else:
-            return None
-    def delete(self, event_id=None):
-        if not event_id: return 'Event not found', 404
-        else:
-            return None
+class Profile(Resource):
+    def get(self):
+        return {}
 
-class ManageVenue(Resource):
-    def put(self, venue_id=None):
-        if not venue_id: return 'Venue not found', 404
-        else:
-            return None
+    def put(self, person=None):
+        return None
 
-    def post(self, venue_id=None):
-        if not venue_id: return 'Venue not found', 404
-        else:
-            return None
 
-    def delete(self, venue_id=None):
-        if not venue_id: return 'Venue not found', 404
-        else:
-            return None
-
-class ManagePerson(Resource):
-    def put(self, person_id=None):
-        if not person_id: return 'Person not found', 404
-        else:
-            return None
-    def post(self, person_id=None):
-        if not person_id: return 'Person not found', 404
-        else:
-            return None
-    def delete(self, person_id=None):
-        if not person_id: return 'Person not found', 404
-        else:
-            return None

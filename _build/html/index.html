@@ -643,10 +643,6 @@ Some attributes may not be writable. todo: list attributes</p>
 <td>string</td>
 <td>One or more of the following: patron, artist, staff, venueManager</td>
 </tr>
-<tr class="row-even"><td>art</td>
-<td>List&lt;string&gt;</td>
-<td>List of art_ids created by the person</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -857,69 +853,14 @@ positive, and South and West are negative</td>
 <span class="s1">&#39;artists&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;b18af90a-4054-4c13-a382-8987bbaeb58b&#39;</span><span class="p">],</span>
 <span class="s1">&#39;websites&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;http://www.galleryhappy.com&#39;</span><span class="p">],</span>
 <span class="s1">&#39;managers&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;c3491f70-8c92-11e3-a91c-3c970e1b8563&#39;</span><span class="p">],</span>
-<span class="nx">ad_1</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-<span class="nx">ad_2</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-<span class="nx">ad_3</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-<span class="nx">ad_4</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-<span class="nx">ad_5</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-<span class="nx">ad_6</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-<span class="nx">ad_7</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-<span class="nx">ad_8</span><span class="o">:</span> <span class="kc">false</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</div>
-<span class="target" id="module-model.Event"></span><div class="section" id="event-entity-schema">
-<h2>Event Entity Schema<a class="headerlink" href="#event-entity-schema" title="Permalink to this headline">¶</a></h2>
-<table border="1" class="docutils">
-<colgroup>
-<col width="13%" />
-<col width="18%" />
-<col width="69%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">member</th>
-<th class="head">type</th>
-<th class="head">description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>id</td>
-<td>string</td>
-<td>unique identifier for the event</td>
-</tr>
-<tr class="row-odd"><td>startDate</td>
-<td>string</td>
-<td>Date the event starts</td>
-</tr>
-<tr class="row-even"><td>endDate</td>
-<td>string</td>
-<td>Date the event ends</td>
-</tr>
-<tr class="row-odd"><td>name</td>
-<td>string</td>
-<td>name of the event</td>
-</tr>
-<tr class="row-even"><td>description</td>
-<td>string</td>
-<td>Text descrition of the event</td>
-</tr>
-<tr class="row-odd"><td>picture</td>
-<td>string</td>
-<td>URI for a tiny jpg or png event logo</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section" id="event-entity-json-sample">
-<h2>Event Entity JSON sample:<a class="headerlink" href="#event-entity-json-sample" title="Permalink to this headline">¶</a></h2>
-<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
-<span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="s1">&#39;east-2014&#39;</span><span class="p">,</span>
-<span class="s1">&#39;startDate&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  3 00:00:00 UTC 2014&#39;</span><span class="p">,</span>
-<span class="s1">&#39;endDate&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  5 00:00:00 UTC 2014&#39;</span><span class="p">,</span>
-<span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Happy Tour 2014&#39;</span><span class="p">,</span>
-<span class="s1">&#39;description&#39;</span><span class="o">:</span> <span class="s1">&#39;This is a tour of all the artwork that you would want to see to make you smile&#39;</span><span class="p">,</span>
-<span class="s1">&#39;picture&#39;</span><span class="o">:</span> <span class="s1">&#39;http://tour.org/logo/happy2014.png&#39;</span>
+<span class="s1">&#39;ad_1&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="s1">&#39;ad_2&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="s1">&#39;ad_3&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="s1">&#39;ad_4&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="s1">&#39;ad_5&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="s1">&#39;ad_6&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="s1">&#39;ad_7&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="s1">&#39;ad_8&#39;</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -956,8 +897,6 @@ positive, and South and West are negative</td>
 <li><a class="reference internal" href="#art-entity-json-sample">Art Entity JSON sample:</a></li>
 <li><a class="reference internal" href="#venue-entity-schema">Venue Entity Schema</a></li>
 <li><a class="reference internal" href="#venue-entity-json-sample">Venue Entity JSON sample:</a></li>
-<li><a class="reference internal" href="#event-entity-schema">Event Entity Schema</a></li>
-<li><a class="reference internal" href="#event-entity-json-sample">Event Entity JSON sample:</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>

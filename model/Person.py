@@ -16,8 +16,6 @@ Person Custom Schema
 +------------+--------------+------------------------------------------------------------------------+
 | role       | string       | One or more of the following: patron, artist, staff, venueManager      |
 +------------+--------------+------------------------------------------------------------------------+
-| art        | List<string> | List of art_ids created by the person                                  |
-+------------+--------------+------------------------------------------------------------------------+
 
 """
 
@@ -58,10 +56,13 @@ class Person():
         if self.not_empty(self.name): d['name'] = self.name
         if self.not_empty(self.given_name): d['given_name'] = self.given_name
         if self.not_empty(self.family_name): d['family_name'] = self.family_name
+        if self.not_empty(self.middle_name): d['middle_name'] = self.middle_name
+        if self.not_empty(self.nickname): d['nickname'] = self.nickname
+        if self.not_empty(self.preferred_username): d['preferred_username'] = self.preferred_username
         if self.not_empty(self.profile): d['profile'] = self.profile
         if self.not_empty(self.picture): d['picture'] = self.picture
         if self.not_empty(self.website): d['website'] = self.website
-        if self.not_empty(self.email): d['email'] = self.emailalen
+        if self.not_empty(self.email): d['email'] = self.email
         if self.not_empty(self.email_verified): d['email_verified'] = self.email_verified
         if self.not_empty(self.gender): d['gender'] = self.gender
         if self.not_empty(self.birthdate): d['birthdate'] = self.birthdate

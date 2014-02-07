@@ -80,18 +80,26 @@ Venue Entity JSON sample:
         'artists': ['b18af90a-4054-4c13-a382-8987bbaeb58b'],
         'websites': ['http://www.galleryhappy.com'],
         'managers': ['c3491f70-8c92-11e3-a91c-3c970e1b8563'],
-        ad_1: true,
-        ad_2: true,
-        ad_3: true,
-        ad_4: true,
-        ad_5: true,
-        ad_6: true,
-        ad_7: true,
-        ad_8: false
+        'ad_1': true,
+        'ad_2': true,
+        'ad_3': true,
+        'ad_4': true,
+        'ad_5': true,
+        'ad_6': true,
+        'ad_7': true,
+        'ad_8': false
         }
 
 """
-import sys
+def not_empty(self, s):
+    if type(s) == type(""):
+        if s != "": return True
+        return False
+
+def get_boolean(b):
+    if b: return "true"
+    return "false"
+
 
 class Venue():
     def __init__(self):
@@ -118,15 +126,6 @@ class Venue():
         self.ada_6 = False
         self.ada_7 = False
         self.ada_8 = False
-
-def not_empty(self, s):
-    if type(s) == type(""):
-        if s != "": return True
-        return False
-
-def get_boolean(b):
-    if b: return "true"
-    return "false"
 
 def __str__(self):
     d = {}
