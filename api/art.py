@@ -23,6 +23,36 @@ Art API
    :statuscode 200: no error
    :statuscode 404: no such art
 
+.. http:post:: /art
+
+   Uploads a new file, returning the newly created art id
+
+   :form file: File to be uploaded
+   :form title: Title of the work
+   :form description: Description of the work
+   :form ebay: Ebay URL
+   :form venue: Venue ID
+   :form medium: Artwork materials and style
+   :form sold: Whether the work is sold
+
+   :statuscode 201: Art Created
+   :statuscode 404: Error uploading
+
+.. http:put:: /art/(art_id)
+
+   Update artwork by sending a json object for a given work.
+
+   :jsonparam string file: base64 encoded bytes for the image
+   :jsonparam string title: Title of the work
+   :jsonparam string description: Description of the work
+   :jsonparam string ebay: Ebay URL
+   :jsonparam string venue: Venue ID
+   :jsonparam string medium: Artwork materials and style
+   :jsonparam boolean sold: Whether the work is sold
+
+   :statuscode 200: Update Successful
+   :statuscode 404: Error uploading
+
 """
 __author__ = 'Michael Schwartz'
 
@@ -52,3 +82,23 @@ class Art(Resource):
             if action_type=="picture":
                 return getPicture(art_id)
             return getArt(art_id)
+
+    def post(self):
+        # Get params and write
+        # Convert image to web size
+        # Write file
+        # Convert image to thumbnail
+        # Write file
+        # Create db entry for art
+        if False: return '',404
+        return '',201
+
+    def put(self):
+        # Get file from json data and base64 decode
+        # Convert image to web size
+        # Write file
+        # Convert image to thumbnail
+        # Update db entry for art
+        if False: return '',404
+        return '',200
+

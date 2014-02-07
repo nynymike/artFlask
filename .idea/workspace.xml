@@ -67,7 +67,7 @@
       <file leaf-file-name="artAPI.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/artAPI.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="551" selection-end="551" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="682">
+            <state line="18" column="51" selection-start="564" selection-end="564" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="704">
               <folding />
             </state>
           </provider>
@@ -76,16 +76,34 @@
       <file leaf-file-name="Art.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/Art.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="80" selection-start="3637" selection-end="3637" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1826">
+            <state line="27" column="40" selection-start="2253" selection-end="2253" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1870">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Person.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Person.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/model/Person.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="24" selection-start="1670" selection-end="1670" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1848">
+            <state line="76" column="0" selection-start="3409" selection-end="3409" vertical-scroll-proportion="1.9555556" vertical-offset="0" max-vertical-offset="1804">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Event.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/Event.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="26" column="0" selection-start="1793" selection-end="1793" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1496">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Venue.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/Venue.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="128" column="18" selection-start="7472" selection-end="7472" vertical-scroll-proportion="0.0" vertical-offset="2696" max-vertical-offset="3564">
               <folding />
             </state>
           </provider>
@@ -94,7 +112,7 @@
       <file leaf-file-name="artists.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/artists.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="22" selection-start="178" selection-end="178" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1012">
+            <state line="32" column="24" selection-start="563" selection-end="563" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1056">
               <folding>
                 <element signature="e#313#356#0" expanded="true" />
               </folding>
@@ -105,7 +123,7 @@
       <file leaf-file-name="venues.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/venues.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="30" selection-start="545" selection-end="596" vertical-scroll-proportion="0.0" vertical-offset="111" max-vertical-offset="924">
+            <state line="15" column="3" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="924">
               <folding>
                 <element signature="e#301#344#0" expanded="true" />
               </folding>
@@ -113,13 +131,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="art.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="art.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/art.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="38" selection-start="1016" selection-end="1016" vertical-scroll-proportion="1.2702702" vertical-offset="0" max-vertical-offset="1298">
+            <state line="24" column="0" selection-start="534" selection-end="534" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="2420">
               <folding>
-                <element signature="e#572#615#0" expanded="true" />
+                <element signature="e#1487#1530#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="manage.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/manage.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="0" selection-start="209" selection-end="209" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1826">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="events.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/events.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="10" column="80" selection-start="161" selection-end="161" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="682">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -149,26 +185,27 @@
         <option value="$PROJECT_DIR$/model/__init__.py" />
         <option value="$PROJECT_DIR$/api/artist.py" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/api/events.py" />
-        <option value="$PROJECT_DIR$/model/Person.py" />
-        <option value="$PROJECT_DIR$/model/Event.py" />
         <option value="$PROJECT_DIR$/api/staff.py" />
-        <option value="$PROJECT_DIR$/api/manage.py" />
         <option value="$PROJECT_DIR$/index.rst" />
-        <option value="$PROJECT_DIR$/model/Venue.py" />
-        <option value="$PROJECT_DIR$/artAPI.py" />
-        <option value="$PROJECT_DIR$/model/Art.py" />
-        <option value="$PROJECT_DIR$/api/artists.py" />
         <option value="$PROJECT_DIR$/api/venues.py" />
+        <option value="$PROJECT_DIR$/conf/artFlask.properties" />
+        <option value="$PROJECT_DIR$/artFlask.properties" />
+        <option value="$PROJECT_DIR$/api/artists.py" />
+        <option value="$PROJECT_DIR$/model/Art.py" />
+        <option value="$PROJECT_DIR$/model/Venue.py" />
+        <option value="$PROJECT_DIR$/model/Event.py" />
+        <option value="$PROJECT_DIR$/api/events.py" />
+        <option value="$PROJECT_DIR$/artAPI.py" />
         <option value="$PROJECT_DIR$/api/art.py" />
+        <option value="$PROJECT_DIR$/model/Person.py" />
+        <option value="$PROJECT_DIR$/api/manage.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="95" />
-    <option name="y" value="7" />
+    <option name="x" value="82" />
     <option name="width" value="1588" />
-    <option name="height" value="967" />
+    <option name="height" value="1021" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -196,7 +233,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -254,6 +290,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -274,6 +311,11 @@
     <option name="myPythonConsoleState">
       <console-settings />
     </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mike\Documents\GitHub\artFlask" />
+    </key>
   </component>
   <component name="RunManager" selected="Python.artAPI">
     <configuration default="false" name="helllo" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -622,7 +664,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="95" y="7" width="1588" height="967" extended-state="0" />
+    <frame x="82" y="0" width="1588" height="1021" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -631,6 +673,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32925472" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
@@ -646,7 +689,6 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.40104166" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988358" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -698,11 +740,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/api/venues.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="10" selection-start="45" selection-end="45" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="527" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/artAPI.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="8" column="0" selection-start="274" selection-end="274" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="646">
@@ -913,19 +950,9 @@
         <state line="31" column="51" selection-start="1106" selection-end="1106" vertical-scroll-proportion="0.0" vertical-offset="527" max-vertical-offset="4522" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/Event.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="24" selection-start="1813" selection-end="1813" vertical-scroll-proportion="0.0" vertical-offset="301" max-vertical-offset="1156" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/index.rst">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="0" selection-start="372" selection-end="372" vertical-scroll-proportion="0.28297055" vertical-offset="0" max-vertical-offset="781" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="191" selection-end="191" vertical-scroll-proportion="0.16873449" vertical-offset="0" max-vertical-offset="806" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/staff.py">
@@ -933,65 +960,86 @@
         <state line="3" column="5" selection-start="39" selection-end="39" vertical-scroll-proportion="0.063275434" vertical-offset="0" max-vertical-offset="806" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/artAPI.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="551" selection-end="551" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="682">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/Art.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="80" selection-start="3637" selection-end="3637" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1826">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/Venue.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="7" selection-start="2814" selection-end="2814" vertical-scroll-proportion="0.13530135" vertical-offset="594" max-vertical-offset="3454">
+        <state line="128" column="18" selection-start="7472" selection-end="7472" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3564">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/events.py">
+    <entry file="file://$PROJECT_DIR$/Properies.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="10" selection-start="45" selection-end="45" vertical-scroll-proportion="0.08118081" vertical-offset="0" max-vertical-offset="813">
+        <state line="12" column="0" selection-start="234" selection-end="234" vertical-scroll-proportion="0.25345623" vertical-offset="0" max-vertical-offset="7062">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/Person.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="24" selection-start="1670" selection-end="1670" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1848">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/artists.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="22" selection-start="178" selection-end="178" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1012">
-          <folding>
-            <element signature="e#313#356#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/venues.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="30" selection-start="545" selection-end="596" vertical-scroll-proportion="0.0" vertical-offset="111" max-vertical-offset="924">
+        <state line="15" column="3" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="924">
           <folding>
             <element signature="e#301#344#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/model/Art.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="40" selection-start="2253" selection-end="2253" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1870">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/artAPI.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="51" selection-start="564" selection-end="564" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="704">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/art.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="38" selection-start="1016" selection-end="1016" vertical-scroll-proportion="1.2702702" vertical-offset="0" max-vertical-offset="1298">
+        <state line="24" column="0" selection-start="534" selection-end="534" vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="2420">
           <folding>
-            <element signature="e#572#615#0" expanded="true" />
+            <element signature="e#1487#1530#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/Event.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="0" selection-start="1793" selection-end="1793" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1496">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/artists.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="24" selection-start="563" selection-end="563" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1056">
+          <folding>
+            <element signature="e#313#356#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/events.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="80" selection-start="161" selection-end="161" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="682">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="209" selection-end="209" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1826">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/Person.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="0" selection-start="3409" selection-end="3409" vertical-scroll-proportion="1.9555556" vertical-offset="0" max-vertical-offset="1804">
+          <folding />
         </state>
       </provider>
     </entry>

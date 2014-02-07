@@ -11,6 +11,8 @@ Venue Entity Schema
 +-------------+---------------+------------------------------------------------------------------------+
 | name        | string        | Name of the venue - MUST be unique                                     |
 +-------------+---------------+------------------------------------------------------------------------+
+| event_id    | string        | Event id                                                               |
++-------------+---------------+------------------------------------------------------------------------+
 | picture     | string        | URL of the End-User's profile picture. This URL MUST refer to an image |
 |             |               | file (for example, a PNG, JPEG, or GIF image file), rather than to a   |
 |             |               | Web page containing an image.                                          |
@@ -63,8 +65,9 @@ Venue Entity JSON sample:
 .. code-block:: javascript
 
         {
-        'id': '50.2f',
+        'id': 'd471b627-f7f3-4872-96e2-2af4d813673f',
         'name': 'Gallery Happy',
+        'evemt_id': 'a93335d9-ca6e-4824-8e30-fdd4551d2c7b',
         'picture': 'http://www.galleryhappy.com/logo.png'
         'address': '100 Cesar Chavez\\nAustin, TX 78702'
         'coordinates': ['40.446195', '-79.982195'],
@@ -94,6 +97,7 @@ class Venue():
     def __init__(self):
         self.id = ""
         self.name = ""
+        self.event_id = ""
         self.picture = ""
         self.address = ""
         self.coordinates = ""
@@ -128,6 +132,7 @@ def __str__(self):
     d = {}
     if self.not_empty(self.id): d['id'] = self.id
     if self.not_empty(self.name): d['name'] = self.name
+    if self.not_empty(self.event_id): d['event_id'] = self.event_id
     if self.not_empty(self.picture): d['picture'] = self.picture
     if self.not_empty(self.address): d['address'] = self.address
     if self.not_empty(self.coordinates): d['coordinates'] = self.coordinates

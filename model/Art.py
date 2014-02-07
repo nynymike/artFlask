@@ -37,10 +37,12 @@ Art Entity JSON sample:
         'id': '1d5bfb0f-8c4b-11e3-b767-3c970e1b8563',
         'artist': '3ad50b37-947e-46f6-940c-44804d95304f',
         'title': 'Austin Sunrise',
+        'description': 'Third in a series of 90 painting of the beautiful Austin skyline',
         'picture': 'http://artAPI.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890',
         'thumbnail': 'http://artAPI.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890?thumbnail=true'
         'ebay': 'http://auction.com/item/3432840932',
-        'venue': '131c',
+        'venue': '37ae018a-1fb2-4da0-8b75-e439c92e6dd5',
+        'medium': 'Painting',
         'sold': 'false'
         }
 

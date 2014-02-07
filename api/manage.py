@@ -4,15 +4,53 @@
 Manage API
 ----------
 
-   Entity write operations. Access to ``/manage`` APIs are restricted to people with the ``staff`` value
-   for user claim ``role``.
+   Functionality available to the tour admin. Access to ``/manage`` APIs are restricted
+   to people with the ``staff`` value for user claim ``role``.
 
-.. http:get:: /manage/event/(event_id)
-.. http:get:: /manage/venue/(venue_id)
-.. http:get:: /manage/person/(person_id)
+.. http:post:: /manage/event
+
+   Add a new event and return newly created event id. See JSON schema for data format.
+   No need to post event id--it will be automatically generated.
+
+   :statuscode 201: Event Created
+   :statuscode 404: Error creating event
+
+.. http:put:: /manage/event/(event_id)
+
+    Update an event by sending new JSON. See JSON schema for data format.
 
    :statuscode 200: no error
-   :statuscode 404: entity not found
+   :statuscode 404: Event not found
+
+.. http:post:: /manage/venue
+
+   Add a new venue and return newly created venue id. See JSON schema for data format.
+   No need to post venue id--it will be automatically generated.
+
+   :statuscode 201: Venue Created
+   :statuscode 404: Error creating Venue
+
+.. http:put:: /manage/venue/(venue_id)
+
+    Update an venue by sending new JSON. See JSON schema for data format.
+
+   :statuscode 200: no error
+   :statuscode 404: Venue not found
+
+.. http:post:: /manage/person
+
+   Add a new person and return newly created person id. See JSON schema for data format.
+   No need to post person id--it will be automatically generated.
+
+   :statuscode 201: Person Created
+   :statuscode 404: Error creating Person
+
+.. http:put:: /manage/person/(person_id)
+
+    Update an person by sending new JSON. See JSON schema for data format.
+
+   :statuscode 200: no error
+   :statuscode 404: Person not found
 
 """
 __author__ = 'Michael Schwartz'

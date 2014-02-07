@@ -47,7 +47,6 @@ class Person():
         # Custom claims
         self.twitter = ""
         self.role = ""
-        self.art = []
 
     def not_empty(self, s):
         if s != "": return True
@@ -74,5 +73,4 @@ class Person():
         if self.not_empty(self.updated_at): d['updated_at'] = self.updated_at
         if self.not_empty(self.updated_at): d['twitter'] = self.twitter
         if self.not_empty(self.updated_at): d['role'] = self.role
-        if len(self.art): d['art'] = self.art
         return str(d)

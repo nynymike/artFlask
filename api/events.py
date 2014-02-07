@@ -10,7 +10,6 @@ Events API
 
    :statuscode 200: no error
    :statuscode 404: no such event
-   :statuscode 422: duplicate event - contact staff
 
 """
 __author__ = 'Michael Schwartz'
@@ -24,6 +23,4 @@ class Events(Resource):
     def get(self, event_id=None):
         if not event_id: return 'Event not found', 404
         else:
-            event = getEvent(event_id)
-            if len(getEvent) > 1: 'duplicate event - contact staff', 422
             return getEvent(event_id)

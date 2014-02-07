@@ -11,12 +11,13 @@ class Homepage(Resource):
     def get(self):
         return "Welcome to the Art Tour API Server."
 
-art = {}
-event = {}
-person = {}
-venue = {}
+UPLOAD_FOLDER = "C:\\Users\\mike\\Documents\\GitHub\\artFlask\\upload"
 
 app = Flask(__name__)
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['MAX_CONTENT_LENGTH'] = 4 * 1024 * 1024 # 4MB max upload size
+
 api = Api(app)
 api.add_resource(Homepage, '/')
 api.add_resource(Artists, '/api/v1/artists/<string:artist_id>')

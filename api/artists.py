@@ -19,6 +19,7 @@ __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
 from flask import Request
+from flask.ext.restful import reqparse
 
 def getAllArtists():
     return []
@@ -38,3 +39,4 @@ class Artists(Resource):
             else:
                 return queryResults(query)
         else: return getArtist(person_id)
+
