@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to artAPI’s documentation! &mdash; artAPI 0.1 documentation</title>
+    <title>artAPI 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -23,22 +23,13 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="artAPI 0.1 documentation" href="#" /> 
+    <link rel="top" title="None" href="index.html#document-index" /> 
   </head>
   <body>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="http-routingtable.html" title="HTTP Routing Table"
-             >routing table</a> |</li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="#">artAPI 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html#document-index">artAPI 0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -50,8 +41,6 @@
   <div class="section" id="welcome-to-artapi-s-documentation">
 <h1>Welcome to artAPI&#8217;s documentation!<a class="headerlink" href="#welcome-to-artapi-s-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
-<ul class="simple">
-</ul>
 </div>
 <span class="target" id="module-api.art"></span><div class="section" id="art-api">
 <h2>Art API<a class="headerlink" href="#art-api" title="Permalink to this headline">¶</a></h2>
@@ -888,17 +877,17 @@ positive, and South and West are negative</td>
 <td>string</td>
 <td>unique identifier for the event</td>
 </tr>
-<tr class="row-odd"><td>startDate</td>
+<tr class="row-odd"><td>name</td>
+<td>string</td>
+<td>Name of the event - must be unique</td>
+</tr>
+<tr class="row-even"><td>startDate</td>
 <td>string</td>
 <td>Date the event starts</td>
 </tr>
-<tr class="row-even"><td>endDate</td>
+<tr class="row-odd"><td>endDate</td>
 <td>string</td>
 <td>Date the event ends</td>
-</tr>
-<tr class="row-odd"><td>name</td>
-<td>string</td>
-<td>name of the event</td>
 </tr>
 <tr class="row-even"><td>description</td>
 <td>string</td>
@@ -914,10 +903,10 @@ positive, and South and West are negative</td>
 <div class="section" id="event-entity-json-sample">
 <h2>Event Entity JSON sample:<a class="headerlink" href="#event-entity-json-sample" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
-<span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="s1">&#39;east-2014&#39;</span><span class="p">,</span>
+<span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="s1">&#39;happy2014&#39;</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Happy Tour 2014&#39;</span><span class="p">,</span>
 <span class="s1">&#39;startDate&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  3 00:00:00 UTC 2014&#39;</span><span class="p">,</span>
 <span class="s1">&#39;endDate&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  5 00:00:00 UTC 2014&#39;</span><span class="p">,</span>
-<span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Happy Tour 2014&#39;</span><span class="p">,</span>
 <span class="s1">&#39;description&#39;</span><span class="o">:</span> <span class="s1">&#39;This is a tour of all the artwork that you would want to see to make you smile&#39;</span><span class="p">,</span>
 <span class="s1">&#39;picture&#39;</span><span class="o">:</span> <span class="s1">&#39;http://tour.org/logo/happy2014.png&#39;</span>
 <span class="p">}</span>
@@ -940,47 +929,10 @@ positive, and South and West are negative</td>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="#">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Welcome to artAPI&#8217;s documentation!</a><ul>
-<li><a class="reference internal" href="#art-api">Art API</a></li>
-<li><a class="reference internal" href="#artists-api">Artists API</a></li>
-<li><a class="reference internal" href="#events-api">Events API</a></li>
-<li><a class="reference internal" href="#manage-api">Manage API</a></li>
-<li><a class="reference internal" href="#venues-api">Venues API</a></li>
-<li><a class="reference internal" href="#profile-api">Profile API</a></li>
-<li><a class="reference internal" href="#staff-api">Staff API</a></li>
-<li><a class="reference internal" href="#person-standard-schema">Person Standard Schema</a></li>
-<li><a class="reference internal" href="#person-custom-schema">Person Custom Schema</a></li>
-<li><a class="reference internal" href="#art-entity-schema">Art Entity Schema</a></li>
-<li><a class="reference internal" href="#art-entity-json-sample">Art Entity JSON sample:</a></li>
-<li><a class="reference internal" href="#venue-entity-schema">Venue Entity Schema</a></li>
-<li><a class="reference internal" href="#venue-entity-json-sample">Venue Entity JSON sample:</a></li>
-<li><a class="reference internal" href="#event-entity-schema">Event Entity Schema</a></li>
-<li><a class="reference internal" href="#event-entity-json-sample">Event Entity JSON sample:</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+  <h3><a href="index.html#document-index">Table Of Contents</a></h3>
+  <ul class="simple">
 </ul>
 
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
@@ -988,16 +940,7 @@ positive, and South and West are negative</td>
     <div class="related">
       <h3>Navigation</h3>
       <ul>
-        <li class="right" style="margin-right: 10px">
-          <a href="genindex.html" title="General Index"
-             >index</a></li>
-        <li class="right" >
-          <a href="http-routingtable.html" title="HTTP Routing Table"
-             >routing table</a> |</li>
-        <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="#">artAPI 0.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html#document-index">artAPI 0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

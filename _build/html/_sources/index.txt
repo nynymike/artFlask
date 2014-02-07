@@ -9,12 +9,13 @@ Welcome to artAPI's documentation!
 .. toctree::
    :maxdepth: 2
 
-.. automodule:: api.artists
-.. automodule:: api.staff
 .. automodule:: api.art
-.. automodule:: api.venues
+.. automodule:: api.artists
 .. automodule:: api.events
 .. automodule:: api.manage
+.. automodule:: api.venues
+.. automodule:: api.profile
+.. automodule:: api.staff
 .. automodule:: model.Person
 .. automodule:: model.Art
 .. automodule:: model.Venue

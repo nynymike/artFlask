@@ -5,6 +5,15 @@
 Artists API
 -----------
 
+.. http:get:: /artists
+
+   Search artists. Returns a list of Person entities.
+
+   :query [see schema]: substring for which to search
+
+   :statuscode 200: no error
+   :statuscode 404: nothing found
+
 .. http:get:: /artists/(artist_id)
 
    Returns a JSON Person entity for the specified artist

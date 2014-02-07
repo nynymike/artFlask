@@ -58,18 +58,33 @@
    <h1>HTTP Routing Table</h1>
 
    <div class="modindex-jumpbox">
+   <a href="#cap-/Search venues. Returns a list of Venue Entities"><strong>/Search venues. Returns a list of Venue Entities</strong></a> | 
    <a href="#cap-/art"><strong>/art</strong></a> | 
    <a href="#cap-/artists"><strong>/artists</strong></a> | 
-   <a href="#cap-/event"><strong>/event</strong></a> | 
+   <a href="#cap-/events"><strong>/events</strong></a> | 
    <a href="#cap-/manage"><strong>/manage</strong></a> | 
+   <a href="#cap-/profile"><strong>/profile</strong></a> | 
    <a href="#cap-/staff"><strong>/staff</strong></a> | 
    <a href="#cap-/venues"><strong>/venues</strong></a>
    </div>
 
    <table class="indextable modindextable" cellspacing="0" cellpadding="2">
      <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/Search venues. Returns a list of Venue Entities"><td></td><td>
+       <strong>/Search venues. Returns a list of Venue Entities</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="index.html#get-Search venues. Returns a list of Venue Entities"><tt class="xref">GET Search venues. Returns a list of Venue Entities</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
      <tr class="cap" id="cap-/art"><td></td><td>
        <strong>/art</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="index.html#get--art"><tt class="xref">GET /art</tt></a></td><td>
+       <em></em></td></tr>
      <tr>
        <td></td>
        <td>
@@ -88,6 +103,11 @@
      <tr>
        <td></td>
        <td>
+       <a href="index.html#delete--art-(art_id)"><tt class="xref">DELETE /art/(art_id)</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
        <a href="index.html#get--art-(art_id)-(action)"><tt class="xref">GET /art/(art_id)/(action)</tt></a></td><td>
        <em></em></td></tr>
      <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
@@ -96,15 +116,25 @@
      <tr>
        <td></td>
        <td>
-       <a href="index.html#get--artists-(artist_id)"><tt class="xref">GET /artists/(artist_id)</tt></a></td><td>
+       <a href="index.html#get--artists"><tt class="xref">GET /artists</tt></a></td><td>
        <em></em></td></tr>
-     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
-     <tr class="cap" id="cap-/event"><td></td><td>
-       <strong>/event</strong></td><td></td></tr>
      <tr>
        <td></td>
        <td>
-       <a href="index.html#get--event-(event_name)"><tt class="xref">GET /event/(event_name)</tt></a></td><td>
+       <a href="index.html#get--artists-(artist_id)"><tt class="xref">GET /artists/(artist_id)</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/events"><td></td><td>
+       <strong>/events</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="index.html#get--events-"><tt class="xref">GET /events/</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="index.html#get--events-(event_name)"><tt class="xref">GET /events/(event_name)</tt></a></td><td>
        <em></em></td></tr>
      <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
      <tr class="cap" id="cap-/manage"><td></td><td>
@@ -122,6 +152,11 @@
      <tr>
        <td></td>
        <td>
+       <a href="index.html#delete--manage-event-(event_id)"><tt class="xref">DELETE /manage/event/(event_id)</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
        <a href="index.html#post--manage-person"><tt class="xref">POST /manage/person</tt></a></td><td>
        <em></em></td></tr>
      <tr>
@@ -132,12 +167,35 @@
      <tr>
        <td></td>
        <td>
+       <a href="index.html#delete--manage-person-(person_id)"><tt class="xref">DELETE /manage/person/(person_id)</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
        <a href="index.html#post--manage-venue"><tt class="xref">POST /manage/venue</tt></a></td><td>
        <em></em></td></tr>
      <tr>
        <td></td>
        <td>
        <a href="index.html#put--manage-venue-(venue_id)"><tt class="xref">PUT /manage/venue/(venue_id)</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="index.html#delete--manage-venue-(venue_id)"><tt class="xref">DELETE /manage/venue/(venue_id)</tt></a></td><td>
+       <em></em></td></tr>
+     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
+     <tr class="cap" id="cap-/profile"><td></td><td>
+       <strong>/profile</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="index.html#get--profile"><tt class="xref">GET /profile</tt></a></td><td>
+       <em></em></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="index.html#put--profile"><tt class="xref">PUT /profile</tt></a></td><td>
        <em></em></td></tr>
      <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
      <tr class="cap" id="cap-/staff"><td></td><td>
@@ -155,6 +213,11 @@
      <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
      <tr class="cap" id="cap-/venues"><td></td><td>
        <strong>/venues</strong></td><td></td></tr>
+     <tr>
+       <td></td>
+       <td>
+       <a href="index.html#get--venues"><tt class="xref">GET /venues</tt></a></td><td>
+       <em></em></td></tr>
      <tr>
        <td></td>
        <td>

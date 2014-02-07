@@ -25,6 +25,8 @@ api.add_resource(Events, '/api/v1/events/<string:event_id>')
 api.add_resource(Venues, '/api/v1/venues/<string:venue_id>')
 api.add_resource(Art, '/api/v1/art/<string:artist_id>',
                       '/api/v1/art/<string:artist_id>/<string:action_type>')
+api.add_resource(Profile, '/api/v1/profile',
+                 '/api/v1/profile/<string:action_type>')
 api.add_resource(Staff, '/api/v1/staff', '/api/v1/staff/<string:staff_id>')
 api.add_resource(ManageEvent, '/api/v1/staff/event')
 api.add_resource(ManageVenue, '/api/v1/staff/venue')

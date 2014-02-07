@@ -9,11 +9,11 @@ Event Entity Schema
 +=============+===================+========================================================================+
 | id          | string            | unique identifier for the event                                        |
 +-------------+-------------------+------------------------------------------------------------------------+
+| name        | string            | Name of the event - must be unique                                     |
++-------------+-------------------+------------------------------------------------------------------------+
 | startDate   | string            | Date the event starts                                                  |
 +-------------+-------------------+------------------------------------------------------------------------+
 | endDate     | string            | Date the event ends                                                    |
-+-------------+-------------------+------------------------------------------------------------------------+
-| name        | string            | name of the event                                                      |
 +-------------+-------------------+------------------------------------------------------------------------+
 | description | string            | Text descrition of the event                                           |
 +-------------+-------------------+------------------------------------------------------------------------+
@@ -26,10 +26,10 @@ Event Entity JSON sample:
 .. code-block:: javascript
 
         {
-        'id': 'east-2014',
+        'id': 'happy2014',
+        'name': 'Happy Tour 2014',
         'startDate': 'Feb  3 00:00:00 UTC 2014',
         'endDate': 'Feb  5 00:00:00 UTC 2014',
-        'name': 'Happy Tour 2014',
         'description': 'This is a tour of all the artwork that you would want to see to make you smile',
         'picture': 'http://tour.org/logo/happy2014.png'
         }

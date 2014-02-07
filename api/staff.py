@@ -7,6 +7,14 @@ Staff API
    Staff listing and detail
 
 .. http:get:: /staff
+
+   List all staff, or search staff
+
+   :query [see schema]: substring for which to search
+
+   :statuscode 200: no error
+   :statuscode 404: nothing found
+
 .. http:get:: /staff/(staff_id)
 
    :statuscode 200: no error

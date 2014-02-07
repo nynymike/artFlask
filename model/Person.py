@@ -61,7 +61,7 @@ class Person():
         if self.not_empty(self.profile): d['profile'] = self.profile
         if self.not_empty(self.picture): d['picture'] = self.picture
         if self.not_empty(self.website): d['website'] = self.website
-        if self.not_empty(self.email): d['email'] = self.email
+        if self.not_empty(self.email): d['email'] = self.emailalen
         if self.not_empty(self.email_verified): d['email_verified'] = self.email_verified
         if self.not_empty(self.gender): d['gender'] = self.gender
         if self.not_empty(self.birthdate): d['birthdate'] = self.birthdate

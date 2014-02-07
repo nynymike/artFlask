@@ -4,11 +4,17 @@
 Venues API
 ----------
 
+.. http:get:: /venues
+    Search venues. Returns a list of Venue Entities
+
+   :query [see schema]: substring for which to search
+
+   :statuscode 200: no error
+   :statuscode 404: nothing found
+
 .. http:get:: /venues/(venue_id)
 
    Returns the Venue entity for the given venue_id.
-
-   :query [see schema]: substring for which to search
 
    :statuscode 200: no error
    :statuscode 404: no such venue

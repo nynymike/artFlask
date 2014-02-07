@@ -3,6 +3,14 @@
 
 Art API
 -------
+.. http:get:: /art
+
+   Search art. Returns a list of Art entities.
+
+   :query [see schema]: substring for which to search
+
+   :statuscode 200: no error
+   :statuscode 404: nothing found
 
 .. http:get:: /art/(art_id)
 .. http:get:: /art/(art_id)/(action)
@@ -53,6 +61,13 @@ Art API
    :statuscode 200: Update Successful
    :statuscode 404: Error uploading
 
+.. http:delete:: /art/(art_id)
+
+   Delete an artwork (must be owned by the person).
+
+   :statuscode 200: Delete Successful
+   :statuscode 404: Not found
+
 """
 __author__ = 'Michael Schwartz'
 
@@ -102,3 +117,9 @@ class Art(Resource):
         if False: return '',404
         return '',200
 
+    def delete(self):
+        # Find item
+        # Check authorizatoin
+        # Delete file
+        if False: return '',404
+        return '',200
