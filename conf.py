@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# artAPI documentation build configuration file, created by
+# artFlask documentation build configuration file, created by
 # sphinx-quickstart on Sat Feb 01 22:31:12 2014.
 #
 # This file is execfile()d with the current directory set to its
@@ -45,7 +45,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'artAPI'
+project = u'artFlask'
 copyright = u'2014, Michael Schwartz'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -178,7 +178,7 @@ html_static_path = ['_static']
 #html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'artAPIdoc'
+htmlhelp_basename = 'artFlaskdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -198,7 +198,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  ('index', 'artAPI.tex', u'artAPI Documentation',
+  ('index', 'artFlask.tex', u'artFlask Documentation',
    u'Michael Schwartz', 'manual'),
 ]
 
@@ -228,7 +228,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    ('index', 'artapi', u'artAPI Documentation',
+    ('index', 'artflask', u'artFlask Documentation',
      [u'Michael Schwartz'], 1)
 ]
 
@@ -242,8 +242,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  ('index', 'artAPI', u'artAPI Documentation',
-   u'Michael Schwartz', 'artAPI', 'One line description of project.',
+  ('index', 'artFlask', u'artFlask Documentation',
+   u'Michael Schwartz', 'artFlask', 'art tour APIs',
    'Miscellaneous'),
 ]
 
