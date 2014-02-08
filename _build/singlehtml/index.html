@@ -303,8 +303,7 @@ to people with the <tt class="docutils literal"><span class="pre">staff</span></
 <dl class="put">
 <dt id="put--manage-event-(event_id)">
 <tt class="descname">PUT </tt><tt class="descname">/manage/event/</tt><big>(</big><em>event_id</em><big>)</big><a class="headerlink" href="#put--manage-event-(event_id)" title="Permalink to this definition">¶</a></dt>
-<dd><blockquote>
-<div>Update an event by sending new JSON. See JSON schema for data format.</div></blockquote>
+<dd><p>Update an event by sending new JSON. See JSON schema for data format.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -412,30 +411,12 @@ No need to post venue id&#8211;it will be automatically generated.</p>
 </table>
 </dd></dl>
 
-<dl class="post">
-<dt id="post--manage-person">
-<tt class="descname">POST </tt><tt class="descname">/manage/person</tt><a class="headerlink" href="#post--manage-person" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add a new person and return newly created person id. See JSON schema for data format.
-No need to post person id&#8211;it will be automatically generated.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
-<li><strong>201</strong> &#8211; Person Created</li>
-<li><strong>404</strong> &#8211; Error creating Person</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
 <dl class="put">
 <dt id="put--manage-person-(person_id)">
 <tt class="descname">PUT </tt><tt class="descname">/manage/person/</tt><big>(</big><em>person_id</em><big>)</big><a class="headerlink" href="#put--manage-person-(person_id)" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
-<div>Update an person by sending new JSON. See JSON schema for data format.</div></blockquote>
+<div>Update a person by sending new JSON. See JSON schema for data format.
+SCIM update will be sent to oxTrust.</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -454,7 +435,7 @@ No need to post person id&#8211;it will be automatically generated.</p>
 <dt id="delete--manage-person-(person_id)">
 <tt class="descname">DELETE </tt><tt class="descname">/manage/person/</tt><big>(</big><em>person_id</em><big>)</big><a class="headerlink" href="#delete--manage-person-(person_id)" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
-<div>Deletes person</div></blockquote>
+<div>Delete a person. SCIM update will be sent to oxTrust.</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -475,8 +456,8 @@ No need to post person id&#8211;it will be automatically generated.</p>
 <dl class="get">
 <dt id="get--venues">
 <tt class="descname">GET </tt><tt class="descname">/venues</tt><a class="headerlink" href="#get--venues" title="Permalink to this definition">¶</a></dt>
-<dt id="get-Search venues. Returns a list of Venue Entities">
-<tt class="descname">GET </tt><tt class="descname">Search venues. Returns a list of Venue Entities</tt><a class="headerlink" href="#get-Search venues. Returns a list of Venue Entities" title="Permalink to this definition">¶</a></dt>
+<dt id="get-Search venues. Returns a list of Venue entities">
+<tt class="descname">GET </tt><tt class="descname">Search venues. Returns a list of Venue entities</tt><a class="headerlink" href="#get-Search venues. Returns a list of Venue entities" title="Permalink to this definition">¶</a></dt>
 <dd><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -516,6 +497,37 @@ No need to post person id&#8211;it will be automatically generated.</p>
 </dd></dl>
 
 </div>
+<span class="target" id="module-api.register"></span><div class="section" id="register-api">
+<h2>Register API<a class="headerlink" href="#register-api" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div>Registration workflow</div></blockquote>
+<dl class="get">
+<dt id="get--register-(registration_id)">
+<tt class="descname">GET </tt><tt class="descname">/register/</tt><big>(</big><em>registration_id</em><big>)</big><a class="headerlink" href="#get--register-(registration_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the person&#8217;s registration and asks them to choose a password.
+Sends a SCIM update to oxTrust to add the person for OpenID Connect
+authentication.</p>
+</dd></dl>
+
+<dl class="post">
+<dt id="post--register">
+<tt class="descname">POST </tt><tt class="descname">/register</tt><a class="headerlink" href="#post--register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a Person entity to request registration.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<li><strong>200</strong> &#8211; Registration request successful</li>
+<li><strong>406</strong> &#8211; Duplicate registration</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
 <span class="target" id="module-api.profile"></span><div class="section" id="profile-api">
 <h2>Profile API<a class="headerlink" href="#profile-api" title="Permalink to this headline">¶</a></h2>
 <blockquote>
@@ -524,7 +536,7 @@ No need to post person id&#8211;it will be automatically generated.</p>
 <dt id="get--profile">
 <tt class="descname">GET </tt><tt class="descname">/profile</tt><a class="headerlink" href="#get--profile" title="Permalink to this definition">¶</a></dt>
 <dd><blockquote>
-<div>Return Person Entity for person currently logged in.</div></blockquote>
+<div>Return Person entity for person currently logged in.</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -542,7 +554,7 @@ No need to post person id&#8211;it will be automatically generated.</p>
 <dl class="put">
 <dt id="put--profile">
 <tt class="descname">PUT </tt><tt class="descname">/profile</tt><a class="headerlink" href="#put--profile" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send a Person Entity to update profile of currently logged in person.
+<dd><p>Send a Person entity to update profile of currently logged in person.
 Some attributes may not be writable. todo: list attributes</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -850,6 +862,61 @@ positive, and South and West are negative</td>
 <span class="s1">&#39;ad_6&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 <span class="s1">&#39;ad_7&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 <span class="s1">&#39;ad_8&#39;</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<span class="target" id="module-model.Event"></span><div class="section" id="event-entity-schema">
+<h2>Event Entity Schema<a class="headerlink" href="#event-entity-schema" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="18%" />
+<col width="69%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">member</th>
+<th class="head">type</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>id</td>
+<td>string</td>
+<td>unique identifier for the event</td>
+</tr>
+<tr class="row-odd"><td>name</td>
+<td>string</td>
+<td>Name of the event - must be unique</td>
+</tr>
+<tr class="row-even"><td>startDate</td>
+<td>string</td>
+<td>Date the event starts</td>
+</tr>
+<tr class="row-odd"><td>endDate</td>
+<td>string</td>
+<td>Date the event ends</td>
+</tr>
+<tr class="row-even"><td>description</td>
+<td>string</td>
+<td>Text descrition of the event</td>
+</tr>
+<tr class="row-odd"><td>picture</td>
+<td>string</td>
+<td>URI for a tiny jpg or png event logo</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="event-entity-json-sample">
+<h2>Event Entity JSON sample:<a class="headerlink" href="#event-entity-json-sample" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+<span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="s1">&#39;happy2014&#39;</span><span class="p">,</span>
+<span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Happy Tour 2014&#39;</span><span class="p">,</span>
+<span class="s1">&#39;startDate&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  3 00:00:00 UTC 2014&#39;</span><span class="p">,</span>
+<span class="s1">&#39;endDate&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  5 00:00:00 UTC 2014&#39;</span><span class="p">,</span>
+<span class="s1">&#39;description&#39;</span><span class="o">:</span> <span class="s1">&#39;This is a tour of all the artwork that you would want to see to make you smile&#39;</span><span class="p">,</span>
+<span class="s1">&#39;picture&#39;</span><span class="o">:</span> <span class="s1">&#39;http://happytour.org/happy2014.png&#39;</span>
 <span class="p">}</span>
 </pre></div>
 </div>

@@ -14,6 +14,7 @@ Welcome to artAPI's documentation!
 .. automodule:: api.events
 .. automodule:: api.manage
 .. automodule:: api.venues
+.. automodule:: api.register
 .. automodule:: api.profile
 .. automodule:: api.staff
 .. automodule:: model.Person

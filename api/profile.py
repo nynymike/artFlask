@@ -8,14 +8,14 @@ Profile API
 
 .. http:get:: /profile
 
-    Return Person Entity for person currently logged in.
+    Return Person entity for person currently logged in.
 
    :statuscode 200: no error
    :statuscode 404: Event not found
 
 .. http:put:: /profile
 
-   Send a Person Entity to update profile of currently logged in person.
+   Send a Person entity to update profile of currently logged in person.
    Some attributes may not be writable. todo: list attributes
 
    :statuscode 200: Update Successful

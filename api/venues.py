@@ -5,7 +5,7 @@ Venues API
 ----------
 
 .. http:get:: /venues
-    Search venues. Returns a list of Venue Entities
+    Search venues. Returns a list of Venue entities
 
    :query [see schema]: substring for which to search
 

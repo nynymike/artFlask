@@ -7,21 +7,9 @@ from api.events import Events
 from api.manage import ManageEvent, ManageVenue, ManagePerson
 from api.staff import Staff
 from api.profile import Profile
-
-class Homepage(Resource):
-    def get(self):
-        return """
-        ______________________
-       |                     |
-       | (____)              |
-       |  (oo)               |
-       |---\/           /----|
-       |  ||           / |   |
-       |--||          *  ||--|
-       |  ^^             ^^  |
-       |---------------------|
-       1       artFlask      1
-       """
+from api.register import Register
+from flask import render_template
+from flask import Markup
 
 UPLOAD_FOLDER = "C:\\Users\\mike\\Documents\\GitHub\\artFlask\\upload"
 MAX_CONTENT_LENGTH = 4 * 1024 * 1024 # 4MB max upload size
@@ -30,10 +18,14 @@ app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
 api = Api(app)
-api.add_resource(Homepage, '/')
 api.add_resource(Art, '/api/v1/art/<string:artist_id>',
                  '/api/v1/art/<string:artist_id>/<string:action_type>')
+api.add_resource(Register, '/api/v1/register', '/api/v1/register/<string:registration_id>')
 api.add_resource(Profile, '/api/v1/profile')
 api.add_resource(Artists, '/api/v1/artists/<string:artist_id>')
 api.add_resource(Staff, '/api/v1/staff', '/api/v1/staff/<string:staff_id>')

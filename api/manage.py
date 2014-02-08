@@ -9,7 +9,7 @@ Manage API
 
 .. http:put:: /manage/event/(event_id)
 
-    Update an event by sending new JSON. See JSON schema for data format.
+   Update an event by sending new JSON. See JSON schema for data format.
 
    :statuscode 200: no error
    :statuscode 404: Event not found
@@ -50,24 +50,17 @@ Manage API
    :statuscode 200: no error
    :statuscode 404: Venue not found
 
-.. http:post:: /manage/person
-
-   Add a new person and return newly created person id. See JSON schema for data format.
-   No need to post person id--it will be automatically generated.
-
-   :statuscode 201: Person Created
-   :statuscode 404: Error creating Person
-
 .. http:put:: /manage/person/(person_id)
 
-    Update an person by sending new JSON. See JSON schema for data format.
+    Update a person by sending new JSON. See JSON schema for data format.
+    SCIM update will be sent to oxTrust.
 
    :statuscode 200: no error
    :statuscode 404: Person not found
 
 .. http:delete:: /manage/person/(person_id)
 
-    Deletes person
+    Delete a person. SCIM update will be sent to oxTrust.
 
    :statuscode 200: no error
    :statuscode 404: Person not found
@@ -108,6 +101,7 @@ class ManageVenue(Resource):
             return None
 
 class ManagePerson(Resource):
+    # Send SCIM requests to oxTrust
     def put(self, person_id=None):
         if not person_id: return 'Person not found', 404
         else:
