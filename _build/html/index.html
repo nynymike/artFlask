@@ -134,6 +134,7 @@
 <li><strong>sold</strong> &#8211; Whether the work is sold</li>
 <li><strong>series</strong> &#8211; List of Art IDs for related works</li>
 <li><strong>parent_work</strong> &#8211; Art ID of work that is the parent, or provides some other context</li>
+<li><strong>alt_urls</strong> &#8211; List of alternate URLs to display.</li>
 </ul>
 </td>
 </tr>
@@ -191,7 +192,11 @@
 <tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><p class="first">Art ID of work that is the parent, or provides some other context</p>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-even field"><th class="field-name" colspan="2">Jsonparam alt_urls:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><p class="first">List of alternate URLs to display.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Status Codes:</th><td class="field-body"><ul class="first last simple">
 <li><strong>200</strong> &#8211; Update Successful</li>
 <li><strong>404</strong> &#8211; Error uploading</li>
 </ul>
@@ -709,8 +714,8 @@ Some attributes may not be writable. todo: list attributes</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="13%" />
-<col width="12%" />
-<col width="74%" />
+<col width="14%" />
+<col width="73%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">member</th>
@@ -760,12 +765,16 @@ Some attributes may not be writable. todo: list attributes</p>
 <td>All works in this series are sold</td>
 </tr>
 <tr class="row-even"><td>series</td>
-<td>boolean</td>
+<td>List&lt;string&gt;</td>
 <td>List of Art IDs for related works</td>
 </tr>
 <tr class="row-odd"><td>parent_work</td>
-<td>boolean</td>
+<td>string</td>
 <td>Art ID of work that is the parent, or provides some other context</td>
+</tr>
+<tr class="row-even"><td>alt_urls</td>
+<td>List&lt;string&gt;</td>
+<td>Dictionary of alternate sites: name:url</td>
 </tr>
 </tbody>
 </table>
@@ -786,6 +795,7 @@ Some attributes may not be writable. todo: list attributes</p>
 <span class="s1">&#39;series&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;cd32b78b-55c5-4e1f-a482-55669f3b466b&#39;</span><span class="p">,</span>
            <span class="s1">&#39;dc7a61e5-06ff-481c-9037-6d82485a47af&#39;</span><span class="p">],</span>
 <span class="s1">&#39;parent_work&#39;</span><span class="o">:</span> <span class="s1">&#39;237747c7-58bd-4822-a577-992714ebadf7&#39;</span>
+<span class="s1">&#39;alt_urls&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;Detail&#39;</span><span class="o">:</span><span class="s1">&#39;http://goo.gl/23A3fi&#39;</span><span class="p">,</span> <span class="s1">&#39;Back&#39;</span><span class="o">:</span><span class="s1">&#39;http://goo.gl/xc3wyo&#39;</span><span class="p">,}</span>
 <span class="p">}</span>
 </pre></div>
 </div>

@@ -44,6 +44,7 @@ Art API
    :form sold: Whether the work is sold
    :form series: List of Art IDs for related works
    :form parent_work: Art ID of work that is the parent, or provides some other context
+   :form alt_urls: List of alternate URLs to display.
 
    :statuscode 201: Art Created
    :statuscode 404: Error uploading
@@ -61,6 +62,7 @@ Art API
    :jsonparam boolean sold: Whether the work is sold
    :jsonparam series: List of Art IDs for related works
    :jsonparam parent_work: Art ID of work that is the parent, or provides some other context
+   :jsonparam alt_urls: List of alternate URLs to display.
 
    :statuscode 200: Update Successful
    :statuscode 404: Error uploading
