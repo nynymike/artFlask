@@ -17,5 +17,13 @@ ______________________
 |---------------------|
 1       artFlask      1
 </pre>
+<div class=metanav>
+    {% if not session.username %}
+    <a href="{{ url_for('login') }}">log in</a>
+    {% else %}
+    Welcome back <b>{{ session.username }}</b> <br/>
+    <a href="{{ url_for('logout') }}">log out</a>
+    {% endif %}
+</div>
 </body>
 </html>

@@ -9,7 +9,9 @@ Venue Entity Schema
 +=============+===============+========================================================================+
 | id          | string        | unique identifier for the venue                                        |
 +-------------+---------------+------------------------------------------------------------------------+
-| name        | string        | Name of the venue - MUST be unique                                     |
+| site_id     | string        | Site number assigned by the tour staff   - MUST be unique              |
++-------------+---------------+------------------------------------------------------------------------+
+| name        | string        | Name of the venue                                                      |
 +-------------+---------------+------------------------------------------------------------------------+
 | event_id    | string        | Event id                                                               |
 +-------------+---------------+------------------------------------------------------------------------+
@@ -66,8 +68,9 @@ Venue Entity JSON sample:
 
         {
         'id': 'd471b627-f7f3-4872-96e2-2af4d813673f',
+        'site_id': '101c',
         'name': 'Gallery Happy',
-        'evemt_id': 'a93335d9-ca6e-4824-8e30-fdd4551d2c7b',
+        'event_id': 'a93335d9-ca6e-4824-8e30-fdd4551d2c7b',
         'picture': 'http://www.galleryhappy.com/logo.png'
         'address': '100 Cesar Chavez\\nAustin, TX 78702'
         'coordinates': ['40.446195', '-79.982195'],
@@ -105,6 +108,7 @@ class Venue():
     def __init__(self):
         self.id = ""
         self.name = ""
+        self.site_id = ""
         self.event_id = ""
         self.picture = ""
         self.address = ""
@@ -131,6 +135,7 @@ def __str__(self):
     d = {}
     if self.not_empty(self.id): d['id'] = self.id
     if self.not_empty(self.name): d['name'] = self.name
+    if self.not_empty(self.site_id): d['site_id'] = self.site_id
     if self.not_empty(self.event_id): d['event_id'] = self.event_id
     if self.not_empty(self.picture): d['picture'] = self.picture
     if self.not_empty(self.address): d['address'] = self.address

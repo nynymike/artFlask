@@ -17,15 +17,19 @@ Art Entity Schema
 +-------------+------------+------------------------------------------------------------------------+
 | picture     | string     | URI for a jpg of artwork                                               |
 +-------------+------------+------------------------------------------------------------------------+
-| thumbnail   | string     | URI for a tiny  version of the jpg                                     |
+| thumbnail   | string     | URL for a tiny  version of the jpg                                     |
 +-------------+------------+------------------------------------------------------------------------+
-| ebay        | string     | URI for ebay auction                                                   |
+| buyURL      | string     | URL for website to buy the work                                        |
 +-------------+------------+------------------------------------------------------------------------+
 | venue       | string     | Venue id                                                               |
 +-------------+------------+------------------------------------------------------------------------+
 | medium      | string     | Artwork materials and style                                            |
 +-------------+------------+------------------------------------------------------------------------+
-| sold        | boolean    | Whether artwork is sold                                                |
+| sold_out    | boolean    | All works in this series are sold                                      |
++-------------+------------+------------------------------------------------------------------------+
+| series      | boolean    | List of Art IDs for related works                                      |
++-------------+------------+------------------------------------------------------------------------+
+| parent_work | boolean    | Art ID of work that is the parent, or provides some other context      |
 +-------------+------------+------------------------------------------------------------------------+
 
 Art Entity JSON sample:
@@ -40,10 +44,13 @@ Art Entity JSON sample:
         'description': 'Third in a series of 90 painting of the beautiful Austin skyline',
         'picture': 'http://artFlask.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890',
         'thumbnail': 'http://artFlask.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890?thumbnail=true'
-        'ebay': 'http://auction.com/item/3432840932',
+        'buyURL': 'http://auction.com/item/3432840932',
         'venue': '37ae018a-1fb2-4da0-8b75-e439c92e6dd5',
         'medium': 'Painting',
-        'sold': 'false'
+        'sold_out': 'false'
+        'series': ['cd32b78b-55c5-4e1f-a482-55669f3b466b',
+                   'dc7a61e5-06ff-481c-9037-6d82485a47af'],
+        'parent_work': '237747c7-58bd-4822-a577-992714ebadf7'
         }
 
 """
@@ -55,10 +62,12 @@ class ArtWork():
         self.description = ""
         self.picture = ""
         self.thumbnail = ""
-        self.ebay = ""
+        self.buyURL = ""
         self.venue = ""
         self.medium = ""
-        self.sold = False
+        self.sold_out = False
+        self.series = []
+        self.parent_work = ''
 
     def not_empty(self, s):
         if s != "": return True
@@ -72,8 +81,10 @@ class ArtWork():
         if self.not_empty(self.description): d['description'] = self.description
         if self.not_empty(self.picture): d['picture'] = self.picture
         if self.not_empty(self.thumbnail): d['thumbnail'] = self.thumbnail
-        if self.not_empty(self.ebay): d['ebay'] = self.ebay
+        if self.not_empty(self.buyURL): d['buyURL'] = self.buyURL
         if self.not_empty(self.venue): d['venue'] = self.venue
         if self.not_empty(self.medium): d['medium'] = self.medium
-        d['sold'] = self.sold
+        if self.not_empty(self.parent_work): d['parent_work'] = self.parent_work
+        if len(self.series): d['series'] = self.series
+        d['sold_out'] = self.sold_out
         return str(d)

@@ -38,10 +38,12 @@ Art API
    :form file: File to be uploaded
    :form title: Title of the work
    :form description: Description of the work
-   :form ebay: Ebay URL
+   :form buyURL: E-commerce website to buy work
    :form venue: Venue ID
    :form medium: Artwork materials and style
    :form sold: Whether the work is sold
+   :form series: List of Art IDs for related works
+   :form parent_work: Art ID of work that is the parent, or provides some other context
 
    :statuscode 201: Art Created
    :statuscode 404: Error uploading
@@ -53,10 +55,12 @@ Art API
    :jsonparam string file: base64 encoded bytes for the image
    :jsonparam string title: Title of the work
    :jsonparam string description: Description of the work
-   :jsonparam string ebay: Ebay URL
+   :jsonparam string buyURL: Ecommerce website to buy work
    :jsonparam string venue: Venue ID
    :jsonparam string medium: Artwork materials and style
    :jsonparam boolean sold: Whether the work is sold
+   :jsonparam series: List of Art IDs for related works
+   :jsonparam parent_work: Art ID of work that is the parent, or provides some other context
 
    :statuscode 200: Update Successful
    :statuscode 404: Error uploading

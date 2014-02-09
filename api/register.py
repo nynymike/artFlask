@@ -28,7 +28,8 @@ class Register(Resource):
     def get(self, registration_id=None):
         return {}
 
-    def put(self, person=None):
+    def post(self):
+
         return None
 
 
