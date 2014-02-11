@@ -31,6 +31,10 @@ Art Entity Schema
 +-------------+--------------+------------------------------------------------------------------------+
 | parent_work | string       | Art ID of work that is the parent, or provides some other context      |
 +-------------+--------------+------------------------------------------------------------------------+
+| size        | string       | Size of the work                                                       |
++-------------+--------------+------------------------------------------------------------------------+
+| year        | string       | Year the work was created                                              |
++-------------+--------------+------------------------------------------------------------------------+
 | alt_urls    | List<string> | Dictionary of alternate sites: name:url                                |
 +-------------+--------------+------------------------------------------------------------------------+
 
@@ -53,6 +57,8 @@ Art Entity JSON sample:
         'series': ['cd32b78b-55c5-4e1f-a482-55669f3b466b',
                    'dc7a61e5-06ff-481c-9037-6d82485a47af'],
         'parent_work': '237747c7-58bd-4822-a577-992714ebadf7'
+        'size': '24"x34"',
+        'year': '2014',
         'alt_urls': {'Detail':'http://goo.gl/23A3fi', 'Back':'http://goo.gl/xc3wyo',}
         }
 
@@ -74,6 +80,8 @@ class ArtWork():
         self.sold_out = False
         self.series = []
         self.parent_work = ''
+        self.size = ''
+        self.year = ''
         self.alt_urls = {}
 
     def not_empty(self, s):
@@ -92,6 +100,8 @@ class ArtWork():
         if self.not_empty(self.venue): d['venue'] = self.venue
         if self.not_empty(self.medium): d['medium'] = self.medium
         if self.not_empty(self.parent_work): d['parent_work'] = self.parent_work
+        if self.not_empty(self.size): d['size'] = self.size
+        if self.not_empty(self.year): d['year'] = self.year
         if len(self.series): d['series'] = self.series
         d['sold_out'] = self.sold_out
         if len(alt_urls): d['alt_urls'] = self.alt_urls

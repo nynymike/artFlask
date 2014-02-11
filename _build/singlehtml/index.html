@@ -516,18 +516,13 @@ SCIM update will be sent to oxTrust.</div></blockquote>
 <h2>Register API<a class="headerlink" href="#register-api" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div>Registration workflow</div></blockquote>
-<dl class="get">
-<dt id="get--register-(registration_id)">
-<tt class="descname">GET </tt><tt class="descname">/register/</tt><big>(</big><em>registration_id</em><big>)</big><a class="headerlink" href="#get--register-(registration_id)" title="Permalink to this definition">¶</a></dt>
-<dd><p>Validates the person&#8217;s registration and asks them to choose a password.
-Sends a SCIM update to oxTrust to add the person for OpenID Connect
-authentication.</p>
-</dd></dl>
-
 <dl class="post">
 <dt id="post--register">
 <tt class="descname">POST </tt><tt class="descname">/register</tt><a class="headerlink" href="#post--register" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send a Person entity to request registration.</p>
+<dd><p>Send a Person entity to request registration. The following fields may be 
+posted for registration : name, given_name, family_name, middle_name,
+nickname, picture, website, email, gender, birthdate, phone_number, address,
+twitter, social_urls, preferred_contact</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -540,6 +535,14 @@ authentication.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="get">
+<dt id="get--register-(registration_id)">
+<tt class="descname">GET </tt><tt class="descname">/register/</tt><big>(</big><em>registration_id</em><big>)</big><a class="headerlink" href="#get--register-(registration_id)" title="Permalink to this definition">¶</a></dt>
+<dd><p>Validates the person&#8217;s registration and asks them to choose a password.
+Sends a SCIM update to oxTrust to add the person for OpenID Connect
+authentication.</p>
 </dd></dl>
 
 </div>
@@ -671,6 +674,14 @@ Some attributes may not be writable. todo: list attributes</p>
 <td>string</td>
 <td>Field to help the person specify how they want to be contacted</td>
 </tr>
+<tr class="row-odd"><td>registration_code</td>
+<td>string</td>
+<td>Dictionary containing the code, date_sent, date_accepted</td>
+</tr>
+<tr class="row-even"><td>status</td>
+<td>string</td>
+<td>Either &#8220;Pending&#8221;, &#8220;Active&#8221;, &#8220;Suspended&#8221;</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -694,7 +705,10 @@ Some attributes may not be writable. todo: list attributes</p>
                  <span class="s1">&#39;LinkedIn&#39;</span><span class="p">,</span> <span class="s1">&#39;http://www.linkedin.com/in/nynymike&#39;</span><span class="p">},</span>
   <span class="s1">&#39;role&#39;</span><span class="o">:</span> <span class="s1">&#39;artist&#39;</span><span class="p">,</span>
   <span class="s1">&#39;twitter&#39;</span><span class="o">:</span> <span class="s1">&#39;@nynymike&#39;</span><span class="p">,</span>
-  <span class="s1">&#39;preferred_contact&#39;</span><span class="o">:</span> <span class="s1">&#39;Email&#39;</span>
+  <span class="s1">&#39;preferred_contact&#39;</span><span class="o">:</span> <span class="s1">&#39;Email&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;status&#39;</span><span class="o">:</span> <span class="s1">&#39;active&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;registration_code&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;e086acd2-2d0f-440b-bbd0-dbde47301b0b&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;sent&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  3 10:10:31 UTC 2014&#39;</span><span class="p">,</span>
+                         <span class="s1">&#39;accepted&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  3 10:15:09 UTC 2014&#39;</span><span class="p">}}</span>
 </pre></div>
 </div>
 </div>
@@ -761,6 +775,14 @@ Some attributes may not be writable. todo: list attributes</p>
 <td>string</td>
 <td>Art ID of work that is the parent, or provides some other context</td>
 </tr>
+<tr class="row-even"><td>size</td>
+<td>string</td>
+<td>Size of the work</td>
+</tr>
+<tr class="row-odd"><td>year</td>
+<td>string</td>
+<td>Year the work was created</td>
+</tr>
 <tr class="row-even"><td>alt_urls</td>
 <td>List&lt;string&gt;</td>
 <td>Dictionary of alternate sites: name:url</td>
@@ -784,6 +806,8 @@ Some attributes may not be writable. todo: list attributes</p>
 <span class="s1">&#39;series&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;cd32b78b-55c5-4e1f-a482-55669f3b466b&#39;</span><span class="p">,</span>
            <span class="s1">&#39;dc7a61e5-06ff-481c-9037-6d82485a47af&#39;</span><span class="p">],</span>
 <span class="s1">&#39;parent_work&#39;</span><span class="o">:</span> <span class="s1">&#39;237747c7-58bd-4822-a577-992714ebadf7&#39;</span>
+<span class="s1">&#39;size&#39;</span><span class="o">:</span> <span class="s1">&#39;24&quot;x34&quot;&#39;</span><span class="p">,</span>
+<span class="s1">&#39;year&#39;</span><span class="o">:</span> <span class="s1">&#39;2014&#39;</span><span class="p">,</span>
 <span class="s1">&#39;alt_urls&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;Detail&#39;</span><span class="o">:</span><span class="s1">&#39;http://goo.gl/23A3fi&#39;</span><span class="p">,</span> <span class="s1">&#39;Back&#39;</span><span class="o">:</span><span class="s1">&#39;http://goo.gl/xc3wyo&#39;</span><span class="p">,}</span>
 <span class="p">}</span>
 </pre></div>
