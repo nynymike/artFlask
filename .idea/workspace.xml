@@ -38,8 +38,8 @@
         <option name="CONDITION_ENABLED" value="true" />
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
+        <option name="CONDITION" value="&#13;&#13;JAVA" />
+        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -55,8 +55,8 @@
         <option name="CONDITION_ENABLED" value="true" />
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
+        <option name="CONDITION" value="&#13;&#13;JAVA" />
+        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
@@ -69,10 +69,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="art.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/api/art.py">
+      <file leaf-file-name="artFlask.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/artFlask.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="79" column="13" selection-start="2288" selection-end="2288" vertical-scroll-proportion="2.2" vertical-offset="0" max-vertical-offset="3014">
+            <state line="33" column="44" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.0" vertical-offset="484" max-vertical-offset="1364">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="artflask_tests.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/artflask_tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="22" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0" vertical-offset="264" max-vertical-offset="1122">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="register.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/register.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="30" column="0" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="1584">
               <folding />
             </state>
           </provider>
@@ -81,17 +99,19 @@
       <file leaf-file-name="Art.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/Art.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="93" column="55" selection-start="5394" selection-end="5394" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2222">
+            <state line="95" column="0" selection-start="5417" selection-end="5417" vertical-scroll-proportion="0.0" vertical-offset="1064" max-vertical-offset="2222">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Venue.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/Venue.py">
+      <file leaf-file-name="watermark.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/api/watermark.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="33" selection-start="6152" selection-end="6152" vertical-scroll-proportion="0.0" vertical-offset="462" max-vertical-offset="3652">
-              <folding />
+            <state line="15" column="32" selection-start="498" selection-end="498" vertical-scroll-proportion="0.49438202" vertical-offset="66" max-vertical-offset="1078">
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -143,14 +163,17 @@
         <option value="$PROJECT_DIR$/Makefile" />
         <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/templates/login.html" />
-        <option value="$PROJECT_DIR$/artFlask.py" />
-        <option value="$PROJECT_DIR$/api/register.py" />
-        <option value="$PROJECT_DIR$/artflask_tests.py" />
         <option value="$PROJECT_DIR$/model/Venue.py" />
         <option value="$PROJECT_DIR$/model/Profile.py" />
-        <option value="$PROJECT_DIR$/model/Person.py" />
-        <option value="$PROJECT_DIR$/model/Art.py" />
         <option value="$PROJECT_DIR$/api/art.py" />
+        <option value="$PROJECT_DIR$/model/Person.py" />
+        <option value="$USER_HOME$/AppData/Local/Temp/rest-server-v2.py" />
+        <option value="$PROJECT_DIR$/artflask_tests.py" />
+        <option value="$PROJECT_DIR$/api/MongoConnection.py" />
+        <option value="$PROJECT_DIR$/artFlask.py" />
+        <option value="$PROJECT_DIR$/api/register.py" />
+        <option value="$PROJECT_DIR$/model/Art.py" />
+        <option value="$PROJECT_DIR$/api/watermark.py" />
       </list>
     </option>
   </component>
@@ -158,10 +181,10 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="6" />
-    <option name="y" value="11" />
-    <option name="width" value="1552" />
-    <option name="height" value="943" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1696" />
+    <option name="height" value="1026" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -190,6 +213,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -222,7 +246,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
+              <option name="myItemId" value="upload" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -242,7 +266,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -274,25 +297,7 @@
       <recent name="C:\Users\mike\Documents\GitHub\artFlask" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in artflask_tests">
-    <configuration default="false" name="helllo" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="artAPI" />
-      <option name="SCRIPT_NAME" value="C:\Users\mike\IdeaProjects\artAPI\artAPI.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.watermark">
     <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -351,7 +356,9 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
+      <RunnerSettings RunnerId="PyDebugRunner" />
       <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PyDebugRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
@@ -368,6 +375,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="artFlask" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/artFlask.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="watermark" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/api" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="artFlask" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/api/watermark.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
@@ -622,19 +647,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.helllo" />
-      <item index="1" class="java.lang.String" itemvalue="Python.test" />
-      <item index="2" class="java.lang.String" itemvalue="Python.artAPI" />
-      <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in artflask_tests" />
-      <item index="4" class="java.lang.String" itemvalue="Python.artFlask" />
+      <item index="0" class="java.lang.String" itemvalue="Python.test" />
+      <item index="1" class="java.lang.String" itemvalue="Python.artAPI" />
+      <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in artflask_tests" />
+      <item index="3" class="java.lang.String" itemvalue="Python.artFlask" />
+      <item index="4" class="java.lang.String" itemvalue="Python.watermark" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in artflask_tests" />
-        <item index="1" class="java.lang.String" itemvalue="Python.artFlask" />
-        <item index="2" class="java.lang.String" itemvalue="Python.artAPI" />
-        <item index="3" class="java.lang.String" itemvalue="Python.test" />
-        <item index="4" class="java.lang.String" itemvalue="Python.helllo" />
+        <item index="0" class="java.lang.String" itemvalue="Python.watermark" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in artflask_tests" />
+        <item index="2" class="java.lang.String" itemvalue="Python.artFlask" />
+        <item index="3" class="java.lang.String" itemvalue="Python.artAPI" />
+        <item index="4" class="java.lang.String" itemvalue="Python.test" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -668,29 +693,49 @@
     </task>
     <servers />
   </component>
+  <component name="TodoView" selected-index="0">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
   <component name="ToolWindowManager">
-    <frame x="6" y="11" width="1552" height="943" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="7" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3768116" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37569678" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16544567" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496732" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Log4jMonitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18139224" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41400492" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Log4jMonitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37569678" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -713,17 +758,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/api/art.py</url>
-          <line>79</line>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/artFlask.py</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="2" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="13" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -731,9 +769,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/artFlask.py">
+    <entry file="file://$PROJECT_DIR$/model/Art.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="54" selection-start="937" selection-end="937" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="612">
+        <state line="59" column="16" selection-start="4076" selection-end="4076" vertical-scroll-proportion="0.0" vertical-offset="1298" max-vertical-offset="2222">
           <folding />
         </state>
       </provider>
@@ -938,41 +976,14 @@
         <state line="7" column="0" selection-start="187" selection-end="187" vertical-scroll-proportion="-5.808184" vertical-offset="2425" max-vertical-offset="2816" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/artFlask.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="28" selection-start="339" selection-end="339" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1320">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/events.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="7" selection-start="322" selection-end="322" vertical-scroll-proportion="0.7827715" vertical-offset="0" max-vertical-offset="968" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/artflask_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="23" selection-start="253" selection-end="253" vertical-scroll-proportion="0.45318353" vertical-offset="0" max-vertical-offset="682" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/artists.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="9" selection-start="95" selection-end="95" vertical-scroll-proportion="-0.8951311" vertical-offset="676" max-vertical-offset="1210" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/Event.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="23" selection-start="2247" selection-end="2247" vertical-scroll-proportion="0.18726592" vertical-offset="846" max-vertical-offset="1452" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/register.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="659" selection-end="659" vertical-scroll-proportion="0.7940075" vertical-offset="258" max-vertical-offset="902" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/Person.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="37" selection-start="1508" selection-end="1508" vertical-scroll-proportion="0.0" vertical-offset="91" max-vertical-offset="2662" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/profile.py">
@@ -982,22 +993,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/model/Venue.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="33" selection-start="6152" selection-end="6152" vertical-scroll-proportion="0.0" vertical-offset="462" max-vertical-offset="3652">
+        <state line="73" column="33" selection-start="6152" selection-end="6152" vertical-scroll-proportion="0.0" vertical-offset="1518" max-vertical-offset="3652" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/Person.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="23" selection-start="3191" selection-end="3192" vertical-scroll-proportion="2.5758157" vertical-offset="0" max-vertical-offset="2904" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/Event.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="9" selection-start="1803" selection-end="1803" vertical-scroll-proportion="0.49438202" vertical-offset="330" max-vertical-offset="1452" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/art.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="35" selection-start="2310" selection-end="2310" vertical-scroll-proportion="3.2546816" vertical-offset="0" max-vertical-offset="3014" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/artFlask.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="44" selection-start="1164" selection-end="1164" vertical-scroll-proportion="0.0" vertical-offset="484" max-vertical-offset="1364">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/register.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="0" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/artflask_tests.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="22" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0" vertical-offset="251" max-vertical-offset="1078">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/model/Art.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="93" column="55" selection-start="5394" selection-end="5394" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2222">
+        <state line="95" column="0" selection-start="5417" selection-end="5417" vertical-scroll-proportion="0.0" vertical-offset="1328" max-vertical-offset="2222">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/art.py">
+    <entry file="file://$PROJECT_DIR$/api/watermark.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="13" selection-start="2288" selection-end="2288" vertical-scroll-proportion="2.2" vertical-offset="0" max-vertical-offset="3014">
-          <folding />
+        <state line="15" column="32" selection-start="498" selection-end="498" vertical-scroll-proportion="0.49438202" vertical-offset="66" max-vertical-offset="1078">
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

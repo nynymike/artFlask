@@ -23,6 +23,10 @@ Person Custom Schema
 +-------------------+--------------+------------------------------------------------------------------------+
 | preferred_contact | string       | Field to help the person specify how they want to be contacted         |
 +-------------------+--------------+------------------------------------------------------------------------+
+| registration_code | string       | Dictionary containing the code, date_sent, date_accepted               |
++-------------------+--------------+------------------------------------------------------------------------+
+| status            | string       | Either "Pending", "Active", "Suspended"                                |
++-------------------+--------------+------------------------------------------------------------------------+
 
 Person Entity JSON sample:
 --------------------------
@@ -47,7 +51,10 @@ Person Entity JSON sample:
                     'LinkedIn', 'http://www.linkedin.com/in/nynymike'},
      'role': 'artist',
      'twitter': '@nynymike',
-     'preferred_contact': 'Email'
+     'preferred_contact': 'Email',
+     'status': 'active',
+     'registration_code': {'e086acd2-2d0f-440b-bbd0-dbde47301b0b': {'sent': 'Feb  3 10:10:31 UTC 2014',
+                            'accepted': 'Feb  3 10:15:09 UTC 2014'}}
 
 """
 
@@ -80,6 +87,8 @@ class Person():
         self.role = ""
         self.social_urls = {}
         self.preferred_contact = ''
+        self.registration_code = ''
+        self.status = ''
 
     def not_empty(self, s):
         if s != "": return True
@@ -112,4 +121,6 @@ class Person():
         if self.not_empty(self.updated_at): d['role'] = self.role
         if len(self.social_urls): d['social_urls'] = self.social_urls
         if self.not_empty(self.preferred_contact): d['preferred_contact'] = self.preferred_contact
+        if len(self.registration_code): d['registration_code'] = self.registration_code
+        if self.not_empty(self.status): d['status'] = self.status
         return str(d)
