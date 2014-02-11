@@ -57,6 +57,9 @@ Art Entity JSON sample:
         }
 
 """
+
+import json
+
 class ArtWork():
     def __init__(self):
         self.id = ""
@@ -92,4 +95,4 @@ class ArtWork():
         if len(self.series): d['series'] = self.series
         d['sold_out'] = self.sold_out
         if len(alt_urls): d['alt_urls'] = self.alt_urls
-        return str(d)
+        return json.dumps(d)

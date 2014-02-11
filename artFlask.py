@@ -9,19 +9,24 @@ from api.staff import Staff
 from api.profile import Profile
 from api.register import Register
 from flask import render_template
-from flask.ext.pymongo import PyMongo
+
+import os, sys
+sys.path.append(os.getcwd())
+
+from mainapp import app, mongo
 
 UPLOAD_FOLDER = "C:\\Users\\mike\\Documents\\GitHub\\artFlask\\upload"
 MAX_CONTENT_LENGTH = 4 * 1024 * 1024 # 4MB max upload size
 
-app = Flask(__name__)
-app.name = 'artFlask'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
 app.secret_key = 'z\xcbu\xe5#\xf2U\xe5\xc4,\x0cz\xf9\xcboA\xd2Z\xf7Y\x15"|\xe4'
 
+
 @app.route('/')
 def index():
+    ## TESTING
+    print "**********\n", mongo.db, "\n**********\n" 
     return render_template('index.html')
 
 # todo: Should route for OpenID Connect Authn

@@ -1,0 +1,9 @@
+*.pyc
+*.log
+*~
+local.cfg
+/build/*
+*.orig
+.project
+.pydevproject
+.settings/
