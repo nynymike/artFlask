@@ -16,7 +16,7 @@ Art API
 .. http:get:: /art/(art_id)/(action)
 
    Returns the Art entity for the given art_id. If the action is ``picture`` , ``thumbnail``,
-   ``qrcode``, ``view``
+   ``qrcode``, return image from filesystem. If ``view`` return artView.html template
 
    **Example request**:
 
@@ -33,7 +33,12 @@ Art API
 
 .. http:post:: /art
 
-   Uploads a new file, returning the newly created art id
+   Uploads a new file, returning the newly created art id. At this time, the thumbnail,
+   watermarked web sized image, and QR code for the view should be generated. For now,
+   these will be stored in the ``upload`` folder and given filenames of
+   <id>-web.png, <id>-tn.png, and <id>-qr.png where <id> is the Art ID field.
+   Note image funtions are in api/artImageFunctions.py (see test() method).
+   Original uploaded binary will be deleted.
 
    :form file: File to be uploaded
    :form title: Title of the work
@@ -51,7 +56,8 @@ Art API
 
 .. http:put:: /art/(art_id)
 
-   Update artwork by sending a json object for a given work.
+   Update artwork by sending a json object for a given work. Note, if a new image is
+   uploaded, you must re-generate the -web and -tn images using artImageFunctions.py
 
    :jsonparam string file: base64 encoded bytes for the image
    :jsonparam string title: Title of the work

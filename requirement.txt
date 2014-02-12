@@ -1,1 +1,5 @@
 pymongo==2.6.3
+google-api-python-client 
+httplib2
+pillow
+qrcode

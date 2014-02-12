@@ -88,7 +88,7 @@
 <dt id="get--art-(art_id)-(action)">
 <tt class="descname">GET </tt><tt class="descname">/art/</tt><big>(</big><em>art_id</em><big>)</big><tt class="descname">/</tt><big>(</big><em>action</em><big>)</big><a class="headerlink" href="#get--art-(art_id)-(action)" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the Art entity for the given art_id. If the action is <tt class="docutils literal"><span class="pre">picture</span></tt> , <tt class="docutils literal"><span class="pre">thumbnail</span></tt>,
-<tt class="docutils literal"><span class="pre">qrcode</span></tt>, <tt class="docutils literal"><span class="pre">view</span></tt></p>
+<tt class="docutils literal"><span class="pre">qrcode</span></tt>, return image from filesystem. If <tt class="docutils literal"><span class="pre">view</span></tt> return artView.html template</p>
 <p><strong>Example request</strong>:</p>
 <div class="highlight-http"><div class="highlight"><pre><span class="nf">GET</span> <span class="nn">/art/68b4f17f-bd76-4338-a59f-15b4a097a31b</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
 <span class="na">Host</span><span class="o">:</span> <span class="l">example.com</span>
@@ -118,7 +118,12 @@
 <dl class="post">
 <dt id="post--art">
 <tt class="descname">POST </tt><tt class="descname">/art</tt><a class="headerlink" href="#post--art" title="Permalink to this definition">¶</a></dt>
-<dd><p>Uploads a new file, returning the newly created art id</p>
+<dd><p>Uploads a new file, returning the newly created art id. At this time, the thumbnail,
+watermarked web sized image, and QR code for the view should be generated. For now,
+these will be stored in the <tt class="docutils literal"><span class="pre">upload</span></tt> folder and given filenames of
+&lt;id&gt;-web.png, &lt;id&gt;-tn.png, and &lt;id&gt;-qr.png where &lt;id&gt; is the Art ID field.
+Note image funtions are in api/artImageFunctions.py (see test() method).
+Original uploaded binary will be deleted.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -151,7 +156,8 @@
 <dl class="put">
 <dt id="put--art-(art_id)">
 <tt class="descname">PUT </tt><tt class="descname">/art/</tt><big>(</big><em>art_id</em><big>)</big><a class="headerlink" href="#put--art-(art_id)" title="Permalink to this definition">¶</a></dt>
-<dd><p>Update artwork by sending a json object for a given work.</p>
+<dd><p>Update artwork by sending a json object for a given work. Note, if a new image is
+uploaded, you must re-generate the -web and -tn images using artImageFunctions.py</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
