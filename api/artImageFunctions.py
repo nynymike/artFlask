@@ -10,7 +10,7 @@ def create_copyright(text, fn, border=1):
     image = Image.new("RGBA", (222,25))
     draw = ImageDraw.Draw(image)
     font = ImageFont.truetype("HelveticaNeue-Light.ttf", 18)
-    draw.text((10, 0), text, (88,88,88), font=font)
+    draw.text((10, 0), text, (219,180,124), font=font)
     bbox = image.getbbox()
     image = image.crop(bbox)
     (width, height) = image.size
@@ -53,9 +53,11 @@ def test(arg):
         copyright_image = basedir + 'watermark.png'
         web_image = basedir + "web.png"
         new_image = basedir + 'final.png'
+        tn = basedir + 'tn.png'
         shrink(original_image, 600, web_image)
         create_copyright("copyright Michael Schwartz", copyright_image)
         watermark(web_image, copyright_image, new_image)
+        shrink(new_image, 100, tn)
         #os.remove(original_image)
         os.remove(copyright_image)
         os.remove(web_image)
@@ -65,4 +67,4 @@ def test(arg):
         genQRcode(gooURL, basedir + "qrcode.png")
 
 if __name__ == '__main__':
-    test(2)
+    test(1)
