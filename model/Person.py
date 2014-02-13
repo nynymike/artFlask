@@ -59,6 +59,35 @@ Person Entity JSON sample:
 """
 
 class Person():
+
+    schema = {
+
+        'id': {type = str},
+        'sub': {type = str},
+        'given_name': {type = str},
+        'family_name': {type = str},
+        'middle_name':{type = str},
+        'name': {type = str},
+        'birthdate':{type = str}
+        'email': {type = str},
+        'phone_number': {type = str},
+        'picture': {type =str},
+        'phone_number_verified': {type = str},
+        'address': {type = dict},
+        'nickname': {type = str},
+        'social_urls': {type = dict},
+        'role': {type = str},
+        'twitter': {type = str},
+        'preferred_contact': {type = str},
+        'status': {type = str},
+        'registration_code': {type = dict},
+        'website' : {type = str},
+        'preferred_username' : {type = str},
+        'zoneinfo' : {type = str},
+        'updated_at': {type = str},
+        'gender':{type = str}
+    }
+
     def __init__(self):
         self.id = ""
         self.sub = ""

@@ -41,6 +41,16 @@ def not_empty(self, s):
     return False
 
 class Event():
+
+    schema = {
+        'id': {type = str},
+        'name': {type = str},
+        'startDate': {type = str},
+        'endDate': {type = str},
+        'description': {type = str},
+        'picture': {type = str}
+    }
+
     def __init__(self):
         self.id = ""
         self.name = ""
