@@ -12,7 +12,7 @@ Must created by manual throw mongo shell:
 '''
 
 app.config['MONGO_DBNAME'] = 'testArt'
-app.config['MONGO_USERNAME'] = 'tester1'
-app.config['MONGO_PASSWORD'] = '123456'
+# app.config['MONGO_USERNAME'] = 'tester1'
+# app.config['MONGO_PASSWORD'] = '123456'
 
 mongo = PyMongo(app)

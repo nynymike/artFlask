@@ -68,19 +68,19 @@ import json
 
 class ArtWork():
 
-    schema =         {
-        'id': {type:'str'},
+    schema =  {
+        # 'id': {type:'str'},
         'artist': {type:'str'},
         'title': {type:'str'},
         'description': {type:'str'},
         'picture': {type:'str'},
-        'thumbnail': {type:'str'}
+        'thumbnail': {type:'str'},
         'buyURL': {type:'str'},
         'venue': {type:'str'},
         'medium': {type:'str'},
         'sold_out': {type:'str'},
         'series': {type:'List'},
-        'parent_work': {type:'str'}
+        'parent_work': {type:'str'},
         'size': {type:'str'},
         'year': {type:'str'},
         'alt_urls': {type:'List'}
@@ -88,7 +88,7 @@ class ArtWork():
 
 
     def __init__(self):
-        self.id = ""
+        # self.id = ""
         self.artist = ""
         self.title = ""
         self.description = ""
@@ -110,7 +110,7 @@ class ArtWork():
 
     def __str__(self):
         d = {}
-        if self.not_empty(self.id): d['id'] = self.id
+        # if self.not_empty(self.id): d['id'] = self.id
         if self.not_empty(self.artist): d['artist'] = self.artist
         if self.not_empty(self.title): d['title'] = self.title
         if self.not_empty(self.description): d['description'] = self.description
@@ -122,7 +122,26 @@ class ArtWork():
         if self.not_empty(self.parent_work): d['parent_work'] = self.parent_work
         if self.not_empty(self.size): d['size'] = self.size
         if self.not_empty(self.year): d['year'] = self.year
-        if len(self.series): d['series'] = self.series
+        if self.series: d['series'] = self.series
         d['sold_out'] = self.sold_out
-        if len(alt_urls): d['alt_urls'] = self.alt_urls
+        if self.alt_urls: d['alt_urls'] = self.alt_urls
         return json.dumps(d)
+    
+    def to_dict(self):
+        d = {}
+        # if self.not_empty(self.id): d['id'] = self.id
+        if self.not_empty(self.artist): d['artist'] = self.artist
+        if self.not_empty(self.title): d['title'] = self.title
+        if self.not_empty(self.description): d['description'] = self.description
+        if self.not_empty(self.picture): d['picture'] = self.picture
+        if self.not_empty(self.thumbnail): d['thumbnail'] = self.thumbnail
+        if self.not_empty(self.buyURL): d['buyURL'] = self.buyURL
+        if self.not_empty(self.venue): d['venue'] = self.venue
+        if self.not_empty(self.medium): d['medium'] = self.medium
+        if self.not_empty(self.parent_work): d['parent_work'] = self.parent_work
+        if self.not_empty(self.size): d['size'] = self.size
+        if self.not_empty(self.year): d['year'] = self.year
+        if self.series: d['series'] = self.series
+        d['sold_out'] = self.sold_out
+        if self.alt_urls: d['alt_urls'] = self.alt_urls
+        return d

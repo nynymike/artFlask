@@ -47,7 +47,7 @@ def logout():
 
 api = Api(app)
 api.add_resource(Register, '/api/v1/register', '/api/v1/register/<string:registration_id>')
-api.add_resource(Art, '/api/v1/art/<string:artist_id>',
+api.add_resource(Art, '/api/v1/art/',
                  '/api/v1/art/<string:artist_id>/<string:action_type>')
 api.add_resource(Profile, '/api/v1/profile')
 api.add_resource(Artists, '/api/v1/artists/<string:artist_id>')
