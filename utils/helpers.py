@@ -20,4 +20,4 @@ def request_to_dictonary(model_class):
 def update_from_dictionary(data,item,model_class):
 	for field in data:
 		setattr(item,field,data[field])
-	mongo.db.ArtWork.save(item.to_dict())
+	getattr(mongo.db,model_class._collection_).save(item.to_dict())

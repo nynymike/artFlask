@@ -68,6 +68,8 @@ import json
 
 class ArtWork():
 
+    _collection_ = "ArtWork"
+
     schema =  {
         # 'id': {type:'str'},
         'artist': {type:'str'},

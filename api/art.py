@@ -85,6 +85,7 @@ __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
 from flask import Request
+from utils.app_ctx import ApplicationContext
 
 def getArt(art_id):
     return {}
@@ -96,19 +97,25 @@ def getPicture(art_id):
     return ""
 
 class Art(Resource):
-    def get(self, art_id=None, action_type=None):
-        if not art_id:
-            query = Request.args
-            if not len(query):
-                return 'Art not found', 404
-            else:
-                return queryArt(query)
-        else:
-            if action_type=="thumbnail":
-                return getThumbnail(art_id)
-            if action_type=="picture":
-                return getPicture(art_id)
-            return getArt(art_id)
+    def get(self, artist_id=None, action_type=None):
+        # if not art_id:
+        #     query = Request.args
+        #     if not len(query):
+        #         return 'Art not found', 404
+        #     else:
+        #         return queryArt(query)
+        # else:
+        #     if action_type=="thumbnail":
+        #         return getThumbnail(art_id)
+        #     if action_type=="picture":
+        #         return getPicture(art_id)
+        #     return getArt(art_id)
+        app_ctx =ApplicationContext('art')
+        try:
+          item = app_ctx.get_item(artist_id)
+          return item.to_dict()
+        except:
+          return 'Art not found', 404
 
     def post(self):
         # Get params and write
@@ -117,8 +124,10 @@ class Art(Resource):
         # Convert image to thumbnail
         # Write file
         # Create db entry for art
-        if False: return '',404
+        app_ctx =ApplicationContext('art')
+        app_ctx.create_item_from_context()
         return '',201
+
 
     def put(self):
         # Get file from json data and base64 decode
