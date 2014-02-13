@@ -105,6 +105,32 @@ def get_boolean(b):
 
 
 class Venue():
+    schema = {
+        'id': {type = str},
+        'site_id': {type = str},
+        'name': {type = str},
+        'event_id': {type = str},
+        'picture': {type = str}
+        'address': {type = str}
+        'coordinates': {type = list},
+        'twitter': {type = str},
+        'mail':{type = str},
+        'phone':{type = str},
+        'category':{type = str},
+        'medium':{type = str},
+        'description':{type = list},
+        'artists': {type = list},
+        'websites': {type = list},
+        'managers': {type = list},
+        'ad_1': {type = bool},
+        'ad_2': {type = bool},
+        'ad_3': {type =bool},
+        'ad_4': {type = bool},
+        'ad_5': {type = bool},
+        'ad_6': {type = bool},
+        'ad_7': {type = bool},
+        'ad_8': {type = bool}
+    }
     def __init__(self):
         self.id = ""
         self.name = ""
