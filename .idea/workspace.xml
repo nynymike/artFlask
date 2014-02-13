@@ -72,7 +72,7 @@
       <file leaf-file-name="artFlask.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/artFlask.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="12" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.0" vertical-offset="726" max-vertical-offset="1474">
+            <state line="50" column="71" selection-start="1678" selection-end="1678" vertical-scroll-proportion="0.0" vertical-offset="658" max-vertical-offset="1210">
               <folding />
             </state>
           </provider>
@@ -81,34 +81,16 @@
       <file leaf-file-name="artflask_tests.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/artflask_tests.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="22" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0" vertical-offset="264" max-vertical-offset="1122">
+            <state line="12" column="22" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0" vertical-offset="462" max-vertical-offset="1078">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="register.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/register.py">
+      <file leaf-file-name="artView.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/artView.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="0" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0" vertical-offset="660" max-vertical-offset="1584">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Art.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/model/Art.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="17" selection-start="69" selection-end="69" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="2508">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Rules.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Rules.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="0" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0" vertical-offset="22" max-vertical-offset="154">
+            <state line="1" column="6" selection-start="22" selection-end="22" vertical-scroll-proportion="0.04238921" vertical-offset="0" max-vertical-offset="2090">
               <folding />
             </state>
           </provider>
@@ -117,27 +99,25 @@
       <file leaf-file-name="art.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/art.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="124" column="35" selection-start="3855" selection-end="3855" vertical-scroll-proportion="0.0" vertical-offset="2574" max-vertical-offset="3146">
-              <folding>
-                <element signature="e#2834#2877#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="artView.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/artView.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="132">
+            <state line="17" column="74" selection-start="368" selection-end="375" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3124">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="artImageFunctions.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/api/artImageFunctions.py">
+      <file leaf-file-name="Venue.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/Venue.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="39" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.19927536" vertical-offset="1034" max-vertical-offset="1650">
+            <state line="73" column="33" selection-start="6152" selection-end="6152" vertical-scroll-proportion="0.0" vertical-offset="66" max-vertical-offset="3652">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Art.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/model/Art.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="8" selection-start="3303" selection-end="3303" vertical-scroll-proportion="0.0" vertical-offset="990" max-vertical-offset="2508">
               <folding />
             </state>
           </provider>
@@ -153,7 +133,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/model/Patron.py" />
         <option value="$PROJECT_DIR$/model/Admin.py" />
         <option value="$PROJECT_DIR$/api/admin.py" />
         <option value="$PROJECT_DIR$/api/venue.py" />
@@ -204,6 +183,7 @@
         <option value="$PROJECT_DIR$/authScript.py" />
         <option value="$PROJECT_DIR$/api/art.py" />
         <option value="$PROJECT_DIR$/api/artImageFunctions.py" />
+        <option value="$PROJECT_DIR$/templates/artView.html" />
       </list>
     </option>
   </component>
@@ -211,8 +191,8 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="198" />
-    <option name="y" value="47" />
+    <option name="x" value="136" />
+    <option name="y" value="9" />
     <option name="width" value="1552" />
     <option name="height" value="1010" />
   </component>
@@ -242,7 +222,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -324,6 +303,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -527,14 +507,6 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-      <method />
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -549,6 +521,14 @@
       <module name="untitled" />
       <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
       <method />
     </configuration>
     <configuration default="true" type="tests" factoryName="Unittests">
@@ -571,19 +551,6 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -611,6 +578,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -772,7 +752,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="198" y="47" width="1552" height="1010" extended-state="1" />
+    <frame x="136" y="9" width="1552" height="1010" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -783,7 +763,7 @@
       <window_info id="CheckStyle" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3768116" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34541336" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34619752" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16544567" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -793,12 +773,12 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Log4jMonitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16599733" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.34541336" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34541336" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -827,6 +807,13 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/api/artImageFunctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="22" selection-start="1441" selection-end="1460" vertical-scroll-proportion="0.0" vertical-offset="1012" max-vertical-offset="1650">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/model/Art.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="25" column="23" selection-start="1836" selection-end="1836" vertical-scroll-proportion="0.0" vertical-offset="289" max-vertical-offset="1190">
@@ -997,16 +984,6 @@
         <state line="97" column="75" selection-start="4099" selection-end="4099" vertical-scroll-proportion="3.6538463" vertical-offset="2229" max-vertical-offset="4026" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="67" selection-end="67" vertical-scroll-proportion="0.13121273" vertical-offset="0" max-vertical-offset="506" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="6" selection-start="368" selection-end="368" vertical-scroll-proportion="0.7872763" vertical-offset="0" max-vertical-offset="770" />
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/flask/testing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="0" selection-start="187" selection-end="187" vertical-scroll-proportion="-5.808184" vertical-offset="2425" max-vertical-offset="2816" />
@@ -1027,11 +1004,6 @@
         <state line="8" column="22" selection-start="150" selection-end="150" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="924" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/Venue.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="33" selection-start="6152" selection-end="6152" vertical-scroll-proportion="0.0" vertical-offset="1518" max-vertical-offset="3652" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/Person.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="61" column="23" selection-start="3191" selection-end="3192" vertical-scroll-proportion="2.5758157" vertical-offset="0" max-vertical-offset="2904" />
@@ -1042,20 +1014,6 @@
         <state line="27" column="9" selection-start="1803" selection-end="1803" vertical-scroll-proportion="0.49438202" vertical-offset="330" max-vertical-offset="1452" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/artflask_tests.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="22" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0" vertical-offset="251" max-vertical-offset="1078">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/register.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1584">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Rules.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="0" selection-start="39" selection-end="39" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="154">
@@ -1063,46 +1021,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/artView.html">
+    <entry file="file://$PROJECT_DIR$/requirement.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="338">
+        <state line="4" column="6" selection-start="63" selection-end="63" vertical-scroll-proportion="0.18106996" vertical-offset="0" max-vertical-offset="486" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="6" selection-start="72" selection-end="72" vertical-scroll-proportion="-3.548387" vertical-offset="0" max-vertical-offset="770">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="441" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="506">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/artImageFunctions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="32" selection-start="1461" selection-end="1461" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1650">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/register.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="0" selection-start="835" selection-end="835" vertical-scroll-proportion="-0.07971015" vertical-offset="660" max-vertical-offset="1540">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/artFlask.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="12" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.0" vertical-offset="726" max-vertical-offset="1474">
+        <state line="50" column="71" selection-start="1678" selection-end="1678" vertical-scroll-proportion="0.0" vertical-offset="658" max-vertical-offset="1210">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirement.txt">
+    <entry file="file://$PROJECT_DIR$/model/Venue.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="6" selection-start="63" selection-end="63" vertical-scroll-proportion="0.18106996" vertical-offset="0" max-vertical-offset="486">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/model/Art.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="17" selection-start="69" selection-end="69" vertical-scroll-proportion="0.0" vertical-offset="594" max-vertical-offset="2508">
+        <state line="73" column="33" selection-start="6152" selection-end="6152" vertical-scroll-proportion="0.0" vertical-offset="66" max-vertical-offset="3652">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/art.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="35" selection-start="3855" selection-end="3855" vertical-scroll-proportion="0.0" vertical-offset="2574" max-vertical-offset="3146">
-          <folding>
-            <element signature="e#2834#2877#0" expanded="true" />
-          </folding>
+        <state line="17" column="74" selection-start="368" selection-end="375" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3124">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/artImageFunctions.py">
+    <entry file="file://$PROJECT_DIR$/artflask_tests.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="39" selection-start="1706" selection-end="1706" vertical-scroll-proportion="0.19927536" vertical-offset="1034" max-vertical-offset="1650">
+        <state line="12" column="22" selection-start="276" selection-end="276" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1078">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/Art.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="8" selection-start="3303" selection-end="3303" vertical-scroll-proportion="0.0" vertical-offset="990" max-vertical-offset="2508">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/artView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="6" selection-start="22" selection-end="22" vertical-scroll-proportion="0.04238921" vertical-offset="0" max-vertical-offset="2090">
           <folding />
         </state>
       </provider>

@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+    <title>{{ art.artist }}</title>
+</head>
+<body>
+    <div align="center">
+        <p>
+            <img alt="" src="./art/{{ art.id }}/picture" title="{{ art.title }}" />
+        </p>
+            <table border="0">
+                <tr>
+                    <td>By:</td>
+                    <td>{{ art.artist }}</td>
+                </tr>
+                <tr>
+                    <td>Title:</td>
+                    <td>{{ art.title }}</td>
+                </tr>
+                <tr>
+                    <td>Description:</td>
+                    <td>{{ art.description }}</td>
+                </tr>
+                <tr>
+                    <td>Medium:</td>
+                    <td>{{ art.medium }}</td>
+                </tr>
+                <tr>
+                    <td>Size:</td>
+                    <td>{{ art.size }}</td>
+                </tr>
+                <tr>
+                    <td>Year Created:</td>
+                    <td>{{ art.year }}</td>
+                </tr>
+
+                {% if art.buyURL %}
+                <tr>
+                    <td>Purchase:</td>
+                    <td>{{ art.buyURL }}</td>
+                </tr>
+                {% endif %}
+
+                {% if art.parent_work %}
+                    <tr>
+                        <td>Parent Work:</td>
+                        <td>{{ art.parent_work }}</td>
+                    </tr>
+                {% endif %}
+
+                {% if art.series %}
+                    <tr>
+                        <td colspan="2">Related Works:</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            {% for item in art.series %}
+                               <a href="./art/{{ item }}/view">
+                                <img border="0" src="./art/{{ item }}/thumbnail"/>
+                               </a>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endif %}
+
+                {% if art.alt_urls %}
+                    {% for item in art.series %}
+                        <tr>
+                            <td colspan="2">
+                                <a href="{{ item.url }}">{{ item.name }}</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endif %}
+            </table>
+
+            {% if art.venue %}
+                <tr>
+                    <td>Venue:</td>
+                    <td>{{ venue.name }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">{{ venue.address }}</td>
+                </tr>
+            {% endif %}
+    </div>
+
+</body>
+</html>
