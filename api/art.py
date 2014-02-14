@@ -85,6 +85,7 @@ __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
 from flask import Request
+from utils.helpers import jsonify
 from utils.app_ctx import ApplicationContext
 
 def getArt(art_id):
@@ -113,7 +114,7 @@ class Art(Resource):
         app_ctx =ApplicationContext('art')
         try:
           item = app_ctx.get_item(artist_id)
-          return item.to_dict()
+          return jsonify(item)
         except:
           return 'Art not found', 404
 
