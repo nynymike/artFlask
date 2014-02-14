@@ -1,5 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 import os
+import httplib, urllib
 
 def shrink(fn, size, newFN):
     im = Image.open(fn)
@@ -30,6 +31,7 @@ def genQRcode(url, fn):
     import qrcode
     ecc = qrcode.constants.ERROR_CORRECT_Q
     if len(url)<21: ecc = qrcode.constants.ERROR_CORRECT_H
+    if len(url)>29: ecc = qrcode.constants.ERROR_CORRECT_M
     qr = qrcode.QRCode(
         version=2,
         error_correction=ecc,
@@ -41,10 +43,19 @@ def genQRcode(url, fn):
     img = qr.make_image()
     img.save(fn, 'PNG')
 
-def getGooURL(url):
-    # Need to call Google URL Shortener API
-    # See https://developers.google.com/url-shortener/v1/getting_started
-    return "http://goo.gl/d29gg"
+def getShortURL(url):
+    # Use http://linktrack.info  API
+    params = urllib.urlencode({'login': 'bb063a6ed8952b2f246d85b53',
+                               'pass': '7de896622639975',
+                               'external_url': url})
+    headers = {"Content-type": "application/x-www-form-urlencoded",
+               "Accept": "text/plain"}
+    conn = httplib.HTTPSConnection("linktrack.info")
+    conn.request("POST", "/api/v1_0/makeLink", params, headers)
+    response = conn.getresponse()
+    data = response.read()
+    conn.close()
+    return data
 
 def test(arg):
     basedir = 'C:\\Users\\mike\\Documents\\GitHub\\artFlask\\upload\\'
@@ -63,8 +74,9 @@ def test(arg):
         os.remove(web_image)
     if arg == 2:
         testURL = 'https://www.eastaustinstudiotour.org/api/v1/f1d2c72a-b859-406e-aa52-6f4a06a66697/view'
-        gooURL = getGooURL(testURL)
-        genQRcode(gooURL, basedir + "qrcode.png")
+        shortURL = getShortURL(testURL)
+        print shortURL
+        genQRcode(shortURL, basedir + "qrcode.png")
 
 if __name__ == '__main__':
-    test(1)
+    test(2)
