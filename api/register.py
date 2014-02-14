@@ -28,36 +28,19 @@ __author__ = 'Michael Schwartz'
 from flask.ext.restful import Resource, Api, reqparse
 from pymongo import MongoClient
 import datetime
+from utils.app_ctx import ApplicationContext
 
 class Register(Resource):
-    def __init__(self):
-        self.parser = reqparse.RequestParser()
-        self.parser.add_argument('name', type=str)
-        self.parser.add_argument('given_name', type=str)
-        self.parser.add_argument('family_name', type=str)
-        self.parser.add_argument('middle_name', type=str)
-        self.parser.add_argument('nickname', type=str)
-        self.parser.add_argument('picture', type=str)
-        self.parser.add_argument('website', type=str)
-        self.parser.add_argument('email', type=str)
-        self.parser.add_argument('gender', type=str)
-        self.parser.add_argument('birthdate', type=str)
-        self.parser.add_argument('phone_number', type=str)
-        self.parser.add_argument('address', type=str)
-        self.parser.add_argument('twitter', type=str)
-        self.parser.add_argument('preferred_contact', type=str)
-        self.parser.add_argument('social_urls', type=str)
-        self.client = MongoClient('mongodb://localhost:27017/')
-        self.db = self.client['artFlask']
-        self.collection = db['people']
-
-    def __del__(self):
-        self.client.disconnect()
 
     def post(self):
-        args = self.parser.parse_args()
-
-        return None,200
+      #args = self.parser.parse_args()
+      #return None,200
+      try:
+        app_ctx = ApplicationContext('person')
+        app_ctx.create_item_from_context()
+        return '',200
+      except Exception, e:
+        return '',406
 
     def get(self, registration_id=None):
         return {}

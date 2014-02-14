@@ -105,31 +105,34 @@ def get_boolean(b):
 
 
 class Venue():
+
+    _collection_ = "Venue"
+
     schema = {
-        'id': {type = str},
-        'site_id': {type = str},
-        'name': {type = str},
-        'event_id': {type = str},
-        'picture': {type = str}
-        'address': {type = str}
-        'coordinates': {type = list},
-        'twitter': {type = str},
-        'mail':{type = str},
-        'phone':{type = str},
-        'category':{type = str},
-        'medium':{type = str},
-        'description':{type = list},
-        'artists': {type = list},
-        'websites': {type = list},
-        'managers': {type = list},
-        'ad_1': {type = bool},
-        'ad_2': {type = bool},
-        'ad_3': {type =bool},
-        'ad_4': {type = bool},
-        'ad_5': {type = bool},
-        'ad_6': {type = bool},
-        'ad_7': {type = bool},
-        'ad_8': {type = bool}
+        'id': {type : str},
+        'site_id': {type : str},
+        'name': {type : str},
+        'event_id': {type : str},
+        'picture': {type : str},
+        'address': {type : str},
+        'coordinates': {type : list},
+        'twitter': {type : str},
+        'mail':{type : str},
+        'phone':{type : str},
+        'category':{type : str},
+        'medium':{type : str},
+        'description':{type : list},
+        'artists': {type : list},
+        'websites': {type : list},
+        'managers': {type : list},
+        'ad_1': {type : bool},
+        'ad_2': {type : bool},
+        'ad_3': {type : bool},
+        'ad_4': {type : bool},
+        'ad_5': {type : bool},
+        'ad_6': {type : bool},
+        'ad_7': {type : bool},
+        'ad_8': {type : bool}
     }
     def __init__(self):
         self.id = ""
@@ -148,39 +151,71 @@ class Venue():
         self.artists = []
         self.websites = []
         self.managers = []
-        self.ada_1 = False
-        self.ada_2 = False
-        self.ada_3 = False
-        self.ada_4 = False
-        self.ada_5 = False
-        self.ada_6 = False
-        self.ada_7 = False
-        self.ada_8 = False
+        self.ad_1 = False
+        self.ad_2 = False
+        self.ad_3 = False
+        self.ad_4 = False
+        self.ad_5 = False
+        self.ad_6 = False
+        self.ad_7 = False
+        self.ad_8 = False
 
-def __str__(self):
-    d = {}
-    if self.not_empty(self.id): d['id'] = self.id
-    if self.not_empty(self.name): d['name'] = self.name
-    if self.not_empty(self.site_id): d['site_id'] = self.site_id
-    if self.not_empty(self.event_id): d['event_id'] = self.event_id
-    if self.not_empty(self.picture): d['picture'] = self.picture
-    if self.not_empty(self.address): d['address'] = self.address
-    if self.not_empty(self.coordinates): d['coordinates'] = self.coordinates
-    if self.not_empty(self.twitter): d['twitter'] = self.twitter
-    if self.not_empty(self.mail): d['mail'] = self.mail
-    if self.not_empty(self.phone): d['phone'] = self.phone
-    if self.not_empty(self.category): d['category'] = self.twitter
-    if self.not_empty(self.medium): d['medium'] = self.medium
-    if self.not_empty(self.description): d['description'] = self.description
-    if len(self.artists): d['artists'] = self.artists
-    if len(self.websites): d['websites'] = self.websites
-    if len(self.managers): d['managers'] = self.managers
-    self['ad_1'] = get_boolean(self.ad_1)
-    self['ad_2'] = get_boolean(self.ad_2)
-    self['ad_3'] = get_boolean(self.ad_3)
-    self['ad_4'] = get_boolean(self.ad_4)
-    self['ad_5'] = get_boolean(self.ad_5)
-    self['ad_6'] = get_boolean(self.ad_6)
-    self['ad_7'] = get_boolean(self.ad_7)
-    self['ad_8'] = get_boolean(self.ad_8)
-    return str(d)
+    def __str__(self):
+        d = {}
+        if self.not_empty(self.id): d['id'] = self.id
+        if self.not_empty(self.name): d['name'] = self.name
+        if self.not_empty(self.site_id): d['site_id'] = self.site_id
+        if self.not_empty(self.event_id): d['event_id'] = self.event_id
+        if self.not_empty(self.picture): d['picture'] = self.picture
+        if self.not_empty(self.address): d['address'] = self.address
+        if self.not_empty(self.coordinates): d['coordinates'] = self.coordinates
+        if self.not_empty(self.twitter): d['twitter'] = self.twitter
+        if self.not_empty(self.mail): d['mail'] = self.mail
+        if self.not_empty(self.phone): d['phone'] = self.phone
+        if self.not_empty(self.category): d['category'] = self.twitter
+        if self.not_empty(self.medium): d['medium'] = self.medium
+        if self.not_empty(self.description): d['description'] = self.description
+        if len(self.artists): d['artists'] = self.artists
+        if len(self.websites): d['websites'] = self.websites
+        if len(self.managers): d['managers'] = self.managers
+        d['ad_1'] = get_boolean(self.ad_1)
+        d['ad_2'] = get_boolean(self.ad_2)
+        d['ad_3'] = get_boolean(self.ad_3)
+        d['ad_4'] = get_boolean(self.ad_4)
+        d['ad_5'] = get_boolean(self.ad_5)
+        d['ad_6'] = get_boolean(self.ad_6)
+        d['ad_7'] = get_boolean(self.ad_7)
+        d['ad_8'] = get_boolean(self.ad_8)
+        return str(d)
+
+    def to_dict(self):
+        d = {}
+        if self.not_empty(self.id): d['id'] = self.id
+        if self.not_empty(self.name): d['name'] = self.name
+        if self.not_empty(self.site_id): d['site_id'] = self.site_id
+        if self.not_empty(self.event_id): d['event_id'] = self.event_id
+        if self.not_empty(self.picture): d['picture'] = self.picture
+        if self.not_empty(self.address): d['address'] = self.address
+        if self.not_empty(self.coordinates): d['coordinates'] = self.coordinates
+        if self.not_empty(self.twitter): d['twitter'] = self.twitter
+        if self.not_empty(self.mail): d['mail'] = self.mail
+        if self.not_empty(self.phone): d['phone'] = self.phone
+        if self.not_empty(self.category): d['category'] = self.twitter
+        if self.not_empty(self.medium): d['medium'] = self.medium
+        if self.not_empty(self.description): d['description'] = self.description
+        if len(self.artists): d['artists'] = self.artists
+        if len(self.websites): d['websites'] = self.websites
+        if len(self.managers): d['managers'] = self.managers
+        d['ad_1'] = get_boolean(self.ad_1)
+        d['ad_2'] = get_boolean(self.ad_2)
+        d['ad_3'] = get_boolean(self.ad_3)
+        d['ad_4'] = get_boolean(self.ad_4)
+        d['ad_5'] = get_boolean(self.ad_5)
+        d['ad_6'] = get_boolean(self.ad_6)
+        d['ad_7'] = get_boolean(self.ad_7)
+        d['ad_8'] = get_boolean(self.ad_8)
+        return d
+
+    def not_empty(self, s):
+        if s != "": return True
+        return False

@@ -69,48 +69,98 @@ Manage API
 __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
+from utils.app_ctx import ApplicationContext
 
 class ManageEvent(Resource):
     def put(self, event_id=None):
-        if not event_id: return 'Event not found', 404
-        else:
-            return None
-    def post(self, event_id=None):
-        if not event_id: return 'Event not found', 404
-        else:
-            return None
+      try:
+        print event_id
+        app_ctx = ApplicationContext('event')
+        app_ctx.create_item_from_context(event_id)
+        return '',200
+      except Exception, e:
+        return '',404
+    # def post(self, event_id=None):
+    #     if not event_id: return 'Event not found', 404
+    #     else:
+    #         return None
+
+    def post(self):
+      # Get params and write
+      # Convert image to web size
+      # Write file
+      # Convert image to thumbnail
+      # Write file
+      # Create db entry for art
+      try:
+        app_ctx = ApplicationContext('event')
+        app_ctx.create_item_from_context()
+        return '',201
+      except Exception, e:
+        return '',404
+
     def delete(self, event_id=None):
-        if not event_id: return 'Event not found', 404
-        else:
-            return None
+      try:
+        app_ctx = ApplicationContext('event')
+        app_ctx.remove_record(event_id)
+        return '',200 
+      except Exception, e:
+        return '',404
 
 class ManageVenue(Resource):
     def put(self, venue_id=None):
-        if not venue_id: return 'Venue not found', 404
-        else:
-            return None
+      try:
+        app_ctx = ApplicationContext('venue')
+        app_ctx.create_item_from_context(venue_id)
+        return '',200
+      except Exception, e:
+        return '',404
 
-    def post(self, venue_id=None):
-        if not venue_id: return 'Venue not found', 404
-        else:
-            return None
+    # def post(self, venue_id=None):
+    #     if not venue_id: return 'Venue not found', 404
+    #     else:
+    #         return None
+
+    def post(self):
+      # Get params and write
+      # Convert image to web size
+      # Write file
+      # Convert image to thumbnail
+      # Write file
+      # Create db entry for art
+      try:
+        app_ctx = ApplicationContext('venue')
+        app_ctx.create_item_from_context()
+        return '',201
+      except Exception, e:
+        return '',404
 
     def delete(self, venue_id=None):
-        if not venue_id: return 'Venue not found', 404
-        else:
-            return None
+      try:
+        app_ctx = ApplicationContext('venue')
+        app_ctx.remove_record(event_id)
+        return '',200 
+      except Exception, e:
+        return '',404
 
 class ManagePerson(Resource):
     # Send SCIM requests to oxTrust
     def put(self, person_id=None):
-        if not person_id: return 'Person not found', 404
-        else:
-            return None
+      try:
+        app_ctx = ApplicationContext('person')
+        app_ctx.remove_record(person_id)
+        return '',200 
+      except Exception, e:
+        return '',404
+        
     def post(self, person_id=None):
         if not person_id: return 'Person not found', 404
         else:
             return None
     def delete(self, person_id=None):
-        if not person_id: return 'Person not found', 404
-        else:
-            return None
+      try:
+        app_ctx = ApplicationContext('person')
+        app_ctx.remove_record(person_id)
+        return '',200 
+      except Exception, e:
+        return '',404

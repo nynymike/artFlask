@@ -24,6 +24,7 @@ __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
 from flask import Request
+from utils.app_ctx import ApplicationContext
 
 def getVenue(venue_id):
     return {}
@@ -41,3 +42,4 @@ class Venues(Resource):
                 return queryVenues(query)
         else:
             return getVenue(venue_id)
+

@@ -72,20 +72,20 @@ class ArtWork():
 
     schema =  {
         # 'id': {type:'str'},
-        'artist': {type:'str'},
-        'title': {type:'str'},
-        'description': {type:'str'},
-        'picture': {type:'str'},
-        'thumbnail': {type:'str'},
-        'buyURL': {type:'str'},
-        'venue': {type:'str'},
-        'medium': {type:'str'},
-        'sold_out': {type:'str'},
-        'series': {type:'List'},
-        'parent_work': {type:'str'},
-        'size': {type:'str'},
-        'year': {type:'str'},
-        'alt_urls': {type:'List'}
+        'artist': {type : str},
+        'title': {type : str},
+        'description': {type : str},
+        'picture': {type : str},
+        'thumbnail': {type : str},
+        'buyURL': {type : str},
+        'venue': {type : str},
+        'medium': {type : str},
+        'sold_out': {type : str},
+        'series': {type : list},
+        'parent_work': {type : list},
+        'size': {type:list},
+        'year': {type : list},
+        'alt_urls': {type : dict}
         }
 
 

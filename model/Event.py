@@ -36,19 +36,21 @@ Event Entity JSON sample:
 
 """
 
-def not_empty(self, s):
+def not_empty( s):
     if s != "": return True
     return False
 
 class Event():
 
+    _collection_ = "Event"
+
     schema = {
-        'id': {type = str},
-        'name': {type = str},
-        'startDate': {type = str},
-        'endDate': {type = str},
-        'description': {type = str},
-        'picture': {type = str}
+        'id': {type : str},
+        'name': {type : str},
+        'startDate': {type : str},
+        'endDate': {type : str},
+        'description': {type : str},
+        'picture': {type : str}
     }
 
     def __init__(self):
@@ -68,3 +70,15 @@ class Event():
         if not_empty(self.description): d['description'] = self.description,
         if not_empty(self.picture): d['picture'] = self.picture
         return str(d)
+
+    def to_dict(self):
+        d = {}
+        if not_empty(self.id): d['id'] = self.id,
+        if not_empty(self.name): d['name'] = self.name,
+        if not_empty(self.startDate): d['startDate'] = self.startDate,
+        if not_empty(self.endDate): d['endDate'] = self.endDate,
+        if not_empty(self.description): d['description'] = self.description,
+        if not_empty(self.picture): d['picture'] = self.picture
+        return d
+
+

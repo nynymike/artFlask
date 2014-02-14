@@ -1,6 +1,7 @@
 from flask.ext.restful import reqparse
 from flask import request
 from mainapp import mongo
+from bson.objectid import ObjectId
 
 def request_to_dictonary(model_class):
 	schema = model_class.schema
@@ -17,7 +18,15 @@ def request_to_dictonary(model_class):
 		del args[a]
 	return args
 
-def update_from_dictionary(data,item,model_class):
+def update_from_dictionary(data,item,model_class,object_id=None):
 	for field in data:
 		setattr(item,field,data[field])
-	getattr(mongo.db,model_class._collection_).save(item.to_dict())
+	if object_id is None:
+		getattr(mongo.db,model_class._collection_).save(item.to_dict())
+	else:
+		getattr(mongo.db,model_class._collection_).update({'_id': ObjectId(object_id)},{"$set": item.to_dict()},upsert=False)	
+
+def remove_record_by_id(object_id,model_class):
+	getattr(mongo.db,model_class._collection_).remove({"_id" : ObjectId(object_id)})
+
+

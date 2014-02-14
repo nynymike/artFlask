@@ -37,3 +37,4 @@ class Events(Resource):
             return getAllEvents()
         else:
             return getEvent(event_id)
+    

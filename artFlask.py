@@ -56,9 +56,9 @@ api.add_resource(Artists, '/api/v1/artists/<string:artist_id>')
 api.add_resource(Staff, '/api/v1/staff', '/api/v1/staff/<string:staff_id>')
 api.add_resource(Events, '/api/v1/events/<string:event_id>')
 api.add_resource(Venues, '/api/v1/venues/<string:venue_id>')
-api.add_resource(ManageEvent, '/api/v1/manage/event')
-api.add_resource(ManageVenue, '/api/v1/manage/venue')
-api.add_resource(ManagePerson, '/api/v1/manage/person')
+api.add_resource(ManageEvent, '/api/v1/manage/event','/api/v1/manage/event/<string:event_id>')
+api.add_resource(ManageVenue, '/api/v1/manage/venue','/api/v1/manage/venue/<string:event_id>')
+api.add_resource(ManagePerson, '/api/v1/manage/person','/api/v1/manage/person/<string:event_id>')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0',debug=True)

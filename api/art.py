@@ -124,23 +124,26 @@ class Art(Resource):
         # Convert image to thumbnail
         # Write file
         # Create db entry for art
-        app_ctx =ApplicationContext('art')
-        app_ctx.create_item_from_context()
-        return '',201
+        try:
+          app_ctx = ApplicationContext('art')
+          app_ctx.create_item_from_context()
+          return '',201
+        except Exception, e:
+          return '',404
 
 
-    def put(self):
-        # Get file from json data and base64 decode
-        # Convert image to web size
-        # Write file
-        # Convert image to thumbnail
-        # Update db entry for art
-        if False: return '',404
+    def put(self,art_id=None):
+      try:
+        app_ctx = ApplicationContext('art')
+        app_ctx.create_item_from_context(art_id)
         return '',200
+      except Exception, e:
+        return '',404
 
-    def delete(self):
-        # Find item
-        # Check authorizatoin
-        # Delete file
-        if False: return '',404
-        return '',200
+    def delete(self,art_id=None):
+      try:
+        app_ctx = ApplicationContext('art')
+        app_ctx.remove_record(art_id)
+        return '',200 
+      except Exception, e:
+        return '',404
