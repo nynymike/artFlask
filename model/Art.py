@@ -83,7 +83,7 @@ class ArtWork():
         'sold_out': {type : str},
         'series': {type : list},
         'parent_work': {type : list},
-        'size': {type:list},
+        'size': {type:str},
         'year': {type : list},
         'alt_urls': {type : dict}
         }

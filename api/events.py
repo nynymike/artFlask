@@ -24,6 +24,8 @@ Events API
 __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
+from utils.helpers import jsonify
+from utils.app_ctx import ApplicationContext
 
 def getEvent(event_id):
     return [{}]
@@ -33,8 +35,9 @@ def getAllEvents():
 
 class Events(Resource):
     def get(self, event_id=None):
-        if not event_id:
-            return getAllEvents()
-        else:
-            return getEvent(event_id)
-    
+      app_ctx =ApplicationContext('event')
+      try:
+        item = app_ctx.get_item(event_id)
+        return jsonify(item)
+      except:
+        return 'Event not found', 404

@@ -25,10 +25,17 @@ Profile API
 __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
+from utils.helpers import jsonify
+from utils.app_ctx import ApplicationContext
 
 class Profile(Resource):
     def get(self):
-        return {}
+      app_ctx =ApplicationContext('person')
+      try:
+        item = app_ctx.get_item(event_id)
+        return jsonify(item)
+      except:
+        return 'Event not found', 404
 
     def put(self, person=None):
         return None

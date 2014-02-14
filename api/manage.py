@@ -138,7 +138,7 @@ class ManageVenue(Resource):
     def delete(self, venue_id=None):
       try:
         app_ctx = ApplicationContext('venue')
-        app_ctx.remove_record(event_id)
+        app_ctx.remove_record(venue_id)
         return '',200 
       except Exception, e:
         return '',404

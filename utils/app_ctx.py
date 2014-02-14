@@ -29,8 +29,11 @@ class ApplicationContext(object):
 	def model_class(self):
 		return MODEL_MAP[self.model_name]
 
-	def get_item(self,id):
-		item = getattr(mongo.db,self.model_class()._collection_).find({"_id":ObjectId(id)})
+	def get_item(self,id=None):
+		if id is None :
+			item = getattr(mongo.db,self.model_class()._collection_).find({})
+		else :
+			item = getattr(mongo.db,self.model_class()._collection_).find({"_id":ObjectId(id)})
 		return item.next()
 
 	def remove_record(self,object_id):

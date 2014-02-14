@@ -24,6 +24,7 @@ __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
 from flask import Request
+from utils.helpers import jsonify
 from utils.app_ctx import ApplicationContext
 
 def getVenue(venue_id):
@@ -34,12 +35,10 @@ def queryVenues(query):
 
 class Venues(Resource):
     def get(self, venue_id=None):
-        if not venue_id:
-            query = Request.args
-            if not len(query):
-                return 'Venue or query not found', 404
-            else:
-                return queryVenues(query)
-        else:
-            return getVenue(venue_id)
+      app_ctx =ApplicationContext('venue')
+      try:
+        item = app_ctx.get_item(venue_id)
+        return jsonify(item)
+      except:
+        return 'venue not found', 404
 
