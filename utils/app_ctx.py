@@ -24,7 +24,8 @@ class ApplicationContext(object):
 		model_class = self.model_class()
 		item = model_class()
 		data = request_to_dictonary(model_class)
-		update_from_dictionary(data,item,model_class,object_id)
+		return  update_from_dictionary(data,item,model_class,object_id)
+
 
 	def model_class(self):
 		return MODEL_MAP[self.model_name]

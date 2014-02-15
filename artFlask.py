@@ -15,10 +15,7 @@ sys.path.append(os.getcwd())
 
 from mainapp import app, mongo
 
-UPLOAD_FOLDER = "C:\\Users\\mike\\Documents\\GitHub\\artFlask\\upload"
 MAX_CONTENT_LENGTH = 4 * 1024 * 1024 # 4MB max upload size
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
 app.secret_key = 'z\xcbu\xe5#\xf2U\xe5\xc4,\x0cz\xf9\xcboA\xd2Z\xf7Y\x15"|\xe4'
 
@@ -50,7 +47,7 @@ api.add_resource(Register, '/api/v1/register/', '/api/v1/register/<string:regist
 # api.add_resource(Art, '/api/v1/art/<string:artist_id>',
 #                  '/api/v1/art/<string:artist_id>/<string:action_type>')
 api.add_resource(Art, '/api/v1/art/',
-                 '/api/v1/art/<string:artist_id>/')
+                 '/api/v1/art/<string:art_id>/')
 api.add_resource(Profile, '/api/v1/profile')
 api.add_resource(Artists, '/api/v1/artists/<string:artist_id>')
 api.add_resource(Staff, '/api/v1/staff', '/api/v1/staff/<string:staff_id>')

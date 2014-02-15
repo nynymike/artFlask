@@ -83,9 +83,9 @@ Art API
 """
 __author__ = 'Michael Schwartz'
 
-from flask import send_file
+from flask import send_file, request,render_template
 from flask.ext.restful import Resource, Api
-from utils.helpers import jsonify
+from utils.helpers import jsonify, upload_file
 from utils.app_ctx import ApplicationContext
 from utils.Properies import Properties
 import io
@@ -94,9 +94,9 @@ class Art(Resource):
     def get(self, art_id=None, action_type=None):
         app_ctx =ApplicationContext('art')
         try:
-            item = app_ctx.get_item(art_id)
-            if not action_type:
-                return jsonify(item)
+          item = app_ctx.get_item(art_id)
+          if not action_type:
+              return render_template('artView.html',art=item)
         except:
             return 'Art not found', 404
 
@@ -128,8 +128,10 @@ class Art(Resource):
         # Create db entry for art
         try:
           app_ctx = ApplicationContext('art')
-          app_ctx.create_item_from_context()
-          return '',201
+          if 'file' in request.files:
+            upload_file()
+          item_id = app_ctx.create_item_from_context()
+          return "%s"%item_id,201
         except Exception, e:
           return '',404
 
@@ -138,6 +140,8 @@ class Art(Resource):
       try:
         app_ctx = ApplicationContext('art')
         app_ctx.create_item_from_context(art_id)
+        if 'file' in request.files:
+            upload_file()
         return '',200
       except Exception, e:
         return '',404
