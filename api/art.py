@@ -99,8 +99,8 @@ class Art(Resource):
               return render_template('artView.html',art=item)
           if action_type==None:
               return jsonify(item)
-        except:
-            return 'Art not found', 404
+        except Exception ,e:
+            return str(e), 404
 
         try:
             # Get the upload dir
@@ -118,8 +118,8 @@ class Art(Resource):
             if action_type=="qrcode":
                 fn = '%s/%s_qrcode.png' % (imagedir, art_id)
             return send_file(io.BytesIO(filename=fn))
-        except:
-            return 'Error returning %s image' % action_type, 404
+        except Exception , e:
+            return str(e), 404
 
     def post(self):
         # Get params and write
@@ -135,7 +135,7 @@ class Art(Resource):
           item_id = app_ctx.create_item_from_context()
           return "%s"%item_id,201
         except Exception, e:
-          return '',404
+          return str(e),404
 
 
     def put(self,art_id=None):
@@ -146,7 +146,7 @@ class Art(Resource):
             upload_file()
         return '',200
       except Exception, e:
-        return '',404
+        return str(e),404
 
     def delete(self,art_id=None):
       try:
@@ -154,4 +154,4 @@ class Art(Resource):
         app_ctx.remove_record(art_id)
         return '',200 
       except Exception, e:
-        return '',404
+        return str(e),404

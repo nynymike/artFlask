@@ -260,4 +260,5 @@ texinfo_documents = [
 #texinfo_no_detailmenu = False
 
 UPLOAD_FOLDER = "./upload"
+LOGGING_FILE = "./logs/log_file"
 DEBUG=True
