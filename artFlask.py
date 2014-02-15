@@ -11,7 +11,8 @@ from api.staff import Staff
 from api.profile import Profile
 from api.register import Register
 from flask import render_template
-
+import logging
+from logging.handlers import RotatingFileHandler
 import os, sys
 sys.path.append(os.getcwd())
 
@@ -21,6 +22,26 @@ MAX_CONTENT_LENGTH = 4 * 1024 * 1024 # 4MB max upload size
 app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
 app.secret_key = 'z\xcbu\xe5#\xf2U\xe5\xc4,\x0cz\xf9\xcboA\xd2Z\xf7Y\x15"|\xe4'
 
+logger = logging.getLogger('app')
+
+if app.config.has_key('LOGGING_FILE'):
+    handler = RotatingFileHandler(app.config['LOGGING_FILE'],
+                                      maxBytes=10000000,
+                                      backupCount=5)
+else:
+    handler = logging.StreamHandler(sys.stdout)
+
+formatter = logging.Formatter(
+        '%(asctime)s %(levelname)s %(message)s')
+handler.setFormatter(formatter)
+
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
+
+@app.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Origin', '*')
+    return response
 
 @app.route('/')
 def index():
