@@ -1,4 +1,4 @@
-curl "http://192.168.1.12:5000/api/v1/art/" -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "{"^
+curl "http://east.gluu.org/api/v1/art/" -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "{"^
 """artist"": ""3ad50b37-947e-46f6-940c-44804d95304f"","^
 """title"": ""Austin Sunrise"","^
 """description"": ""Third in a series of 90 painting of the beautiful Austin skyline"","^
@@ -17,7 +17,7 @@ curl "http://192.168.1.12:5000/api/v1/art/" -H "Origin: chrome-extension://cokgb
 "}" --compressed
 
 
-curl "http://192.168.1.12:5000/api/v1/register/" -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "{ ""sub"": ""nynymike@gmail.com"","^
+curl "http://east.gluu.org/api/v1/register/" -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "{ ""sub"": ""nynymike@gmail.com"","^
 "  ""given_name"": ""Michael"","^
 "  ""family_name"": ""Schwartz"","^
 "  ""name"": ""Michael Schwartz"","^
@@ -41,7 +41,7 @@ curl "http://192.168.1.12:5000/api/v1/register/" -H "Origin: chrome-extension://
 
 
 
-curl "http://192.168.1.12:5000/api/v1/manage/event/" -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "        {"^
+curl "http://east.gluu.org/api/v1/manage/event/" -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "        {"^
 "        ""id"": ""happy2014"","^
 "        ""name"": ""Happy Tour 2014"","^
 "        ""startDate"": ""Feb  3 00:00:00 UTC 2014"","^
@@ -52,7 +52,7 @@ curl "http://192.168.1.12:5000/api/v1/manage/event/" -H "Origin: chrome-extensio
 
 
 
-curl "http://192.168.1.12:5000/api/v1/manage/venue/" -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "        {"^
+curl "http://east.gluu.org/api/v1/manage/venue/" -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "        {"^
 "        ""site_id"": ""101c"","^
 "        ""name"": ""Gallery Happy"","^
 "        ""event_id"": ""a93335d9-ca6e-4824-8e30-fdd4551d2c7b"","^
@@ -80,7 +80,7 @@ curl "http://192.168.1.12:5000/api/v1/manage/venue/" -H "Origin: chrome-extensio
 
 
 
-curl "http://192.168.1.12:5000/api/v1/manage/venue/52fe45741d41c82a4b5ab1c1" -X PUT -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "        {"^
+curl "http://east.gluu.org/api/v1/manage/venue/52fe45741d41c82a4b5ab1c1" -X PUT -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "        {"^
 "        ""site_id"": ""101c"","^
 "        ""name"": ""Gallery Happy - Changed"","^
 "        ""event_id"": ""a93335d9-ca6e-4824-8e30-fdd4551d2c7b"","^
@@ -108,7 +108,7 @@ curl "http://192.168.1.12:5000/api/v1/manage/venue/52fe45741d41c82a4b5ab1c1" -X 
 
 
 
-curl "http://192.168.1.12:5000/api/v1/manage/event/52fe43851d41c829bd3028a3" -X PUT -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "        {"^
+curl "http://east.gluu.org/api/v1/manage/event/52fe43851d41c829bd3028a3" -X PUT -H "Origin: chrome-extension://cokgbflfommojglbmbpenpphppikmonn" -H "Accept-Encoding: gzip,deflate,sdch" -H "Accept-Language: en-US,en;q=0.8" -H "User-Agent: Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.107 Safari/537.36" -H "Content-Type: application/json" -H "Accept: */*" -H "Connection: keep-alive" --data-binary "        {"^
 "        ""id"": ""happy2014 - new"","^
 "        ""name"": ""Happy Tour 2014 - new"","^
 "        ""startDate"": ""Feb  3 00:00:00 UTC 2014"","^
