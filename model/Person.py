@@ -6,12 +6,28 @@ Person Standard Schema
 
 For a list of standard person claims for OpenID Connect 1.0 see http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
 
+Required Claims
+----------------
++-------------------+
+| claim             |
++===================+
+| email             |
++-------------------+
+| given_name        |
++-------------------+
+| family_name       |
++-------------------+
+| phone_number      |
++-------------------+
+| sub               |
++-------------------+
+
+
 Person Custom Schema
 --------------------
 
-
 +-------------------+--------------+------------------------------------------------------------------------+
-| member            | type         | description                                                            |
+| claim             | type         | description                                                            |
 +===================+==============+========================================================================+
 | id                | string       | unique artFlask identifier                                             |
 +-------------------+--------------+------------------------------------------------------------------------+
