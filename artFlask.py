@@ -1,4 +1,6 @@
-from flask import Flask, url_for, request, session, redirect
+#!/usr/bin/python
+
+# from flask import Flask, url_for, request, session, redirect
 from flask.ext.restful import Resource, Api
 from api.artists import Artists
 from api.art import Art
