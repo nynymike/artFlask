@@ -83,40 +83,41 @@ Art API
 """
 __author__ = 'Michael Schwartz'
 
+from flask import send_file
 from flask.ext.restful import Resource, Api
-from flask import Request
 from utils.helpers import jsonify
 from utils.app_ctx import ApplicationContext
-
-def getArt(art_id):
-    return {}
-
-def getThumbnail(art_id):
-    return ""
-
-def getPicture(art_id):
-    return ""
+from utils.Properies import Properties
+import io
 
 class Art(Resource):
-    def get(self, artist_id=None, action_type=None):
-        # if not art_id:
-        #     query = Request.args
-        #     if not len(query):
-        #         return 'Art not found', 404
-        #     else:
-        #         return queryArt(query)
-        # else:
-        #     if action_type=="thumbnail":
-        #         return getThumbnail(art_id)
-        #     if action_type=="picture":
-        #         return getPicture(art_id)
-        #     return getArt(art_id)
+    def get(self, art_id=None, action_type=None):
         app_ctx =ApplicationContext('art')
         try:
-          item = app_ctx.get_item(artist_id)
-          return jsonify(item)
+            item = app_ctx.get_item(art_id)
+            if not action_type:
+                return jsonify(item)
         except:
-          return 'Art not found', 404
+            return 'Art not found', 404
+
+        try:
+            # Get the upload dir
+            imagedir = ""
+            fn = ""
+            try:
+                p = Properties.load("../artFlask.properties")
+                imagedir = p.getProperty('imagedir')
+            except:
+                return 'Imagedir property not found in artFlask.properties', 404
+            if action_type=="thumbnail":
+                fn = '%s/%s_tn.png' % (imagedir, art_id)
+            if action_type=="picture":
+                fn = '%s/%s_web.png' % (imagedir, art_id)
+            if action_type=="qrcode":
+                fn = '%s/%s_qrcode.png' % (imagedir, art_id)
+            return send_file(io.BytesIO(filename=fn))
+        except:
+            return 'Error returning %s image' % action_type, 404
 
     def post(self):
         # Get params and write

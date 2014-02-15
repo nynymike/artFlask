@@ -2,7 +2,5 @@ flask
 flask-restful
 Flask-PyMongo
 pymongo==2.6.3
-google-api-python-client 
-httplib2
 pillow
 qrcode
