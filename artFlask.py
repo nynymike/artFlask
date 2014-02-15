@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# from flask import Flask, url_for, request, session, redirect
+from flask import Flask, url_for, request, session, redirect
 from flask.ext.restful import Resource, Api
 from api.artists import Artists
 from api.art import Art
@@ -74,7 +74,7 @@ api.add_resource(Art, '/api/v1/art/',
 api.add_resource(Profile, '/api/v1/profile')
 api.add_resource(Artists, '/api/v1/artists/<string:artist_id>')
 api.add_resource(Staff, '/api/v1/staff', '/api/v1/staff/<string:staff_id>')
-api.add_resource(Events, '/api/v1/events/<string:event_id>')
+api.add_resource(Events, '/api/v1/events', '/api/v1/events/<string:event_id>')
 api.add_resource(Venues, '/api/v1/venues/<string:venue_id>')
 api.add_resource(ManageEvent, '/api/v1/manage/event/','/api/v1/manage/event/<string:event_id>')
 api.add_resource(ManageVenue, '/api/v1/manage/venue/','/api/v1/manage/venue/<string:venue_id>')
