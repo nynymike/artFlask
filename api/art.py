@@ -95,8 +95,10 @@ class Art(Resource):
         app_ctx =ApplicationContext('art')
         try:
           item = app_ctx.get_item(art_id)
-          if not action_type:
+          if action_type=='view':
               return render_template('artView.html',art=item)
+          if action_type==None:
+              return jsonify(item)
         except:
             return 'Art not found', 404
 
