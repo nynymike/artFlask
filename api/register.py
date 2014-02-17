@@ -45,7 +45,8 @@ class Register(Resource):
       except Exception, e:
         return '',406
 
-    def get(self, registration_id=None):
+    def get(self, person_id=None, registration_code=None):
+        # Check if registration code matches person
         return {}
 
 

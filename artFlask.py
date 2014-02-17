@@ -66,7 +66,8 @@ def logout():
     return redirect(url_for('index'))
 
 api = Api(app)
-api.add_resource(Register, '/api/v1/register', '/api/v1/register/<string:registration_id>')
+api.add_resource(Register, '/api/v1/register',
+                 '/api/v1/register/<string:person_id>/<string:registration_code>')
 api.add_resource(Art, '/api/v1/art',
                  '/api/v1/art/<string:art_id>',
                  '/api/v1/art/<string:artist_id>/<string:action_type>')

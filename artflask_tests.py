@@ -31,7 +31,7 @@ class artFlaskTestCase(unittest.TestCase):
             })
         assert response.status_code==201
 
-    def register(self):
+    def test_register(self):
         response = self.app.post('/api/v1/register', data={
             'name':"Foo Bar",
             'given_name': "Foo",
@@ -49,6 +49,12 @@ class artFlaskTestCase(unittest.TestCase):
             'social_urls': "{'facebook':'http://facebook.com/foobar'}",
             'preferred_contact': 'email'}, follow_redirects=True)
         assert response.status_code == 200
+
+    # Test should show that the person activated the link
+    # and that the status was set to Active
+    def test_activate_registration(self):
+        assert False
+
 
 if __name__ == '__main__':
     try:
