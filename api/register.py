@@ -8,10 +8,13 @@ Register API
 
 .. http:post:: /register
 
-   Send a Person entity to request registration. The following fields may be 
-   posted for registration : name, given_name, family_name, middle_name,
-   nickname, picture, website, email, gender, birthdate, phone_number, address,
-   twitter, social_urls, preferred_contact
+   Send a Person entity to request registration. Check the Person Entity for
+   required fields. A registration_code is generated and stored in the Person
+   entity. The Person's status entry will be 'Pending' until the activation
+   link is clicked.
+
+   On registration, the person will be sent and email with
+   an activation link.
 
    :statuscode 200: Registration request successful
    :statuscode 406: Duplicate registration

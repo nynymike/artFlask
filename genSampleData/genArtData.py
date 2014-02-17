@@ -1,6 +1,10 @@
 import random, uuid
 from random import *
 
+numVenues = 10
+numArtists = 13
+numArt = 10
+
 def getRandom(fn):
     f = open(fn)
     lines = f.readlines()
@@ -75,7 +79,7 @@ i = 0
 venue_list = []
 used_site_ids = []
 siteID = ''
-while i<10:
+while i < numVenues:
     i = i + 1
     gotID = False
     username = getRandom("usernames.txt")

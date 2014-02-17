@@ -58,7 +58,9 @@
 <dl class="get">
 <dt id="get--art">
 <tt class="descname">GET </tt><tt class="descname">/art</tt><a class="headerlink" href="#get--art" title="Permalink to this definition">¶</a></dt>
-<dd><p>Search art. Returns a list of Art entities.</p>
+<dd><p>Search art: returns a list of Art entities. GET requests to this URL without query
+parameters will return 501 (Not Implemented), as requests to dump all the Art data
+is discouraged.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -536,10 +538,12 @@ SCIM update will be sent to oxTrust.</div></blockquote>
 <dl class="post">
 <dt id="post--register">
 <tt class="descname">POST </tt><tt class="descname">/register</tt><a class="headerlink" href="#post--register" title="Permalink to this definition">¶</a></dt>
-<dd><p>Send a Person entity to request registration. The following fields may be 
-posted for registration : name, given_name, family_name, middle_name,
-nickname, picture, website, email, gender, birthdate, phone_number, address,
-twitter, social_urls, preferred_contact</p>
+<dd><p>Send a Person entity to request registration. Check the Person Entity for
+required fields. A registration_code is generated and stored in the Person
+entity. The Person&#8217;s status entry will be &#8216;Pending&#8217; until the activation
+link is clicked.</p>
+<p>On registration, the person will be sent and email with
+an activation link.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -658,6 +662,7 @@ Some attributes may not be writable. todo: list attributes</p>
 </div>
 <div class="section" id="required-claims">
 <h2>Required Claims<a class="headerlink" href="#required-claims" title="Permalink to this headline">¶</a></h2>
+<p>The following claims are required for registration.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="100%" />
@@ -682,6 +687,7 @@ Some attributes may not be writable. todo: list attributes</p>
 </div>
 <div class="section" id="person-custom-schema">
 <h2>Person Custom Schema<a class="headerlink" href="#person-custom-schema" title="Permalink to this headline">¶</a></h2>
+<p>The following claims are used in addition to the standard OpenID Connect person claims.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="18%" />
@@ -705,7 +711,7 @@ Some attributes may not be writable. todo: list attributes</p>
 </tr>
 <tr class="row-even"><td>role</td>
 <td>string</td>
-<td>One or more of the following: patron, artist, staff</td>
+<td>Zero or more of the following: artist, staff</td>
 </tr>
 <tr class="row-odd"><td>social_urls</td>
 <td>string</td>
@@ -737,10 +743,10 @@ Some attributes may not be writable. todo: list attributes</p>
   <span class="s1">&#39;phone_number&#39;</span><span class="o">:</span> <span class="s1">&#39;1-512-555-1212&#39;</span><span class="p">,</span>
   <span class="s1">&#39;picture&#39;</span><span class="o">:</span> <span class="s1">&#39;http://www.gluu.org/wp-content/uploads/2012/04/mike3.png&#39;</span><span class="p">,</span>
   <span class="s2">&quot;address&quot;</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;621 East Sixth Street&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;locality&quot;</span><span class="o">:</span> <span class="s2">&quot;Austin&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;region&quot;</span><span class="o">:</span> <span class="s2">&quot;TX&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;78701&quot;</span><span class="p">,</span>
-  <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;US&quot;</span><span class="p">},</span>
+              <span class="s2">&quot;locality&quot;</span><span class="o">:</span> <span class="s2">&quot;Austin&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;region&quot;</span><span class="o">:</span> <span class="s2">&quot;TX&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;78701&quot;</span><span class="p">,</span>
+              <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;US&quot;</span><span class="p">},</span>
   <span class="s1">&#39;nickname&#39;</span><span class="o">:</span> <span class="s1">&#39;Mike&#39;</span><span class="p">,</span>
   <span class="s1">&#39;social_urls&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;FB&#39;</span><span class="o">:</span> <span class="s1">&#39;https://www.facebook.com/nynymike&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;LinkedIn&#39;</span><span class="p">,</span> <span class="s1">&#39;http://www.linkedin.com/in/nynymike&#39;</span><span class="p">},</span>
@@ -798,7 +804,7 @@ Some attributes may not be writable. todo: list attributes</p>
 </tr>
 <tr class="row-odd"><td>venue</td>
 <td>string</td>
-<td>Venue id</td>
+<td>Venue id. Needs approval of Venue manager if curated</td>
 </tr>
 <tr class="row-even"><td>medium</td>
 <td>string</td>
@@ -937,6 +943,14 @@ positive, and South and West are negative</td>
 <td>List&lt;string&gt;</td>
 <td>Person IDs authorized to manage the venue</td>
 </tr>
+<tr class="row-even"><td>curated</td>
+<td>List&lt;string&gt;</td>
+<td>If true, venue manager must approve art for venue</td>
+</tr>
+<tr class="row-odd"><td>times</td>
+<td>Boolean</td>
+<td>Used to specify limited hours. List of date and start times</td>
+</tr>
 <tr class="row-even"><td>ad_1</td>
 <td>Boolean</td>
 <td>Parking: Official parking for the disabled</td>
@@ -980,7 +994,12 @@ positive, and South and West are negative</td>
 <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Gallery Happy&#39;</span><span class="p">,</span>
 <span class="s1">&#39;event_id&#39;</span><span class="o">:</span> <span class="s1">&#39;a93335d9-ca6e-4824-8e30-fdd4551d2c7b&#39;</span><span class="p">,</span>
 <span class="s1">&#39;picture&#39;</span><span class="o">:</span> <span class="s1">&#39;http://www.galleryhappy.com/logo.png&#39;</span>
-<span class="s1">&#39;address&#39;</span><span class="o">:</span> <span class="s1">&#39;100 Cesar Chavez\nAustin, TX 78702&#39;</span>
+<span class="s1">&#39;address&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;621 East Sixth Street&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;locality&quot;</span><span class="o">:</span> <span class="s2">&quot;Austin&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;region&quot;</span><span class="o">:</span> <span class="s2">&quot;TX&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;postal_code&quot;</span><span class="o">:</span> <span class="s2">&quot;78701&quot;</span><span class="p">,</span>
+         <span class="s2">&quot;country&quot;</span><span class="o">:</span> <span class="s2">&quot;US&quot;</span><span class="p">},</span>
+<span class="s1">&#39;100 Cesar Chavez\nAustin, TX 78702&#39;</span>
 <span class="s1">&#39;coordinates&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;40.446195&#39;</span><span class="p">,</span> <span class="s1">&#39;-79.982195&#39;</span><span class="p">],</span>
 <span class="s1">&#39;twitter&#39;</span><span class="o">:</span> <span class="s1">&#39;@GalleryHappy&#39;</span><span class="p">,</span>
 <span class="s1">&#39;mail&#39;</span><span class="o">:</span><span class="s1">&#39;info@galleryhappy.org&#39;</span><span class="p">,</span>

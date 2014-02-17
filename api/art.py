@@ -5,7 +5,9 @@ Art API
 -------
 .. http:get:: /art
 
-   Search art. Returns a list of Art entities.
+   Search art: returns a list of Art entities. GET requests to this URL without query
+   parameters will return 501 (Not Implemented), as requests to dump all the Art data
+   is discouraged.
 
    :query [see schema]: substring for which to search
 

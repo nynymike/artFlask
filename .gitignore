@@ -7,3 +7,6 @@ local.cfg
 .project
 .pydevproject
 .settings/
+.pyc
+.idea
+

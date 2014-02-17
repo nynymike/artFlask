@@ -20,7 +20,18 @@ class artFlaskTestCase(unittest.TestCase):
         assert 'Welcome to the artFlask API Server' in response.data
         assert response.status_code == 200
 
-    def test_register(self):
+    def test_add_event(self):
+        response = self.app.post('/api/v1/manage/event/', data={
+             "id": "52ffa23745a8842d2e6aba6b",
+             "startDate": "Feb  3 00:00:00 UTC 2014",
+             "endDate": "Feb  5 00:00:00 UTC 2014",
+             "description": "This is a tour of all the artwork that you would want to see to make you smile",
+             "picture": "url_goes_here",
+             "name": "Happy Tour 2014"
+            })
+        assert response.status_code==201
+
+    def register(self):
         response = self.app.post('/api/v1/register', data={
             'name':"Foo Bar",
             'given_name': "Foo",

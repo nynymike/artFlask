@@ -7,7 +7,10 @@ Person Standard Schema
 For a list of standard person claims for OpenID Connect 1.0 see http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
 
 Required Claims
-----------------
+---------------
+
+The following claims are required for registration.
+
 +-------------------+
 | claim             |
 +===================+
@@ -22,9 +25,10 @@ Required Claims
 | sub               |
 +-------------------+
 
-
 Person Custom Schema
 --------------------
+
+The following claims are used in addition to the standard OpenID Connect person claims.
 
 +-------------------+--------------+------------------------------------------------------------------------+
 | claim             | type         | description                                                            |
@@ -33,7 +37,7 @@ Person Custom Schema
 +-------------------+--------------+------------------------------------------------------------------------+
 | twitter           | string       | Twitter handle for the person                                          |
 +-------------------+--------------+------------------------------------------------------------------------+
-| role              | string       | One or more of the following: patron, artist, staff                    |
+| role              | string       | Zero or more of the following: artist, staff                           |
 +-------------------+--------------+------------------------------------------------------------------------+
 | social_urls       | string       | Dictionary of websites given in the format {'display-name':'url'}      |
 +-------------------+--------------+------------------------------------------------------------------------+
@@ -58,10 +62,10 @@ Person Entity JSON sample:
      'phone_number': '1-512-555-1212',
      'picture': 'http://www.gluu.org/wp-content/uploads/2012/04/mike3.png',
      "address": {"street_address": "621 East Sixth Street",
-     "locality": "Austin",
-     "region": "TX",
-     "postal_code": "78701",
-     "country": "US"},
+                 "locality": "Austin",
+                 "region": "TX",
+                 "postal_code": "78701",
+                 "country": "US"},
      'nickname': 'Mike',
      'social_urls': {'FB': 'https://www.facebook.com/nynymike',
                     'LinkedIn', 'http://www.linkedin.com/in/nynymike'},

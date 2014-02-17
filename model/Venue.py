@@ -43,6 +43,10 @@ Venue Entity Schema
 +-------------+---------------+------------------------------------------------------------------------+
 | managers    | List<string>  | Person IDs authorized to manage the venue                              |
 +-------------+---------------+------------------------------------------------------------------------+
+| curated     | List<string>  | If true, venue manager must approve art for venue                      |
++-------------+---------------+------------------------------------------------------------------------+
+| times       | Boolean       | Used to specify limited hours. List of date and start times            |
++-------------+---------------+------------------------------------------------------------------------+
 | ad_1        | Boolean       | Parking: Official parking for the disabled                             |
 +-------------+---------------+------------------------------------------------------------------------+
 | ad_2        | Boolean       | Entrance and interior: Minimum 32" doorway clearance space             |
@@ -72,7 +76,12 @@ Venue Entity JSON sample:
         'name': 'Gallery Happy',
         'event_id': 'a93335d9-ca6e-4824-8e30-fdd4551d2c7b',
         'picture': 'http://www.galleryhappy.com/logo.png'
-        'address': '100 Cesar Chavez\\nAustin, TX 78702'
+        'address': {"street_address": "621 East Sixth Street",
+                 "locality": "Austin",
+                 "region": "TX",
+                 "postal_code": "78701",
+                 "country": "US"},
+        '100 Cesar Chavez\\nAustin, TX 78702'
         'coordinates': ['40.446195', '-79.982195'],
         'twitter': '@GalleryHappy',
         'mail':'info@galleryhappy.org',
