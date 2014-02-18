@@ -261,4 +261,5 @@ texinfo_documents = [
 
 UPLOAD_FOLDER = "./upload"
 LOGGING_FILE = "./logs/log_file"
+MONGO_DBNAME = 'artFlask'
 DEBUG=True

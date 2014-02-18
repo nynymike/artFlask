@@ -4,7 +4,7 @@ from model.Event import Event
 from model.Person import Person
 from utils.helpers import request_to_dictonary, update_from_dictionary,remove_record_by_id
 from flask import request
-from mainapp import mongo
+from db import mongo
 from bson import ObjectId
 MODEL_MAP = {
 			"art" : ArtWork,
@@ -15,6 +15,10 @@ MODEL_MAP = {
 
 class ApplicationContext(object):
 
+	def query_from_context(self):
+		model_class = self.model_class()
+		data = request_to_dictonary(model_class)
+		return self.query(**data)
 
 
 	def __init__(self,model_name):
@@ -36,6 +40,12 @@ class ApplicationContext(object):
 		else :
 			item = getattr(mongo.db,self.model_class()._collection_).find({"_id":ObjectId(id)})
 		return item.next()
+
+	def query(self,**kwargs):
+		print kwargs
+		items = getattr(mongo.db,self.model_class()._collection_).find({})
+		return items
+
 
 	def remove_record(self,object_id):
 		model_class = self.model_class()

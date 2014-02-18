@@ -7,3 +7,5 @@ local.cfg
 .project
 .pydevproject
 .settings/
+/upload/*
+/logs/*
