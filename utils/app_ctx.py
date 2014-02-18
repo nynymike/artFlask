@@ -15,24 +15,22 @@ MODEL_MAP = {
 
 class ApplicationContext(object):
 
-<<<<<<< HEAD
+
 	def query_from_context(self):
 		model_class = self.model_class()
 		data = request_to_dictonary(model_class)
 		return self.query(**data)
-=======
-    def __init__(self,model_name):
-        self.model_name = model_name
->>>>>>> 7731906a0b0cc75864146b15c92ba630e3baab82
 
-    def create_item_from_context(self,object_id=None):
-        model_class = self.model_class()
-        item = model_class()
-        data = request_to_dictonary(model_class)
-        return  update_from_dictionary(data,item,model_class,object_id)
+	def __init__(self,model_name):
+		self.model_name = model_name
+
+	def create_item_from_context(self,object_id=None):
+	    model_class = self.model_class()
+	    item = model_class()
+	    data = request_to_dictonary(model_class)
+	    return  update_from_dictionary(data,item,model_class,object_id)
 
 
-<<<<<<< HEAD
 	def create_item_from_context(self,object_id=None):
 		model_class = self.model_class()
 		item = model_class()
@@ -46,35 +44,18 @@ class ApplicationContext(object):
 	def get_item(self,id=None):
 		if id is None :
 			item = getattr(mongo.db,self.model_class()._collection_).find({})
-		else :
+		else:
 			item = getattr(mongo.db,self.model_class()._collection_).find({"_id":ObjectId(id)})
 		return item.next()
 
 	def query(self,**kwargs):
 		print kwargs
-		items = getattr(mongo.db,self.model_class()._collection_).find({})
+		items = getattr(mongo.db,self.model_class()._collection_).find(kwargs)
 		return items
 
 
 	def remove_record(self,object_id):
 		model_class = self.model_class()
 		remove_recorde_by_id(object_id,model_class)
-=======
-    def model_class(self):
-        return MODEL_MAP[self.model_name]
->>>>>>> 7731906a0b0cc75864146b15c92ba630e3baab82
 
-    def get_item(self,id=None):
-        if id is None :
-            item = getattr(mongo.db,self.model_class()._collection_).find({})
-        else :
-            item = getattr(mongo.db,self.model_class()._collection_).find({"_id":ObjectId(id)})
-        return item.next()
-
-    def remove_record(self,object_id):
-        model_class = self.model_class()
-        remove_record_by_id(object_id, model_class)
-
-    def search(self, d):
-        return getattr(mongo.db,self.model_class()._collection_).find(`d`)
 

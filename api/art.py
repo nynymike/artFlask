@@ -100,7 +100,8 @@ class Art(Resource):
       app_ctx =ApplicationContext('art')
       items = app_ctx.query_from_context()
       return json_util.dumps(items)
-
+      
+#Commenting this out until I figure out a decent way to give it a proper route
     # def get(self, art_id=None, action_type=None):
     #     app_ctx =ApplicationContext('art')
     #     try:

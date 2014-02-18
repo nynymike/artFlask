@@ -75,53 +75,29 @@ def configure_routes(app):
             return render_template('login.html')
 
     # todo: Should route for OpenID Connect Logout
+
+
     @app.route('/logout')
     def logout():
         # remove the username from the session if it's there
         session.pop('username', None)
         return redirect(url_for('index'))
-<<<<<<< HEAD
 
     api = Api(app)
-    api.add_resource(Register, '/api/v1/register/', '/api/v1/register/<string:registration_id>')
-    # api.add_resource(Art, '/api/v1/art/<string:artist_id>',
-    #                  '/api/v1/art/<string:artist_id>/<string:action_type>')
-    api.add_resource(Art, '/api/v1/art/',
-                     '/api/v1/art/<string:art_id>/')
+    api.add_resource(Register, '/api/v1/register',
+                     '/api/v1/register/<string:person_id>/<string:registration_code>')
+    api.add_resource(Art, '/api/v1/art',
+                     '/api/v1/art/<string:art_id>',
+                     '/api/v1/art/<string:artist_id>/<string:action_type>')
     api.add_resource(Profile, '/api/v1/profile')
     api.add_resource(Artists, '/api/v1/artists/<string:artist_id>')
     api.add_resource(Staff, '/api/v1/staff', '/api/v1/staff/<string:staff_id>')
-    api.add_resource(Events, '/api/v1/events/<string:event_id>')
-    api.add_resource(Venues, '/api/v1/venues/<string:venue_id>')
-    api.add_resource(ManageEvent, '/api/v1/manage/event/','/api/v1/manage/event/<string:event_id>')
-    api.add_resource(ManageVenue, '/api/v1/manage/venue/','/api/v1/manage/venue/<string:venue_id>')
-    api.add_resource(ManagePerson, '/api/v1/manage/person/','/api/v1/manage/person/<string:person_id>')
-=======
-    else:
-        return render_template('login.html')
+    api.add_resource(Events, '/api/v1/events', '/api/v1/events/<string:event_id>')
+    api.add_resource(Venues, '/api/v1/venues', '/api/v1/venues/<string:venue_id>')
+    api.add_resource(ManageEvent, '/api/v1/manage/event','/api/v1/manage/event/<string:event_id>')
+    api.add_resource(ManageVenue, '/api/v1/manage/venue','/api/v1/manage/venue/<string:venue_id>')
+    api.add_resource(ManagePerson, '/api/v1/manage/person','/api/v1/manage/person/<string:person_id>')
 
-# todo: Should route for OpenID Connect Logout
-@app.route('/logout')
-def logout():
-    # remove the username from the session if it's there
-    session.pop('username', None)
-    return redirect(url_for('index'))
-
-api = Api(app)
-api.add_resource(Register, '/api/v1/register',
-                 '/api/v1/register/<string:person_id>/<string:registration_code>')
-api.add_resource(Art, '/api/v1/art',
-                 '/api/v1/art/<string:art_id>',
-                 '/api/v1/art/<string:artist_id>/<string:action_type>')
-api.add_resource(Profile, '/api/v1/profile')
-api.add_resource(Artists, '/api/v1/artists/<string:artist_id>')
-api.add_resource(Staff, '/api/v1/staff', '/api/v1/staff/<string:staff_id>')
-api.add_resource(Events, '/api/v1/events', '/api/v1/events/<string:event_id>')
-api.add_resource(Venues, '/api/v1/venues', '/api/v1/venues/<string:venue_id>')
-api.add_resource(ManageEvent, '/api/v1/manage/event','/api/v1/manage/event/<string:event_id>')
-api.add_resource(ManageVenue, '/api/v1/manage/venue','/api/v1/manage/venue/<string:venue_id>')
-api.add_resource(ManagePerson, '/api/v1/manage/person','/api/v1/manage/person/<string:person_id>')
->>>>>>> 7731906a0b0cc75864146b15c92ba630e3baab82
 
 if __name__ == '__main__':
     app = create_app(__name__)
