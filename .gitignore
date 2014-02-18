@@ -9,3 +9,5 @@ local.cfg
 .settings/
 /upload/*
 /logs/*
+.idea
+

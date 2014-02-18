@@ -1,0 +1,14 @@
+painting
+photogtrahy
+sculpture
+mixed-medium
+found-art
+print
+installation
+film
+video
+wood
+metal
+fashion
+jewlary
+other
