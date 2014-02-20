@@ -26,6 +26,8 @@ __author__ = 'Michael Schwartz'
 from flask.ext.restful import Resource, Api
 from utils.helpers import jsonify, request_to_dictonary
 from utils.app_ctx import ApplicationContext
+import json
+from bson import json_util
 
 def getEvent(event_id):
     return [{}]
@@ -37,8 +39,7 @@ class Events(Resource):
     def get(self, event_id=None):
       app_ctx =ApplicationContext('event')
       try:
-          item = app_ctx.get_item(event_id)
-          print item
-          return jsonify(item),200
+        events = app_ctx.query_from_context()
+        return json_util.dumps(events)
       except:
           return 'Event not found', 404

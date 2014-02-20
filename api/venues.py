@@ -26,6 +26,8 @@ from flask.ext.restful import Resource, Api
 from flask import Request
 from utils.helpers import jsonify
 from utils.app_ctx import ApplicationContext
+import json
+from bson import json_util
 
 def getVenue(venue_id):
     return {}
@@ -37,8 +39,8 @@ class Venues(Resource):
     def get(self, venue_id=None):
       app_ctx =ApplicationContext('venue')
       try:
-        item = app_ctx.get_item(venue_id)
-        return jsonify(item)
+        venue = app_ctx.query_from_context()
+        return json_util.dumps(venue)
       except:
         return 'venue not found', 404
 
