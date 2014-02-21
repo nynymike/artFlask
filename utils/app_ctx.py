@@ -3,7 +3,7 @@ from model.Venue import Venue
 from model.Event import Event
 from model.Person import Person
 from utils.helpers import request_to_dictonary, update_from_dictionary,remove_record_by_id
-from flask import request
+from flask import request, abort
 from db import mongo
 from bson import ObjectId
 MODEL_MAP = {
@@ -16,9 +16,11 @@ MODEL_MAP = {
 class ApplicationContext(object):
 
 
-	def query_from_context(self):
+	def query_from_context(self,allowList=False):
 		model_class = self.model_class()
-		data = request_to_dictonary(model_class)
+		data = request_to_dictonary(model_class,typeSafe=False)
+		if not data:
+			abort(501)
 		return self.query(**data)
 
 	def __init__(self,model_name):

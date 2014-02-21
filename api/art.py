@@ -96,57 +96,41 @@ import io
 
 class Art(Resource):
 
-    def get(self):
-      app_ctx =ApplicationContext('art')
-      items = app_ctx.query_from_context()
-      return json_util.dumps(items)
-      
-#Commenting this out until I figure out a decent way to give it a proper route
-    # def get(self, art_id=None, action_type=None):
-    #     app_ctx =ApplicationContext('art')
-    #     try:
-    #       item = app_ctx.get_item(art_id)
-    #       if action_type=='view':
-    #           return render_template('artView.html',art=item)
-    #       if action_type==None:
-    #           return jsonify(item)
-    #     except Exception ,e:
-    #         return str(e), 404
 
-    #     try:
-    #         # Get the upload dir
-    #         imagedir = ""
-    #         fn = ""
-    #         try:
-    #             p = Properties.load("../artFlask.properties")
-    #             imagedir = p.getProperty('imagedir')
-    #         except:
-    #             return 'Imagedir property not found in artFlask.properties', 404
-    #         if action_type=="thumbnail":
-    #             fn = '%s/%s_tn.png' % (imagedir, art_id)
-    #         if action_type=="picture":
-    #             fn = '%s/%s_web.png' % (imagedir, art_id)
-    #         if action_type=="qrcode":
-    #             fn = '%s/%s_qrcode.png' % (imagedir, art_id)
-    #         return send_file(io.BytesIO(filename=fn))
-    #     except Exception , e:
-    #         return str(e), 404
+      
+
+    def get(self, art_id=None, action_type=None):
+        app_ctx =ApplicationContext('art')
+        try:
+          item = app_ctx.get_item(art_id)
+          if action_type=='view':
+              return render_template('artView.html',art=item)
+          if action_type==None:
+              return jsonify(item)
+        except Exception ,e:
+            return str(e), 404
+
+        try:
+            # Get the upload dir
+            imagedir = ""
+            fn = ""
+            try:
+                p = Properties.load("../artFlask.properties")
+                imagedir = p.getProperty('imagedir')
+            except:
+                return 'Imagedir property not found in artFlask.properties', 404
+            if action_type=="thumbnail":
+                fn = '%s/%s_tn.png' % (imagedir, art_id)
+            if action_type=="picture":
+                fn = '%s/%s_web.png' % (imagedir, art_id)
+            if action_type=="qrcode":
+                fn = '%s/%s_qrcode.png' % (imagedir, art_id)
+            return send_file(io.BytesIO(filename=fn))
+        except Exception , e:
+            return str(e), 404
 
     def post(self):
-        # Get params and write
-        # Convert image to web size
-        # Write file
-        # Convert image to thumbnail
-        # Write file
-        # Create db entry for art
-        try:
-          app_ctx = ApplicationContext('art')
-          if 'file' in request.files:
-            upload_file()
-          item_id = app_ctx.create_item_from_context()
-          return "%s"%item_id,201
-        except Exception, e:
-          return str(e),404
+      pass
 
 
     def put(self,art_id=None):
@@ -154,7 +138,7 @@ class Art(Resource):
         app_ctx = ApplicationContext('art')
         app_ctx.create_item_from_context(art_id)
         if 'file' in request.files:
-            upload_file()
+            upload_file(art_id)
         return '',200
       except Exception, e:
         return str(e),404

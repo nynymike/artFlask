@@ -17,11 +17,15 @@ from api.artImageFunctions import shrink , watermark, create_copyright
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
-def request_to_dictonary(model_class):
+def request_to_dictonary(model_class,typeSafe=True):
 	schema = model_class.schema
 	parser = reqparse.RequestParser()
 	for field in schema:
-		parser.add_argument(field)
+		if typeSafe:
+			parser.add_argument(field,type=schema[field][type])
+		else:
+			parser.add_argument(field)
+
 	args =  parser.parse_args(request)
 	remove_parameters = []
 	for a in args:
@@ -63,16 +67,18 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
 
-def upload_file():
+def upload_file(id):
 	file = request.files['file']
 	if file and allowed_file(file.filename):
 	    filename = secure_filename(file.filename)
 	    file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
 	    file.save(file_path)
+	    extension = file_path.split('.')[-1]
 	    copyright_image = current_app.config['UPLOAD_FOLDER'] + 'watermark.png'
 	    create_copyright("copyright Michael Schwartz", copyright_image)
-	    shrink(file_path, 600, "%s/thumb-%s"%(current_app.config['UPLOAD_FOLDER'],filename))
-	    watermark(file_path,copyright_image,"%s/web-%s"%(current_app.config['UPLOAD_FOLDER'],filename))
+	    shrink(file_path, 600, "%s/thumb-%s.%s"%(current_app.config['UPLOAD_FOLDER'],id,extension))
+	    watermark(file_path,copyright_image,"%s/web-%s.%s"%(current_app.config['UPLOAD_FOLDER'],id,extension))
+	    os.remove(file_path)
 	    return True
 	return False
 
