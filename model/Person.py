@@ -75,7 +75,7 @@ Person Entity JSON sample:
      'status': 'active',
      'registration_code': {'e086acd2-2d0f-440b-bbd0-dbde47301b0b': {'sent': 'Feb  3 10:10:31 UTC 2014',
                             'accepted': 'Feb  3 10:15:09 UTC 2014'}}
-
+      }
 """
 
 class Person():

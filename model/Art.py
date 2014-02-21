@@ -15,10 +15,6 @@ Art Entity Schema
 +-------------+--------------+------------------------------------------------------------------------+
 | description | string       | Artwork materials and style                                            |
 +-------------+--------------+------------------------------------------------------------------------+
-| picture     | string       | URI for a jpg of artwork                                               |
-+-------------+--------------+------------------------------------------------------------------------+
-| thumbnail   | string       | URL for a tiny  version of the jpg                                     |
-+-------------+--------------+------------------------------------------------------------------------+
 | buyURL      | string       | URL for website to buy the work                                        |
 +-------------+--------------+------------------------------------------------------------------------+
 | venue       | string       | Venue id. Needs approval of Venue manager if curated                   |
@@ -48,8 +44,6 @@ Art Entity JSON sample:
         'artist': '3ad50b37-947e-46f6-940c-44804d95304f',
         'title': 'Austin Sunrise',
         'description': 'Third in a series of 90 painting of the beautiful Austin skyline',
-        'picture': 'http://artFlask.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890',
-        'thumbnail': 'http://artFlask.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890?thumbnail=true'
         'buyURL': 'http://auction.com/item/3432840932',
         'venue': '37ae018a-1fb2-4da0-8b75-e439c92e6dd5',
         'medium': 'Painting',
