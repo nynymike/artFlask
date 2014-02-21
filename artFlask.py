@@ -4,6 +4,7 @@ from flask import Flask, url_for, request, session, redirect
 from flask.ext.restful import Resource, Api
 from api.artists import Artists
 from api.art import Art
+from api.artList import ArtList
 from api.venues import Venues
 from api.events import Events
 from api.manage import ManageEvent, ManageVenue, ManagePerson
@@ -86,9 +87,8 @@ def configure_routes(app):
     api = Api(app)
     api.add_resource(Register, '/api/v1/register',
                      '/api/v1/register/<string:person_id>/<string:registration_code>')
-    api.add_resource(Art, '/api/v1/art',
-                     '/api/v1/art/<string:art_id>',
-                     '/api/v1/art/<string:artist_id>/<string:action_type>')
+    api.add_resource(Art,'/api/v1/art/<string:art_id>')
+    api.add_resource(ArtList,'/api/v1/art/')
     api.add_resource(Profile, '/api/v1/profile')
     api.add_resource(Artists, '/api/v1/artists/<string:artist_id>')
     api.add_resource(Staff, '/api/v1/staff', '/api/v1/staff/<string:staff_id>')
