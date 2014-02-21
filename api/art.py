@@ -99,35 +99,13 @@ class Art(Resource):
 
       
 
-    def get(self, art_id=None, action_type=None):
+    def get(self, art_id):
         app_ctx =ApplicationContext('art')
         try:
           item = app_ctx.get_item(art_id)
-          if action_type=='view':
-              return render_template('artView.html',art=item)
-          if action_type==None:
-              return jsonify(item)
-        except Exception ,e:
-            return str(e), 404
-
-        try:
-            # Get the upload dir
-            imagedir = ""
-            fn = ""
-            try:
-                p = Properties.load("../artFlask.properties")
-                imagedir = p.getProperty('imagedir')
-            except:
-                return 'Imagedir property not found in artFlask.properties', 404
-            if action_type=="thumbnail":
-                fn = '%s/%s_tn.png' % (imagedir, art_id)
-            if action_type=="picture":
-                fn = '%s/%s_web.png' % (imagedir, art_id)
-            if action_type=="qrcode":
-                fn = '%s/%s_qrcode.png' % (imagedir, art_id)
-            return send_file(io.BytesIO(filename=fn))
+          return json_util.dumps(item)
         except Exception , e:
-            return str(e), 404
+          return str(e), 404
 
     def post(self):
       pass
