@@ -33,7 +33,7 @@ Venue Entity Schema
 +-------------+---------------+------------------------------------------------------------------------+
 | category    | string        | i.e. "Happenings", "Exhibitions" or  "Artists & Studios"               |
 +-------------+---------------+------------------------------------------------------------------------+
-| medium      | string        | Primary material used for art                                          |
+| mediums     | List<string>  | Primary material used for art                                          |
 +-------------+---------------+------------------------------------------------------------------------+
 | description | string        | Brief text about the venue                                             |
 +-------------+---------------+------------------------------------------------------------------------+
@@ -43,9 +43,9 @@ Venue Entity Schema
 +-------------+---------------+------------------------------------------------------------------------+
 | managers    | List<string>  | Person IDs authorized to manage the venue                              |
 +-------------+---------------+------------------------------------------------------------------------+
-| curated     | List<string>  | If true, venue manager must approve art for venue                      |
+| curated     | Boolean       | If true, venue manager must approve art for venue                      |
 +-------------+---------------+------------------------------------------------------------------------+
-| times       | Boolean       | Used to specify limited hours. List of date and start times            |
+| times       | List<string>  | Used to specify limited hours. List of date and start times            |
 +-------------+---------------+------------------------------------------------------------------------+
 | ad_1        | Boolean       | Parking: Official parking for the disabled                             |
 +-------------+---------------+------------------------------------------------------------------------+
@@ -74,7 +74,7 @@ Venue Entity JSON sample:
         'id': 'd471b627-f7f3-4872-96e2-2af4d813673f',
         'site_id': '101c',
         'name': 'Gallery Happy',
-        'event_id': 'a93335d9-ca6e-4824-8e30-fdd4551d2c7b',
+        'event_id': 'happy2014',
         'picture': 'http://www.galleryhappy.com/logo.png'
         'address': {"street_address": "621 East Sixth Street",
                  "locality": "Austin",
@@ -87,11 +87,13 @@ Venue Entity JSON sample:
         'mail':'info@galleryhappy.org',
         'phone':'+1 512-555-1212',
         'category':'Artists & Studios'.
-        'medium':'Ceramics',
+        'mediums': ['Ceramics'],
         'description':'Fun stuff made of clay by talented people.',
         'artists': ['b18af90a-4054-4c13-a382-8987bbaeb58b'],
         'websites': ['http://www.galleryhappy.com'],
         'managers': ['c3491f70-8c92-11e3-a91c-3c970e1b8563'],
+        'curated': true,
+        'times': ['Feb  3 12:00:00 UTC 2014', 'Feb  3 14:00:00 UTC 2014']
         'ad_1': true,
         'ad_2': true,
         'ad_3': true,

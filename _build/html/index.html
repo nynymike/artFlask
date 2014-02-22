@@ -756,6 +756,7 @@ Some attributes may not be writable. todo: list attributes</p>
   <span class="s1">&#39;status&#39;</span><span class="o">:</span> <span class="s1">&#39;active&#39;</span><span class="p">,</span>
   <span class="s1">&#39;registration_code&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;e086acd2-2d0f-440b-bbd0-dbde47301b0b&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;sent&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  3 10:10:31 UTC 2014&#39;</span><span class="p">,</span>
                          <span class="s1">&#39;accepted&#39;</span><span class="o">:</span> <span class="s1">&#39;Feb  3 10:15:09 UTC 2014&#39;</span><span class="p">}}</span>
+   <span class="p">}</span>
 </pre></div>
 </div>
 </div>
@@ -789,14 +790,6 @@ Some attributes may not be writable. todo: list attributes</p>
 <tr class="row-odd"><td>description</td>
 <td>string</td>
 <td>Artwork materials and style</td>
-</tr>
-<tr class="row-even"><td>picture</td>
-<td>string</td>
-<td>URI for a jpg of artwork</td>
-</tr>
-<tr class="row-odd"><td>thumbnail</td>
-<td>string</td>
-<td>URL for a tiny  version of the jpg</td>
 </tr>
 <tr class="row-even"><td>buyURL</td>
 <td>string</td>
@@ -844,8 +837,6 @@ Some attributes may not be writable. todo: list attributes</p>
 <span class="s1">&#39;artist&#39;</span><span class="o">:</span> <span class="s1">&#39;3ad50b37-947e-46f6-940c-44804d95304f&#39;</span><span class="p">,</span>
 <span class="s1">&#39;title&#39;</span><span class="o">:</span> <span class="s1">&#39;Austin Sunrise&#39;</span><span class="p">,</span>
 <span class="s1">&#39;description&#39;</span><span class="o">:</span> <span class="s1">&#39;Third in a series of 90 painting of the beautiful Austin skyline&#39;</span><span class="p">,</span>
-<span class="s1">&#39;picture&#39;</span><span class="o">:</span> <span class="s1">&#39;http://artFlask.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890&#39;</span><span class="p">,</span>
-<span class="s1">&#39;thumbnail&#39;</span><span class="o">:</span> <span class="s1">&#39;http://artFlask.us/api/v1/art/140a3bfc-63a4-4f88-9d63-893e69f88890?thumbnail=true&#39;</span>
 <span class="s1">&#39;buyURL&#39;</span><span class="o">:</span> <span class="s1">&#39;http://auction.com/item/3432840932&#39;</span><span class="p">,</span>
 <span class="s1">&#39;venue&#39;</span><span class="o">:</span> <span class="s1">&#39;37ae018a-1fb2-4da0-8b75-e439c92e6dd5&#39;</span><span class="p">,</span>
 <span class="s1">&#39;medium&#39;</span><span class="o">:</span> <span class="s1">&#39;Painting&#39;</span><span class="p">,</span>
@@ -923,8 +914,8 @@ positive, and South and West are negative</td>
 <td>string</td>
 <td>i.e. &#8220;Happenings&#8221;, &#8220;Exhibitions&#8221; or  &#8220;Artists &amp; Studios&#8221;</td>
 </tr>
-<tr class="row-odd"><td>medium</td>
-<td>string</td>
+<tr class="row-odd"><td>mediums</td>
+<td>List&lt;string&gt;</td>
 <td>Primary material used for art</td>
 </tr>
 <tr class="row-even"><td>description</td>
@@ -944,11 +935,11 @@ positive, and South and West are negative</td>
 <td>Person IDs authorized to manage the venue</td>
 </tr>
 <tr class="row-even"><td>curated</td>
-<td>List&lt;string&gt;</td>
+<td>Boolean</td>
 <td>If true, venue manager must approve art for venue</td>
 </tr>
 <tr class="row-odd"><td>times</td>
-<td>Boolean</td>
+<td>List&lt;string&gt;</td>
 <td>Used to specify limited hours. List of date and start times</td>
 </tr>
 <tr class="row-even"><td>ad_1</td>
@@ -992,7 +983,7 @@ positive, and South and West are negative</td>
 <span class="s1">&#39;id&#39;</span><span class="o">:</span> <span class="s1">&#39;d471b627-f7f3-4872-96e2-2af4d813673f&#39;</span><span class="p">,</span>
 <span class="s1">&#39;site_id&#39;</span><span class="o">:</span> <span class="s1">&#39;101c&#39;</span><span class="p">,</span>
 <span class="s1">&#39;name&#39;</span><span class="o">:</span> <span class="s1">&#39;Gallery Happy&#39;</span><span class="p">,</span>
-<span class="s1">&#39;event_id&#39;</span><span class="o">:</span> <span class="s1">&#39;a93335d9-ca6e-4824-8e30-fdd4551d2c7b&#39;</span><span class="p">,</span>
+<span class="s1">&#39;event_id&#39;</span><span class="o">:</span> <span class="s1">&#39;happy2014&#39;</span><span class="p">,</span>
 <span class="s1">&#39;picture&#39;</span><span class="o">:</span> <span class="s1">&#39;http://www.galleryhappy.com/logo.png&#39;</span>
 <span class="s1">&#39;address&#39;</span><span class="o">:</span> <span class="p">{</span><span class="s2">&quot;street_address&quot;</span><span class="o">:</span> <span class="s2">&quot;621 East Sixth Street&quot;</span><span class="p">,</span>
          <span class="s2">&quot;locality&quot;</span><span class="o">:</span> <span class="s2">&quot;Austin&quot;</span><span class="p">,</span>
@@ -1005,11 +996,13 @@ positive, and South and West are negative</td>
 <span class="s1">&#39;mail&#39;</span><span class="o">:</span><span class="s1">&#39;info@galleryhappy.org&#39;</span><span class="p">,</span>
 <span class="s1">&#39;phone&#39;</span><span class="o">:</span><span class="s1">&#39;+1 512-555-1212&#39;</span><span class="p">,</span>
 <span class="s1">&#39;category&#39;</span><span class="o">:</span><span class="s1">&#39;Artists &amp; Studios&#39;</span><span class="p">.</span>
-<span class="s1">&#39;medium&#39;</span><span class="o">:</span><span class="s1">&#39;Ceramics&#39;</span><span class="p">,</span>
+<span class="s1">&#39;mediums&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Ceramics&#39;</span><span class="p">],</span>
 <span class="s1">&#39;description&#39;</span><span class="o">:</span><span class="s1">&#39;Fun stuff made of clay by talented people.&#39;</span><span class="p">,</span>
 <span class="s1">&#39;artists&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;b18af90a-4054-4c13-a382-8987bbaeb58b&#39;</span><span class="p">],</span>
 <span class="s1">&#39;websites&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;http://www.galleryhappy.com&#39;</span><span class="p">],</span>
 <span class="s1">&#39;managers&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;c3491f70-8c92-11e3-a91c-3c970e1b8563&#39;</span><span class="p">],</span>
+<span class="s1">&#39;curated&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="s1">&#39;times&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Feb  3 12:00:00 UTC 2014&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb  3 14:00:00 UTC 2014&#39;</span><span class="p">]</span>
 <span class="s1">&#39;ad_1&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 <span class="s1">&#39;ad_2&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 <span class="s1">&#39;ad_3&#39;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
