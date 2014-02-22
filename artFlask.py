@@ -12,6 +12,7 @@ from api.manage import ManageEvent, ManageVenue, ManagePerson
 from api.staff import Staff
 from api.profile import Profile
 from api.register import Register
+from api.artistlist import ArtistList
 from flask import render_template
 import logging
 from logging.handlers import RotatingFileHandler
@@ -19,6 +20,7 @@ import os, sys
 sys.path.append(os.getcwd())
 from flask import Flask
 from db import mongo
+from mail import mail
 
 def create_app(name):
     app = Flask(name)
@@ -26,11 +28,12 @@ def create_app(name):
     app.config.from_object('conf')
     configure_logger(app)
     configure_routes(app)
-    configure_database(app)
+    configure_extensions(app)
     return app
 
-def configure_database(app):
+def configure_extensions(app):
     mongo.init_app(app)
+    mail.init_app(app)
 
 def configure_logger(app):
 
@@ -86,15 +89,20 @@ def configure_routes(app):
         return redirect(url_for('index'))
 
     api = Api(app)
-    api.add_resource(Register, '/api/v1/register',
-                     '/api/v1/register/<string:person_id>/<string:registration_code>')
+
     api.add_resource(Art,'/api/v1/art/<string:art_id>/')
     api.add_resource(ArtImage,'/api/v1/art/<string:art_id>/<string:action_type>')
     api.add_resource(ArtList,'/api/v1/art/')
-    api.add_resource(Profile, '/api/v1/profile')
+
     api.add_resource(Artists, '/api/v1/artists/<string:artist_id>')
+    api.add_resource(ArtistList, '/api/v1/artists/')
+
+    api.add_resource(Register, '/api/v1/register/<string:token>','/api/v1/register/')
+
+    api.add_resource(Events, '/api/v1/events/')
+
+    api.add_resource(Profile, '/api/v1/profile')
     api.add_resource(Staff, '/api/v1/staff', '/api/v1/staff/<string:staff_id>')
-    api.add_resource(Events, '/api/v1/events', '/api/v1/events/<string:event_id>')
     api.add_resource(Venues, '/api/v1/venues', '/api/v1/venues/<string:venue_id>')
     api.add_resource(ManageEvent, '/api/v1/manage/event','/api/v1/manage/event/<string:event_id>')
     api.add_resource(ManageVenue, '/api/v1/manage/venue','/api/v1/manage/venue/<string:venue_id>')

@@ -1,6 +1,6 @@
 from flask.ext.restful import reqparse
 from flask import Flask, request, redirect, url_for, current_app
-from mainapp import mongo
+from db import mongo
 from bson.objectid import ObjectId
 import os
 from werkzeug.utils import secure_filename
@@ -25,7 +25,6 @@ def request_to_dictonary(model_class,typeSafe=True):
 			parser.add_argument(field,type=schema[field][type])
 		else:
 			parser.add_argument(field)
-
 	args =  parser.parse_args(request)
 	remove_parameters = []
 	for a in args:

@@ -29,6 +29,9 @@ __author__ = 'Michael Schwartz'
 from flask.ext.restful import Resource, Api
 from flask import Request
 from flask.ext.restful import reqparse
+from utils.app_ctx import ApplicationContext
+from bson import json_util
+
 
 def getAllArtists():
     return []
@@ -40,12 +43,11 @@ def queryResults(query):
     return {}
 
 class Artists(Resource):
-    def get(self, person_id=None, action_id=None):
-        if not person_id:
-            query = Request.args
-            if not len(query):
-                return getAllArtists()
-            else:
-                return queryResults(query)
-        else: return getArtist(person_id)
+    def get(self, artist_id):
+        app_ctx =ApplicationContext('person')
+        try:
+          item = app_ctx.get_item(artist_id)
+          return json_util.dumps(item)
+        except Exception , e:
+          return str(e), 404
 

@@ -45,7 +45,6 @@ class Event():
     _collection_ = "Event"
 
     schema = {
-        'id': {type : str},
         'name': {type : str},
         'startDate': {type : str},
         'endDate': {type : str},

@@ -38,8 +38,8 @@ def getAllEvents():
 class Events(Resource):
     def get(self, event_id=None):
       app_ctx =ApplicationContext('event')
-      try:
-        events = app_ctx.query_from_context()
-        return json_util.dumps(events)
-      except:
-          return 'Event not found', 404
+      # try:
+      events = app_ctx.query_from_context(allowList=True)
+      return json_util.dumps(events)
+      # except:
+      #     return 'Event not found', 404
