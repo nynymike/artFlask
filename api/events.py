@@ -35,7 +35,16 @@ def getEvent(event_id):
 def getAllEvents():
     return []
 
-class Events(Resource):
+class Event(Resource):
+    def get(self,event_id):
+      try:
+        print event_id
+        app_ctx = ApplicationContext('event')
+        return json_util.dumps(app_ctx.get_item(event_id)),200
+      except Exception, e:
+        return '',404
+
+class EventList(Resource):
     def get(self, event_id=None):
       app_ctx =ApplicationContext('event')
       # try:

@@ -7,7 +7,7 @@ from api.art import Art
 from api.artList import ArtList
 from api.artImage import ArtImage
 from api.venues import Venues,VenueList
-from api.events import Events
+from api.events import Event,EventList
 from api.manage import ManageEvent, ManageVenue, ManagePerson
 from api.staff import Staff,StaffList
 from api.profile import Profile
@@ -99,7 +99,8 @@ def configure_routes(app):
 
     api.add_resource(Register, '/api/v1/register/<string:token>','/api/v1/register/')
 
-    api.add_resource(Events, '/api/v1/events/')
+    api.add_resource(EventList, '/api/v1/events/')
+    api.add_resource(Event, '/api/v1/event/<string:event_id>')
 
     api.add_resource(VenueList, '/api/v1/venues')
     api.add_resource(Venues, '/api/v1/venues/<string:venue_id>')    

@@ -70,8 +70,10 @@ __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
 from utils.app_ctx import ApplicationContext
+from bson import json_util
 
 class ManageEvent(Resource):
+
     def put(self, event_id=None):
       try:
         print event_id
