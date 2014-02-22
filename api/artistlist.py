@@ -9,5 +9,5 @@ class ArtistList(Resource):
 
     def get(self):
       app_ctx =ApplicationContext('person')
-      items = app_ctx.query_from_context(allowList=True)
+      items = app_ctx.query_from_context(allowList=True,default_data={'role':'artist'})
       return json_util.dumps(items)

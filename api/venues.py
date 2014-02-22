@@ -36,11 +36,20 @@ def queryVenues(query):
     return {}
 
 class Venues(Resource):
-    def get(self, venue_id=None):
+    def get(self,venue_id):
       app_ctx =ApplicationContext('venue')
       try:
-        venue = app_ctx.query_from_context()
-        return json_util.dumps(venue)
-      except:
-        return 'venue not found', 404
+        item = app_ctx.get_item(venue_id)
+        return json_util.dumps(item)
+      except Exception , e:
+        return str(e), 404
+
+class VenueList(Resource):
+      def get(self):
+        app_ctx =ApplicationContext('venue')
+        try:
+          venue = app_ctx.query_from_context(allowList=True)
+          return json_util.dumps(venue)
+        except:
+          return 'venue not found', 404
 

@@ -16,9 +16,11 @@ MODEL_MAP = {
 class ApplicationContext(object):
 
 
-	def query_from_context(self,allowList=False):
+	def query_from_context(self,allowList=False,default_data=None):
 		model_class = self.model_class()
 		data = request_to_dictonary(model_class,typeSafe=False)
+		if default_data:
+			data.update(default_data)
 		if not data and not allowList:
 			abort(501)
 		return self.query(**data)

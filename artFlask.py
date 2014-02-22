@@ -6,10 +6,10 @@ from api.artists import Artists
 from api.art import Art
 from api.artList import ArtList
 from api.artImage import ArtImage
-from api.venues import Venues
+from api.venues import Venues,VenueList
 from api.events import Events
 from api.manage import ManageEvent, ManageVenue, ManagePerson
-from api.staff import Staff
+from api.staff import Staff,StaffList
 from api.profile import Profile
 from api.register import Register
 from api.artistlist import ArtistList
@@ -101,9 +101,12 @@ def configure_routes(app):
 
     api.add_resource(Events, '/api/v1/events/')
 
+    api.add_resource(VenueList, '/api/v1/venues')
+    api.add_resource(Venues, '/api/v1/venues/<string:venue_id>')    
+
     api.add_resource(Profile, '/api/v1/profile')
-    api.add_resource(Staff, '/api/v1/staff', '/api/v1/staff/<string:staff_id>')
-    api.add_resource(Venues, '/api/v1/venues', '/api/v1/venues/<string:venue_id>')
+    api.add_resource(StaffList, '/api/v1/staff/')
+    api.add_resource(Staff, '/api/v1/staff/<string:person_id>')
     api.add_resource(ManageEvent, '/api/v1/manage/event','/api/v1/manage/event/<string:event_id>')
     api.add_resource(ManageVenue, '/api/v1/manage/venue','/api/v1/manage/venue/<string:venue_id>')
     api.add_resource(ManagePerson, '/api/v1/manage/person','/api/v1/manage/person/<string:person_id>')

@@ -37,10 +37,12 @@ def request_to_dictonary(model_class,typeSafe=True):
 def update_from_dictionary(data,item,model_class,object_id=None):
 	for field in data:
 		setattr(item,field,data[field])
+	print item
+	print data
 	if object_id is None:
 		 return getattr(mongo.db,model_class._collection_).save(item.to_dict())
 	else:
-		 return getattr(mongo.db,model_class._collection_).update({'_id': ObjectId(object_id)},{"$set": item.to_dict()},upsert=False)	
+		 return getattr(mongo.db,model_class._collection_).update({'_id': ObjectId(object_id)},{"$set": data},upsert=False)	
 
 def remove_record_by_id(object_id,model_class):
 	getattr(mongo.db,model_class._collection_).remove({"_id" : ObjectId(object_id)})

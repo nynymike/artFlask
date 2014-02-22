@@ -128,17 +128,17 @@ class ManageVenue(Resource):
       # Convert image to thumbnail
       # Write file
       # Create db entry for art
-      # try:
+      try:
         app_ctx = ApplicationContext('venue')
         item_id = app_ctx.create_item_from_context()
         return '%s'%item_id,201
-      # except Exception, e:
-      #   return '',404
+      except Exception, e:
+        return '',404
 
     def delete(self, venue_id=None):
       try:
         app_ctx = ApplicationContext('venue')
-        app_ctx.create_item_from_context(venue_id)
+        app_ctx.remove_record(venue_id)
         return '',200 
       except Exception, e:
         return '',404
@@ -148,10 +148,10 @@ class ManagePerson(Resource):
     def put(self, person_id=None):
       try:
         app_ctx = ApplicationContext('person')
-        app_ctx.remove_record(person_id)
+        app_ctx.create_item_from_context(person_id)
         return '',200 
       except Exception, e:
-        return '',404
+        return str(e),404
         
     def post(self, person_id=None):
         if not person_id: return 'Person not found', 404

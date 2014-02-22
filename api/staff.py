@@ -24,14 +24,25 @@ Staff API
 __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
-
+from utils.app_ctx import ApplicationContext
+import json
+from bson import json_util
 
 class Staff(Resource):
-    def getAllStaff(self):
-        return []
-    def getStaff(self, staff_id):
-        return {}
-    def get(self, staff_id=None):
-        if not staff_id: return 'Event not found', 404
-        return self.getStaff(staff_id)
+  def get(self,person_id):
+    app_ctx =ApplicationContext('person')
+    try:
+      item = app_ctx.get_item(person_id)
+      return json_util.dumps(item)
+    except Exception , e:
+      return str(e), 404
+
+class StaffList(Resource):
+    def get(self):
+        app_ctx =ApplicationContext('person')
+        try:
+          venue = app_ctx.query_from_context(allowList=True,default_data={'role':'staff'})
+          return json_util.dumps(venue)
+        except:
+          return 'venue not found', 404
 
