@@ -21,11 +21,12 @@ sys.path.append(os.getcwd())
 from flask import Flask
 from db import mongo
 from mail import mail
+from conf import BaseConfig
 
-def create_app(name):
+def create_app(name,config=BaseConfig):
     app = Flask(name)
     app.name = "artFlask"
-    app.config.from_object('conf')
+    app.config.from_object(config)
     configure_logger(app)
     configure_routes(app)
     configure_extensions(app)

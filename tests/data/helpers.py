@@ -32,7 +32,7 @@ def getTimes():
     return l
 
 def getRandom(fn):
-    f = open(fn)
+    f = open("data/%s"%fn)
     lines = f.readlines()
     f.close()
     return (lines[randint(0,len(lines) -1)]).strip()
