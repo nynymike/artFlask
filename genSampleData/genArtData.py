@@ -1,6 +1,7 @@
 from uuid import *
 from random import *
 from bson import json_util
+import os, base64
 
 numStaff = 4
 numArtists = 250
@@ -10,7 +11,6 @@ numArt = 500
 
 staff = {}
 artists = {}
-venueManagers = {}
 venues = {}
 art = {}
 
@@ -19,9 +19,8 @@ artistVenueMap = {}
 basePictureURL = "http://aloft.gluu.org/"
 
 def getPhone():
-    three = '%i%i%i' % (randint(0,9),randint(0,9),randint(0,9)),
-    four = '%i%i%i%i' % (randint(0,9),randint(0,9),randint(0,9),randint(0,9)),
-    return '1-512-%s-%s' % (three, four)
+    return "1-512-%i%i%i-%i%i%i%i" % (randint(2,9),randint(0,9),randint(0,9),
+                                    randint(0,9),randint(0,9),randint(0,9),randint(0,9))
 
 def getBoolean():
     return randint(0,1)
@@ -36,8 +35,7 @@ def getRandom(fn):
     f = open(fn)
     lines = f.readlines()
     f.close()
-    return (lines[randint(0,len(lines -1))])
-
+    return (lines[randint(0,len(lines) -1)]).strip()
 
 def printJson(d):
     ids = d.keys()
@@ -54,28 +52,28 @@ event = {
 }
 
 def genArt(artist_id, venue_id):
-    id = uuid4()
+    id = str(uuid4())
     d = {
         'id': id,
         'artist': artist_id,
-        'title': getRandom('title.txt'),
+        'title': getRandom('titles.txt'),
         'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        'buyURL': 'http://ebay.com/item/%s' % uuid4()[:8],
+        'buyURL': 'http://ebay.com/item/%s' % base64.encodestring(str(os.urandom(8)).strip()),
         'venue': venue_id,
         'medium': getRandom('medium.txt'),
         'sold_out': getBoolean(),
         'size': '%i x %i' % (randint(10,90), randint(10,90)),
         'year': '2014',
-        'alt_urls': {'Detail': 'http://www.%s/%s' % (getRandom('domains.txt'), uuid4()[3:9])}
+        'alt_urls': {'Detail': 'http://www.%s/%s' % (getRandom('domains.txt'), base64.encodestring(str(os.urandom(4))).strip())}
     }
-    if randint(0,10)>9: d['parent'] = uuid4()
-    elif randint(0,10)>9: d['series'] = [uuid4(), uuid4(), uuid4()]
+    if randint(0,10)>9: d['parent'] = str(uuid4())
+    elif randint(0,10)>9: d['series'] = [str(uuid4()), str(uuid4()), str(uuid4())]
     return d
 
 def genPerson(role=None):
     username = getRandom('usernames.txt')
     d = {
-        'id': uuid4(),
+        'id': str(uuid4()),
         'sub': username,
         'family_name': getRandom('family_names.txt'),
         'phone_number': getPhone(),
@@ -103,7 +101,7 @@ def genPerson(role=None):
 def genVenue(i=0, artists=[], managers=[]):
     username = getRandom('usernames.txt'),
     return {
-        'id': uuid4(),
+        'id': str(uuid4()),
          'site-id': `i`,
          'name': getRandom("venues.txt"),
          'event_id': event['id'],
@@ -136,60 +134,51 @@ def genVenue(i=0, artists=[], managers=[]):
 
 # generate staff
 i=0
-while i <= numStaff:
+while i < numStaff:
     i = i + 1
     d = genPerson('staff')
     staff[d['id']] = d
 
-# generate venue managers
-i=0
-while i <= numVenueManagers:
-    i = i + 1
-    d = genPerson()
-    venueManagers[d['id']] = d
-
 # generate artists
 i=0
-while i <= numArtists:
+while i < numArtists:
     i = i + 1
     d = genPerson('artist')
     artists[d['id']] = d
 
 # generate venues
 i=0
-while i <= numVenues:
+while i < numVenues:
     i = i + 1
     artist_ids = artists.keys()
     num_artists = randint(1,3)
     k = 0
     venueArtists = []
     while k <= num_artists:
-        artistIndex = randint(0, len(artist_ids))
-        id = artist_ids[artistIndex]
-        if id in venueArtists.keys():
-            continue
         k = k + 1
+        artistIndex = randint(0, len(artist_ids)-1)
+        id = artist_ids[artistIndex]
+        venueArtists.append(id)
         del artist_ids[artistIndex]
     d = genVenue(i, venueArtists, [venueArtists[0]])
     venues[d['id']] = d
-    # Create the index of used artists
-    for item in artist_ids:
-        venueArtists[item] = d['id']
 
 # generate art
 i=0
-while i <= numArt:
+while i < numArt:
     i = i + 1
-    artist_ids = venueArtists.keys()
-    random_artist = artist_ids[0,len(artist_ids)-1]
-    d = genArt(random_artist, venueArtists[random_artist])
+    artist_ids = artists.keys()
+    random_artist = artist_ids[randint(0,(len(artist_ids)-1))]
+    d = genArt(random_artist, artists[random_artist])
     art[d['id']] = d
 
 print json_util.dumps(event)
 
 printJson(staff)
 printJson(artists)
-printJson(venueManagers)
 printJson(venues)
+#ids = art.keys()
+#print art(ids[0])
+print len(art)
 printJson(art)
 
