@@ -132,52 +132,52 @@ def genVenue(i=0, artists=[], managers=[]):
     }
 
 # generate staff
-i=0
-while i < numStaff:
-    i = i + 1
-    d = genPerson('staff')
-    staff[d['id']] = d
+# i=0
+# while i < numStaff:
+#     i = i + 1
+#     d = genPerson('staff')
+#     staff[d['id']] = d
 
-# generate artists
-i=0
-while i < numArtists:
-    i = i + 1
-    d = genPerson('artist')
-    artists[d['id']] = d
+# # generate artists
+# i=0
+# while i < numArtists:
+#     i = i + 1
+#     d = genPerson('artist')
+#     artists[d['id']] = d
 
-# generate venues
-i=0
-while i < numVenues:
-    i = i + 1
-    artist_ids = artists.keys()
-    num_artists = randint(1,3)
-    k = 0
-    venueArtists = []
-    while k <= num_artists:
-        k = k + 1
-        artistIndex = randint(0, len(artist_ids)-1)
-        id = artist_ids[artistIndex]
-        venueArtists.append(id)
-        del artist_ids[artistIndex]
-    d = genVenue(i, venueArtists, [venueArtists[0]])
-    venues[d['id']] = d
+# # generate venues
+# i=0
+# while i < numVenues:
+#     i = i + 1
+#     artist_ids = artists.keys()
+#     num_artists = randint(1,3)
+#     k = 0
+#     venueArtists = []
+#     while k <= num_artists:
+#         k = k + 1
+#         artistIndex = randint(0, len(artist_ids)-1)
+#         id = artist_ids[artistIndex]
+#         venueArtists.append(id)
+#         del artist_ids[artistIndex]
+#     d = genVenue(i, venueArtists, [venueArtists[0]])
+#     venues[d['id']] = d
 
-# generate art
-i=0
-while i < numArt:
-    i = i + 1
-    artist_ids = artists.keys()
-    random_artist = artist_ids[randint(0,(len(artist_ids)-1))]
-    d = genArt(random_artist, artists[random_artist])
-    art[d['id']] = d
+# # generate art
+# i=0
+# while i < numArt:
+#     i = i + 1
+#     artist_ids = artists.keys()
+#     random_artist = artist_ids[randint(0,(len(artist_ids)-1))]
+#     d = genArt(random_artist, artists[random_artist])
+#     art[d['id']] = d
 
-print json_util.dumps(event)
+# print json_util.dumps(event)
 
-printJson(staff)
-printJson(artists)
-printJson(venues)
-#ids = art.keys()
-#print art(ids[0])
-print len(art)
-printJson(art)
+# printJson(staff)
+# printJson(artists)
+# printJson(venues)
+# #ids = art.keys()
+# #print art(ids[0])
+# print len(art)
+# printJson(art)
 
