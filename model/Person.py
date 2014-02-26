@@ -98,7 +98,7 @@ class Person():
         'address': {type : dict},
         'nickname': {type : str},
         'social_urls': {type : dict},
-        'role': {type : str},
+        'role': {type : list},
         'twitter': {type : str},
         'preferred_contact': {type : str},
         'status': {type : str},
