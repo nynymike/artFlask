@@ -7,6 +7,7 @@ from conf import TestingConfig
 from db import mongo
 import data.helpers as h
 from bson import ObjectId
+from bson import json_util
 import json
 class TestCase(Base):
     """Base TestClass for your application."""
@@ -28,18 +29,19 @@ class TestCase(Base):
 
     def tearDown(self):
         """Clean db session and drop all tables."""
-        mongo.cx.drop_database(TestingConfig.MONGO_DBNAME)
+         mongo.cx.drop_database(TestingConfig.MONGO_DBNAME)
 
 
 
-    def _test_get_request(self, endpoint, template=None):
+    def _test_get_request(self,endpoint,template=None):
         response = self.client.get(endpoint)
-        self.assert_200(response)
+        self.assertEqual(response.status_code,200)
+        data = json.loads(response.data)
         if template:
             self.assertTemplateUsed(name=template)
         return response
 
-    def _test_post_request(self, endpoint,data,model_class):
+    def _test_post_request(self,endpoint,data,model_class):
         response = self.client.post(endpoint,data = data,  content_type='application/json')
         self.assertEqual(response.status_code,201)
         oid = "%s"%response.data
@@ -50,8 +52,21 @@ class TestCase(Base):
         item = getattr(mongo.db,model_class._collection_).find({"_id":id}).next()
         for field in data:
             self.assertEqual(item[field],data[field])
+        return id
 
+    def _test_put_request(self,endpoint,data,model_class,id):
+        response = self.client.put(endpoint,data = data, content_type='application/json')
+        self.assertEqual(response.status_code,200)
+        id = ObjectId(id)
+        data = json.loads(data)
+        data.pop("id",None)
+        item = getattr(mongo.db,model_class._collection_).find({"_id":id}).next()
+        for field in data:
+            self.assertEqual(item[field],data[field])
 
-
-
-
+    def _test_put_delete(self,endpoint,model_class,id):
+        response = self.client.delete(endpoint)
+        self.assertEqual(response.status_code,200)
+        id = ObjectId(id)
+        item = getattr(mongo.db,model_class._collection_).find({"_id":id})
+        self.assertEqual(item.count(),0)

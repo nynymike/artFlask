@@ -113,7 +113,7 @@ class ManageVenue(Resource):
     def put(self, venue_id=None):
       try:
         app_ctx = ApplicationContext('venue')
-        app_ctx.create_item_from_context(venue_id)
+        item_id = app_ctx.create_item_from_context(venue_id)
         return '',200
       except Exception, e:
         return '',404

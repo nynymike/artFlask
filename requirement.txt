@@ -5,3 +5,5 @@ pymongo==2.6.3
 pillow
 qrcode
 Flask-Mail
+nose
+Flask-Testing

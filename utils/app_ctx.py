@@ -37,7 +37,7 @@ class ApplicationContext(object):
 			print data[field]
 			item = getattr(mongo.db,self.model_class()._collection_).find({field:data[field]})
 			if item.count() > 0:
-				print "%s is already taken"%field
+				#print "%s is already taken"%field
 				abort(406)
 		return True
 	
