@@ -111,8 +111,7 @@ def not_empty(self, s):
         return False
 
 def get_boolean(b):
-    if b: return "true"
-    return "false"
+    return b
 
 
 class Venue():
@@ -125,17 +124,19 @@ class Venue():
         'name': {type : str},
         'event_id': {type : str},
         'picture': {type : str},
-        'address': {type : str},
+        'address': {type : dict},
         'coordinates': {type : list},
         'twitter': {type : str},
         'mail':{type : str},
         'phone':{type : str},
         'category':{type : str},
-        'medium':{type : str},
-        'description':{type : list},
+        'mediums':{type : list},
+        'description':{type : str},
         'artists': {type : list},
         'websites': {type : list},
         'managers': {type : list},
+        'times' : {type : list},
+        'curated' : {type : bool},
         'ad_1': {type : bool},
         'ad_2': {type : bool},
         'ad_3': {type : bool},
@@ -157,11 +158,12 @@ class Venue():
         self.mail = ""
         self.phone = ""
         self.category = ""
-        self.medium = ""
+        self.mediums = []
         self.description = ""
         self.artists = []
         self.websites = []
         self.managers = []
+        self.times = []
         self.ad_1 = False
         self.ad_2 = False
         self.ad_3 = False
@@ -170,6 +172,7 @@ class Venue():
         self.ad_6 = False
         self.ad_7 = False
         self.ad_8 = False
+        self.curated = False
 
     def __str__(self):
         d = {}
@@ -183,12 +186,13 @@ class Venue():
         if self.not_empty(self.twitter): d['twitter'] = self.twitter
         if self.not_empty(self.mail): d['mail'] = self.mail
         if self.not_empty(self.phone): d['phone'] = self.phone
-        if self.not_empty(self.category): d['category'] = self.twitter
-        if self.not_empty(self.medium): d['medium'] = self.medium
+        if self.not_empty(self.category): d['category'] = self.category
         if self.not_empty(self.description): d['description'] = self.description
         if len(self.artists): d['artists'] = self.artists
         if len(self.websites): d['websites'] = self.websites
-        if len(self.managers): d['managers'] = self.managers
+        if len(self.websites): d['websites'] = self.websites
+        if len(self.mediums): d['mediums'] = self.mediums
+        if len(self.times): d['times'] = self.times
         d['ad_1'] = get_boolean(self.ad_1)
         d['ad_2'] = get_boolean(self.ad_2)
         d['ad_3'] = get_boolean(self.ad_3)
@@ -197,6 +201,7 @@ class Venue():
         d['ad_6'] = get_boolean(self.ad_6)
         d['ad_7'] = get_boolean(self.ad_7)
         d['ad_8'] = get_boolean(self.ad_8)
+        d['curated'] = get_boolean(self.curated)
         return str(d)
 
     def to_dict(self):
@@ -211,12 +216,13 @@ class Venue():
         if self.not_empty(self.twitter): d['twitter'] = self.twitter
         if self.not_empty(self.mail): d['mail'] = self.mail
         if self.not_empty(self.phone): d['phone'] = self.phone
-        if self.not_empty(self.category): d['category'] = self.twitter
-        if self.not_empty(self.medium): d['medium'] = self.medium
+        if self.not_empty(self.category): d['category'] = self.category
         if self.not_empty(self.description): d['description'] = self.description
         if len(self.artists): d['artists'] = self.artists
         if len(self.websites): d['websites'] = self.websites
         if len(self.managers): d['managers'] = self.managers
+        if len(self.mediums): d['mediums'] = self.mediums
+        if len(self.times): d['times'] = self.times
         d['ad_1'] = get_boolean(self.ad_1)
         d['ad_2'] = get_boolean(self.ad_2)
         d['ad_3'] = get_boolean(self.ad_3)
@@ -225,6 +231,7 @@ class Venue():
         d['ad_6'] = get_boolean(self.ad_6)
         d['ad_7'] = get_boolean(self.ad_7)
         d['ad_8'] = get_boolean(self.ad_8)
+        d['curated'] = get_boolean(self.curated)
         return d
 
     def not_empty(self, s):

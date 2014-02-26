@@ -23,13 +23,12 @@ def getPhone():
                                     randint(0,9),randint(0,9),randint(0,9),randint(0,9))
 
 def getBoolean():
-    return randint(0,1)
+    return randint(0,1) == True
 
 def getTimes():
-    l = []
-    if randint(0,100)>95: l.append('Feb  3 12:00:00 UTC 2014')
-    if randint(0,100)>95: l.append('Feb  3 15:00:00 UTC 2014')
-    return l
+    l = ['Feb  3 12:00:00 UTC 2014', 'Feb  3 15:00:00 UTC 2014']
+    i = randint(0,1)
+    return [l[i]]
 
 def getRandom(fn):
     f = open("data/%s"%fn)
@@ -66,7 +65,7 @@ def genArt(artist_id, venue_id):
         'year': '2014',
         'alt_urls': {'Detail': 'http://www.%s/%s' % (getRandom('domains.txt'), base64.encodestring(str(os.urandom(4))).strip())}
     }
-    if randint(0,10)>9: d['parent'] = str(uuid4())
+    if randint(0,10)>9: d['parent_work'] = str(uuid4())
     elif randint(0,10)>9: d['series'] = [str(uuid4()), str(uuid4()), str(uuid4())]
     return d
 
@@ -102,10 +101,10 @@ def genVenue(i=0, artists=[], managers=[]):
     username = getRandom('usernames.txt'),
     return {
         'id': str(uuid4()),
-         'site-id': `i`,
+         'site_id': `i`,
          'name': getRandom("venues.txt"),
          'event_id': event['id'],
-         'logoURI':'http://aloft.gluu.org/images/venues/00%i.jpg' % randint(0,9),
+         'picture':'http://aloft.gluu.org/images/venues/00%i.jpg' % randint(0,9),
          'address': {"street_address": getRandom("address.txt"),
                  "locality": "Austin",
                  "region": "TX",

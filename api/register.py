@@ -42,7 +42,7 @@ class Register(Resource):
     def post(self):
       #args = self.parser.parse_args()
       #return None,200
-      try:
+      # try:
         required_fields = ['email',
                           'given_name',
                           'family_name',
@@ -63,8 +63,8 @@ class Register(Resource):
         message = Message(subject='Verify your email address', html=html, recipients=[user['email']],sender=current_app.config['DEFAULT_MAIL_SENDER'])
         mail.send(message)
         return '',200
-      except Exception, e:
-        return str(e),404
+      # except Exception, e:
+      #   return str(e),404
 
     def get(self,token):
         try:

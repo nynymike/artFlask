@@ -94,12 +94,12 @@ class ManageEvent(Resource):
       # Convert image to thumbnail
       # Write file
       # Create db entry for art
-      try:
+      # try:
         app_ctx = ApplicationContext('event')
         item_id = app_ctx.create_item_from_context()
         return '%s'%item_id,201
-      except Exception, e:
-        return '',404
+      # except Exception, e:
+      #   return '',404
 
     def delete(self, event_id=None):
       try:

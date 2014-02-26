@@ -28,19 +28,17 @@ def request_to_dictonary(model_class,typeSafe=True):
 	args =  parser.parse_args(request)
 	remove_parameters = []
 	for a in args:
-		if not args[a]:
+		if args[a] == None:
 			remove_parameters.append(a)
 	for a in remove_parameters:
 		del args[a]
 	return args
 
 def update_from_dictionary(data,item,model_class,object_id=None):
-	for field in data:
-		setattr(item,field,data[field])
-	print item
+	print "data"
 	print data
 	if object_id is None:
-		 return getattr(mongo.db,model_class._collection_).save(item.to_dict())
+		 return getattr(mongo.db,model_class._collection_).save(data)
 	else:
 		 return getattr(mongo.db,model_class._collection_).update({'_id': ObjectId(object_id)},{"$set": data},upsert=False)	
 

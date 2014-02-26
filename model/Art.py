@@ -74,11 +74,11 @@ class ArtWork():
         'buyURL': {type : str},
         'venue': {type : str},
         'medium': {type : str},
-        'sold_out': {type : str},
+        'sold_out': {type : bool},
         'series': {type : list},
-        'parent_work': {type : list},
+        'parent_work': {type : str},
         'size': {type:str},
-        'year': {type : list},
+        'year': {type : str},
         'alt_urls': {type : dict}
         }
 

@@ -279,5 +279,7 @@ class BaseConfig(object):
 
 class TestingConfig(BaseConfig):
 	MONGO_DBNAME = 'artFlask_test'
+	MAIL_DEBUG = True
+	TESTING = True
 
 
