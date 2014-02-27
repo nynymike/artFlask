@@ -42,6 +42,9 @@ class TestCase(Base):
         return response
 
     def _test_post_request(self,endpoint,data,model_class):
+        """
+        Post Object through Post Request and returns object Id 
+        """
         response = self.client.post(endpoint,data = data,  content_type='application/json')
         self.assertEqual(response.status_code,201)
         oid = "%s"%response.data
@@ -55,6 +58,9 @@ class TestCase(Base):
         return id
 
     def _test_put_request(self,endpoint,data,model_class,id):
+        """
+        Update Object through Put Request
+        """
         response = self.client.put(endpoint,data = data, content_type='application/json')
         self.assertEqual(response.status_code,200)
         id = ObjectId(id)
@@ -65,6 +71,9 @@ class TestCase(Base):
             self.assertEqual(item[field],data[field])
 
     def _test_put_delete(self,endpoint,model_class,id):
+        """
+        Remove Object through Put Delete Request
+        """
         response = self.client.delete(endpoint)
         self.assertEqual(response.status_code,200)
         id = ObjectId(id)
