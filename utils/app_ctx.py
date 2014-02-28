@@ -6,6 +6,8 @@ from utils.helpers import request_to_dictonary, update_from_dictionary,remove_re
 from flask import request, abort
 from db import mongo
 from bson import ObjectId
+from api.venueFunctions import geoCode
+
 MODEL_MAP = {
     "art" : ArtWork,
     "venue" : Venue,
@@ -69,5 +71,17 @@ class ApplicationContext(object):
 	def remove_record(self,object_id):
 		model_class = self.model_class()
 		remove_record_by_id(object_id,model_class)
+
+	def get_geo_location(self,item_id):
+		try:
+			model_class = self.model_class()
+			item = self.get_item(id = item_id)
+			geolocation = geoCode(street = item["address"]["street"], city = item["address"]["city"], state = item["address"]["state"], zip = item["address"]["zip"])
+			item["coordinates"] = geolocation[0]
+			item.pop("_id")
+			return getattr(mongo.db,model_class._collection_).update({'_id': item_id},{"$set": item},upsert=False)
+		except Exception, e:
+			return ''
+
 
 

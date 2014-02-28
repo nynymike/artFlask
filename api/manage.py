@@ -133,6 +133,7 @@ class ManageVenue(Resource):
       try:
         app_ctx = ApplicationContext('venue')
         item_id = app_ctx.create_item_from_context()
+        app_ctx.get_geo_location(item_id)
         return '%s'%item_id,201
       except Exception, e:
         return '',404
