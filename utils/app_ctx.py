@@ -33,7 +33,7 @@ class ApplicationContext(object):
 
 	def verify_data(self,data,required_fields,unique_fields):
 		for field in required_fields:
-			if not data.has_key(field):
+			if not self.myhaskey(d=data,key=field):
 				abort("%s is required"%field,400)
 		for field in unique_fields:
 			print data[field]
@@ -48,7 +48,7 @@ class ApplicationContext(object):
 		item = model_class()
 		data = request_to_dictonary(model_class)
 		if object_id == None:
-			self.verify_data(data,required_fields,unique_fields)
+			self.verify_data(data=data,required_fields=required_fields,unique_fields=unique_fields)
 		return  update_from_dictionary(data,item,model_class,object_id)
 
 
@@ -82,6 +82,9 @@ class ApplicationContext(object):
 			return getattr(mongo.db,model_class._collection_).update({'_id': item_id},{"$set": item},upsert=False)
 		except Exception, e:
 			return ''
+
+	def myhaskey(self,d,key): 
+		return d.has_key(key) or any(self.myhaskey(d=dd,key=key) for dd in d.values() if isinstance(dd, dict))
 
 
 
