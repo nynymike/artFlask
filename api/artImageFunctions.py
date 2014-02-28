@@ -47,8 +47,8 @@ def genQRcode(url, fn):
 
 def getShortURL(url):
     # Use http://linktrack.info  API
-    params = urllib.urlencode({'login': 'bb063a6ed8952b2f246d85b53',
-                               'pass': '7de896622639975',
+    params = urllib.urlencode({'login': current_app.config['LINKTRACK_API_LOGIN'],
+                               'pass': current_app.config['LINKTRACK_API_PASS'],
                                'external_url': url})
     headers = {"Content-type": "application/x-www-form-urlencoded",
                "Accept": "text/plain"}
