@@ -53,11 +53,11 @@ event = {
 def genArt(artist_id, venue_id):
     import os, os.path
     id = str(uuid4())
-    if not os.path.exists("./testimages"):
-        os.mkdir("./testimages")
-    i = randint(0,9)
-    shutil.copyfile('./data/images/00%i.jpg' % i, './testimages/%s.jpg' % id)
-    shutil.copyfile('./data/images/00%itn.jpg' % i, './testimages/%s_tn.jpg' % id)
+    # if not os.path.exists("./testimages"):
+    #     os.mkdir("./testimages")
+    # i = randint(0,9)
+    # shutil.copyfile('./data/images/00%i.jpg' % i, './testimages/%s.jpg' % id)
+    # shutil.copyfile('./data/images/00%itn.jpg' % i, './testimages/%s_tn.jpg' % id)
     d = {
         'artist': artist_id,
         'title': getRandom('titles.txt'),

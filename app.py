@@ -5,7 +5,7 @@ from flask.ext.restful import Resource, Api
 from api.artists import Artists
 from api.art import Art
 from api.artList import ArtList
-from api.artImage import ArtImage
+from api.artImage import get_image
 from api.venues import Venues,VenueList
 from api.events import Event,EventList
 from api.manage import ManageEvent, ManageVenue, ManagePerson
@@ -24,7 +24,7 @@ from mail import mail
 from conf import BaseConfig
 
 def create_app(name,config=BaseConfig):
-    app = Flask(name)
+    app = Flask(name,static_folder="./upload")
     app.name = "artFlask"
     app.config.from_object(config)
     configure_logger(app)
@@ -79,6 +79,9 @@ def configure_routes(app):
             return redirect(url_for('index'))
         else:
             return render_template('login.html')
+    @app.route('/api/v1/art/<string:art_id>/<string:action_type>',methods=['GET'])
+    def render_image(art_id,action_type):
+        return get_image(art_id,action_type)
 
     # todo: Should route for OpenID Connect Logout
 
@@ -92,7 +95,7 @@ def configure_routes(app):
     api = Api(app)
 
     api.add_resource(Art,'/api/v1/art/<string:art_id>/')
-    api.add_resource(ArtImage,'/api/v1/art/<string:art_id>/<string:action_type>')
+    # api.add_resource(ArtImage,'/api/v1/art/<string:art_id>/<string:action_type>')
     api.add_resource(ArtList,'/api/v1/art/')
 
     api.add_resource(Artists, '/api/v1/artists/<string:artist_id>')

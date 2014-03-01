@@ -4,6 +4,7 @@ sys.path.append("%s/../"%os.getcwd())
 from conf import BaseConfig
 from data.helpers import genPerson,genArt,genVenue
 from random import *
+import os, base64, shutil
 
 from pymongo import MongoClient
 
@@ -60,11 +61,16 @@ def main():
     # generate art
     i=0
     while i < numArt:
-        i = i + 1
-        artist_ids = artists.keys()
-        random_artist = artist_ids[randint(0,(len(artist_ids)-1))]
-        d = genArt(random_artist, artists[random_artist])
-        db.ArtWork.save(d)
+		i = i + 1
+		print i
+		artist_ids = artists.keys()
+		random_artist = artist_ids[randint(0,(len(artist_ids)-1))]
+		d = genArt(random_artist, artists[random_artist])
+		art_id = db.ArtWork.save(d)
+		basedir =  BaseConfig.UPLOAD_FOLDER
+		j = randint(0,9)
+		shutil.copyfile('data/images/00%i.jpg' % j, '../%s/%s.jpg' % (basedir,art_id))
+		shutil.copyfile('data/images/00%itn.jpg' % j, '../%s/%s_tn.jpg' % (basedir,art_id))
 
 if __name__ == '__main__':
     main()
