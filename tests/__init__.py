@@ -29,7 +29,7 @@ class TestCase(Base):
 
     def tearDown(self):
         """Clean db session and drop all tables."""
-         mongo.cx.drop_database(TestingConfig.MONGO_DBNAME)
+        mongo.cx.drop_database(TestingConfig.MONGO_DBNAME)
 
 
 

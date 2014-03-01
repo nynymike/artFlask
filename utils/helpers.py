@@ -65,22 +65,37 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
+def upload_file(id, artist=None):
+    file = request.files['file']
+    basedir = current_app.config['UPLOAD_FOLDER']
+    if file and allowed_file(file.filename):
+        original_filename = secure_filename(file.filename)
+        extension = original_filename.split('.')[-1]
+        original_image = os.path.join(basedir, original_filename)
+        file.save(original_image)
 
-def upload_file(id):
-	file = request.files['file']
-	if file and allowed_file(file.filename):
-	    filename = secure_filename(file.filename)
-	    file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
-	    file.save(file_path)
-	    extension = file_path.split('.')[-1]
-	    copyright_image = current_app.config['UPLOAD_FOLDER'] + 'watermark.png'
-	    create_copyright("copyright Michael Schwartz", copyright_image)
-	    shrink(file_path, 600, "%s/thumb-%s.%s"%(current_app.config['UPLOAD_FOLDER'],id,extension))
-	    watermark(file_path,copyright_image,"%s/web-%s.%s"%(current_app.config['UPLOAD_FOLDER'],id,extension))
-	    os.remove(file_path)
-	    return True
-	return False
+        web_image = os.path.join(basedir, "%s_web.%s" % (id, extension))
+        copyright_image = os.path.join(basedir, "%s_copyright.png" % id)
+        new_image = os.path.join(basedir, "%s.%s" % (id, extension))
+        tn_image = os.path.join(basedir, "%s_tn.%s" % (id, extension))
 
+        # Make Thumbnail of original
+        shrink(original_image, 100, tn_image)
+
+        # Make WaterMarked Image
+        shrink(original_image, 600, web_image)
+        copyrightText = "All Rights Reserved by artist"
+        if artist:
+            copyrightText = "Copyright %s" % artist
+        create_copyright(copyrightText, copyright_image)
+        watermark(web_image, copyright_image, new_image)
+
+        # Remove the original and two temporary files
+        os.remove(original_image)
+        os.remove(web_image)
+        os.remove(copyright_image)
+        return True
+    return False
 
 
 

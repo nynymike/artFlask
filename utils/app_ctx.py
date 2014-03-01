@@ -6,6 +6,8 @@ from utils.helpers import request_to_dictonary, update_from_dictionary,remove_re
 from flask import request, abort
 from db import mongo
 from bson import ObjectId
+from api.venueFunctions import geoCode
+
 MODEL_MAP = {
     "art" : ArtWork,
     "venue" : Venue,
@@ -31,7 +33,7 @@ class ApplicationContext(object):
 
 	def verify_data(self,data,required_fields,unique_fields):
 		for field in required_fields:
-			if not data.has_key(field):
+			if not self.myhaskey(d=data,key=field):
 				abort("%s is required"%field,400)
 		for field in unique_fields:
 			print data[field]
@@ -46,7 +48,7 @@ class ApplicationContext(object):
 		item = model_class()
 		data = request_to_dictonary(model_class)
 		if object_id == None:
-			self.verify_data(data,required_fields,unique_fields)
+			self.verify_data(data=data,required_fields=required_fields,unique_fields=unique_fields)
 		return  update_from_dictionary(data,item,model_class,object_id)
 
 
@@ -69,5 +71,20 @@ class ApplicationContext(object):
 	def remove_record(self,object_id):
 		model_class = self.model_class()
 		remove_record_by_id(object_id,model_class)
+
+	def get_geo_location(self,item_id):
+		try:
+			model_class = self.model_class()
+			item = self.get_item(id = item_id)
+			geolocation = geoCode(street = item["address"]["street"], city = item["address"]["city"], state = item["address"]["state"], zip = item["address"]["zip"])
+			item["coordinates"] = geolocation[0]
+			item.pop("_id")
+			return getattr(mongo.db,model_class._collection_).update({'_id': item_id},{"$set": item},upsert=False)
+		except Exception, e:
+			return ''
+
+	def myhaskey(self,d,key): 
+		return d.has_key(key) or any(self.myhaskey(d=dd,key=key) for dd in d.values() if isinstance(dd, dict))
+
 
 

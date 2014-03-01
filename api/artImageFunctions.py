@@ -11,8 +11,7 @@ def shrink(fn, size, newFN):
 def create_copyright(text, fn, border=1):
     image = Image.new("RGBA", (222,25))
     draw = ImageDraw.Draw(image)
-    print "%sHelveticaNeue-Light.ttf"%current_app.config['UPLOAD_FOLDER']
-    font = ImageFont.truetype("%s/HelveticaNeue-Light.ttf"%current_app.config['UPLOAD_FOLDER'], 18)
+    font = ImageFont.truetype("%s/HelveticaNeue-Light.ttf" % current_app.config['STATIC_FOLDER'], 18)
     draw.text((10, 0), text, (219,180,124), font=font)
     bbox = image.getbbox()
     image = image.crop(bbox)
@@ -47,8 +46,8 @@ def genQRcode(url, fn):
 
 def getShortURL(url):
     # Use http://linktrack.info  API
-    params = urllib.urlencode({'login': 'bb063a6ed8952b2f246d85b53',
-                               'pass': '7de896622639975',
+    params = urllib.urlencode({'login': current_app.config['LINKTRACK_API_LOGIN'],
+                               'pass': current_app.config['LINKTRACK_API_PASS'],
                                'external_url': url})
     headers = {"Content-type": "application/x-www-form-urlencoded",
                "Accept": "text/plain"}

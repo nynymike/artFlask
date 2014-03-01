@@ -125,7 +125,7 @@ class Venue():
         'event_id': {type : str},
         'picture': {type : str},
         'address': {type : dict},
-        'coordinates': {type : list},
+        'coordinates': {type : dict},
         'twitter': {type : str},
         'mail':{type : str},
         'phone':{type : str},

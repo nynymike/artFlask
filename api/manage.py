@@ -130,12 +130,14 @@ class ManageVenue(Resource):
       # Convert image to thumbnail
       # Write file
       # Create db entry for art
-      try:
-        app_ctx = ApplicationContext('venue')
-        item_id = app_ctx.create_item_from_context()
-        return '%s'%item_id,201
-      except Exception, e:
-        return '',404
+      #try:
+      required_fields = ["street","city","state","zip"]
+      app_ctx = ApplicationContext('venue')
+      item_id = app_ctx.create_item_from_context(required_fields=required_fields)
+      app_ctx.get_geo_location(item_id)
+      return '%s'%item_id,201
+      #except Exception, e:
+        #return '',404
 
     def delete(self, venue_id=None):
       try:
