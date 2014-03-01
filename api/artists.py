@@ -31,7 +31,7 @@ from flask import Request
 from flask.ext.restful import reqparse
 from utils.app_ctx import ApplicationContext
 from bson import json_util
-
+import json
 
 def getAllArtists():
     return []
@@ -47,7 +47,7 @@ class Artists(Resource):
         app_ctx =ApplicationContext('person')
         try:
           item = app_ctx.get_item(artist_id)
-          return json_util.dumps(item)
+          return json.loads(json_util.dumps(item))
         except Exception , e:
           return str(e), 404
 

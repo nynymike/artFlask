@@ -103,7 +103,7 @@ class Art(Resource):
         app_ctx =ApplicationContext('art')
         try:
           item = app_ctx.get_item(art_id)
-          return json_util.dumps(item)
+          return json.loads(json_util.dumps(item))
         except Exception , e:
           return str(e), 404
 

@@ -3,14 +3,14 @@ from flask.ext.restful import Resource, Api
 from utils.helpers import  upload_file, jsonify
 from utils.app_ctx import ApplicationContext
 from bson import json_util
+import json
 
 class ArtList(Resource):
 
     def get(self):
       app_ctx =ApplicationContext('art')
       items = app_ctx.query_from_context(allowList=False)
-      return json_util.dumps(items)
-
+      return json.loads(json_util.dumps(items))
     def post(self):
         # Get params and write
         # Convert image to web size

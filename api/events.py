@@ -40,7 +40,7 @@ class Event(Resource):
       try:
         print event_id
         app_ctx = ApplicationContext('event')
-        return json_util.dumps(app_ctx.get_item(event_id)),200
+        return json.loads(json_util.dumps(app_ctx.get_item(event_id))),200
       except Exception, e:
         return '',404
 
@@ -49,6 +49,6 @@ class EventList(Resource):
       app_ctx =ApplicationContext('event')
       # try:
       events = app_ctx.query_from_context(allowList=True)
-      return json_util.dumps(events)
+      return json.loads(json_util.dumps(events))
       # except:
       #     return 'Event not found', 404

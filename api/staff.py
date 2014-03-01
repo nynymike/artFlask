@@ -33,7 +33,7 @@ class Staff(Resource):
     app_ctx =ApplicationContext('person')
     try:
       item = app_ctx.get_item(person_id)
-      return json_util.dumps(item)
+      return json.loads(json_util.dumps(item))
     except Exception , e:
       return str(e), 404
 
@@ -41,8 +41,8 @@ class StaffList(Resource):
     def get(self):
         app_ctx =ApplicationContext('person')
         try:
-          venue = app_ctx.query_from_context(allowList=True,default_data={'role':'staff'})
-          return json_util.dumps(venue)
+          staff = app_ctx.query_from_context(allowList=True,default_data={'role':'staff'})
+          return json.loads(json_util.dumps(staff))
         except:
           return 'venue not found', 404
 

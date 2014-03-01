@@ -35,7 +35,7 @@ class Profile(Resource):
         item = app_ctx.get_item(event_id)
         return jsonify(item)
       except:
-        return 'Event not found', 404
+        return 'Person not found', 404
 
     def put(self, person=None):
         return None

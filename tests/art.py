@@ -11,6 +11,16 @@ class ArtTest(TestCase):
 	# 	#self._test_get_request('/api/v1/artists/')
 
 	def test_art(self):
+		"""
+		Test Case:
+		1)Creates an Art object
+		2)Inserts it into Database through Post request
+		3)Fetches the same object through get request.
+		4)Makes Some Changes to the object.
+		5)Update the Object in database through PUT Request.
+		6)Delete Object through Delete Request
+		"""
+
 		art = genArt(self.artist_id,self.venue_id)
 		id = self._test_post_request('/api/v1/art/',data=json.dumps(art),model_class = ArtWork)
 		self._test_get_request('/api/v1/art/%s/'%id)
@@ -18,26 +28,17 @@ class ArtTest(TestCase):
 		self._test_put_request('/api/v1/art/%s/'%id,data=json.dumps(art),model_class = ArtWork,id = id)
 		self._test_put_delete('/api/v1/art/%s/'%id, model_class = ArtWork,id = id)
 
-		'''
-		Get ID 
-		Send ID to get endpoint
-		assert startus 200
-		check len 1
-		'''
-
-		'''
-		generate new art
-		send update request to oid
-		check for fields
-		'''
-
-		'''
-		delete oid
-		check in DB
-		.count()
-		'''
-
 	def test_venue(self):
+		"""
+		Test Case:
+		1)Creates an Venue object
+		2)Inserts it into Database through Post request
+		3)Fetches the same object through get request.
+		4)Makes Some Changes to the object.
+		5)Update the Object in database through PUT Request.
+		6)Delete Object through Delete Request
+		"""
+
 		venue = genVenue(artists = ["%s"%self.artist_id],managers =["%s"%self.artist_id])
 		id = self._test_post_request('/api/v1/manage/venue',data=json.dumps(venue),model_class = Venue)
 		self._test_get_request('/api/v1/venues/%s'%id)
@@ -48,6 +49,17 @@ class ArtTest(TestCase):
 
 
 	def test_artist(self):
+		
+		"""
+		Test Case:
+		1)Creates an Person object
+		2)Inserts it into Database through Post request
+		3)Fetches the same object through get request.
+		4)Makes Some Changes to the object.
+		5)Update the Object in database through PUT Request.
+		6)Delete Object through Delete Request
+		"""
+
 		artist = genPerson('artist')
 		email = artist["email"]
 		artist = json.dumps(artist)
@@ -64,6 +76,17 @@ class ArtTest(TestCase):
 
 
 	def test_post_event(self):
+		
+		"""
+		Test Case:
+		1)Creates an Event object
+		2)Inserts it into Database through Post request
+		3)Fetches the same object through get request.
+		4)Makes Some Changes to the object.
+		5)Update the Object in database through PUT Request.
+		6)Delete Object through Delete Request
+		"""
+
 		event = {
 		'name': 'Happy Tour 2014',
 		'startDate': 'Feb  3 00:00:00 UTC 2014',

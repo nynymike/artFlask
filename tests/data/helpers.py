@@ -42,7 +42,6 @@ def printJson(d):
         print json_util.dumps(d[id])
 
 event = {
-    'id': 'happy2014',
     'name': 'Happy Tour 2014',
     'startDate': 'Feb  3 00:00:00 UTC 2014',
     'endDate': 'Feb  5 00:00:00 UTC 2014',
@@ -53,7 +52,6 @@ event = {
 def genArt(artist_id, venue_id):
     id = str(uuid4())
     d = {
-        'id': id,
         'artist': artist_id,
         'title': getRandom('titles.txt'),
         'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
@@ -72,7 +70,6 @@ def genArt(artist_id, venue_id):
 def genPerson(role=None):
     username = getRandom('usernames.txt')
     d = {
-        'id': str(uuid4()),
         'sub': username,
         'family_name': getRandom('family_names.txt'),
         'phone_number': getPhone(),
@@ -100,7 +97,6 @@ def genPerson(role=None):
 def genVenue(i=0, artists=[], managers=[]):
     username = getRandom('usernames.txt'),
     return {
-        'id': str(uuid4()),
          'site_id': `i`,
          'name': getRandom("venues.txt"),
          'event_id': event['id'],
