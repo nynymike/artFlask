@@ -6,7 +6,7 @@
 <body>
     <div align="center">
         <p>
-            <img alt="" src="./art/{{ art.id }}/picture" title="{{ art.title }}" />
+            <img src="/api/v1/art/{{ art._id }}/picture" title="{{ art.title }}" />
         </p>
             <table border="0">
                 <tr>
@@ -37,7 +37,9 @@
                 {% if art.buyURL %}
                 <tr>
                     <td>Purchase:</td>
-                    <td>{{ art.buyURL }}</td>
+                    <td>
+			<a href="{{ art.buyURL }}">{{ art.buyURL }}</a>
+		   </td>
                 </tr>
                 {% endif %}
 
@@ -74,15 +76,6 @@
                 {% endif %}
             </table>
 
-            {% if art.venue %}
-                <tr>
-                    <td>Venue:</td>
-                    <td>{{ art.venue.name }}</td>
-                </tr>
-                <tr>
-                    <td colspan="2">{{ art.venue.address }}</td>
-                </tr>
-            {% endif %}
     </div>
 
 </body>
