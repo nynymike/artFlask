@@ -28,11 +28,20 @@ def main():
 	while i < numArtists:
 	    i = i + 1
 	    d = genPerson('artist')
-	    db.Person.save(d)
-	    artists[d['id']] = d
-	    
+	    artist_id = db.Person.save(d)
+	    artists["%s"%artist_id] = "%s"%artist_id
+
 
 	# generate venues
+	event = {
+	'name': 'Happy Tour 2014',
+	'startDate': 'Feb  3 00:00:00 UTC 2014',
+	'endDate': 'Feb  5 00:00:00 UTC 2014',
+	'description': 'This is a tour of all the artwork that you would want to see to make you smile',
+	'picture': 'http://aloft.gluu.org/images/happy2014.png'
+	}
+
+	event_id = db.Event.save(event)
 	i=0
 	while i < numVenues:
 	    i = i + 1
@@ -46,7 +55,7 @@ def main():
 	        id = artist_ids[artistIndex]
 	        venueArtists.append(id)
 	        del artist_ids[artistIndex]
-	    d = genVenue(i, venueArtists, [venueArtists[0]])
+	    d = genVenue(i, venueArtists, [venueArtists[0]],event_id)
 	    db.Venue.save(d)
 
 	# generate art
@@ -58,15 +67,7 @@ def main():
 	    d = genArt(random_artist, artists[random_artist])
 	    db.ArtWork.save(d)
 
-	event = {
-	'name': 'Happy Tour 2014',
-	'startDate': 'Feb  3 00:00:00 UTC 2014',
-	'endDate': 'Feb  5 00:00:00 UTC 2014',
-	'description': 'This is a tour of all the artwork that you would want to see to make you smile',
-	'picture': 'http://aloft.gluu.org/images/happy2014.png'
-	}
 
-	db.Event.save(event)
 
 if __name__ == '__main__':
 	main()

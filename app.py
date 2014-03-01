@@ -42,8 +42,7 @@ def configure_logger(app):
     app.config['MAX_CONTENT_LENGTH'] = MAX_CONTENT_LENGTH
     app.secret_key = 'z\xcbu\xe5#\xf2U\xe5\xc4,\x0cz\xf9\xcboA\xd2Z\xf7Y\x15"|\xe4'
 
-    logger = logging.getLogger('app')
-
+    log = logging.getLogger('werkzeug')
     if app.config.has_key('LOGGING_FILE'):
         handler = RotatingFileHandler(app.config['LOGGING_FILE'],
                                           maxBytes=10000000,
@@ -51,12 +50,13 @@ def configure_logger(app):
     else:
         handler = logging.StreamHandler(sys.stdout)
 
+    handler.setLevel(logging.INFO)
     formatter = logging.Formatter(
             '%(asctime)s %(levelname)s %(message)s')
     handler.setFormatter(formatter)
+    app.logger.setLevel(logging.INFO)
+    log.addHandler(handler)
 
-    logger.addHandler(handler)
-    logger.setLevel(logging.INFO)
 
 def configure_routes(app):
 

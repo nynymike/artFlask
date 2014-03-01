@@ -119,7 +119,6 @@ class Venue():
     _collection_ = "Venue"
 
     schema = {
-        'id': {type : str},
         'site_id': {type : str},
         'name': {type : str},
         'event_id': {type : str},

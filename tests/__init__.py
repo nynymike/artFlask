@@ -22,8 +22,11 @@ class TestCase(Base):
     def setUp(self):
         self.artist = h.genPerson('artist')
         self.artist_id = "%s"%mongo.db.Person.save(self.artist)
-        self.venue = h.genVenue(["%s"%self.artist_id],["%s"%self.artist_id])
+        self.event = h.event
+        self.event_id = "%s"%mongo.db.Event.save(self.event)
+        self.venue = h.genVenue(["%s"%self.artist_id],["%s"%self.artist_id],event_id=self.event_id)
         self.venue_id ="%s"%mongo.db.Venue.save(self.venue)
+
 
 
 

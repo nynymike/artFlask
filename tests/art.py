@@ -39,10 +39,10 @@ class ArtTest(TestCase):
 		6)Delete Object through Delete Request
 		"""
 
-		venue = genVenue(artists = ["%s"%self.artist_id],managers =["%s"%self.artist_id])
+		venue = genVenue(artists = ["%s"%self.artist_id],managers =["%s"%self.artist_id],event_id=self.event_id)
 		id = self._test_post_request('/api/v1/manage/venue',data=json.dumps(venue),model_class = Venue)
 		self._test_get_request('/api/v1/venues/%s'%id)
-		venue = genVenue(artists = ["%s"%self.artist_id],managers =["%s"%self.artist_id])
+		venue = genVenue(artists = ["%s"%self.artist_id],managers =["%s"%self.artist_id],event_id=self.event_id)
 		self._test_put_request('/api/v1/manage/venue/%s'%id,data=json.dumps(venue),model_class = Venue,id = id)
 		self._test_put_delete('/api/v1/manage/venue/%s'%id, model_class = Venue,id = id)
 

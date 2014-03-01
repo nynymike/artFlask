@@ -84,7 +84,6 @@ class Person():
 
     schema = {
 
-        'id': {type : str},
         'sub': {type : str},
         'given_name': {type : str},
         'family_name': {type : str},

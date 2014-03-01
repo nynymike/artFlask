@@ -51,9 +51,9 @@ event = {
 
 def genArt(artist_id, venue_id):
     id = str(uuid4())
-    i = randint(0,9)
-    shutil.copyfile('./images/00%i.jpg', './testimages/%s.jpg' % id)
-    shutil.copyfile('./images/00%itn.jpg', './testimages/%s_tn.jpg' % id)
+    # i = randint(0,9)
+    # shutil.copyfile('./images/00%i.jpg', './testimages/%s.jpg' % id)
+    # shutil.copyfile('./images/00%itn.jpg', './testimages/%s_tn.jpg' % id)
     d = {
         'artist': artist_id,
         'title': getRandom('titles.txt'),
@@ -97,12 +97,12 @@ def genPerson(role=None):
         d['picture'] = "%s/men/person%i.jpg" % (basePictureURL, randint(0,9))
     return d
 
-def genVenue(i=0, artists=[], managers=[]):
+def genVenue(i=0, artists=[], managers=[],event_id=""):
     username = getRandom('usernames.txt'),
     return {
          'site_id': `i`,
          'name': getRandom("venues.txt"),
-         'event_id': event['id'],
+         'event_id': event_id,
          'picture':'http://aloft.gluu.org/images/venues/00%i.jpg' % randint(0,9),
          'address': {"street": getRandom("address.txt"),
                  "city": "Austin",
