@@ -42,6 +42,7 @@ def printJson(d):
         print json_util.dumps(d[id])
 
 event = {
+    'id': 'happy2014',
     'name': 'Happy Tour 2014',
     'startDate': 'Feb  3 00:00:00 UTC 2014',
     'endDate': 'Feb  5 00:00:00 UTC 2014',
@@ -50,10 +51,13 @@ event = {
 }
 
 def genArt(artist_id, venue_id):
+    import os, os.path
     id = str(uuid4())
-    # i = randint(0,9)
-    # shutil.copyfile('./images/00%i.jpg', './testimages/%s.jpg' % id)
-    # shutil.copyfile('./images/00%itn.jpg', './testimages/%s_tn.jpg' % id)
+    if not os.path.exists("./testimages"):
+        os.mkdir("./testimages")
+    i = randint(0,9)
+    shutil.copyfile('./data/images/00%i.jpg', './testimages/%s.jpg' % id)
+    shutil.copyfile('./data/images/00%itn.jpg', './testimages/%s_tn.jpg' % id)
     d = {
         'artist': artist_id,
         'title': getRandom('titles.txt'),

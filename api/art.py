@@ -94,10 +94,8 @@ from utils.Properies import Properties
 import json
 import io
 
+# Note POST is in artList.py
 class Art(Resource):
-
-
-      
 
     def get(self, art_id):
         app_ctx =ApplicationContext('art')
@@ -106,10 +104,6 @@ class Art(Resource):
           return json.loads(json_util.dumps(item))
         except Exception , e:
           return str(e), 404
-
-    def post(self):
-      pass
-
 
     def put(self,art_id=None):
       try:
