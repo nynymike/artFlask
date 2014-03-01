@@ -69,31 +69,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="load_data.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/load_data.py">
+      <file leaf-file-name="convert.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/data/images/convert.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="10" selection-start="1865" selection-end="1865" vertical-scroll-proportion="0.0" vertical-offset="662" max-vertical-offset="1628">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="helpers.py" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tests/data/helpers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="50" selection-start="1493" selection-end="1493" vertical-scroll-proportion="0.45780346" vertical-offset="902" max-vertical-offset="3124">
+            <state line="9" column="13" selection-start="196" selection-end="196" vertical-scroll-proportion="0.48410758" vertical-offset="0" max-vertical-offset="409">
               <folding>
-                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#0#21#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="helpers.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Desktop/New folder/artFlask/tests/data/helpers.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="71" column="0" selection-start="1921" selection-end="2085" vertical-scroll-proportion="0.0" vertical-offset="946" max-vertical-offset="3058">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -108,7 +90,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/test/runTests.py" />
         <option value="$PROJECT_DIR$/index.rst" />
         <option value="$PROJECT_DIR$/LICENSE" />
         <option value="$PROJECT_DIR$/make.bat" />
@@ -159,6 +140,7 @@
         <option value="$PROJECT_DIR$/tests/data/testimages/README" />
         <option value="$PROJECT_DIR$/tests/load_data.py" />
         <option value="$PROJECT_DIR$/tests/data/helpers.py" />
+        <option value="$PROJECT_DIR$/tests/data/images/convert.py" />
       </list>
     </option>
   </component>
@@ -252,6 +234,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="artFlask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="artFlask" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="data" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="images" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -286,7 +290,7 @@
       <recent name="C:\Users\mike\Documents\GitHub\artFlask\templates" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.venueFunctions">
+  <component name="RunManager" selected="Python.convert">
     <configuration default="false" name="Unittests in artflask_tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -331,24 +335,6 @@
       <ConfigurationWrapper RunnerId="PythonRunner" />
       <method />
     </configuration>
-    <configuration default="false" name="artImageFunctions" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/api" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="artFlask" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/api/artImageFunctions.py" />
-      <option name="PARAMETERS" value="" />
-      <RunnerSettings RunnerId="PythonRunner" />
-      <ConfigurationWrapper RunnerId="PythonRunner" />
-      <method />
-    </configuration>
     <configuration default="false" name="genArtData" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -380,6 +366,24 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="artFlask" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/api/venueFunctions.py" />
+      <option name="PARAMETERS" value="" />
+      <RunnerSettings RunnerId="PythonRunner" />
+      <ConfigurationWrapper RunnerId="PythonRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="convert" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/data/images" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="artFlask" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/data/images/convert.py" />
       <option name="PARAMETERS" value="" />
       <RunnerSettings RunnerId="PythonRunner" />
       <ConfigurationWrapper RunnerId="PythonRunner" />
@@ -636,17 +640,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in artflask_tests" />
       <item index="1" class="java.lang.String" itemvalue="Python.artFlask" />
-      <item index="2" class="java.lang.String" itemvalue="Python.artImageFunctions" />
-      <item index="3" class="java.lang.String" itemvalue="Python.genArtData" />
-      <item index="4" class="java.lang.String" itemvalue="Python.venueFunctions" />
+      <item index="2" class="java.lang.String" itemvalue="Python.genArtData" />
+      <item index="3" class="java.lang.String" itemvalue="Python.venueFunctions" />
+      <item index="4" class="java.lang.String" itemvalue="Python.convert" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.venueFunctions" />
-        <item index="1" class="java.lang.String" itemvalue="Python.genArtData" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in artflask_tests" />
-        <item index="3" class="java.lang.String" itemvalue="Python.artFlask" />
-        <item index="4" class="java.lang.String" itemvalue="Python.artImageFunctions" />
+        <item index="0" class="java.lang.String" itemvalue="Python.convert" />
+        <item index="1" class="java.lang.String" itemvalue="Python.venueFunctions" />
+        <item index="2" class="java.lang.String" itemvalue="Python.genArtData" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in artflask_tests" />
+        <item index="4" class="java.lang.String" itemvalue="Python.artFlask" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -713,7 +717,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3768116" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32826087" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18150684" sideWeight="0.1659292" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18150684" sideWeight="0.16781609" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496732" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -721,8 +725,8 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Log4jMonitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18150684" sideWeight="0.8340708" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5195652" sideWeight="0.8440476" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18150684" sideWeight="0.8321839" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5188053" sideWeight="0.8440476" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32826087" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -894,11 +898,6 @@
         <state line="25" column="43" selection-start="459" selection-end="459" vertical-scroll-proportion="0.38076153" vertical-offset="360" max-vertical-offset="1100" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/artView.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="32" selection-start="2319" selection-end="2319" vertical-scroll-proportion="3.337607" vertical-offset="0" max-vertical-offset="2068" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/model/Person.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="79" column="0" selection-start="3668" selection-end="3668" vertical-scroll-proportion="0.8754717" vertical-offset="1274" max-vertical-offset="4708" />
@@ -1003,7 +1002,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1958">
           <folding>
-            <element signature="e#0#53#0" expanded="true" />
+            <element signature="e#0#53#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1022,13 +1021,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/load_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="10" selection-start="1865" selection-end="1865" vertical-scroll-proportion="0.0" vertical-offset="662" max-vertical-offset="1628">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/New folder/artFlask/tests/data/helpers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="71" column="0" selection-start="1921" selection-end="2085" vertical-scroll-proportion="0.0" vertical-offset="946" max-vertical-offset="3058">
@@ -1036,11 +1028,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/templates/artView.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="42" selection-start="144" selection-end="144" vertical-scroll-proportion="0.18181819" vertical-offset="0" max-vertical-offset="2068">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/data/helpers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="50" selection-start="1493" selection-end="1493" vertical-scroll-proportion="0.45780346" vertical-offset="902" max-vertical-offset="3124">
+        <state line="78" column="9" selection-start="2404" selection-end="2404" vertical-scroll-proportion="0.92369944" vertical-offset="917" max-vertical-offset="3124">
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/load_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="10" selection-start="1865" selection-end="1865" vertical-scroll-proportion="0.9498861" vertical-offset="662" max-vertical-offset="1628">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/data/images/convert.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="196" selection-end="196" vertical-scroll-proportion="0.48410758" vertical-offset="0" max-vertical-offset="409">
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
           </folding>
         </state>
       </provider>
