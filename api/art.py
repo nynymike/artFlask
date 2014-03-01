@@ -93,6 +93,7 @@ from utils.app_ctx import ApplicationContext
 from utils.Properies import Properties
 import json
 import io
+from artImageFunctions import *
 
 # Note POST is in artList.py
 class Art(Resource):
@@ -114,7 +115,7 @@ class Art(Resource):
         if not item["artist"]:
           return "Artist Not Found In Art",400
         artist = artist_context.get_item(item["artist"])
-        artist_name = "%s"%(artist['family_name'])
+        artist_name = "%s %s" % (artist['given_name'], artist['family_name'])
         if 'file' in request.files:
             upload_file(art_id, artist_name)
         return '',200

@@ -15,7 +15,7 @@ Venue Entity Schema
 +-------------+---------------+------------------------------------------------------------------------+
 | event_id    | string        | Event id                                                               |
 +-------------+---------------+------------------------------------------------------------------------+
-| picture     | string        | URL of the End-User's profile picture. This URL MUST refer to an image |
+| picture     | string        | URL of the Venue logo. This URL MUST refer to an image                 |
 |             |               | file (for example, a PNG, JPEG, or GIF image file), rather than to a   |
 |             |               | Web page containing an image.                                          |
 +-------------+---------------+------------------------------------------------------------------------+
