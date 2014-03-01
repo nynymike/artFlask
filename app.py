@@ -104,6 +104,7 @@ def configure_routes(app):
     api.add_resource(Register, '/api/v1/register/<string:token>','/api/v1/register/')
 
     api.add_resource(EventList, '/api/v1/events/')
+    api.add_resource(Event, '/api/v1/events/<string:event_id>')
     api.add_resource(Event, '/api/v1/event/<string:event_id>')
 
     api.add_resource(VenueList, '/api/v1/venues')
