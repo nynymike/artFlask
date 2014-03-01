@@ -1,7 +1,7 @@
 from uuid import *
 from random import *
 from bson import json_util
-import os, base64
+import os, base64, shutil
 
 numStaff = 4
 numArtists = 250
@@ -16,7 +16,7 @@ art = {}
 
 artistVenueMap = {}
 
-basePictureURL = "http://aloft.gluu.org/"
+basePictureURL = "http://aloft.gluu.org"
 
 def getPhone():
     return "1-512-%i%i%i-%i%i%i%i" % (randint(2,9),randint(0,9),randint(0,9),
@@ -52,6 +52,9 @@ event = {
 
 def genArt(artist_id, venue_id):
     id = str(uuid4())
+    i = randint(0,9)
+    shutil.copyfile('./images/00%i.jpg', './testimages/%s.jpg' % id)
+    shutil.copyfile('./images/00%itn.jpg', './testimages/%s_tn.jpg' % id)
     d = {
         'id': id,
         'artist': artist_id,
@@ -91,7 +94,7 @@ def genPerson(role=None):
     else: d['preferred_contact'] = 'facebook'
     if randint(0,1)==0:
         d['given_name'] = getRandom('girls_names.txt')
-        d['picture'] = "%s/men/person%i.jpg" % (basePictureURL, randint(0,9))
+        d['picture'] = "%s/women/person%i.jpg" % (basePictureURL, randint(0,9))
     else:
         d['given_name'] = getRandom('boys_names.txt')
         d['picture'] = "%s/men/person%i.jpg" % (basePictureURL, randint(0,9))
@@ -130,54 +133,4 @@ def genVenue(i=0, artists=[], managers=[]):
          'ad_7': getBoolean(),
          'ad_8': getBoolean()
     }
-
-# generate staff
-# i=0
-# while i < numStaff:
-#     i = i + 1
-#     d = genPerson('staff')
-#     staff[d['id']] = d
-
-# # generate artists
-# i=0
-# while i < numArtists:
-#     i = i + 1
-#     d = genPerson('artist')
-#     artists[d['id']] = d
-
-# # generate venues
-# i=0
-# while i < numVenues:
-#     i = i + 1
-#     artist_ids = artists.keys()
-#     num_artists = randint(1,3)
-#     k = 0
-#     venueArtists = []
-#     while k <= num_artists:
-#         k = k + 1
-#         artistIndex = randint(0, len(artist_ids)-1)
-#         id = artist_ids[artistIndex]
-#         venueArtists.append(id)
-#         del artist_ids[artistIndex]
-#     d = genVenue(i, venueArtists, [venueArtists[0]])
-#     venues[d['id']] = d
-
-# # generate art
-# i=0
-# while i < numArt:
-#     i = i + 1
-#     artist_ids = artists.keys()
-#     random_artist = artist_ids[randint(0,(len(artist_ids)-1))]
-#     d = genArt(random_artist, artists[random_artist])
-#     art[d['id']] = d
-
-# print json_util.dumps(event)
-
-# printJson(staff)
-# printJson(artists)
-# printJson(venues)
-# #ids = art.keys()
-# #print art(ids[0])
-# print len(art)
-# printJson(art)
 

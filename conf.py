@@ -273,6 +273,7 @@ class BaseConfig(object):
 
     BASE_URL = "http://0.0.0.0:5000/"
     UPLOAD_FOLDER = "./upload"
+    STATIC_FOLDER = "./static"
     LOGGING_FILE = "./logs/log_file"
     MONGO_DBNAME = 'artFlask'
     DEBUG=True

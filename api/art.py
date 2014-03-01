@@ -116,7 +116,7 @@ class Art(Resource):
         app_ctx = ApplicationContext('art')
         app_ctx.create_item_from_context(art_id)
         if 'file' in request.files:
-            upload_file(art_id)
+            upload_file(art_id, "arttist_name")
         return '',200
       except Exception, e:
         return str(e),404

@@ -10,5 +10,5 @@ video
 wood
 metal
 fashion
-jewlary
+jewlery
 other
