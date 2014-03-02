@@ -30,7 +30,7 @@ from bson import json_util
 from flask_restful.utils import cors
 
 class Staff(Resource):
-    @cors.crossdomain(origin='*')
+    #@cors.crossdomain(origin='*')
     def get(self,person_id):
         app_ctx =ApplicationContext('person')
         try:
@@ -40,7 +40,7 @@ class Staff(Resource):
             return str(e), 404
 
 class StaffList(Resource):
-    @cors.crossdomain(origin='*')
+    #@cors.crossdomain(origin='*')
     def get(self):
         app_ctx =ApplicationContext('person')
         try:

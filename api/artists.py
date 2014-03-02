@@ -45,7 +45,7 @@ def queryResults(query):
 
 class Artists(Resource):
 
-    @cors.crossdomain(origin='*')
+    #@cors.crossdomain(origin='*')
     def get(self, artist_id):
         app_ctx =ApplicationContext('person')
         try:

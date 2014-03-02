@@ -93,7 +93,7 @@ import json
 from flask_restful.utils import cors
 
 class Art(Resource):
-    @cors.crossdomain(origin='*')
+    #@cors.crossdomain(origin='*')
     def get(self, art_id):
         app_ctx =ApplicationContext('art')
         try:
@@ -102,7 +102,7 @@ class Art(Resource):
         except Exception , e:
           return str(e), 404
 
-    @cors.crossdomain(origin='*')
+    #@cors.crossdomain(origin='*')
     def put(self,art_id=None):
       try:
         app_ctx = ApplicationContext('art')
@@ -119,7 +119,7 @@ class Art(Resource):
       except Exception, e:
         return str(e),404
 
-    @cors.crossdomain(origin='*')
+    #@cors.crossdomain(origin='*')
     def delete(self,art_id=None):
       try:
         app_ctx = ApplicationContext('art')

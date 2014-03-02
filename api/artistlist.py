@@ -7,7 +7,7 @@ from bson import json_util
 import json
 
 class ArtistList(Resource):
-    @cors.crossdomain(origin='*')
+    #@cors.crossdomain(origin='*')
     def get(self):
         app_ctx =ApplicationContext('person')
         items = app_ctx.query_from_context(allowList=True,default_data={'role':'artist'})

@@ -40,7 +40,7 @@ from flask_restful.utils import cors
 from flask.ext.restful import Resource, Api
 
 class Register(Resource):
-    @cors.crossdomain(origin='*')
+    #@cors.crossdomain(origin='*')
     def post(self):
       #args = self.parser.parse_args()
       #return None,200
@@ -68,7 +68,7 @@ class Register(Resource):
       # except Exception, e:
       #   return str(e),404
 
-    @cors.crossdomain(origin='*')
+    #@cors.crossdomain(origin='*')
     def get(self,token):
         try:
           user = mongo.db.Person.find({'registration_code.code':token}).next()

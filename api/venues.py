@@ -38,7 +38,7 @@ def queryVenues(query):
 
 class Venues(Resource):
 
-    @cors.crossdomain(origin='*')
+    #@cors.crossdomain(origin='*')
     def get(self,venue_id):
       app_ctx =ApplicationContext('venue')
       try:
@@ -48,7 +48,7 @@ class Venues(Resource):
         return str(e), 404
 
 class VenueList(Resource):
-    @cors.crossdomain(origin='*')
+    #@cors.crossdomain(origin='*')
     def get(self):
         app_ctx =ApplicationContext('venue')
         try:
