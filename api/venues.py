@@ -28,6 +28,7 @@ from utils.helpers import jsonify
 from utils.app_ctx import ApplicationContext
 import json
 from bson import json_util
+from flask_restful.utils import cors
 
 def getVenue(venue_id):
     return {}
@@ -36,6 +37,8 @@ def queryVenues(query):
     return {}
 
 class Venues(Resource):
+
+    @cors.crossdomain(origin='*')
     def get(self,venue_id):
       app_ctx =ApplicationContext('venue')
       try:
@@ -45,11 +48,12 @@ class Venues(Resource):
         return str(e), 404
 
 class VenueList(Resource):
-      def get(self):
+    @cors.crossdomain(origin='*')
+    def get(self):
         app_ctx =ApplicationContext('venue')
         try:
-          venue = app_ctx.query_from_context(allowList=True)
-          return json.loads(json_util.dumps(venue))
+            venue = app_ctx.query_from_context(allowList=True)
+            return json.loads(json_util.dumps(venue))
         except:
-          return 'venue not found', 404
+            return 'venue not found', 404
 

@@ -26,10 +26,9 @@ Register API
    authentication.
 
 """
+
 __author__ = 'Michael Schwartz'
 
-from flask.ext.restful import Resource, Api, reqparse
-from pymongo import MongoClient
 import datetime
 from bson.objectid import ObjectId
 from utils.app_ctx import ApplicationContext
@@ -37,8 +36,10 @@ from db import mongo
 from flask.ext.mail import Message
 from flask import current_app
 from mail import mail
-class Register(Resource):
+from flask_restful.utils import cors
 
+class Register(Resource):
+    @cors.crossdomain(origin='*')
     def post(self):
       #args = self.parser.parse_args()
       #return None,200
@@ -66,6 +67,7 @@ class Register(Resource):
       # except Exception, e:
       #   return str(e),404
 
+    @cors.crossdomain(origin='*')
     def get(self,token):
         try:
           user = mongo.db.Person.find({'registration_code.code':token}).next()

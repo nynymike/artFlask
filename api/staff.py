@@ -27,17 +27,20 @@ from flask.ext.restful import Resource, Api
 from utils.app_ctx import ApplicationContext
 import json
 from bson import json_util
+from flask_restful.utils import cors
 
 class Staff(Resource):
-  def get(self,person_id):
-    app_ctx =ApplicationContext('person')
-    try:
-      item = app_ctx.get_item(person_id)
-      return json.loads(json_util.dumps(item))
-    except Exception , e:
-      return str(e), 404
+    @cors.crossdomain(origin='*')
+    def get(self,person_id):
+        app_ctx =ApplicationContext('person')
+        try:
+            item = app_ctx.get_item(person_id)
+            return json.loads(json_util.dumps(item))
+        except Exception , e:
+            return str(e), 404
 
 class StaffList(Resource):
+    @cors.crossdomain(origin='*')
     def get(self):
         app_ctx =ApplicationContext('person')
         try:

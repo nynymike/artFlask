@@ -32,6 +32,7 @@ from flask.ext.restful import reqparse
 from utils.app_ctx import ApplicationContext
 from bson import json_util
 import json
+from flask_restful.utils import cors
 
 def getAllArtists():
     return []
@@ -43,6 +44,8 @@ def queryResults(query):
     return {}
 
 class Artists(Resource):
+
+    @cors.crossdomain(origin='*')
     def get(self, artist_id):
         app_ctx =ApplicationContext('person')
         try:

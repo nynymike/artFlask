@@ -36,6 +36,7 @@ def getAllEvents():
     return []
 
 class Event(Resource):
+    @cors.crossdomain(origin='*')
     def get(self,event_id):
       try:
         print event_id
@@ -45,6 +46,7 @@ class Event(Resource):
         return '',404
 
 class EventList(Resource):
+    @cors.crossdomain(origin='*')
     def get(self, event_id=None):
       app_ctx =ApplicationContext('event')
       # try:

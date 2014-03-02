@@ -84,20 +84,16 @@ Art API
 
 """
 __author__ = 'Michael Schwartz'
-
 from flask import send_file, request,render_template
 from flask.ext.restful import Resource, Api
-from utils.helpers import  upload_file, jsonify
+from utils.helpers import  upload_file
 from bson import json_util
 from utils.app_ctx import ApplicationContext
-from utils.Properies import Properties
 import json
-import io
-from artImageFunctions import *
+from flask_restful.utils import cors
 
-# Note POST is in artList.py
 class Art(Resource):
-
+    @cors.crossdomain(origin='*')
     def get(self, art_id):
         app_ctx =ApplicationContext('art')
         try:
@@ -106,6 +102,7 @@ class Art(Resource):
         except Exception , e:
           return str(e), 404
 
+    @cors.crossdomain(origin='*')
     def put(self,art_id=None):
       try:
         app_ctx = ApplicationContext('art')
@@ -122,6 +119,7 @@ class Art(Resource):
       except Exception, e:
         return str(e),404
 
+    @cors.crossdomain(origin='*')
     def delete(self,art_id=None):
       try:
         app_ctx = ApplicationContext('art')

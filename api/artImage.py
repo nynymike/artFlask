@@ -1,7 +1,9 @@
 from flask import send_file, request,render_template, current_app
 from flask.ext.restful import Resource, Api
 from utils.app_ctx import ApplicationContext
+from flask_restful.utils import cors
 
+@cors.crossdomain(origin='*')
 def get_image(art_id, action_type):
     app_ctx =ApplicationContext('art')
     item = app_ctx.get_item(art_id)

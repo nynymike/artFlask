@@ -70,10 +70,12 @@ __author__ = 'Michael Schwartz'
 
 from flask.ext.restful import Resource, Api
 from utils.app_ctx import ApplicationContext
-from bson import json_util
+from flask_restful.utils import cors
+
 
 class ManageEvent(Resource):
 
+    @cors.crossdomain(origin='*')
     def put(self, event_id=None):
       try:
         print event_id
@@ -87,6 +89,7 @@ class ManageEvent(Resource):
     #     else:
     #         return None
 
+    @cors.crossdomain(origin='*')
     def post(self):
       # Get params and write
       # Convert image to web size
@@ -101,6 +104,7 @@ class ManageEvent(Resource):
       # except Exception, e:
       #   return '',404
 
+    @cors.crossdomain(origin='*')
     def delete(self, event_id=None):
       try:
         app_ctx = ApplicationContext('event')
@@ -110,6 +114,8 @@ class ManageEvent(Resource):
         return '',404
 
 class ManageVenue(Resource):
+
+    @cors.crossdomain(origin='*')
     def put(self, venue_id=None):
       try:
         app_ctx = ApplicationContext('venue')
@@ -123,6 +129,7 @@ class ManageVenue(Resource):
     #     else:
     #         return None
 
+    @cors.crossdomain(origin='*')
     def post(self):
       # Get params and write
       # Convert image to web size
@@ -139,6 +146,7 @@ class ManageVenue(Resource):
       #except Exception, e:
         #return '',404
 
+    @cors.crossdomain(origin='*')
     def delete(self, venue_id=None):
       try:
         app_ctx = ApplicationContext('venue')
@@ -148,7 +156,9 @@ class ManageVenue(Resource):
         return '',404
 
 class ManagePerson(Resource):
+
     # Send SCIM requests to oxTrust
+    @cors.crossdomain(origin='*')
     def put(self, person_id=None):
       try:
         app_ctx = ApplicationContext('person')
@@ -156,11 +166,14 @@ class ManagePerson(Resource):
         return '',200 
       except Exception, e:
         return str(e),404
-        
+
+    @cors.crossdomain(origin='*')
     def post(self, person_id=None):
         if not person_id: return 'Person not found', 404
         else:
             return None
+
+    @cors.crossdomain(origin='*')
     def delete(self, person_id=None):
       try:
         app_ctx = ApplicationContext('person')

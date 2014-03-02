@@ -29,6 +29,7 @@ from utils.helpers import jsonify
 from utils.app_ctx import ApplicationContext
 
 class Profile(Resource):
+    @cors.crossdomain(origin='*')
     def get(self):
       app_ctx =ApplicationContext('person')
       try:
@@ -37,6 +38,7 @@ class Profile(Resource):
       except:
         return 'Person not found', 404
 
+    @cors.crossdomain(origin='*')
     def put(self, person=None):
         return None
 

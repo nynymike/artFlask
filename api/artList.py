@@ -6,11 +6,13 @@ from bson import json_util
 import json
 
 class ArtList(Resource):
-
+    @cors.crossdomain(origin='*')
     def get(self):
       app_ctx =ApplicationContext('art')
       items = app_ctx.query_from_context(allowList=False)
       return json.loads(json_util.dumps(items))
+
+    @cors.crossdomain(origin='*')
     def post(self):
         # Get params and write
         # Convert image to web size
