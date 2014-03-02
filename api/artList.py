@@ -4,6 +4,7 @@ from utils.helpers import  upload_file, jsonify
 from utils.app_ctx import ApplicationContext
 from bson import json_util
 import json
+from flask_restful.utils import cors
 
 class ArtList(Resource):
     @cors.crossdomain(origin='*')

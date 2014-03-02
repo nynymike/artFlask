@@ -28,6 +28,7 @@ from utils.helpers import jsonify, request_to_dictonary
 from utils.app_ctx import ApplicationContext
 import json
 from bson import json_util
+from flask_restful.utils import cors
 
 def getEvent(event_id):
     return [{}]

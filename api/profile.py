@@ -27,6 +27,7 @@ __author__ = 'Michael Schwartz'
 from flask.ext.restful import Resource, Api
 from utils.helpers import jsonify
 from utils.app_ctx import ApplicationContext
+from flask_restful.utils import cors
 
 class Profile(Resource):
     @cors.crossdomain(origin='*')
