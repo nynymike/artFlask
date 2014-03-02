@@ -37,6 +37,7 @@ from flask.ext.mail import Message
 from flask import current_app
 from mail import mail
 from flask_restful.utils import cors
+from flask.ext.restful import Resource, Api
 
 class Register(Resource):
     @cors.crossdomain(origin='*')
