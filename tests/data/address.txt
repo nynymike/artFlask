@@ -1,4 +1,4 @@
-1305 Glencrest Dr 
+1305 Glencrest Dr
 5811 Berkman Dr
 5833 Westminster Dr
 2009 Airport Blvd
@@ -31,3 +31,21 @@
 1511 E 6th St
 412 Comal St
 1807 Holly St
+702 Shady Lane
+4704 East Ceasar Chavez
+701 Tillery Street
+2101 Maldon Place
+507 Calles Street
+1601 E 5th Street
+1111 E 11th Street
+1700 E 12th Street
+1701 E Martin Luther King Jr Blvd
+800 Gullett Street
+4609 Lyons Rd
+1406 Smith Road
+651 North Pleasant Valley Road
+1711 Canterbury Street
+68 Navasota Street
+2000 E 6th Street
+414 Waller Street
+1209 Maple Avenue

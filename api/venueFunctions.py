@@ -23,7 +23,8 @@ def geoCode(street, city, state, zip):
 
 def test():
     import urllib, urllib2, json
-    apikey = '<enter mapquest api key here>'
+    #apikey = current_app.config['MAPQUEST_API_KEY']
+    apikey = 'Fmjtd%7Cluur210tll%2C7n%3Do5-90y050'
     address = urllib.quote("621 East Sixth Street,Austin,TX,78702")
     url = 'http://www.mapquestapi.com/geocoding/v1/address?&key=%s&location=%s' % (apikey, address)
     print url

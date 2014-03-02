@@ -1,7 +1,8 @@
 from uuid import *
 from random import *
 from bson import json_util
-import os, base64, shutil
+import base64, traceback
+import api.venueFunctions
 
 numStaff = 4
 numArtists = 250
@@ -52,12 +53,6 @@ event = {
 
 def genArt(artist_id, venue_id):
     import os, os.path
-    id = str(uuid4())
-    # if not os.path.exists("./testimages"):
-    #     os.mkdir("./testimages")
-    # i = randint(0,9)
-    # shutil.copyfile('./data/images/00%i.jpg' % i, './testimages/%s.jpg' % id)
-    # shutil.copyfile('./data/images/00%itn.jpg' % i, './testimages/%s_tn.jpg' % id)
     d = {
         'artist': artist_id,
         'title': getRandom('titles.txt'),
@@ -70,8 +65,6 @@ def genArt(artist_id, venue_id):
         'year': '2014',
         'alt_urls': {'Detail': 'http://www.%s/%s' % (getRandom('domains.txt'), base64.encodestring(str(os.urandom(4))).strip())}
     }
-    if randint(0,10)>9: d['parent_work'] = str(uuid4())
-    elif randint(0,10)>9: d['series'] = [str(uuid4()), str(uuid4()), str(uuid4())]
     return d
 
 def genPerson(role=None):
@@ -95,24 +88,31 @@ def genPerson(role=None):
     else: d['preferred_contact'] = 'facebook'
     if randint(0,1)==0:
         d['given_name'] = getRandom('girls_names.txt')
-        d['picture'] = "%s/women/person%i.jpg" % (basePictureURL, randint(0,9))
+        d['picture'] = "%s/women/person%i.jpg" % (basePictureURL, randint(0,14))
     else:
         d['given_name'] = getRandom('boys_names.txt')
-        d['picture'] = "%s/men/person%i.jpg" % (basePictureURL, randint(0,9))
+        d['picture'] = "%s/men/person%i.jpg" % (basePictureURL, randint(0,12))
     return d
 
 def genVenue(i=0, artists=[], managers=[],event_id=""):
-    username = getRandom('usernames.txt'),
+    username = getRandom('usernames.txt')
+    street = getRandom("address.txt")
+    geoCode = {}
+    try:
+        geoCode = api.venueFunctions.geoCode(street, "Austin", "TX", "78702")
+    except:
+        traceback.print_stack()
     return {
          'site_id': `i`,
          'name': getRandom("venues.txt"),
          'event_id': event_id,
-         'picture':'http://aloft.gluu.org/images/venues/00%i.jpg' % randint(0,9),
+         'picture': '%s/images/venues/0%s.jpg' % (basePictureURL, `randint(0,20)`.zfill(2)),
          'address': {"street": getRandom("address.txt"),
                  "city": "Austin",
                  "state": "TX",
-                 "zip": "78610",
+                 "zip": "78702",
                  "country": "US"},
+         'coordinates': geoCode,
          'twitter':'@%s' % username,
          'mail':'%s@gmail.com' % username,
          'phone': getPhone(),

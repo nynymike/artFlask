@@ -259,30 +259,30 @@ class BaseConfig(object):
     # If true, do not generate a @detailmenu in the "Top" node's menu.
     #texinfo_no_detailmenu = False
 
+    MAIL_SERVER = 'smtp.gmail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
+    MAIL_DEBUG = False
 
-    # MAIL_SERVER = 'smtp.gmail.com'
-    # MAIL_PORT = 587
-    # MAIL_USE_TLS = True
-    # MAIL_USE_SSL = False
-    # MAIL_DEBUG = False
-    # # Should put MAIL_USERNAME and MAIL_PASSWORD in production under instance folder.
-    # MAIL_USERNAME = 'sn.ahsanali@gmail.com'
-    # MAIL_PASSWORD = 'changeme'
-    # DEFAULT_MAIL_SENDER = 'sn.ahsanali@gmail.com'
-    # MAIL_PROCESSORS = ['background']
-    #
-    # BASE_URL = "http://0.0.0.0:5000/"
-    # API_BASE_URL = "http://east.gluu.org/api/v1"
-    # UPLOAD_FOLDER = "./upload"
-    # STATIC_FOLDER = "./static"
-    # LOGGING_FILE = "./logs/log_file"
-    # MONGO_DBNAME = 'artFlask'
-    # DEBUG=True
-    #
-    # # External API's
-    # LINKTRACK_API_LOGIN=''
-    # LINKTRACK_API_PASS=''
-    # MAPQUEST_API_KEY=''
+    # Should put MAIL_USERNAME and MAIL_PASSWORD in production under instance folder.
+    MAIL_USERNAME = 'user@domain.tld'
+    MAIL_PASSWORD = 'changeme'
+    DEFAULT_MAIL_SENDER = 'user@domain.tld'
+    MAIL_PROCESSORS = ['background']
+
+    BASE_URL = "http://0.0.0.0:5000/"
+    API_BASE_URL = "http://east.gluu.org/api/v1"
+    UPLOAD_FOLDER = "./upload"
+    STATIC_FOLDER = "./static"
+    LOGGING_FILE = "./logs/log_file"
+    MONGO_DBNAME = 'artFlask'
+    DEBUG=True
+
+    # External API's
+    LINKTRACK_API_LOGIN=''
+    LINKTRACK_API_PASS=''
+    MAPQUEST_API_KEY=''
 
 class TestingConfig(BaseConfig):
     MONGO_DBNAME = 'artFlask_test'

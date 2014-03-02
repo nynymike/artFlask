@@ -22,8 +22,8 @@ Venue Entity Schema
 | address     | string        | Address as defined in                                                  |
 |             |               | http://openid.net/specs/openid-connect-core-1_0.html#AddressClaim      |
 +-------------+---------------+------------------------------------------------------------------------+
-| coordinates | string        | List of the North-South decimal values, where North and East  are      |
-|             |               | positive, and South and West are negative                              |
+| coordinates | string        | Geocode generated from the address from Mapquest API, sample :         |
+|             |               | {'lat': 30.266441, 'lng': -97.736969}                                  |
 +-------------+---------------+------------------------------------------------------------------------+
 | twitter     | string        | Twitter handle for the venue                                           |
 +-------------+---------------+------------------------------------------------------------------------+
