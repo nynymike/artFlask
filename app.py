@@ -59,6 +59,12 @@ def configure_logger(app):
 
 
 def configure_routes(app):
+
+    @app.after_request
+    def after_request(response):
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        return response
+
     @app.route('/')
     def index():
         ## TESTING
