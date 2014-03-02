@@ -5,10 +5,11 @@ from flask import current_app
 
 # Returns dictionary for example: {u'lat': 30.26068, u'lng': -97.7319}
 # and response code 0 for success, and 1 if error parsing results, 2 for other errors
-def geoCode(street, city, state, zip):
+def geoCode(street, city, state, zip, apikey):
     try:
         import urllib, urllib2, json
-        apikey = current_app.config['MAPQUEST_API_KEY']
+        if apikey == None:
+            apikey = current_app.config['MAPQUEST_API_KEY']
         address = urllib.quote('%s,%s,%s,%s' % (street, city, state, zip))
         url = 'http://www.mapquestapi.com/geocoding/v1/address?&key=%s&location=%s' % (apikey, address)
         response = urllib2.urlopen(url).read()
