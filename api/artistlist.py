@@ -6,9 +6,10 @@ from utils.app_ctx import ApplicationContext
 from bson import json_util
 import json
 
+
 class ArtistList(Resource):
     #@cors.crossdomain(origin='*')
     def get(self):
         app_ctx =ApplicationContext('person')
-        items = app_ctx.query_from_context(allowList=True,default_data={'role':'artist'})
+        items = app_ctx.query_from_context(allowList=True, default_data={'role': 'artist'})
         return json.loads(json_util.dumps(items))

@@ -36,7 +36,6 @@ def configure_logger(app):
     log.addHandler(handler)
 
 
-
 app = Flask(__name__, static_folder="./upload")
 app.name = "artFlask"
 app.config.from_object(BaseConfig)

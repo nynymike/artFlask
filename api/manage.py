@@ -77,13 +77,13 @@ class ManageEvent(Resource):
 
     #@cors.crossdomain(origin='*')
     def put(self, event_id=None):
-      try:
-        print(event_id)
-        app_ctx = ApplicationContext('event')
-        app_ctx.create_item_from_context(event_id)
-        return '',200
-      except Exception as e:
-        return '', 404
+        try:
+            print(event_id)
+            app_ctx = ApplicationContext('event')
+            app_ctx.create_item_from_context(event_id)
+            return '', 200
+        except Exception as e:
+            return '', 404
     # def post(self, event_id=None):
     #     if not event_id: return 'Event not found', 404
     #     else:
@@ -99,19 +99,19 @@ class ManageEvent(Resource):
       # Create db entry for art
       # try:
         app_ctx = ApplicationContext('event')
-        item_id = app_ctx.create_item_from_context()
-        return '%s'%item_id,201
+        item = app_ctx.create_item_from_context()
+        return '%s' % item.id, 201
       # except Exception as e:
       #   return '',404
 
     #@cors.crossdomain(origin='*')
     def delete(self, event_id=None):
-      try:
-        app_ctx = ApplicationContext('event')
-        app_ctx.remove_record(event_id)
-        return '',200 
-      except Exception as e:
-        return '',404
+        try:
+            app_ctx = ApplicationContext('event')
+            app_ctx.remove_record(event_id)
+            return '', 200
+        except Exception as e:
+            return '', 404
 
 class ManageVenue(Resource):
 
@@ -119,7 +119,7 @@ class ManageVenue(Resource):
     def put(self, venue_id=None):
       try:
         app_ctx = ApplicationContext('venue')
-        item_id = app_ctx.create_item_from_context(venue_id)
+        item = app_ctx.create_item_from_context(venue_id)
         return '', 200
       except Exception as e:
         return '', 404
@@ -140,9 +140,9 @@ class ManageVenue(Resource):
         #try:
         required_fields = ["street", "city", "state", "zip"]
         app_ctx = ApplicationContext('venue')
-        item_id = app_ctx.create_item_from_context(required_fields=required_fields)
-        app_ctx.get_geo_location(item_id)
-        return '%s' % item_id, 201
+        item = app_ctx.create_item_from_context(required_fields=required_fields)
+        app_ctx.get_geo_location(item.id)
+        return '%s' % item.id, 201
         #except Exception as e:
           #return '',404
 
@@ -161,12 +161,12 @@ class ManagePerson(Resource):
     # Send SCIM requests to oxTrust
     #@cors.crossdomain(origin='*')
     def put(self, person_id=None):
-      try:
-        app_ctx = ApplicationContext('person')
-        app_ctx.create_item_from_context(person_id)
-        return '',200 
-      except Exception as e:
-        return str(e),404
+        try:
+            app_ctx = ApplicationContext('person')
+            app_ctx.create_item_from_context(person_id)
+            return '', 200
+        except Exception as e:
+            return str(e),404
 
     #@cors.crossdomain(origin='*')
     def post(self, person_id=None):

@@ -86,7 +86,7 @@ Art API
 __author__ = 'Michael Schwartz'
 from flask import send_file, request,render_template
 from flask.ext.restful import Resource, Api
-from utils.helpers import  upload_file
+from utils.helpers import  upload_file, JsonModelEncoder
 from bson import json_util
 from utils.app_ctx import ApplicationContext
 import json
@@ -98,22 +98,22 @@ class Art(Resource):
     def get(self, art_id):
         app_ctx = ApplicationContext('art')
         try:
-          item = app_ctx.get_item(art_id)
-          return json.loads(json_util.dumps(item))
-        except Exception , e:
-          return str(e), 404
+            item = app_ctx.get_item(art_id)
+            return json_util.dumps(item, cls=JsonModelEncoder)
+
+        except Exception as e:
+            return str(e), 404
 
     #@cors.crossdomain(origin='*')
     def put(self, art_id=None):
         try:
             app_ctx = ApplicationContext('art')
-            app_ctx.create_item_from_context(art_id)
-            item = app_ctx.get_item(art_id)
+            item = app_ctx.create_item_from_context(art_id)
             artist_context = ApplicationContext('person')
-            if not item["artist"]:
+            if not item.artist:
                 return "Artist Not Found In Art", 400
-            artist = artist_context.get_item(item["artist"])
-            artist_name = "%s %s" % (artist['given_name'], artist['family_name'])
+            artist = artist_context.get_item(item.artist)
+            artist_name = "%s %s" % (artist.given_name, artist.family_name)
             if 'file' in request.files:
                 upload_file(art_id, artist_name)
             return '', 200

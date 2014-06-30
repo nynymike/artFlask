@@ -2,11 +2,13 @@ from model import Artwork
 from model.Venue import Venue
 from model.Event import Event
 from model.Person import Person
-from utils.helpers import request_to_dictonary, update_from_dictionary # , remove_record_by_id
+from utils.helpers import request_to_dictonary # , update_from_dictionary, remove_record_by_id
 from flask import request, abort
-from db import mongo
+# from db import mongo
 from bson import ObjectId
 from api.venueFunctions import geoCode
+
+from app import db
 
 MODEL_MAP = {
     "art": Artwork,
@@ -29,25 +31,31 @@ class ApplicationContext(object):
     def __init__(self, model_name):
         self.model_name = model_name
 
-    def verify_data(self, data, required_fields, unique_fields):
-        for field in required_fields:
-            if not self.myhaskey(d=data,key=field):
-                abort(422, "%s is required" % field)
-        for field in unique_fields:
-            print(data[field])
-            item = getattr(mongo.db, self.model_class()._collection_).find({field: data[field]})
-            if item.count() > 0:
-                #print "%s is already taken"%field
-                abort(406)
-        return True
+    # def verify_data(self, data, required_fields, unique_fields):
+    #     for field in required_fields:
+    #         if not self.myhaskey(d=data,key=field):
+    #             abort(422, "%s is required" % field)
+    #     for field in unique_fields:
+    #         print(data[field])
+    #         item = getattr(mongo.db, self.model_class()._collection_).find({field: data[field]})
+    #         if item.count() > 0:
+    #             #print "%s is already taken"%field
+    #             abort(406)
+    #     return True
 
-    def create_item_from_context(self, object_id=None, required_fields=[], unique_fields=[]):
-        model_class = self.model_class()
-        item = model_class()
-        data = request_to_dictonary(model_class)
-        if object_id is None:
-            self.verify_data(data=data,required_fields=required_fields,unique_fields=unique_fields)
-        return update_from_dictionary(data,item,model_class,object_id)
+    def create_item_from_context(self, object_id=None, required_fields=None, unique_fields=None):
+        # required_fields = required_fields or []
+        # unique_fields = unique_fields or []
+        ModelClass = self.model_class()
+        data = request_to_dictonary(ModelClass)
+        # if object_id is None:
+        #     self.verify_data(data=data, required_fields=required_fields, unique_fields=unique_fields)
+        item = ModelClass(**data)
+        db.session.add(item)
+        db.session.merge(item)
+        db.session.commit()
+        # return update_from_dictionary(data, item, ModelClass, object_id)
+        return item
 
     def model_class(self):
         return MODEL_MAP[self.model_name]
@@ -58,8 +66,7 @@ class ApplicationContext(object):
         return item_dict
 
     def query(self, **kwargs):
-        items = self.model_class().query.filter_by(kwargs)
-        return [item.__dict__.copy() for item in items]
+        return self.model_class().query.filter_by(**kwargs)
 
     def remove_record(self, object_id):
         model_class = self.model_class()

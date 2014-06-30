@@ -1,40 +1,30 @@
-from flask import Flask
-from flask.ext.sqlalchemy import SQLAlchemy
+import json
 
 from app import db
 
-# __author__ = 'mike'
 # from Art import ArtWork
 # from Event import Event
 # from Person import Person
 # from Venue import Venue
 
 
-# 'artist': {type : str},
-# 'title': {type : str},
-# 'description': {type : str},
-# 'picture': {type : str},
-# 'thumbnail': {type : str},
-# 'buyURL': {type : str},
-# 'venue': {type : str},
-# 'medium': {type : str},
-# 'sold_out': {type : bool},
-# 'series': {type : list},
-# 'parent_work': {type : str},
-# 'size': {type:str},
-# 'year': {type : str},
-# 'alt_urls': {type : dict}
-
-
-# app = Flask(__name__)
+class SimpleSerializeMixin:
+    def serialize(self):
+        d = {}
+        for c in self.__table__.columns:
+            v = getattr(self, c.name)
+            if v:
+                d[c.name] = v
+        return d
 
 
 class AltUrl(db.Model):
     name = db.Column(db.String(128), primary_key=True)
     url = db.Column(db.String(256))
+    artwork_id = db.Column(db.Integer, db.ForeignKey('artwork.id'))
 
 
-class Artwork(db.Model):
+class Artwork(db.Model, SimpleSerializeMixin):
     id = db.Column(db.Integer, primary_key=True)
     artist = db.Column(db.String(128))
     title = db.Column(db.String(128))
@@ -50,4 +40,4 @@ class Artwork(db.Model):
     parent = db.relationship('Artwork', remote_side=[id])
     size = db.Column(db.String(256))
     year = db.Column(db.Integer)
-    alt_urls = db.relationship('AltUrl')
+    alt_urls = db.relationship('AltUrl', primaryjoin="Artwork.id==AltUrl.artwork_id")

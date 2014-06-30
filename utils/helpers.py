@@ -1,47 +1,42 @@
+import json
+import datetime
+
+from flask import request
 from flask.ext.restful import reqparse
-from flask import Flask, request, redirect, url_for, current_app
-from db import mongo
+
+# from db import mongo
 from bson.objectid import ObjectId
 from werkzeug.utils import secure_filename
-try:
-    import simplejson as json
-except ImportError:
-    import json
-import datetime
 from werkzeug import Response
+
 from api.artImageFunctions import *
+
+from app import db
+from model import SimpleSerializeMixin
+
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 
 def request_to_dictonary(model_class, typeSafe=True):
     parser = reqparse.RequestParser()
-    args = parser.parse_args(request)
-    schema = model_class.schema
-    for field in schema:
+    for field in model_class.__table__.columns:
         if typeSafe:
-            parser.add_argument(field, type=schema[field][type])
+            parser.add_argument(field.name, type=field.type.python_type)
         else:
-            parser.add_argument(field)
-    remove_parameters = []
-    for a in args:
-        if args[a] is None:
-            remove_parameters.append(a)
-    for a in remove_parameters:
-        del args[a]
+            parser.add_argument(field.name)
+    args = {k: v for k, v in parser.parse_args(request).items() if v}
     return args
 
 
-def update_from_dictionary(data, item, model_class, object_id=None):
-    print("data")
-    print(data)
-    if object_id is None:
-        return getattr(mongo.db, model_class._collection_).save(data)
-    else:
-        return getattr(mongo.db, model_class._collection_).update(
-            {'_id': ObjectId(object_id)},
-            {"$set": data},
-            upsert=False)
+# def update_from_dictionary(data, item, model_class, object_id=None):
+#     if object_id is None:
+#         return getattr(mongo.db, model_class._collection_).save(data)
+#     else:
+#         return getattr(mongo.db, model_class._collection_).update(
+#             {'_id': ObjectId(object_id)},
+#             {"$set": data},
+#             upsert=False)
 
 
 # def remove_record_by_id(object_id,model_class):
@@ -55,6 +50,13 @@ class MongoJsonEncoder(json.JSONEncoder):
         elif isinstance(obj, ObjectId):
             return unicode(obj)
         return json.JSONEncoder.default(self, obj)
+
+
+class JsonModelEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, SimpleSerializeMixin):
+            return obj.serialize()
+        return super(JsonModelEncoder, self).default(obj)
 
 
 def jsonify(*args, **kwargs):

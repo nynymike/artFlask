@@ -36,8 +36,9 @@ from db import mongo
 from flask.ext.mail import Message
 from flask import current_app
 from mail import mail
-from flask_restful.utils import cors
-from flask.ext.restful import Resource, Api
+# from flask_restful.utils import cors
+from flask.ext.restful import Resource
+
 
 class Register(Resource):
     #@cors.crossdomain(origin='*')
@@ -52,31 +53,38 @@ class Register(Resource):
                           'sub']
         unique_fields = ['email']
         app_ctx = ApplicationContext('person')
-        code = "%s"%ObjectId()
-        registration_id = app_ctx.create_item_from_context(required_fields=required_fields,unique_fields=unique_fields)
+        code = "%s" % ObjectId()
+        registration = app_ctx.create_item_from_context(required_fields=required_fields,
+                                                        unique_fields=unique_fields)
         data = {'status':'Pending',
                 'registration_code':{'code':code, 'sent': datetime.datetime.now(),
                          'accepted': None}
                 }
-        mongo.db.Person.update({'_id': ObjectId(registration_id)},{"$set": data},upsert=False)
-        user = mongo.db.Person.find({'_id': ObjectId(registration_id)}).next()
-        url = current_app.config['BASE_URL']+ "api/v1/register/%s"%code
-        html = "Please click <a href='%s'>here</a> to verify your email address or copy paste %s in browser"% (url,url)
-        message = Message(subject='Verify your email address', html=html, recipients=[user['email']],sender=current_app.config['DEFAULT_MAIL_SENDER'])
+        mongo.db.Person.update({'_id': ObjectId(registration.id)}, {"$set": data}, upsert=False)
+        user = mongo.db.Person.find({'_id': ObjectId(registration.id)}).next()
+        url = current_app.config['BASE_URL'] + "api/v1/register/%s" % code
+        html = "Please click <a href='%s'>here</a> to verify your email address"\
+               " or copy paste %s in browser" % (url, url)
+        message = Message(subject='Verify your email address',
+                          html=html,
+                          recipients=[user['email']],
+                          sender=current_app.config['DEFAULT_MAIL_SENDER'])
         mail.send(message)
-        return '',200
+        return '', 200
       # except Exception, e:
       #   return str(e),404
 
     #@cors.crossdomain(origin='*')
-    def get(self,token):
+    def get(self, token):
         try:
-          user = mongo.db.Person.find({'registration_code.code':token}).next()
-          mongo.db.Person.update({'_id': ObjectId("%s"%user['_id'])},{"$set": {'status':'Active'}},upsert=False)
-          return '',200
+            user = mongo.db.Person.find({'registration_code.code':token}).next()
+            mongo.db.Person.update({'_id': ObjectId("%s" % user['_id'])},
+                                   {"$set": {'status':'Active'}},
+                                   upsert=False)
+            return '', 200
         except Exception, e:
-          print str(e)
-          return 'user not found',404
+            print str(e)
+            return 'user not found', 404
 
 
 
