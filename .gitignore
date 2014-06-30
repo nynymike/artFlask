@@ -1,6 +1,11 @@
+# Python compiled
 *.pyc
+
 *.log
+
+# Temporary files
 *~
+
 local.cfg
 /build/*
 *.orig
@@ -9,5 +14,7 @@ local.cfg
 .settings/
 /upload/*
 /logs/*
-.idea
 
+# IntelliJ files
+.idea/*
+*.iml
