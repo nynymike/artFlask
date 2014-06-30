@@ -34,23 +34,27 @@ from bson import json_util
 import json
 from flask_restful.utils import cors
 
+
 def getAllArtists():
     return []
+
 
 def getArtist(personID):
     return {}
 
+
 def queryResults(query):
     return {}
+
 
 class Artists(Resource):
 
     #@cors.crossdomain(origin='*')
     def get(self, artist_id):
-        app_ctx =ApplicationContext('person')
+        app_ctx = ApplicationContext('person')
         try:
-          item = app_ctx.get_item(artist_id)
-          return json.loads(json_util.dumps(item))
-        except Exception , e:
-          return str(e), 404
+            item = app_ctx.get_item(artist_id)
+            return json.loads(json_util.dumps(item))
+        except Exception as e:
+            return str(e), 404
 

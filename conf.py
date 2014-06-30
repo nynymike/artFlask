@@ -276,16 +276,18 @@ class BaseConfig(object):
     UPLOAD_FOLDER = "./upload"
     STATIC_FOLDER = "./static"
     LOGGING_FILE = "./logs/log_file"
-    MONGO_DBNAME = 'artFlask'
-    DEBUG=True
+    # MONGO_DBNAME = 'artFlask'
+    SQLALCHEMY_DATABASE_URI = "mysql://art_flask:art_flask@localhost/art_flask"
+    DEBUG = True
 
     # External API's
-    LINKTRACK_API_LOGIN=''
-    LINKTRACK_API_PASS=''
-    MAPQUEST_API_KEY=''
+    LINKTRACK_API_LOGIN = ''
+    LINKTRACK_API_PASS = ''
+    MAPQUEST_API_KEY = ''
+
 
 class TestingConfig(BaseConfig):
-    MONGO_DBNAME = 'artFlask_test'
+    # MONGO_DBNAME = 'artFlask_test'
     MAIL_DEBUG = True
     TESTING = True
 

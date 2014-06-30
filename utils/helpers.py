@@ -2,48 +2,50 @@ from flask.ext.restful import reqparse
 from flask import Flask, request, redirect, url_for, current_app
 from db import mongo
 from bson.objectid import ObjectId
-import os
 from werkzeug.utils import secure_filename
 try:
     import simplejson as json
 except ImportError:
-    try:
-        import json
-    except ImportError:
-        raise ImportError
+    import json
 import datetime
 from werkzeug import Response
 from api.artImageFunctions import *
 
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
-def request_to_dictonary(model_class,typeSafe=True):
-	schema = model_class.schema
-	parser = reqparse.RequestParser()
-	for field in schema:
-		if typeSafe:
-			parser.add_argument(field,type=schema[field][type])
-		else:
-			parser.add_argument(field)
-	args =  parser.parse_args(request)
-	remove_parameters = []
-	for a in args:
-		if args[a] == None:
-			remove_parameters.append(a)
-	for a in remove_parameters:
-		del args[a]
-	return args
 
-def update_from_dictionary(data,item,model_class,object_id=None):
-	print "data"
-	print data
-	if object_id is None:
-		 return getattr(mongo.db,model_class._collection_).save(data)
-	else:
-		 return getattr(mongo.db,model_class._collection_).update({'_id': ObjectId(object_id)},{"$set": data},upsert=False)	
+def request_to_dictonary(model_class, typeSafe=True):
+    parser = reqparse.RequestParser()
+    args = parser.parse_args(request)
+    schema = model_class.schema
+    for field in schema:
+        if typeSafe:
+            parser.add_argument(field, type=schema[field][type])
+        else:
+            parser.add_argument(field)
+    remove_parameters = []
+    for a in args:
+        if args[a] is None:
+            remove_parameters.append(a)
+    for a in remove_parameters:
+        del args[a]
+    return args
 
-def remove_record_by_id(object_id,model_class):
-	getattr(mongo.db,model_class._collection_).remove({"_id" : ObjectId(object_id)})
+
+def update_from_dictionary(data, item, model_class, object_id=None):
+    print("data")
+    print(data)
+    if object_id is None:
+        return getattr(mongo.db, model_class._collection_).save(data)
+    else:
+        return getattr(mongo.db, model_class._collection_).update(
+            {'_id': ObjectId(object_id)},
+            {"$set": data},
+            upsert=False)
+
+
+# def remove_record_by_id(object_id,model_class):
+#     getattr(mongo.db, model_class._collection_).remove({"_id" : ObjectId(object_id)})
 
  
 class MongoJsonEncoder(json.JSONEncoder):
@@ -53,17 +55,18 @@ class MongoJsonEncoder(json.JSONEncoder):
         elif isinstance(obj, ObjectId):
             return unicode(obj)
         return json.JSONEncoder.default(self, obj)
- 
+
+
 def jsonify(*args, **kwargs):
     """ jsonify with support for MongoDB ObjectId
     """
     return Response(json.dumps(dict(*args, **kwargs), cls=MongoJsonEncoder), mimetype='application/json')
 
 
-
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
 
 # TODO Why is this in "helpers" -- this should only be for common api requirements I think...
 def upload_file(id, artist=None):
@@ -103,7 +106,7 @@ def upload_file(id, artist=None):
             # TODO add logging about failure
             pass
 
-# Remove the original and two temporary files
+        # Remove the original and two temporary files
         os.remove(original_image)
         os.remove(web_image)
         os.remove(copyright_image)

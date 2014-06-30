@@ -3,12 +3,13 @@
 # http://www.mapquestapi.com/geocoding/v1/address?&key=YOUR-KEY-HERE&location=1555 Blake St,Denver,CO,80202
 from flask import current_app
 
+
 # Returns dictionary for example: {u'lat': 30.26068, u'lng': -97.7319}
 # and response code 0 for success, and 1 if error parsing results, 2 for other errors
-def geoCode(street, city, state, zip, apikey):
+def geoCode(street, city, state, zip, apikey=None):
     try:
         import urllib, urllib2, json
-        if apikey == None:
+        if not apikey:
             apikey = current_app.config['MAPQUEST_API_KEY']
         address = urllib.quote('%s,%s,%s,%s' % (street, city, state, zip))
         url = 'http://www.mapquestapi.com/geocoding/v1/address?&key=%s&location=%s' % (apikey, address)
@@ -22,6 +23,7 @@ def geoCode(street, city, state, zip, apikey):
     except Exception, e:
         return str(e),2
 
+
 def test():
     import urllib, urllib2, json
     #apikey = current_app.config['MAPQUEST_API_KEY']
@@ -33,6 +35,7 @@ def test():
     d = json.loads(response)
     coords = d['results'][0]['locations'][0]['latLng']
     print coords
+
 
 if __name__ == '__main__':
     test()

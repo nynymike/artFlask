@@ -1,6 +1,6 @@
-from flask.ext.testing import TestCase as Base, Twill
 import sys
 import os
+from flask.ext.testing import TestCase as Base, Twill
 sys.path.append("%s/../"%os.getcwd())
 from app import create_app
 from conf import TestingConfig
@@ -9,6 +9,8 @@ import data.helpers as h
 from bson import ObjectId
 from bson import json_util
 import json
+
+
 class TestCase(Base):
     """Base TestClass for your application."""
 
@@ -16,6 +18,8 @@ class TestCase(Base):
         """Create and return a testing flask app."""
 
         app = create_app("test",TestingConfig)
+        self._ctx = None
+        self.app = app
         self.twill = Twill(app, port=3000)
         return app
 
@@ -27,14 +31,9 @@ class TestCase(Base):
         self.venue = h.genVenue(["%s"%self.artist_id],["%s"%self.artist_id],event_id=self.event_id)
         self.venue_id ="%s"%mongo.db.Venue.save(self.venue)
 
-
-
-
     def tearDown(self):
         """Clean db session and drop all tables."""
         mongo.cx.drop_database(TestingConfig.MONGO_DBNAME)
-
-
 
     def _test_get_request(self,endpoint,template=None):
         response = self.client.get(endpoint)
@@ -64,8 +63,10 @@ class TestCase(Base):
         """
         Update Object through Put Request
         """
-        response = self.client.put(endpoint,data = data, content_type='application/json')
-        self.assertEqual(response.status_code,200)
+        response = self.client.put(endpoint, data=data, content_type='application/json')
+        if response.status_code != 200:
+            import ipdb; ipdb.set_trace()
+        self.assertEqual(response.status_code, 200)
         id = ObjectId(id)
         data = json.loads(data)
         data.pop("id",None)
@@ -82,3 +83,4 @@ class TestCase(Base):
         id = ObjectId(id)
         item = getattr(mongo.db,model_class._collection_).find({"_id":id})
         self.assertEqual(item.count(),0)
+

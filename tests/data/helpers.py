@@ -1,3 +1,4 @@
+import os
 from uuid import *
 from random import *
 from bson import json_util
@@ -32,7 +33,9 @@ def getTimes():
     return [l[i]]
 
 def getRandom(fn):
-    f = open("data/%s"%fn)
+    # import ipdb; ipdb.set_trace()
+    path = os.path.join(os.path.dirname(__file__), fn)
+    f = open(path)
     lines = f.readlines()
     f.close()
     return (lines[randint(0,len(lines) -1)]).strip()
@@ -94,13 +97,14 @@ def genPerson(role=None):
         d['picture'] = "%s/men/person%i.jpg" % (basePictureURL, randint(0,12))
     return d
 
+
 def genVenue(i=0, artists=[], managers=[],event_id=""):
     username = getRandom('usernames.txt')
     street = getRandom("address.txt")
     geoCode = {}
     try:
         geoCode = api.venueFunctions.geoCode(street, "Austin", "TX", "78702")
-    except:
+    except Exception as e:
         traceback.print_stack()
     return {
          'site_id': `i`,
@@ -118,7 +122,8 @@ def genVenue(i=0, artists=[], managers=[],event_id=""):
          'phone': getPhone(),
          'category': 'studio',
          'mediums':[getRandom("medium.txt"), getRandom("medium.txt")],
-         'description':'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+         'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit,'
+                        ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
          'artists': artists,
          'websites': ['http://www.%s' % getRandom('domains.txt'), 'http://www.%s' % getRandom('domains.txt')],
          'managers': managers,

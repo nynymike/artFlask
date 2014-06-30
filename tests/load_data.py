@@ -1,12 +1,13 @@
 import sys
-sys.path.append("%s/../" % os.getcwd())
+import os
+import shutil
 from conf import BaseConfig
-from data.helpers import genPerson,genArt,genVenue
+from data.helpers import genPerson, genArt, genVenue
 from random import *
-import os, shutil
 from PIL import Image
 
 from pymongo import MongoClient
+
 
 def main():
     client = MongoClient('localhost', 27017)
@@ -68,7 +69,7 @@ def main():
         random_artist = artist_ids[randint(0,(len(artist_ids)-1))]
         d = genArt(random_artist, artists[random_artist])
         art_id = db.ArtWork.save(d)
-        uploadFolder =  BaseConfig.UPLOAD_FOLDER
+        uploadFolder = BaseConfig.UPLOAD_FOLDER
         file = "./data/images/art/0%s.jpg" % `randint(0,70)`.zfill(2)
         image=Image.open(file)
         image.save("%s/%s.png" % (uploadFolder, art_id), "PNG")

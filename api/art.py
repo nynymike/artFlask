@@ -92,10 +92,11 @@ from utils.app_ctx import ApplicationContext
 import json
 from flask_restful.utils import cors
 
+
 class Art(Resource):
     #@cors.crossdomain(origin='*')
     def get(self, art_id):
-        app_ctx =ApplicationContext('art')
+        app_ctx = ApplicationContext('art')
         try:
           item = app_ctx.get_item(art_id)
           return json.loads(json_util.dumps(item))
@@ -103,27 +104,27 @@ class Art(Resource):
           return str(e), 404
 
     #@cors.crossdomain(origin='*')
-    def put(self,art_id=None):
-      try:
-        app_ctx = ApplicationContext('art')
-        app_ctx.create_item_from_context(art_id)
-        item = app_ctx.get_item(art_id)
-        artist_context = ApplicationContext('person')
-        if not item["artist"]:
-          return "Artist Not Found In Art",400
-        artist = artist_context.get_item(item["artist"])
-        artist_name = "%s %s" % (artist['given_name'], artist['family_name'])
-        if 'file' in request.files:
-            upload_file(art_id, artist_name)
-        return '',200
-      except Exception, e:
-        return str(e),404
+    def put(self, art_id=None):
+        try:
+            app_ctx = ApplicationContext('art')
+            app_ctx.create_item_from_context(art_id)
+            item = app_ctx.get_item(art_id)
+            artist_context = ApplicationContext('person')
+            if not item["artist"]:
+                return "Artist Not Found In Art", 400
+            artist = artist_context.get_item(item["artist"])
+            artist_name = "%s %s" % (artist['given_name'], artist['family_name'])
+            if 'file' in request.files:
+                upload_file(art_id, artist_name)
+            return '', 200
+        except Exception, e:
+            return str(e), 404
 
     #@cors.crossdomain(origin='*')
-    def delete(self,art_id=None):
-      try:
-        app_ctx = ApplicationContext('art')
-        app_ctx.remove_record(art_id)
-        return '',200 
-      except Exception, e:
-        return str(e),404
+    def delete(self, art_id=None):
+        try:
+            app_ctx = ApplicationContext('art')
+            app_ctx.remove_record(art_id)
+            return '', 200
+        except Exception, e:
+            return str(e), 404
