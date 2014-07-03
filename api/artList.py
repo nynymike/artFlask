@@ -5,6 +5,7 @@ from utils.helpers import JsonModelEncoder
 from bson import json_util
 import json
 # from flask_restful.utils import cors
+from model import Artwork, Person
 
 
 class ArtList(Resource):

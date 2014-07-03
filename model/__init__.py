@@ -16,6 +16,38 @@ class Website(db.Model):
     url = db.Column(db.String(256))
 
 
+person_websites = db.Table('person_websites',
+                           db.Column('person_sub', db.String(256), db.ForeignKey('person.sub')),
+                           db.Column('website_name', db.String(128), db.ForeignKey('website.name')))
+
+
+class Person(db.Model, SimpleSerializeMixin):
+    # OpenID Connect identifier, 256 should be enough for max len
+    sub = db.Column(db.String(256), primary_key=True)
+    given_name = db.Column(db.String(64))
+    family_name = db.Column(db.String(64))
+    middle_name = db.Column(db.String(64))
+    name = db.Column(db.String(64))
+    birthdate = db.Column(db.Date)
+    email = db.Column(db.String(64))
+    phone_number = db.Column(db.String(64))
+    picture = db.Column(db.String(256))
+    phone_number_verified = db.Column(db.Boolean, default=False)
+    address = db.Column(db.String(256))
+    nickname = db.Column(db.String(64))
+    social_urls = db.relationship('Website', secondary=person_websites)
+    role = db.Column(db.Enum(['artist', 'staff']))
+    twitter = db.Column(db.String(64))
+    preferred_contact = db.Column(db.String(256))
+    status = db.Column(db.String(64))
+    registration_code = db.Column(db.String(64))
+    website = db.Column(db.String(256))
+    preferred_username = db.Column(db.String(64))
+    zoneinfo = db.Column(db.String(256))
+    updated_at = db.Column(db.DateTime)
+    gender = db.Column(db.String(1))
+
+
 artwork_websites = db.Table('artwork_websites',
                             db.Column('artwork_id', db.Integer, db.ForeignKey('artwork.id')),
                             db.Column('website_name', db.String(128), db.ForeignKey('website.name')))
@@ -56,7 +88,6 @@ class Artwork(db.Model, SimpleSerializeMixin):
     parent = db.relationship('Artwork', remote_side=[id])
     size = db.Column(db.String(256))
     year = db.Column(db.Integer)
-    # alt_urls = db.relationship('Website', primaryjoin="Artwork.id==AltUrl.artwork_id")
     alt_urls = db.relationship('Website', secondary=artwork_websites)
 
 
@@ -77,44 +108,6 @@ class Event(db.Model, SimpleSerializeMixin):
     end_date = db.Column(db.Date)
     description = db.Column(db.String(1024))
     picture = db.Column(db.String(256))
-
-
-person_websites = db.Table('person_websites',
-                           db.Column('person_sub', db.String(256), db.ForeignKey('person.sub')),
-                           db.Column('website_name', db.String(128), db.ForeignKey('website.name')))
-
-
-class Person(db.Model, SimpleSerializeMixin):
-    # OpenID Connect identifier, 256 should be enough for max len
-    sub = db.Column(db.String(256), primary_key=True)
-    given_name = db.Column(db.String(64))
-    family_name = db.Column(db.String(64))
-    middle_name = db.Column(db.String(64))
-    name = db.Column(db.String(64))
-    birthdate = db.Column(db.Date)
-    email = db.Column(db.String(64))
-    phone_number = db.Column(db.String(64))
-    picture = db.Column(db.String(256))
-    phone_number_verified = db.Column(db.Boolean, default=False)
-    address = db.Column(db.String(256))
-    nickname = db.Column(db.String(64))
-    social_urls = db.relationship('Website', secondary=person_websites)
-    role = db.Column(db.Enum(['artist', 'staff']))
-    twitter = db.Column(db.String(64))
-    preferred_contact = db.Column(db.String(256))
-    status = db.Column(db.String(64))
-    registration_code = db.Column(db.String(64))
-    website = db.Column(db.String(256))
-    preferred_username = db.Column(db.String(64))
-    zoneinfo = db.Column(db.String(256))
-    updated_at = db.Column(db.DateTime)
-    gender = db.Column(db.String(1))
-
-
-# class VenueManager(db.Model):
-#     venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
-#     manager_id = db.Column(db.String(256), db.ForeignKey('person.id'))
-    # artist = db.relationship('Person', backref='artworks')
 
 
 class Medium(db.Model):
@@ -138,6 +131,7 @@ venue_websites = db.Table('venue_websites',
 venue_artists = db.Table('venue_artists',
                          db.Column('venue_id', db.Integer, db.ForeignKey('venue.id')),
                          db.Column('artist_id', db.String(256), db.ForeignKey('person.sub')))
+
 
 venue_managers = db.Table('venue_managers',
                           db.Column('venue_id', db.Integer, db.ForeignKey('venue.id')),

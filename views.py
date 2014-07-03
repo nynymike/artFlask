@@ -13,7 +13,8 @@ from api.profile import Profile
 from api.register import Register
 from api.artistlist import ArtistList
 
-from app import app
+from app import app, db
+import model
 
 
 @app.after_request
