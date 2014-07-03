@@ -5,7 +5,7 @@ from flask_restful.utils import cors
 
 #@cors.crossdomain(origin='*')
 def get_image(art_id, action_type):
-    app_ctx =ApplicationContext('art')
+    app_ctx =ApplicationContext('Art')
     item = app_ctx.get_item(art_id)
     if action_type=='view':
         return render_template('artView.html',art=item)

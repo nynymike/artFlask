@@ -40,7 +40,7 @@ class Venues(Resource):
 
     #@cors.crossdomain(origin='*')
     def get(self,venue_id):
-      app_ctx =ApplicationContext('venue')
+      app_ctx =ApplicationContext('Venue')
       try:
         item = app_ctx.get_item(venue_id)
         return json.loads(json_util.dumps(item))
@@ -50,7 +50,7 @@ class Venues(Resource):
 class VenueList(Resource):
     #@cors.crossdomain(origin='*')
     def get(self):
-        app_ctx =ApplicationContext('venue')
+        app_ctx =ApplicationContext('Venue')
         try:
             venue = app_ctx.query_from_context(allowList=True)
             return json.loads(json_util.dumps(venue))

@@ -32,7 +32,7 @@ from flask_restful.utils import cors
 class Staff(Resource):
     #@cors.crossdomain(origin='*')
     def get(self,person_id):
-        app_ctx =ApplicationContext('person')
+        app_ctx =ApplicationContext('Person')
         try:
             item = app_ctx.get_item(person_id)
             return json.loads(json_util.dumps(item))
@@ -42,7 +42,7 @@ class Staff(Resource):
 class StaffList(Resource):
     #@cors.crossdomain(origin='*')
     def get(self):
-        app_ctx =ApplicationContext('person')
+        app_ctx =ApplicationContext('Person')
         try:
           staff = app_ctx.query_from_context(allowList=True,default_data={'role':'staff'})
           return json.loads(json_util.dumps(staff))

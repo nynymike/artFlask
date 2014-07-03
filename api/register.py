@@ -52,7 +52,7 @@ class Register(Resource):
                           'phone_number',
                           'sub']
         unique_fields = ['email']
-        app_ctx = ApplicationContext('person')
+        app_ctx = ApplicationContext('Person')
         code = "%s" % ObjectId()
         registration = app_ctx.create_item_from_context(required_fields=required_fields,
                                                         unique_fields=unique_fields)

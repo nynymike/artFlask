@@ -1,7 +1,7 @@
-from model import Artwork
-from model.Venue import Venue
-from model.Event import Event
-from model.Person import Person
+# from model import Artwork
+# from model import Venue
+# from model import Event
+# from model import Person
 from utils.helpers import request_to_dictonary # , update_from_dictionary, remove_record_by_id
 from flask import request, abort
 # from db import mongo
@@ -9,13 +9,14 @@ from bson import ObjectId
 from api.venueFunctions import geoCode
 
 from app import db
+from importlib import import_module
 
-MODEL_MAP = {
-    "art": Artwork,
-    "venue": Venue,
-    "event": Event,
-    "person": Person,
-}
+# MODEL_MAP = {
+#     "art": Artwork,
+#     "venue": Venue,
+#     "event": Event,
+#     "person": Person,
+# }
 
 
 class ApplicationContext(object):
@@ -58,7 +59,9 @@ class ApplicationContext(object):
         return item
 
     def model_class(self):
-        return MODEL_MAP[self.model_name]
+        # return MODEL_MAP[self.model_name]
+        module = import_module('model')
+        return getattr(module, self.model_name)
 
     def get_item(self, item_id=None):
         item = self.model_class().query.get(item_id)

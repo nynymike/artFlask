@@ -51,7 +51,7 @@ class Artists(Resource):
 
     #@cors.crossdomain(origin='*')
     def get(self, artist_id):
-        app_ctx = ApplicationContext('person')
+        app_ctx = ApplicationContext('Person')
         try:
             item = app_ctx.get_item(artist_id)
             return json.loads(json_util.dumps(item))

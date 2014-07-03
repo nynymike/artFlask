@@ -11,9 +11,6 @@ from werkzeug import Response
 
 from api.artImageFunctions import *
 
-from app import db
-from model import SimpleSerializeMixin
-
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -50,13 +47,6 @@ class MongoJsonEncoder(json.JSONEncoder):
         elif isinstance(obj, ObjectId):
             return unicode(obj)
         return json.JSONEncoder.default(self, obj)
-
-
-class JsonModelEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, SimpleSerializeMixin):
-            return obj.serialize()
-        return super(JsonModelEncoder, self).default(obj)
 
 
 def jsonify(*args, **kwargs):

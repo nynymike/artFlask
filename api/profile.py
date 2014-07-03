@@ -32,7 +32,7 @@ from flask_restful.utils import cors
 class Profile(Resource):
     #@cors.crossdomain(origin='*')
     def get(self):
-      app_ctx =ApplicationContext('person')
+      app_ctx =ApplicationContext('Person')
       try:
         item = app_ctx.get_item(event_id)
         return jsonify(item)

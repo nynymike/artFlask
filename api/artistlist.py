@@ -10,6 +10,6 @@ import json
 class ArtistList(Resource):
     #@cors.crossdomain(origin='*')
     def get(self):
-        app_ctx =ApplicationContext('person')
+        app_ctx =ApplicationContext('Person')
         items = app_ctx.query_from_context(allowList=True, default_data={'role': 'artist'})
         return json.loads(json_util.dumps(items))

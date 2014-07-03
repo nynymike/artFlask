@@ -86,7 +86,7 @@ Art API
 __author__ = 'Michael Schwartz'
 from flask import send_file, request,render_template
 from flask.ext.restful import Resource, Api
-from utils.helpers import  upload_file, JsonModelEncoder
+from utils.helpers import upload_file
 from bson import json_util
 from utils.app_ctx import ApplicationContext
 import json
@@ -96,9 +96,11 @@ from flask_restful.utils import cors
 class Art(Resource):
     #@cors.crossdomain(origin='*')
     def get(self, art_id):
-        app_ctx = ApplicationContext('art')
+        app_ctx = ApplicationContext('Art')
         try:
             item = app_ctx.get_item(art_id)
+            # avoid import cycle
+            from model import JsonModelEncoder
             return json_util.dumps(item, cls=JsonModelEncoder)
 
         except Exception as e:
@@ -107,9 +109,9 @@ class Art(Resource):
     #@cors.crossdomain(origin='*')
     def put(self, art_id=None):
         try:
-            app_ctx = ApplicationContext('art')
+            app_ctx = ApplicationContext('Art')
             item = app_ctx.create_item_from_context(art_id)
-            artist_context = ApplicationContext('person')
+            artist_context = ApplicationContext('Person')
             if not item.artist:
                 return "Artist Not Found In Art", 400
             artist = artist_context.get_item(item.artist)
@@ -123,7 +125,7 @@ class Art(Resource):
     #@cors.crossdomain(origin='*')
     def delete(self, art_id=None):
         try:
-            app_ctx = ApplicationContext('art')
+            app_ctx = ApplicationContext('Art')
             app_ctx.remove_record(art_id)
             return '', 200
         except Exception, e:

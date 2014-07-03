@@ -79,7 +79,7 @@ class ManageEvent(Resource):
     def put(self, event_id=None):
         try:
             print(event_id)
-            app_ctx = ApplicationContext('event')
+            app_ctx = ApplicationContext('Event')
             app_ctx.create_item_from_context(event_id)
             return '', 200
         except Exception as e:
@@ -98,7 +98,7 @@ class ManageEvent(Resource):
       # Write file
       # Create db entry for art
       # try:
-        app_ctx = ApplicationContext('event')
+        app_ctx = ApplicationContext('Event')
         item = app_ctx.create_item_from_context()
         return '%s' % item.id, 201
       # except Exception as e:
@@ -107,7 +107,7 @@ class ManageEvent(Resource):
     #@cors.crossdomain(origin='*')
     def delete(self, event_id=None):
         try:
-            app_ctx = ApplicationContext('event')
+            app_ctx = ApplicationContext('Event')
             app_ctx.remove_record(event_id)
             return '', 200
         except Exception as e:
@@ -118,7 +118,7 @@ class ManageVenue(Resource):
     #@cors.crossdomain(origin='*')
     def put(self, venue_id=None):
       try:
-        app_ctx = ApplicationContext('venue')
+        app_ctx = ApplicationContext('Venue')
         item = app_ctx.create_item_from_context(venue_id)
         return '', 200
       except Exception as e:
@@ -139,7 +139,7 @@ class ManageVenue(Resource):
         # Create db entry for art
         #try:
         required_fields = ["street", "city", "state", "zip"]
-        app_ctx = ApplicationContext('venue')
+        app_ctx = ApplicationContext('Venue')
         item = app_ctx.create_item_from_context(required_fields=required_fields)
         app_ctx.get_geo_location(item.id)
         return '%s' % item.id, 201
@@ -149,7 +149,7 @@ class ManageVenue(Resource):
     #@cors.crossdomain(origin='*')
     def delete(self, venue_id=None):
         try:
-            app_ctx = ApplicationContext('venue')
+            app_ctx = ApplicationContext('Venue')
             app_ctx.remove_record(venue_id)
             return '', 200
         except Exception as e:
@@ -162,7 +162,7 @@ class ManagePerson(Resource):
     #@cors.crossdomain(origin='*')
     def put(self, person_id=None):
         try:
-            app_ctx = ApplicationContext('person')
+            app_ctx = ApplicationContext('Person')
             app_ctx.create_item_from_context(person_id)
             return '', 200
         except Exception as e:
@@ -177,7 +177,7 @@ class ManagePerson(Resource):
     #@cors.crossdomain(origin='*')
     def delete(self, person_id=None):
       try:
-        app_ctx = ApplicationContext('person')
+        app_ctx = ApplicationContext('Person')
         app_ctx.remove_record(person_id)
         return '',200 
       except Exception as e:

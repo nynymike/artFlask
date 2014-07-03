@@ -1,3 +1,4 @@
+import json
 from app import db
 
 
@@ -9,6 +10,13 @@ class SimpleSerializeMixin(object):
             if v:
                 d[c.name] = v
         return d
+
+
+class JsonModelEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, SimpleSerializeMixin):
+            return obj.serialize()
+        return super(JsonModelEncoder, self).default(obj)
 
 
 class Website(db.Model):
@@ -36,7 +44,7 @@ class Person(db.Model, SimpleSerializeMixin):
     address = db.Column(db.String(256))
     nickname = db.Column(db.String(64))
     social_urls = db.relationship('Website', secondary=person_websites)
-    role = db.Column(db.Enum(['artist', 'staff']))
+    role = db.Column(db.Enum('artist', 'staff'))
     twitter = db.Column(db.String(64))
     preferred_contact = db.Column(db.String(256))
     status = db.Column(db.String(64))
@@ -113,14 +121,14 @@ class Event(db.Model, SimpleSerializeMixin):
 class Medium(db.Model):
     """Primary material used for art"""
     name = db.Column(db.String(128), primary_key=True)
-    venue_id = db.Column(db.Integer)
+    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
 
 
 class LimitedVenueTime(db.Model):
     """Used to specify limited hours. List of date and start times"""
     id = db.Column(db.Integer, primary_key=True)
     start = db.Column(db.DateTime)
-    venue_id = db.Column(db.Integer)
+    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
 
 
 venue_websites = db.Table('venue_websites',
@@ -169,7 +177,7 @@ class Venue(db.Model, SimpleSerializeMixin):
     id = db.Column(db.Integer, primary_key=True)
     site_id = db.Column(db.String(64), unique=True)
     name = db.Column(db.String(256))
-    event_id = db.Column(db.Integer)
+    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
     event = db.relationship('Event')
     picture = db.Column(db.String(256))
     address = db.Column(db.String(256))

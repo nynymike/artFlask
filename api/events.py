@@ -44,7 +44,7 @@ class Event(Resource):
     def get(self, event_id):
         try:
             print(event_id)
-            app_ctx = ApplicationContext('event')
+            app_ctx = ApplicationContext('Event')
             return json.loads(json_util.dumps(app_ctx.get_item(event_id))), 200
         except Exception as e:
             return '', 404
@@ -53,7 +53,7 @@ class Event(Resource):
 class EventList(Resource):
     #@cors.crossdomain(origin='*')
     def get(self, event_id=None):
-        app_ctx = ApplicationContext('event')
+        app_ctx = ApplicationContext('Event')
         # try:
         events = app_ctx.query_from_context(allowList=True)
         return json.loads(json_util.dumps(events))

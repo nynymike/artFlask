@@ -277,7 +277,8 @@ class BaseConfig(object):
     STATIC_FOLDER = "./static"
     LOGGING_FILE = "./logs/log_file"
     # MONGO_DBNAME = 'artFlask'
-    SQLALCHEMY_DATABASE_URI = "mysql://art_flask:art_flask@localhost/art_flask"
+    # SQLALCHEMY_DATABASE_URI = "mysql://art_flask:art_flask@localhost/art_flask"
+    SQLALCHEMY_DATABASE_URI = "sqlite:///data.db"
     DEBUG = True
 
     # External API's
