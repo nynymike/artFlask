@@ -97,14 +97,10 @@ class Art(Resource):
     #@cors.crossdomain(origin='*')
     def get(self, art_id):
         app_ctx = ApplicationContext('Art')
-        try:
-            item = app_ctx.get_item(art_id)
-            # avoid import cycle
-            from model import JsonModelEncoder
-            return json_util.dumps(item, cls=JsonModelEncoder)
-
-        except Exception as e:
-            return str(e), 404
+        item = app_ctx.get_item(art_id)
+        if not item:
+            return {}, 404
+        return item
 
     #@cors.crossdomain(origin='*')
     def put(self, art_id=None):

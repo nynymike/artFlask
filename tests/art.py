@@ -2,14 +2,33 @@ import unittest
 from . import TestCase
 from .data.helpers import genArt, genVenue, genPerson
 import json
-from model import *
-from bson import ObjectId
-from db import mongo
+from model import Artwork, Person, Event, Venue
+# from db import mongo
 
 
 class ArtTest(TestCase):
     # def test_show(self):
     # #self._test_get_request('/api/v1/artists/')
+
+    def test_empty_artlist(self):
+        """
+        Test empty request, empty response
+        :return:
+        """
+        response = self.client.get('/api/v1/art/')
+        self.assertEqual(response.status_code, 403)
+        args = {
+            'title': 'Artwork!'
+        }
+        response = self.client.get('/api/v1/art/', query_string=args)
+        self.assertEqual(response.status_code, 404)
+
+    def test_artlist(self):
+        data = {
+            ''
+        }
+        response = self.client.post('/api/v1/art/')
+        self.assertEqual(response.status_code, 200)
 
     def test_art(self):
         """
@@ -22,12 +41,12 @@ class ArtTest(TestCase):
         6)Delete Object through Delete Request
         """
 
-        art = genArt(self.artist_id, self.venue_id)
-        id = self._test_post_request('/api/v1/art/', data=json.dumps(art), model_class=ArtWork)
-        self._test_get_request('/api/v1/art/%s/' % id)
-        art = genArt(self.artist_id, self.venue_id)
-        self._test_put_request('/api/v1/art/%s/' % id, data=json.dumps(art), model_class=ArtWork, id=id)
-        self._test_put_delete('/api/v1/art/%s/' % id, model_class=ArtWork, id=id)
+        # art = genArt(self.artist_id, self.venue_id)
+        # id = self._test_post_request('/api/v1/art/', data=json.dumps(art), model_class=Artwork)
+        # self._test_get_request('/api/v1/art/%s/' % id)
+        # art = genArt(self.artist_id, self.venue_id)
+        # self._test_put_request('/api/v1/art/%s/' % id, data=json.dumps(art), model_class=Artwork, id=id)
+        # self._test_put_delete('/api/v1/art/%s/' % id, model_class=Artwork, id=id)
 
     def test_venue(self):
         """

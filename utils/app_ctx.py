@@ -1,11 +1,5 @@
-# from model import Artwork
-# from model import Venue
-# from model import Event
-# from model import Person
-from utils.helpers import request_to_dictonary # , update_from_dictionary, remove_record_by_id
-from flask import request, abort
-# from db import mongo
-from bson import ObjectId
+from utils.helpers import request_to_dictonary  # , update_from_dictionary, remove_record_by_id
+from flask import abort
 from api.venueFunctions import geoCode
 
 from app import db
@@ -23,11 +17,19 @@ class ApplicationContext(object):
     def query_from_context(self, allowList=False, default_data=None):
         model_class = self.model_class()
         data = request_to_dictonary(model_class, typeSafe=False)
+
         if default_data:
             data.update(default_data)
+
         if not data and not allowList:
-            abort(501)
-        return self.query(**data)
+            # FIXME(analytic): description is not handled anywhere
+            abort(403, description=u"Queries with no filtering params not allowed")
+        result = list(self.query(**data))
+
+        if not result:
+            abort(404)
+
+        return result
 
     def __init__(self, model_name):
         self.model_name = model_name
@@ -65,7 +67,7 @@ class ApplicationContext(object):
 
     def get_item(self, item_id=None):
         item = self.model_class().query.get(item_id)
-        item_dict = item.__dict__.copy()
+        item_dict = item.as_dict()
         return item_dict
 
     def query(self, **kwargs):
@@ -77,19 +79,16 @@ class ApplicationContext(object):
         # remove_record_by_id(object_id, model_class)
 
     def get_geo_location(self, item_id):
-        try:
-            model_class = self.model_class()
-            item = self.get_item(item_id=item_id)
-            address = item['address']
-            geolocation = geoCode(street=address["street"],
-                                  city=address["city"],
-                                  state=address["state"],
-                                  zip=address["zip"])
-            item["coordinates"] = geolocation[0]
-            item.pop("_id")
-            return getattr(mongo.db, model_class._collection_).update({'_id': item_id},{"$set": item}, upsert=False)
-        except Exception as e:
-            return ''
+        model_class = self.model_class()
+        item = self.get_item(item_id=item_id)
+        address = item['address']
+        geolocation = geoCode(street=address["street"],
+                              city=address["city"],
+                              state=address["state"],
+                              zip=address["zip"])
+        item["coordinates"] = geolocation[0]
+        item.pop("_id")
+        return getattr(mongo.db, model_class._collection_).update({'_id': item_id},{"$set": item}, upsert=False)
 
     def myhaskey(self,d,key):
         return d.has_key(key) or any(self.myhaskey(d=dd,key=key) for dd in d.values() if isinstance(dd, dict))

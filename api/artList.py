@@ -1,8 +1,6 @@
 from flask.ext.restful import Resource
 from flask.json import jsonify
 from utils.app_ctx import ApplicationContext
-from bson import json_util
-import json
 # from flask_restful.utils import cors
 
 
@@ -13,7 +11,7 @@ class ArtList(Resource):
         items = app_ctx.query_from_context(allowList=False)
         # from utils.helpers import JsonModelEncoder
         # return json.dumps(items.all(), cls=JsonModelEncoder)
-        return jsonify(item_list=[item.serialize() for item in items])
+        return jsonify(item_list=[item.as_dict() for item in items])
 
     # @cors.crossdomain(origin='*')
     def post(self):

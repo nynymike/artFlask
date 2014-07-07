@@ -21,7 +21,7 @@ def configure_logger(app):
     app.secret_key = 'z\xcbu\xe5#\xf2U\xe5\xc4,\x0cz\xf9\xcboA\xd2Z\xf7Y\x15"|\xe4'
 
     log = logging.getLogger('werkzeug')
-    if app.config.has_key('LOGGING_FILE'):
+    if 'LOGGING_FILE' in app.config:
         handler = RotatingFileHandler(app.config['LOGGING_FILE'],
                                       maxBytes=10000000,
                                       backupCount=5)

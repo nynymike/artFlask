@@ -11,6 +11,8 @@
 #
 # All configuration values have a default; values that are commented out
 # serve to show the default.
+
+
 class BaseConfig(object):
     import sys
     import os
@@ -235,7 +237,6 @@ class BaseConfig(object):
     # If true, show URL addresses after external links.
     #man_show_urls = False
 
-
     # -- Options for Texinfo output -------------------------------------------
 
     # Grouping the document tree into Texinfo files. List of tuples
@@ -289,6 +290,7 @@ class BaseConfig(object):
 
 class TestingConfig(BaseConfig):
     # MONGO_DBNAME = 'artFlask_test'
+    SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/test.db"
     MAIL_DEBUG = True
     TESTING = True
 

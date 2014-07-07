@@ -59,16 +59,20 @@ def genArt(artist_id, venue_id):
     d = {
         'artist': artist_id,
         'title': getRandom('titles.txt'),
-        'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        'description': 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor '
+                       'incididunt ut labore et dolore magna aliqua.',
         'buyURL': 'http://ebay.com/item/%s' % base64.encodestring(str(os.urandom(8)).strip()),
         'venue': venue_id,
         'medium': getRandom('medium.txt'),
         'sold_out': getBoolean(),
         'size': '%i x %i' % (randint(10,90), randint(10,90)),
         'year': '2014',
-        'alt_urls': {'Detail': 'http://www.%s/%s' % (getRandom('domains.txt'), base64.encodestring(str(os.urandom(4))).strip())}
+        'alt_urls': {
+            'Detail': 'http://www.%s/%s' % (getRandom('domains.txt'),
+                                            base64.encodestring(str(os.urandom(4))).strip())}
     }
     return d
+
 
 def genPerson(role=None):
     username = getRandom('usernames.txt')
@@ -85,7 +89,8 @@ def genPerson(role=None):
                     "postal_code": "78702",
                     "country": "US"}
         }
-    if role: d['role'] = [role]
+    if role:
+        d['role'] = [role]
     if randint(0,1)==0: d['preferred_contact'] = 'email'
     elif randint(0,1)==0: d['preferred_contact'] = 'phone'
     else: d['preferred_contact'] = 'facebook'

@@ -1,13 +1,19 @@
 import json
+import hashlib
+from datetime import datetime as dtime
+
 from app import db
 
 
 class SimpleSerializeMixin(object):
-    def serialize(self):
+    def as_dict(self, include_id=False):
         d = {}
         for c in self.__table__.columns:
             v = getattr(self, c.name)
-            if v:
+            # ignore
+            if (include_id or c.name != 'id') and v:
+                if isinstance(v, dtime):
+                    v = v.strftime("%c")
                 d[c.name] = v
         return d
 
@@ -15,18 +21,43 @@ class SimpleSerializeMixin(object):
 class JsonModelEncoder(json.JSONEncoder):
     def default(self, obj):
         if isinstance(obj, SimpleSerializeMixin):
-            return obj.serialize()
+            return obj.as_dict()
         return super(JsonModelEncoder, self).default(obj)
 
 
-class Website(db.Model):
-    name = db.Column(db.String(128), primary_key=True)
+class RegistrationCode(db.Model, SimpleSerializeMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    accepted = db.Column(db.DateTime, nullable=True)
+    sent = db.Column(db.DateTime, nullable=True)
+
+    def hashed_id(self):
+        return hashlib.sha224(str(self.id)).hexdigest()
+
+    def as_dict(self, include_id=False):
+        d = super(RegistrationCode, self).as_dict(False)
+        return {
+            self.hashed_id(): d,
+        }
+
+
+class Website(db.Model, SimpleSerializeMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128))
     url = db.Column(db.String(256))
+
+
+class Address(db.Model, SimpleSerializeMixin):
+    id = db.Column(db.Integer(), primary_key=True)
+    street = db.Column(db.String(128))
+    locality = db.Column(db.String(64))
+    region = db.Column(db.String(64))
+    postal_code = db.Column(db.Integer)
+    country = db.Column(db.String(64))
 
 
 person_websites = db.Table('person_websites',
                            db.Column('person_sub', db.String(256), db.ForeignKey('person.sub')),
-                           db.Column('website_name', db.String(128), db.ForeignKey('website.name')))
+                           db.Column('website_id', db.String(128), db.ForeignKey('website.id')))
 
 
 class Person(db.Model, SimpleSerializeMixin):
@@ -41,24 +72,42 @@ class Person(db.Model, SimpleSerializeMixin):
     phone_number = db.Column(db.String(64))
     picture = db.Column(db.String(256))
     phone_number_verified = db.Column(db.Boolean, default=False)
-    address = db.Column(db.String(256))
+    address_id = db.Column(db.Integer, db.ForeignKey('address.id'))
+    address = db.relationship(Address, uselist=False)
     nickname = db.Column(db.String(64))
     social_urls = db.relationship('Website', secondary=person_websites)
     role = db.Column(db.Enum('artist', 'staff'))
     twitter = db.Column(db.String(64))
     preferred_contact = db.Column(db.String(256))
     status = db.Column(db.String(64))
-    registration_code = db.Column(db.String(64))
-    website = db.Column(db.String(256))
+    registration_code_id = db.Column(db.Integer, db.ForeignKey('registration_code.id'))
+    registration_code = db.relationship('RegistrationCode')
+    website_id = db.Column(db.Integer, db.ForeignKey('website.id'))
+    website = db.relationship('Website')
     preferred_username = db.Column(db.String(64))
     zoneinfo = db.Column(db.String(256))
     updated_at = db.Column(db.DateTime)
     gender = db.Column(db.String(1))
 
+    def as_dict(self, include_id=False):
+        # import ipdb; ipdb.set_trace()
+        d = super(Person, self).as_dict(include_id)
+        if 'address_id' in d:
+            del d['address_id']
+            d['address'] = self.address.as_dict()
+        if 'registration_code_id' in d:
+            del d['registration_code_id']
+            d['registration_code'] = self.registration_code.as_dict()
+        if 'website_id' in d:
+            del d['website_id']
+            d['website'] = self.website.as_dict()
+        d['social_urls'] = [u.as_dict() for u in self.social_urls]
+        return d
+
 
 artwork_websites = db.Table('artwork_websites',
                             db.Column('artwork_id', db.Integer, db.ForeignKey('artwork.id')),
-                            db.Column('website_name', db.String(128), db.ForeignKey('website.name')))
+                            db.Column('website_id', db.String(128), db.ForeignKey('website.id')))
 
 
 class Artwork(db.Model, SimpleSerializeMixin):
@@ -180,7 +229,8 @@ class Venue(db.Model, SimpleSerializeMixin):
     event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
     event = db.relationship('Event')
     picture = db.Column(db.String(256))
-    address = db.Column(db.String(256))
+    address_id = db.Column(db.Integer, db.ForeignKey('address.id'))
+    address = db.relationship(Address, uselist=False)
     # coordinates
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
