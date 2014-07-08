@@ -10,12 +10,24 @@ class ArtistTestCase(TestCase):
     def test_empty_artist_list(self):
         result = self.client.get('/api/v1/artists/')
         self.assertEqual(result.status_code, 404)
+
+    def test_artist_by_id(self):
+        person = PersonFactory.create(given_name=u"Pedro")
+        db.session.commit()
+
+        result = self.client.get('/api/v1/artists/%s' % person.sub)
+        self.assertEqual(result.status_code, 200)
+        artist_data = json.loads(result.data)
+        self.assertEqual(artist_data.get('given_name'), u"Pedro")
+
+    def test_single_artist(self):
         # just create a person
         PersonFactory.create()
         db.session.commit()
         result = self.client.get('/api/v1/artists/')
         self.assertEqual(result.status_code, 200)
-        persons = json.loads(result.data).get('item_list')
+        data = json.loads(result.data)
+        persons = data.get('item_list')
         self.assertIsNotNone(persons)
         self.assertEqual(len(persons), 1)
         result_person = persons[0]
@@ -48,7 +60,7 @@ class ArtistTestCase(TestCase):
             }
         ])
         self.assertEqual(result_person['twitter'], '@nynymike')
-
+        
         self.assertEqual(result_person['registration_code'], {
             hashlib.sha224('1').hexdigest(): {
                 'accepted': 'Mon Feb  3 10:15:09 2014',
