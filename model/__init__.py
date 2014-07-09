@@ -100,7 +100,6 @@ class Person(db.Model, SimpleSerializeMixin):
     gender = db.Column(db.String(1))
 
     def as_dict(self, include_id=False):
-        # import ipdb; ipdb.set_trace()
         d = super(Person, self).as_dict(include_id)
         if 'address_id' in d:
             del d['address_id']
@@ -248,6 +247,21 @@ class Venue(db.Model, SimpleSerializeMixin):
     ad_7 = db.Column(db.Boolean)
     # Other: Braille or raised letter signage
     ad_8 = db.Column(db.Boolean)
+
+    def as_dict(self, include_id=False):
+        d = super(Venue, self).as_dict()
+        if 'event_id' in d:
+            del d['event_id']
+            d['event'] = self.event_id
+        if 'address_id' in d:
+            del d['address_id']
+            d['address'] = self.address.as_dict()
+        d['mediums'] = [m.name for m in self.mediums]
+        d['artists'] = [a.sub for a in self.artists]
+        d['websites'] = [w.url for w in self.websites]
+        d['managers'] = [m.sub for m in self.managers]
+        d['times'] = [t.start.strftime("%c") for t in self.times]
+        return d
 
 
 class Artwork(db.Model, SimpleSerializeMixin):

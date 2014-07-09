@@ -84,13 +84,16 @@ Art API
 
 """
 __author__ = 'Michael Schwartz'
-from flask import send_file, request,render_template
-from flask.ext.restful import Resource, Api
-from utils.helpers import upload_file
-from bson import json_util
-from utils.app_ctx import ApplicationContext
+
 import json
+
+from flask import request
+from flask.ext.restful import Resource
 from flask_restful.utils import cors
+
+from utils.helpers import upload_file
+from utils.app_ctx import ApplicationContext
+from bson import json_util
 
 
 class Art(Resource):

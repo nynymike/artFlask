@@ -22,38 +22,32 @@ Venues API
 """
 __author__ = 'Michael Schwartz'
 
+import json
+
 from flask.ext.restful import Resource, Api
 from flask import Request
-from utils.helpers import jsonify
-from utils.app_ctx import ApplicationContext
-import json
-from bson import json_util
 from flask_restful.utils import cors
 
-def getVenue(venue_id):
-    return {}
+from utils.helpers import jsonify
+from utils.app_ctx import ApplicationContext
+from bson import json_util
 
-def queryVenues(query):
-    return {}
 
 class Venues(Resource):
-
     #@cors.crossdomain(origin='*')
-    def get(self,venue_id):
-      app_ctx =ApplicationContext('Venue')
-      try:
+    def get(self, venue_id):
+        app_ctx = ApplicationContext('Venue')
         item = app_ctx.get_item(venue_id)
-        return json.loads(json_util.dumps(item))
-      except Exception , e:
-        return str(e), 404
+        if not item:
+            return {}, 404
+        return item
+
 
 class VenueList(Resource):
     #@cors.crossdomain(origin='*')
     def get(self):
-        app_ctx =ApplicationContext('Venue')
-        try:
-            venue = app_ctx.query_from_context(allowList=True)
-            return json.loads(json_util.dumps(venue))
-        except:
-            return 'venue not found', 404
+        app_ctx = ApplicationContext('Venue')
+        venues = app_ctx.query_from_context(allowList=True)
+
+        return jsonify(item_list=[item.as_dict() for item in venues])
 

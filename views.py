@@ -62,7 +62,7 @@ api.add_resource(Register, '/api/v1/register/<string:token>', '/api/v1/register/
 api.add_resource(EventList, '/api/v1/events/')
 api.add_resource(Event, '/api/v1/event/<string:event_id>')
 
-api.add_resource(VenueList, '/api/v1/venues')
+api.add_resource(VenueList, '/api/v1/venues/')
 api.add_resource(Venues, '/api/v1/venues/<string:venue_id>')
 
 api.add_resource(Profile, '/api/v1/profile')
