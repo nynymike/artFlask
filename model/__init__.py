@@ -110,44 +110,6 @@ artwork_websites = db.Table('artwork_websites',
                             db.Column('website_id', db.String(128), db.ForeignKey('website.id')))
 
 
-class Artwork(db.Model, SimpleSerializeMixin):
-    """
-        {
-        'id': '1d5bfb0f-8c4b-11e3-b767-3c970e1b8563',
-        'artist': '3ad50b37-947e-46f6-940c-44804d95304f',
-        'title': 'Austin Sunrise',
-        'description': 'Third in a series of 90 painting of the beautiful Austin skyline',
-        'buyURL': 'http://auction.com/item/3432840932',
-        'venue': '37ae018a-1fb2-4da0-8b75-e439c92e6dd5',
-        'medium': 'Painting',
-        'sold_out': 'false'
-        'series': ['cd32b78b-55c5-4e1f-a482-55669f3b466b',
-                   'dc7a61e5-06ff-481c-9037-6d82485a47af'],
-        'parent_work': '237747c7-58bd-4822-a577-992714ebadf7'
-        'size': '24"x34"',
-        'year': '2014',
-        'alt_urls': {'Detail':'http://goo.gl/23A3fi', 'Back':'http://goo.gl/xc3wyo',}
-        }
-    """
-    id = db.Column(db.Integer, primary_key=True)
-    artist_id = db.Column(db.String(256), db.ForeignKey('person.sub'))
-    artist = db.relationship('Person', backref='artworks')
-    title = db.Column(db.String(128))
-    description = db.Column(db.String(1024))
-    picture = db.Column(db.String(256))
-    thumbnail = db.Column(db.String(256))
-    buyurl = db.Column(db.String(256))
-    venue = db.Column(db.String(256))
-    medium = db.Column(db.String(256))
-    sold_out = db.Column(db.Boolean)
-    series = db.relationship('Artwork')
-    parent_id = db.Column(db.Integer, db.ForeignKey('artwork.id'))
-    parent = db.relationship('Artwork', remote_side=[id])
-    size = db.Column(db.String(256))
-    year = db.Column(db.Integer)
-    alt_urls = db.relationship('Website', secondary=artwork_websites)
-
-
 class Event(db.Model, SimpleSerializeMixin):
     """
     {
@@ -170,24 +132,28 @@ class Event(db.Model, SimpleSerializeMixin):
 class Medium(db.Model):
     """Primary material used for art"""
     name = db.Column(db.String(128), primary_key=True)
-    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
 
 
-class LimitedVenueTime(db.Model):
+class VenueLimitedTime(db.Model):
     """Used to specify limited hours. List of date and start times"""
     id = db.Column(db.Integer, primary_key=True)
     start = db.Column(db.DateTime)
     venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
 
 
-venue_websites = db.Table('venue_websites',
-                          db.Column('venue_id', db.Integer, db.ForeignKey('venue.id')),
-                          db.Column('website_name', db.String(128), db.ForeignKey('website.name')))
+venue_mediums = db.Table('venue_mediums',
+                         db.Column('venue_id', db.Integer, db.ForeignKey('venue.id')),
+                         db.Column('medium_name', db.String(128), db.ForeignKey('medium.name')))
 
 
 venue_artists = db.Table('venue_artists',
                          db.Column('venue_id', db.Integer, db.ForeignKey('venue.id')),
                          db.Column('artist_id', db.String(256), db.ForeignKey('person.sub')))
+
+
+venue_websites = db.Table('venue_websites',
+                          db.Column('venue_id', db.Integer, db.ForeignKey('venue.id')),
+                          db.Column('website_name', db.String(128), db.ForeignKey('website.name')))
 
 
 venue_managers = db.Table('venue_managers',
@@ -237,16 +203,16 @@ class Venue(db.Model, SimpleSerializeMixin):
 
     twitter = db.Column(db.String(64))
     email = db.Column(db.String(64))
-    phone_number = db.Column(db.String(64))
+    phone = db.Column(db.String(64))
     category = db.Column(db.String(128))
-    mediums = db.relationship('Medium')
+    mediums = db.relationship('Medium', secondary=venue_mediums)
     description = db.Column(db.String(1024))
     artists = db.relationship('Person', secondary=venue_artists)
     websites = db.relationship('Website', secondary=venue_websites)
     managers = db.relationship('Person', secondary=venue_managers)
     curated = db.Column(db.Boolean)
     # limited times
-    times = db.relationship('LimitedVenueTime')
+    times = db.relationship('VenueLimitedTime')
     # Parking: Official parking for the disabled
     ad_1 = db.Column(db.Boolean)
     # Entrance and interior: Minimum 32" doorway clearance space
@@ -263,3 +229,57 @@ class Venue(db.Model, SimpleSerializeMixin):
     ad_7 = db.Column(db.Boolean)
     # Other: Braille or raised letter signage
     ad_8 = db.Column(db.Boolean)
+
+
+class Artwork(db.Model, SimpleSerializeMixin):
+    """
+        {
+        'id': '1d5bfb0f-8c4b-11e3-b767-3c970e1b8563',
+        'artist': '3ad50b37-947e-46f6-940c-44804d95304f',
+        'title': 'Austin Sunrise',
+        'description': 'Third in a series of 90 painting of the beautiful Austin skyline',
+        'buyURL': 'http://auction.com/item/3432840932',
+        'venue': '37ae018a-1fb2-4da0-8b75-e439c92e6dd5',
+        'medium': 'Painting',
+        'sold_out': 'false'
+        'series': ['cd32b78b-55c5-4e1f-a482-55669f3b466b',
+                   'dc7a61e5-06ff-481c-9037-6d82485a47af'],
+        'parent_work': '237747c7-58bd-4822-a577-992714ebadf7'
+        'size': '24"x34"',
+        'year': '2014',
+        'alt_urls': {'Detail':'http://goo.gl/23A3fi', 'Back':'http://goo.gl/xc3wyo',}
+        }
+    """
+    id = db.Column(db.Integer, primary_key=True)
+    artist_id = db.Column(db.String(256), db.ForeignKey('person.sub'))
+    artist = db.relationship('Person', backref='artworks')
+    title = db.Column(db.String(128))
+    description = db.Column(db.String(1024))
+    picture = db.Column(db.String(256))
+    thumbnail = db.Column(db.String(256))
+    buy_url = db.Column(db.String(256))
+    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
+    venue = db.relationship('Venue', uselist=False)
+    medium = db.Column(db.String(256))
+    sold_out = db.Column(db.Boolean)
+    series = db.relationship('Artwork')
+    parent_id = db.Column(db.Integer, db.ForeignKey('artwork.id'))
+    parent_work = db.relationship('Artwork', backref='children', remote_side=[id])
+    # size = db.Column(db.String(256))
+    height = db.Column(db.Float, nullable=True)
+    width = db.Column(db.Float, nullable=True)
+    year = db.Column(db.Integer)
+    alt_urls = db.relationship('Website', secondary=artwork_websites)
+
+    def as_dict(self, include_id=False):
+        d = super(Artwork, self).as_dict()
+        d['artist'] = self.artist_id
+        d['venue'] = self.venue_id
+        d['parent_work'] = self.parent_id
+        d['alt_urls'] = {}
+        for u in self.alt_urls:
+            d['alt_urls'][u.name] = u.url
+        if not d.get('series'):
+            d['series'] = []
+
+        return d

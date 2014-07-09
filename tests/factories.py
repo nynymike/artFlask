@@ -3,7 +3,7 @@ from factory.alchemy import SQLAlchemyModelFactory
 import model
 import hashlib
 from tests import db
-import datetime
+from datetime import datetime as dtime, date
 
 
 class RegistrationCodeFactory(SQLAlchemyModelFactory):
@@ -11,8 +11,8 @@ class RegistrationCodeFactory(SQLAlchemyModelFactory):
         model = model.RegistrationCode
         sqlalchemy_session = db.session
 
-    sent = datetime.datetime(2014, 2, 3, 10, 10, 31)
-    accepted = datetime.datetime(2014, 2, 3, 10, 15, 9)
+    sent = dtime(2014, 2, 3, 10, 10, 31)
+    accepted = dtime(2014, 2, 3, 10, 15, 9)
 
 
 class WebsiteFactory(SQLAlchemyModelFactory):
@@ -69,8 +69,149 @@ class PersonFactory(SQLAlchemyModelFactory):
     registration_code = factory.SubFactory(RegistrationCodeFactory)
 
 
-class ArtFactory(SQLAlchemyModelFactory):
+class EventFactory(SQLAlchemyModelFactory):
+    class Meta:
+        model = model.Event
+        sqlalchemy_session = db.session
+
+    name = 'Happy Tour 2014'
+
+    start_date = date(2014, 2, 3)
+    end_date = date(2014, 2, 5)
+    # startDate = 'Feb  3 00:00:00 UTC 2014'
+    # endDate = 'Feb  5 00:00:00 UTC 2014'
+    description = u'This is a tour of all the artwork that you would want to see to make you smile'
+    picture = u'http://happytour.org/happy2014.png'
+
+
+class MediumFactory(SQLAlchemyModelFactory):
+    class Meta:
+        model = model.Medium
+        sqlalchemy_session = db.session
+
+    name = factory.Iterator((u'Ceramics', u'Painting'), cycle=True)
+
+
+class VenueLimitedTimeFactory(SQLAlchemyModelFactory):
+    class Meta:
+        model = model.VenueLimitedTime
+        sqlalchemy_session = db.session
+
+    start = dtime(2014, 2, 3, 0, 0, 0)
+    # venue_id
+
+
+class VenueFactory(SQLAlchemyModelFactory):
+    class Meta:
+        model = model.Venue
+        sqlalchemy_session = db.session
+
+    # 'id': 'd471b627-f7f3-4872-96e2-2af4d813673f'
+    site_id = '101c'
+    name = u'Gallery Happy'
+    event = factory.SubFactory(EventFactory)
+    picture = u'http://www.galleryhappy.com/logo.png'
+    address = factory.SubFactory(AddressFactory)
+    # 100 Cesar Chavez\\nAustin, TX 78702'
+    latitude = 40.446195
+    longitude = -79.982195
+    # coordinates = ['40.446195', '-79.982195']
+    twitter = '@GalleryHappy'
+    email = 'info@galleryhappy.org'
+    phone = '+1 512-555-1212'
+    category = u'Artists & Studios'
+
+    mediums = []
+
+    @factory.post_generation
+    def set_mediums(self, create, extracted, **kwargs):
+        if not len(self.mediums):
+            self.mediums = MediumFactory.create_batch(2)
+
+    description = u'Fun stuff made of clay by talented people.'
+
+    artists = []
+
+    @factory.post_generation
+    def set_artists(self, create, extracted, **kwargs):
+        if not self.artists:
+            self.artists.append(PersonFactory())
+
+    websites = []
+
+    @factory.post_generation
+    def set_websites(self, create, extracted, **kwargs):
+        if not self.websites:
+            self.websites.append(
+                WebsiteFactory(name='main', url='http://www.galleryhappy.com'))
+
+    managers = []
+
+    @factory.post_generation
+    def set_managers(self, create, extracted, **kwargs):
+        if not self.managers:
+            self.managers.append(PersonFactory(role='staff'))
+    # managers = ['c3491f70-8c92-11e3-a91c-3c970e1b8563']
+    curated = True
+
+    times = []
+
+    @factory.post_generation
+    def set_times(self, create, extracted, **kwargs):
+        if not self.times:
+            for t in (dtime(2014, 2, 3, 12, 0, 0), dtime(2014, 2, 3, 14, 0, 0)):
+                self.times.append(
+                    VenueLimitedTimeFactory(start=t, venue_id=self.id))
+    # times = ['Feb  3 12:00:00 UTC 2014', 'Feb  3 14:00:00 UTC 2014']
+    ad_1 = True
+    ad_2 = False
+    ad_3 = False
+    ad_4 = True
+    ad_5 = True
+    ad_6 = False
+    ad_7 = True
+    ad_8 = False
+
+
+class ArtworkFactory(SQLAlchemyModelFactory):
     class Meta:
         model = model.Artwork
         sqlalchemy_session = db.session
+
+    # id = '1d5bfb0f-8c4b-11e3-b767-3c970e1b8563'
+    artist = factory.SubFactory(PersonFactory)
+    title = u'Austin Sunrise'
+    description = u'Third in a series of 90 painting of the beautiful Austin skyline'
+    buy_url = u'http://auction.com/item/3432840932'
+    venue = factory.SubFactory(VenueFactory)
+    medium = 'Painting'
+    sold_out = False
+    series = []
+
+    @factory.post_generation
+    # @factory.post_generation(extract_prefix='related')
+    def set_series(self, create, extracted, **kwargs):
+        if not self.series:
+            if extracted:
+                self.series += extracted
+
+    parent_work = None
+
+    @factory.post_generation
+    def set_parent(self, create, extracted, **kwargs):
+        if not self.parent_work:
+            if extracted:
+                self.parent_work = extracted
+
+    height = 24
+    width = 34
+    year = '2014'
+
+    alt_urls = []
+
+    @factory.post_generation
+    def set_urls(self, create, extracted, **kwargs):
+        if not self.alt_urls:
+            for k, v in (('Detail', 'http://goo.gl/23A3fi'), ('Back', 'http://goo.gl/xc3wyo')):
+                self.alt_urls.append(WebsiteFactory(name=k, url=v))
 

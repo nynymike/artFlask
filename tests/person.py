@@ -60,7 +60,7 @@ class ArtistTestCase(TestCase):
             }
         ])
         self.assertEqual(result_person['twitter'], '@nynymike')
-        
+
         self.assertEqual(result_person['registration_code'], {
             hashlib.sha224('1').hexdigest(): {
                 'accepted': 'Mon Feb  3 10:15:09 2014',
