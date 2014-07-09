@@ -1,6 +1,6 @@
 import json
 import hashlib
-from datetime import datetime as dtime
+from datetime import datetime as dtime, date
 
 from app import db
 
@@ -14,6 +14,8 @@ class SimpleSerializeMixin(object):
             if (include_id or c.name != 'id') and v:
                 if isinstance(v, dtime):
                     v = v.strftime("%c")
+                elif isinstance(v, date):
+                    v = v.strftime('%a %b %d %Y')
                 d[c.name] = v
         return d
 

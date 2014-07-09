@@ -9,14 +9,14 @@ from app import db
 class ArtistTestCase(TestCase):
     def test_empty_artist_list(self):
         result = self.client.get('/api/v1/artists/')
-        self.assertEqual(result.status_code, 404)
+        self.assert404(result)
 
     def test_artist_by_id(self):
         person = PersonFactory.create(given_name=u"Pedro")
         db.session.commit()
 
         result = self.client.get('/api/v1/artists/%s' % person.sub)
-        self.assertEqual(result.status_code, 200)
+        self.assert200(result)
         artist_data = json.loads(result.data)
         self.assertEqual(artist_data.get('given_name'), u"Pedro")
 
@@ -25,7 +25,7 @@ class ArtistTestCase(TestCase):
         PersonFactory.create()
         db.session.commit()
         result = self.client.get('/api/v1/artists/')
-        self.assertEqual(result.status_code, 200)
+        self.assert200(result)
         data = json.loads(result.data)
         persons = data.get('item_list')
         self.assertIsNotNone(persons)

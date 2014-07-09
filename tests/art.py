@@ -18,23 +18,22 @@ class ArtTest(TestCase):
         :return:
         """
         response = self.client.get('/api/v1/art/')
-        self.assertEqual(response.status_code, 403)
+        self.assert403(response)
         args = {
             'title': 'Artwork!'
         }
         response = self.client.get('/api/v1/art/', query_string=args)
-        self.assertEqual(response.status_code, 404)
+        self.assert404(response)
 
     def test_single_artwork(self):
         ArtworkFactory(parent_work=None)
         db.session.commit()
 
-
         response = self.client.get('/api/v1/art/', query_string={'medium': "Sculpture"})
-        self.assertEqual(response.status_code, 404)
+        self.assert404(response)
 
         response = self.client.get('/api/v1/art/', query_string={'medium': "Painting"})
-        self.assertEqual(response.status_code, 200)
+        self.assert200(response)
         data = json.loads(response.data)
         self.assertIn('item_list', data)
         self.assertEqual(len(data['item_list']), 1)

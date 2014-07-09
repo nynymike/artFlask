@@ -31,31 +31,19 @@ from bson import json_util
 from flask_restful.utils import cors
 
 
-def getEvent(event_id):
-    return [{}]
-
-
-def getAllEvents():
-    return []
-
-
 class Event(Resource):
     #@cors.crossdomain(origin='*')
     def get(self, event_id):
-        try:
-            print(event_id)
-            app_ctx = ApplicationContext('Event')
-            return json.loads(json_util.dumps(app_ctx.get_item(event_id))), 200
-        except Exception as e:
-            return '', 404
+        app_ctx = ApplicationContext('Event')
+        item = app_ctx.get_item(event_id)
+        if not item:
+            return {}, 404
+        return item
 
 
 class EventList(Resource):
     #@cors.crossdomain(origin='*')
     def get(self, event_id=None):
         app_ctx = ApplicationContext('Event')
-        # try:
         events = app_ctx.query_from_context(allowList=True)
-        return json.loads(json_util.dumps(events))
-        # except:
-        #     return 'Event not found', 404
+        return jsonify(item_list=[item.as_dict() for item in events])

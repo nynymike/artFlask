@@ -74,7 +74,7 @@ class EventFactory(SQLAlchemyModelFactory):
         model = model.Event
         sqlalchemy_session = db.session
 
-    name = 'Happy Tour 2014'
+    name = u'Happy Tour 2014'
 
     start_date = date(2014, 2, 3)
     end_date = date(2014, 2, 5)
