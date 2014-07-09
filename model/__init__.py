@@ -26,6 +26,8 @@ class JsonModelEncoder(json.JSONEncoder):
 
 
 class RegistrationCode(db.Model, SimpleSerializeMixin):
+    __tablename__ = "registration_codes"
+
     id = db.Column(db.Integer, primary_key=True)
     accepted = db.Column(db.DateTime, nullable=True)
     sent = db.Column(db.DateTime, nullable=True)
@@ -41,12 +43,16 @@ class RegistrationCode(db.Model, SimpleSerializeMixin):
 
 
 class Website(db.Model, SimpleSerializeMixin):
+    __tablename__ = "websites"
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
     url = db.Column(db.String(256))
 
 
 class Address(db.Model, SimpleSerializeMixin):
+    __tablename__ = "physical_addresses"
+
     id = db.Column(db.Integer(), primary_key=True)
     street = db.Column(db.String(128))
     locality = db.Column(db.String(64))
@@ -56,11 +62,13 @@ class Address(db.Model, SimpleSerializeMixin):
 
 
 person_websites = db.Table('person_websites',
-                           db.Column('person_sub', db.String(256), db.ForeignKey('person.sub')),
-                           db.Column('website_id', db.String(128), db.ForeignKey('website.id')))
+                           db.Column('person_sub', db.String(256), db.ForeignKey('persons.sub')),
+                           db.Column('website_id', db.String(128), db.ForeignKey('websites.id')))
 
 
 class Person(db.Model, SimpleSerializeMixin):
+    __tablename__ = "persons"
+
     # OpenID Connect identifier, 256 should be enough for max len
     sub = db.Column(db.String(256), primary_key=True)
     given_name = db.Column(db.String(64))
@@ -72,7 +80,7 @@ class Person(db.Model, SimpleSerializeMixin):
     phone_number = db.Column(db.String(64))
     picture = db.Column(db.String(256))
     phone_number_verified = db.Column(db.Boolean, default=False)
-    address_id = db.Column(db.Integer, db.ForeignKey('address.id'))
+    address_id = db.Column(db.Integer, db.ForeignKey('physical_addresses.id'))
     address = db.relationship(Address, uselist=False)
     nickname = db.Column(db.String(64))
     social_urls = db.relationship('Website', secondary=person_websites)
@@ -80,9 +88,9 @@ class Person(db.Model, SimpleSerializeMixin):
     twitter = db.Column(db.String(64))
     preferred_contact = db.Column(db.String(256))
     status = db.Column(db.String(64))
-    registration_code_id = db.Column(db.Integer, db.ForeignKey('registration_code.id'))
+    registration_code_id = db.Column(db.Integer, db.ForeignKey('registration_codes.id'))
     registration_code = db.relationship('RegistrationCode')
-    website_id = db.Column(db.Integer, db.ForeignKey('website.id'))
+    website_id = db.Column(db.Integer, db.ForeignKey('websites.id'))
     website = db.relationship('Website')
     preferred_username = db.Column(db.String(64))
     zoneinfo = db.Column(db.String(256))
@@ -106,8 +114,8 @@ class Person(db.Model, SimpleSerializeMixin):
 
 
 artwork_websites = db.Table('artwork_websites',
-                            db.Column('artwork_id', db.Integer, db.ForeignKey('artwork.id')),
-                            db.Column('website_id', db.String(128), db.ForeignKey('website.id')))
+                            db.Column('artwork_id', db.Integer, db.ForeignKey('artworks.id')),
+                            db.Column('website_id', db.String(128), db.ForeignKey('websites.id')))
 
 
 class Event(db.Model, SimpleSerializeMixin):
@@ -121,6 +129,8 @@ class Event(db.Model, SimpleSerializeMixin):
         'picture': 'http://happytour.org/happy2014.png'
     }
     """
+    __tablename__ = "art_events"
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256))
     start_date = db.Column(db.Date)
@@ -131,34 +141,39 @@ class Event(db.Model, SimpleSerializeMixin):
 
 class Medium(db.Model):
     """Primary material used for art"""
+
+    __tablename__ = "mediums"
+
     name = db.Column(db.String(128), primary_key=True)
 
 
 class VenueLimitedTime(db.Model):
     """Used to specify limited hours. List of date and start times"""
+    __tablename__ = "venue_limitation_times"
+
     id = db.Column(db.Integer, primary_key=True)
     start = db.Column(db.DateTime)
-    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
+    venue_id = db.Column(db.Integer, db.ForeignKey('venues.id'))
 
 
 venue_mediums = db.Table('venue_mediums',
-                         db.Column('venue_id', db.Integer, db.ForeignKey('venue.id')),
-                         db.Column('medium_name', db.String(128), db.ForeignKey('medium.name')))
+                         db.Column('venue_id', db.Integer, db.ForeignKey('venues.id')),
+                         db.Column('medium_name', db.String(128), db.ForeignKey('mediums.name')))
 
 
 venue_artists = db.Table('venue_artists',
-                         db.Column('venue_id', db.Integer, db.ForeignKey('venue.id')),
-                         db.Column('artist_id', db.String(256), db.ForeignKey('person.sub')))
+                         db.Column('venue_id', db.Integer, db.ForeignKey('venues.id')),
+                         db.Column('artist_id', db.String(256), db.ForeignKey('persons.sub')))
 
 
 venue_websites = db.Table('venue_websites',
-                          db.Column('venue_id', db.Integer, db.ForeignKey('venue.id')),
-                          db.Column('website_name', db.String(128), db.ForeignKey('website.name')))
+                          db.Column('venue_id', db.Integer, db.ForeignKey('venues.id')),
+                          db.Column('website_name', db.String(128), db.ForeignKey('websites.name')))
 
 
 venue_managers = db.Table('venue_managers',
-                          db.Column('venue_id', db.Integer, db.ForeignKey('venue.id')),
-                          db.Column('manager_id', db.String(256), db.ForeignKey('person.sub')))
+                          db.Column('venue_id', db.Integer, db.ForeignKey('venues.id')),
+                          db.Column('manager_id', db.String(256), db.ForeignKey('persons.sub')))
 
 
 class Venue(db.Model, SimpleSerializeMixin):
@@ -189,13 +204,15 @@ class Venue(db.Model, SimpleSerializeMixin):
     ...
 
     """
+    __tablename__ = "venues"
+
     id = db.Column(db.Integer, primary_key=True)
     site_id = db.Column(db.String(64), unique=True)
     name = db.Column(db.String(256))
-    event_id = db.Column(db.Integer, db.ForeignKey('event.id'))
+    event_id = db.Column(db.Integer, db.ForeignKey('art_events.id'))
     event = db.relationship('Event')
     picture = db.Column(db.String(256))
-    address_id = db.Column(db.Integer, db.ForeignKey('address.id'))
+    address_id = db.Column(db.Integer, db.ForeignKey('physical_addresses.id'))
     address = db.relationship(Address, uselist=False)
     # coordinates
     latitude = db.Column(db.Float)
@@ -250,20 +267,22 @@ class Artwork(db.Model, SimpleSerializeMixin):
         'alt_urls': {'Detail':'http://goo.gl/23A3fi', 'Back':'http://goo.gl/xc3wyo',}
         }
     """
+    __tablename__ = "artworks"
+
     id = db.Column(db.Integer, primary_key=True)
-    artist_id = db.Column(db.String(256), db.ForeignKey('person.sub'))
+    artist_id = db.Column(db.String(256), db.ForeignKey('persons.sub'))
     artist = db.relationship('Person', backref='artworks')
     title = db.Column(db.String(128))
     description = db.Column(db.String(1024))
     picture = db.Column(db.String(256))
     thumbnail = db.Column(db.String(256))
     buy_url = db.Column(db.String(256))
-    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
+    venue_id = db.Column(db.Integer, db.ForeignKey('venues.id'))
     venue = db.relationship('Venue', uselist=False)
     medium = db.Column(db.String(256))
     sold_out = db.Column(db.Boolean)
     series = db.relationship('Artwork')
-    parent_id = db.Column(db.Integer, db.ForeignKey('artwork.id'))
+    parent_id = db.Column(db.Integer, db.ForeignKey('artworks.id'))
     parent_work = db.relationship('Artwork', backref='children', remote_side=[id])
     # size = db.Column(db.String(256))
     height = db.Column(db.Float, nullable=True)
