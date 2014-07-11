@@ -107,7 +107,7 @@ class VenueFactory(SQLAlchemyModelFactory):
         sqlalchemy_session = db.session
 
     # 'id': 'd471b627-f7f3-4872-96e2-2af4d813673f'
-    site_id = '101c'
+    site_id = factory.Sequence(lambda n: '%dc' % n)
     name = u'Gallery Happy'
     event = factory.SubFactory(EventFactory)
     picture = u'http://www.galleryhappy.com/logo.png'
@@ -125,8 +125,14 @@ class VenueFactory(SQLAlchemyModelFactory):
 
     @factory.post_generation
     def set_mediums(self, create, extracted, **kwargs):
-        if not len(self.mediums):
-            self.mediums = MediumFactory.create_batch(2)
+        if not self.mediums:
+            self.mediums = model.Medium.query.limit(2).all()
+            required = 2
+            existing = len(self.mediums)
+            if existing < required:
+                new_mediums = MediumFactory.create_batch(required - existing)
+                self.mediums += new_mediums
+
 
     description = u'Fun stuff made of clay by talented people.'
 
@@ -143,7 +149,8 @@ class VenueFactory(SQLAlchemyModelFactory):
     def set_websites(self, create, extracted, **kwargs):
         if not self.websites:
             self.websites.append(
-                WebsiteFactory(name='main', url='http://www.galleryhappy.com'))
+                WebsiteFactory(name='venue',
+                               url='http://www.venue.com'))
 
     managers = []
 

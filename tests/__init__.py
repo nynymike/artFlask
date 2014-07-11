@@ -3,10 +3,7 @@ import os
 
 from flask.ext.testing import TestCase as TestCaseBase, Twill
 sys.path.append("%s/../" % os.getcwd())
-from conf import TestingConfig
-# from db import mongo
-# import data.helpers as h
-# from bson import ObjectId, json_util
+
 from app import app, db
 
 import logging

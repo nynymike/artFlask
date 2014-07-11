@@ -14,6 +14,10 @@ def website_list_from_dict(website_dict):
     return [Website(name=name, url=url) for name, url in website_dict.items()]
 
 
+def art_list_from_ids(ids):
+    return Artwork.query.filter(Artwork.id.in_(ids)).all()
+
+
 class ArtList(Resource):
     REQUIRED = ['title', 'description', 'buy_url', 'venue', 'medium', 'sold']
 
@@ -34,18 +38,20 @@ class ArtList(Resource):
                 input_name = 'venue'
             elif field.name == 'artist_id':
                 input_name = 'artist'
+            elif field.name == 'parent_id':
+                input_name = 'parent_work'
             else:
                 input_name = field.name
 
             parser.add_argument(input_name, type=field.type.python_type,
                                 dest=field.name, required=required)
         parser.add_argument('alt_urls', type=website_list_from_dict, required=False)
+        parser.add_argument('series', type=art_list_from_ids, required=False)
 
         args = {k: v for k, v in parser.parse_args(request).items() if v}
         try:
             item = Artwork(**args)
             db.session.add(item)
-            db.session.merge(item)
             db.session.commit()
 
             return "%d" % item.id, 201

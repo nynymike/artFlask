@@ -21,6 +21,9 @@ class VenueTestCase(TestCase):
         response = self.client.get(urljoin(self.BASE_API_URL, '1/'))
         self.assert404(response)
 
+    def test_two_venues(self):
+        VenueFactory.create_batch(2)
+
     def test_single_venue(self):
         """
         Test single venue

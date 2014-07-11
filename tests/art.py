@@ -60,42 +60,45 @@ class ArtTest(TestCase):
             artwork.get('alt_urls', {}))
 
     def test_add_artwork(self):
+        self.assertEqual(0, Artwork.query.count())
+
         VenueFactory(id=5)
+        db.session.commit()
+        ArtworkFactory(id=5)
+        db.session.commit()
         data = {
             # 'file': art_image,
-            'title': u'Austin Sunrise',
+            'title': u'Austin Sunrise Special',
             'description': u'Third in a series of 90 painting of the beautiful Austin skyline',
             'buy_url': u'http://auction.com/item/3432840932',
             'venue': 5,
             'medium': 'Painting',
             'sold': False,
-            'series': [],
-            'parent_work': None,
+            'series': [5],
+            'parent_work': 5,
             'alt_urls': {
                 'Detail': 'http://goo.gl/23A3fi',
                 'Back': 'http://goo.gl/xc3wyo',
             },
         }
-        self.assertEqual(0, Artwork.query.count())
         response = self.client.post(self.API_URL, data=json.dumps(data),
                                     follow_redirects=True, content_type='application/json')
-        artwork = Artwork.query.first()
+        artwork = Artwork.query.filter_by(title=u'Austin Sunrise Special').first()
         self.assertIsNotNone(artwork)
-        self.assertEqual(u'Austin Sunrise', artwork.title)
+        self.assertEqual(u'Austin Sunrise Special', artwork.title)
         self.assertEqual(u'Third in a series of 90 painting of the beautiful Austin skyline',
                          artwork.description)
         self.assertEqual(u'http://auction.com/item/3432840932', artwork.buy_url)
-        self.assertEqual(1, artwork.venue_id)
+        self.assertEqual(5, artwork.venue_id)
         self.assertEqual('Painting', artwork.medium)
         self.assertFalse(artwork.sold_out)
-        self.assertListEqual([], artwork.series)
-        self.assertIsNone(artwork.parent_work)
+        self.assertListEqual([5], [s.id for s in artwork.series])
+        self.assertEqual(5, artwork.parent_id)
         self.assertDictEqual({
             'Detail': 'http://goo.gl/23A3fi',
             'Back': 'http://goo.gl/xc3wyo',
         }, {u.name: u.url for u in artwork.alt_urls})
         self.assert201(response)
-
 
     # def test_art(self):
     #     """
