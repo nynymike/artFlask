@@ -44,6 +44,16 @@ class TestCase(TestCaseBase):
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+
+    def assert201(self, response):
+        """
+        Checks if response status code is 201
+
+        :param response: Flask response
+        """
+
+        self.assertStatus(response, 201)
+
     #     """Clean db session and drop all tables."""
     #     mongo.cx.drop_database(TestingConfig.MONGO_DBNAME)
 

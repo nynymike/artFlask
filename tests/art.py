@@ -1,38 +1,36 @@
-import unittest
-from . import TestCase
-from .data.helpers import genArt, genVenue, genPerson
 import json
-from model import Artwork, Person, Event, Venue
-# from db import mongo
-from factories import ArtworkFactory
+
+from . import TestCase
+from factories import ArtworkFactory, VenueFactory
+
 from app import db
+from model import Artwork
 
 
 class ArtTest(TestCase):
-    # def test_show(self):
-    # #self._test_get_request('/api/v1/artists/')
+    API_URL = '/api/v1/art/'
 
     def test_empty_artlist(self):
         """
         Test empty request, empty response
         :return:
         """
-        response = self.client.get('/api/v1/art/')
+        response = self.client.get(self.API_URL)
         self.assert403(response)
         args = {
             'title': 'Artwork!'
         }
-        response = self.client.get('/api/v1/art/', query_string=args)
+        response = self.client.get(self.API_URL, query_string=args)
         self.assert404(response)
 
     def test_single_artwork(self):
         ArtworkFactory(parent_work=None)
         db.session.commit()
 
-        response = self.client.get('/api/v1/art/', query_string={'medium': "Sculpture"})
+        response = self.client.get(self.API_URL, query_string={'medium': "Sculpture"})
         self.assert404(response)
 
-        response = self.client.get('/api/v1/art/', query_string={'medium': "Painting"})
+        response = self.client.get(self.API_URL, query_string={'medium': "Painting"})
         self.assert200(response)
         data = json.loads(response.data)
         self.assertIn('item_list', data)
@@ -60,6 +58,43 @@ class ArtTest(TestCase):
                 'Back': 'http://goo.gl/xc3wyo',
             },
             artwork.get('alt_urls', {}))
+
+    def test_add_artwork(self):
+        VenueFactory(id=5)
+        data = {
+            # 'file': art_image,
+            'title': u'Austin Sunrise',
+            'description': u'Third in a series of 90 painting of the beautiful Austin skyline',
+            'buy_url': u'http://auction.com/item/3432840932',
+            'venue': 5,
+            'medium': 'Painting',
+            'sold': False,
+            'series': [],
+            'parent_work': None,
+            'alt_urls': {
+                'Detail': 'http://goo.gl/23A3fi',
+                'Back': 'http://goo.gl/xc3wyo',
+            },
+        }
+        self.assertEqual(0, Artwork.query.count())
+        response = self.client.post(self.API_URL, data=json.dumps(data),
+                                    follow_redirects=True, content_type='application/json')
+        artwork = Artwork.query.first()
+        self.assertIsNotNone(artwork)
+        self.assertEqual(u'Austin Sunrise', artwork.title)
+        self.assertEqual(u'Third in a series of 90 painting of the beautiful Austin skyline',
+                         artwork.description)
+        self.assertEqual(u'http://auction.com/item/3432840932', artwork.buy_url)
+        self.assertEqual(1, artwork.venue_id)
+        self.assertEqual('Painting', artwork.medium)
+        self.assertFalse(artwork.sold_out)
+        self.assertListEqual([], artwork.series)
+        self.assertIsNone(artwork.parent_work)
+        self.assertDictEqual({
+            'Detail': 'http://goo.gl/23A3fi',
+            'Back': 'http://goo.gl/xc3wyo',
+        }, {u.name: u.url for u in artwork.alt_urls})
+        self.assert201(response)
 
 
     # def test_art(self):

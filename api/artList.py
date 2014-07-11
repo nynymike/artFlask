@@ -1,10 +1,22 @@
-from flask.ext.restful import Resource
+from flask import request, abort
+from flask.ext.restful import Resource, reqparse
 from flask.json import jsonify
+from sqlalchemy.exc import IntegrityError
+
 from utils.app_ctx import ApplicationContext
+from app import db
 # from flask_restful.utils import cors
+
+from model import Artwork, Website
+
+
+def website_list_from_dict(website_dict):
+    return [Website(name=name, url=url) for name, url in website_dict.items()]
 
 
 class ArtList(Resource):
+    REQUIRED = ['title', 'description', 'buy_url', 'venue', 'medium', 'sold']
+
     # @cors.crossdomain(origin='*')
     def get(self):
         app_ctx = ApplicationContext('Artwork')
@@ -15,17 +27,30 @@ class ArtList(Resource):
 
     # @cors.crossdomain(origin='*')
     def post(self):
-        # Get params and write
-        # Convert image to web size
-        # Write file
-        # Convert image to thumbnail
-        # Write file
-        # Create db entry for art
-        # try:
-        app_ctx = ApplicationContext('Artwork')
-        # if 'file' in request.files:
-        #   upload_file()
-        item = app_ctx.create_item_from_context()
-        return "%d" % item.id, 201
-        # except Exception, e:
-        #   return str(e),404
+        parser = reqparse.RequestParser()
+        for field in Artwork.__table__.columns:
+            required = (field.name in self.REQUIRED)
+            if field.name == 'venue_id':
+                input_name = 'venue'
+            elif field.name == 'artist_id':
+                input_name = 'artist'
+            else:
+                input_name = field.name
+
+            parser.add_argument(input_name, type=field.type.python_type,
+                                dest=field.name, required=required)
+        parser.add_argument('alt_urls', type=website_list_from_dict, required=False)
+
+        args = {k: v for k, v in parser.parse_args(request).items() if v}
+        try:
+            item = Artwork(**args)
+            db.session.add(item)
+            db.session.merge(item)
+            db.session.commit()
+
+            return "%d" % item.id, 201
+        except IntegrityError:
+            abort(403)
+
+
+
