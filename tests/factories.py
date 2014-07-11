@@ -92,9 +92,9 @@ class MediumFactory(SQLAlchemyModelFactory):
     name = factory.Iterator((u'Ceramics', u'Painting'), cycle=True)
 
 
-class VenueLimitedTimeFactory(SQLAlchemyModelFactory):
+class LimitedTimeFactory(SQLAlchemyModelFactory):
     class Meta:
-        model = model.VenueLimitedTime
+        model = model.LimitedTime
         sqlalchemy_session = db.session
 
     start = dtime(2014, 2, 3, 0, 0, 0)
@@ -167,8 +167,7 @@ class VenueFactory(SQLAlchemyModelFactory):
     def set_times(self, create, extracted, **kwargs):
         if not self.times:
             for t in (dtime(2014, 2, 3, 12, 0, 0), dtime(2014, 2, 3, 14, 0, 0)):
-                self.times.append(
-                    VenueLimitedTimeFactory(start=t, venue_id=self.id))
+                self.times.append(LimitedTimeFactory(start=t))
     # times = ['Feb  3 12:00:00 UTC 2014', 'Feb  3 14:00:00 UTC 2014']
     ad_1 = True
     ad_2 = False

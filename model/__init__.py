@@ -148,13 +148,12 @@ class Medium(db.Model):
     name = db.Column(db.String(128), primary_key=True)
 
 
-class VenueLimitedTime(db.Model):
+class LimitedTime(db.Model):
     """Used to specify limited hours. List of date and start times"""
-    __tablename__ = "venue_limitation_times"
+    __tablename__ = "limitation_time"
 
     id = db.Column(db.Integer, primary_key=True)
     start = db.Column(db.DateTime)
-    venue_id = db.Column(db.Integer, db.ForeignKey('venues.id'))
 
 
 venue_mediums = db.Table('venue_mediums',
@@ -175,6 +174,10 @@ venue_websites = db.Table('venue_websites',
 venue_managers = db.Table('venue_managers',
                           db.Column('venue_id', db.Integer, db.ForeignKey('venues.id')),
                           db.Column('manager_id', db.String(256), db.ForeignKey('persons.sub')))
+
+venue_limited_time = db.Table('venue_limited_time',
+                              db.Column('venue_id', db.Integer, db.ForeignKey('venues.id')),
+                              db.Column('time_id', db.Integer, db.ForeignKey('limitation_time.id')))
 
 
 class Venue(db.Model, SimpleSerializeMixin):
@@ -230,7 +233,7 @@ class Venue(db.Model, SimpleSerializeMixin):
     managers = db.relationship('Person', secondary=venue_managers)
     curated = db.Column(db.Boolean)
     # limited times
-    times = db.relationship('VenueLimitedTime')
+    times = db.relationship('LimitedTime', secondary=venue_limited_time)
     # Parking: Official parking for the disabled
     ad_1 = db.Column(db.Boolean)
     # Entrance and interior: Minimum 32" doorway clearance space

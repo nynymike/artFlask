@@ -68,9 +68,15 @@ Manage API
 """
 __author__ = 'Michael Schwartz'
 
-from flask.ext.restful import Resource, Api
+from datetime import datetime as dtime
+
+from flask import request, abort
+from flask.ext.restful import Resource, reqparse
+from sqlalchemy.exc import IntegrityError
+
 from utils.app_ctx import ApplicationContext
-from flask_restful.utils import cors
+from model import Venue, Address, Website, Medium, Person, LimitedTime
+from app import db
 
 
 class ManageEvent(Resource):
@@ -113,7 +119,13 @@ class ManageEvent(Resource):
         except Exception as e:
             return '', 404
 
+
 class ManageVenue(Resource):
+    # REQUIRED = ["street", "city", "state", "zip"]
+
+    # @staticmethod
+    # def art_list_from_ids(ids):
+    #     return Artwork.query.filter(Artwork.id.in_(ids)).all()
 
     #@cors.crossdomain(origin='*')
     def put(self, venue_id=None):
@@ -131,20 +143,49 @@ class ManageVenue(Resource):
 
     #@cors.crossdomain(origin='*')
     def post(self):
-        # Get params and write
-        # Convert image to web size
-        # Write file
-        # Convert image to thumbnail
-        # Write file
-        # Create db entry for art
-        #try:
-        required_fields = ["street", "city", "state", "zip"]
-        app_ctx = ApplicationContext('Venue')
-        item = app_ctx.create_item_from_context(required_fields=required_fields)
-        app_ctx.get_geo_location(item.id)
-        return '%s' % item.id, 201
-        #except Exception as e:
-          #return '',404
+        parser = reqparse.RequestParser()
+        for field in Venue.__table__.columns:
+            parser.add_argument(field.name, type=field.type.python_type)
+
+        def website_list_from_urls(urls):
+            return [Website(name="url%d" % n, url=url) for n, url in enumerate(urls)]
+        parser.add_argument('websites', type=website_list_from_urls)
+
+        def mediums_from_names(names):
+            return [Medium.query.get(name) or Medium(name=name) for name in names]
+        parser.add_argument('mediums', type=mediums_from_names)
+
+        def object_from_dict(class_name):
+            def wrapper(d):
+                return class_name(**d)
+            return wrapper
+
+        parser.add_argument('address', type=object_from_dict(Address))
+
+        def objects_from_ids(class_name):
+            def wrapper(lst):
+                return [class_name.query.get(obj_id) for obj_id in lst]
+            return wrapper
+        parser.add_argument('artists', type=objects_from_ids(Person))
+        parser.add_argument('managers', type=objects_from_ids(Person))
+
+        def times_from_stringlist(stringlist):
+            # TODO(analytic): move that to common place
+            FORMAT = '%b %d %X %Z %Y'
+            return [LimitedTime(start=dtime.strptime(start, FORMAT)) for start in stringlist]
+        parser.add_argument('times', type=times_from_stringlist)
+
+        args = {k: v for k, v in parser.parse_args(request).items() if v is not None}
+        try:
+            item = Venue(**args)
+            db.session.add(item)
+            db.session.commit()
+            return '%s' % item.id, 201
+        except IntegrityError:
+            abort(403)
+        # TODO(analytic): temporary disabled
+        # app_ctx = ApplicationContext('Venue')
+        # app_ctx.get_geo_location(item.id)
 
     #@cors.crossdomain(origin='*')
     def delete(self, venue_id=None):
