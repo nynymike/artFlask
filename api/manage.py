@@ -75,13 +75,13 @@ from flask.ext.restful import Resource, reqparse
 from sqlalchemy.exc import IntegrityError
 
 from utils.app_ctx import ApplicationContext
-from model import Venue, Address, Website, Medium, Person, LimitedTime
+from model import *
 from app import db
 
 
 class ManageEvent(Resource):
+    MODEL = Event
 
-    #@cors.crossdomain(origin='*')
     def put(self, event_id=None):
         try:
             print(event_id)
@@ -90,27 +90,27 @@ class ManageEvent(Resource):
             return '', 200
         except Exception as e:
             return '', 404
-    # def post(self, event_id=None):
-    #     if not event_id: return 'Event not found', 404
-    #     else:
-    #         return None
 
-    #@cors.crossdomain(origin='*')
     def post(self):
-      # Get params and write
-      # Convert image to web size
-      # Write file
-      # Convert image to thumbnail
-      # Write file
-      # Create db entry for art
-      # try:
-        app_ctx = ApplicationContext('Event')
-        item = app_ctx.create_item_from_context()
-        return '%s' % item.id, 201
-      # except Exception as e:
-      #   return '',404
+        parser = reqparse.RequestParser()
 
-    #@cors.crossdomain(origin='*')
+        def date_from_str(s):
+            return dtime.strptime(s, '%b %d %Y').date()
+        for field in self.MODEL.__table__.columns:
+            if field.type.python_type == date:
+                parser.add_argument(field.name, type=date_from_str)
+            else:
+                parser.add_argument(field.name, type=field.type.python_type)
+        args = {k: v for k, v in parser.parse_args(request).items() if v is not None}
+
+        try:
+            item = self.MODEL(**args)
+            db.session.add(item)
+            db.session.commit()
+            return '%s' % item.id, 201
+        except IntegrityError:
+            abort(403)
+
     def delete(self, event_id=None):
         try:
             app_ctx = ApplicationContext('Event')

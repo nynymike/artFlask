@@ -1,4 +1,5 @@
 import json
+from datetime import datetime as dtime
 from urlparse import urljoin
 
 from . import TestCase
@@ -135,8 +136,8 @@ class VenueTestCase(TestCase):
         self.assertEqual(True, venue.curated)
         # TODO(analytic): move to common time format ( 3 => 03)
         # TODO(analytic): UTC parsing ??
-        self.assertEqual(['Feb 03 12:00:00 2014', 'Feb 03 14:00:00 2014'],
-                         [t.start.strftime('%b %d %X %Y') for t in venue.times])
+        self.assertEqual([dtime(2014, 02, 03, 12, 0, 0), dtime(2014, 02, 03, 14, 0, 0)],
+                         [t.start for t in venue.times])
         self.assertTrue(venue.ad_1)
         self.assertTrue(venue.ad_2)
         self.assertTrue(venue.ad_3)
