@@ -67,6 +67,8 @@ class ApplicationContext(object):
 
     def get_item(self, item_id=None):
         item = self.model_class().query.get(item_id)
+        if not item:
+            abort(404)
         item_dict = item.as_dict()
         return item_dict
 

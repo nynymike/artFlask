@@ -1,12 +1,18 @@
 import json
+from urlparse import urljoin
 import hashlib
 
 from . import TestCase
 from factories import PersonFactory
 from app import db
+from model import Person
 
 
 class ArtistTestCase(TestCase):
+    MODEL = Person
+    FACTORY = PersonFactory
+    MANAGE_API_URL = '/api/v1/manage/persons/'
+
     def test_empty_artist_list(self):
         result = self.client.get('/api/v1/artists/')
         self.assert404(result)
@@ -67,3 +73,11 @@ class ArtistTestCase(TestCase):
                 'sent': 'Mon Feb  3 10:10:31 2014'
             }
         })
+
+    def test_deletion(self):
+        self.assertObjectCount(0)
+        self.FACTORY(sub='5')
+        db.session.commit()
+        self.assertObjectCount(1)
+        self.client.delete(urljoin(self.MANAGE_API_URL, '%s/' % '5'))
+        self.assertObjectCount(0)

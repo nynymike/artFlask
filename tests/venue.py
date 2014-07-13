@@ -12,6 +12,8 @@ from model import Venue
 class VenueTestCase(TestCase):
     API_URL = '/api/v1/venues/'
     MANAGE_API_URL = '/api/v1/manage/venues/'
+    MODEL = Venue
+    FACTORY = VenueFactory
 
     def test_empty_venue_list(self):
         """
@@ -32,7 +34,7 @@ class VenueTestCase(TestCase):
         Test single venue
         :return:
         """
-        VenueFactory(name=u'Venue1')
+        VenueFactory(site_id='101c', name=u'Venue1')
         db.session.commit()
 
         response = self.client.get(self.API_URL)
@@ -43,7 +45,7 @@ class VenueTestCase(TestCase):
 
         venue = data['item_list'][0]
 
-        self.assertEqual('1c', venue['site_id'])
+        self.assertEqual('101c', venue['site_id'])
         self.assertEqual(u'Venue1', venue['name'])
         self.assertIsNotNone(venue.get('event'))
         self.assertEqual(u'http://www.galleryhappy.com/logo.png', venue['picture'])
@@ -146,3 +148,11 @@ class VenueTestCase(TestCase):
         self.assertTrue(venue.ad_6)
         self.assertTrue(venue.ad_7)
         self.assertFalse(venue.ad_8)
+
+    def test_deletion(self):
+        self.assertObjectCount(0)
+        self.FACTORY(id=5)
+        db.session.commit()
+        self.assertObjectCount(1)
+        self.client.delete(urljoin(self.MANAGE_API_URL, '%d/' % 5))
+        self.assertObjectCount(0)

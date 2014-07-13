@@ -112,15 +112,12 @@ class ManageEvent(Resource):
             abort(403)
 
     def delete(self, event_id=None):
-        try:
-            app_ctx = ApplicationContext('Event')
-            app_ctx.remove_record(event_id)
-            return '', 200
-        except Exception as e:
-            return '', 404
+        db.session.delete(self.MODEL.query.get(event_id))
+        db.session.commit()
 
 
 class ManageVenue(Resource):
+    MODEL = Venue
     # REQUIRED = ["street", "city", "state", "zip"]
 
     # @staticmethod
@@ -187,17 +184,13 @@ class ManageVenue(Resource):
         # app_ctx = ApplicationContext('Venue')
         # app_ctx.get_geo_location(item.id)
 
-    #@cors.crossdomain(origin='*')
     def delete(self, venue_id=None):
-        try:
-            app_ctx = ApplicationContext('Venue')
-            app_ctx.remove_record(venue_id)
-            return '', 200
-        except Exception as e:
-            return '', 404
+        db.session.delete(self.MODEL.query.get(venue_id))
+        db.session.commit()
 
 
 class ManagePerson(Resource):
+    MODEL = Person
 
     # Send SCIM requests to oxTrust
     #@cors.crossdomain(origin='*')
@@ -217,9 +210,6 @@ class ManagePerson(Resource):
 
     #@cors.crossdomain(origin='*')
     def delete(self, person_id=None):
-      try:
-        app_ctx = ApplicationContext('Person')
-        app_ctx.remove_record(person_id)
-        return '',200 
-      except Exception as e:
-        return '',404
+        db.session.delete(self.MODEL.query.get(person_id))
+        db.session.commit()
+

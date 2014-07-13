@@ -10,7 +10,14 @@ import logging
 logging.getLogger('factory').setLevel(logging.WARN)
 
 
-class TestCase(TestCaseBase):
+class ModelMixin:
+    MODEL = None
+
+    def assertObjectCount(self, count):
+        self.assertEqual(count, self.MODEL.query.count())
+
+
+class TestCase(TestCaseBase, ModelMixin):
     """Base TestClass for your application."""
 
     SQLALCHEMY_DATABASE_URL = "sqlite:////tmp/test.db"

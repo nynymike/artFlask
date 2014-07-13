@@ -13,6 +13,7 @@ class EventTestCase(TestCase):
     API_URL = '/api/v1/events/'
     MANAGE_API_URL = '/api/v1/manage/events/'
     MODEL = Event
+    FACTORY = EventFactory
 
     def test_empty_eventllist(self):
         """
@@ -71,4 +72,11 @@ class EventTestCase(TestCase):
                          event.description)
         self.assertEqual(u'http://happytour.org/happy2014.png', event.picture)
 
+    def test_deletion(self):
+        self.assertObjectCount(0)
+        self.FACTORY(id=5)
+        db.session.commit()
+        self.assertObjectCount(1)
+        self.client.delete(urljoin(self.MANAGE_API_URL, '%d/' % 5))
+        self.assertObjectCount(0)
 

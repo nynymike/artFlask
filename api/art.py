@@ -95,8 +95,13 @@ from utils.helpers import upload_file
 from utils.app_ctx import ApplicationContext
 from bson import json_util
 
+from model import Artwork
+from app import db
+
 
 class Art(Resource):
+    MODEL = Artwork
+
     #@cors.crossdomain(origin='*')
     def get(self, art_id):
         app_ctx = ApplicationContext('Art')
@@ -121,11 +126,7 @@ class Art(Resource):
         except Exception, e:
             return str(e), 404
 
-    #@cors.crossdomain(origin='*')
     def delete(self, art_id=None):
-        try:
-            app_ctx = ApplicationContext('Art')
-            app_ctx.remove_record(art_id)
-            return '', 200
-        except Exception, e:
-            return str(e), 404
+        db.session.delete(self.MODEL.query.get(art_id))
+        db.session.commit()
+
