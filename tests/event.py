@@ -80,3 +80,27 @@ class EventTestCase(TestCase):
         self.client.delete(urljoin(self.MANAGE_API_URL, '%d/' % 5))
         self.assertObjectCount(0)
 
+    def test_put(self):
+        event_id = 5
+        data = {
+            'start_date': 'Feb 07 2014',
+            'end_date': 'Feb 09 2014',
+            'description': u"modified description",
+        }
+        response = self.client.put(urljoin(self.MANAGE_API_URL, '%d/' % event_id),
+                                   data=json.dumps(data),
+                                   content_type='application/json')
+        self.assert404(response)
+        event = self.FACTORY(id=event_id)
+        db.session.commit()
+        self.assertNotEqual(date(2014, 2, 7), event.start_date)
+        self.assertNotEqual(date(2014, 2, 9), event.end_date)
+        self.assertNotEqual(u"modified description", event.description)
+        response = self.client.put(urljoin(self.MANAGE_API_URL, '%d/' % event_id),
+                                   data=json.dumps(data),
+                                   content_type='application/json')
+        self.assert200(response)
+        self.assertEqual(date(2014, 2, 7), event.start_date)
+        self.assertEqual(date(2014, 2, 9), event.end_date)
+        self.assertEqual(u"modified description", event.description)
+

@@ -87,7 +87,7 @@ __author__ = 'Michael Schwartz'
 
 import json
 
-from flask import request
+from flask import request, abort
 from flask.ext.restful import Resource
 from flask_restful.utils import cors
 
@@ -127,6 +127,9 @@ class Art(Resource):
             return str(e), 404
 
     def delete(self, art_id=None):
-        db.session.delete(self.MODEL.query.get(art_id))
+        o = self.MODEL.query.get(art_id)
+        if not o:
+            abort(404)
+        db.session.delete(o)
         db.session.commit()
 

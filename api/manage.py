@@ -79,23 +79,58 @@ from model import *
 from app import db
 
 
+def date_from_str(s):
+    return dtime.strptime(s, '%b %d %Y').date()
+
+
+def website_list_from_urls(urls):
+    return [Website(name="url%d" % n, url=url) for n, url in enumerate(urls)]
+
+
+def mediums_from_names(names):
+    return [Medium.query.get(name) or Medium(name=name) for name in names]
+
+
+def object_from_dict(class_name):
+    def wrapper(d):
+        return class_name(**d)
+    return wrapper
+
+
+def objects_from_ids(class_name):
+    def wrapper(lst):
+        return [class_name.query.get(obj_id) for obj_id in lst]
+    return wrapper
+
+
+def times_from_stringlist(stringlist):
+    # TODO(analytic): move that to common place
+    FORMAT = '%b %d %X %Z %Y'
+    return [LimitedTime(start=dtime.strptime(start, FORMAT)) for start in stringlist]
+
+
 class ManageEvent(Resource):
     MODEL = Event
 
-    def put(self, event_id=None):
-        try:
-            print(event_id)
-            app_ctx = ApplicationContext('Event')
-            app_ctx.create_item_from_context(event_id)
-            return '', 200
-        except Exception as e:
-            return '', 404
+    def put(self, event_id):
+        event = self.MODEL.query.get(event_id)
+        if not event:
+            abort(404)
+
+        parser = reqparse.RequestParser()
+        for field in self.MODEL.__table__.columns:
+            if field.type.python_type == date:
+                parser.add_argument(field.name, type=date_from_str)
+            else:
+                parser.add_argument(field.name, type=field.type.python_type)
+        for k, v in parser.parse_args(request).items():
+            if v is not None:
+                setattr(event, k, v)
+        db.session.commit()
 
     def post(self):
         parser = reqparse.RequestParser()
 
-        def date_from_str(s):
-            return dtime.strptime(s, '%b %d %Y').date()
         for field in self.MODEL.__table__.columns:
             if field.type.python_type == date:
                 parser.add_argument(field.name, type=date_from_str)
@@ -111,8 +146,11 @@ class ManageEvent(Resource):
         except IntegrityError:
             abort(403)
 
-    def delete(self, event_id=None):
-        db.session.delete(self.MODEL.query.get(event_id))
+    def delete(self, event_id):
+        o = self.MODEL.query.get(event_id)
+        if not o:
+            abort(404)
+        db.session.delete(o)
         db.session.commit()
 
 
@@ -126,12 +164,29 @@ class ManageVenue(Resource):
 
     #@cors.crossdomain(origin='*')
     def put(self, venue_id=None):
-      try:
-        app_ctx = ApplicationContext('Venue')
-        item = app_ctx.create_item_from_context(venue_id)
-        return '', 200
-      except Exception as e:
-        return '', 404
+        venue = self.MODEL.query.get(venue_id)
+        if not venue:
+            abort(404)
+
+        parser = reqparse.RequestParser()
+        for field in Venue.__table__.columns:
+            parser.add_argument(field.name, type=field.type.python_type)
+
+        parser.add_argument('websites', type=website_list_from_urls)
+
+        parser.add_argument('mediums', type=mediums_from_names)
+
+        parser.add_argument('address', type=object_from_dict(Address))
+
+        parser.add_argument('artists', type=objects_from_ids(Person))
+        parser.add_argument('managers', type=objects_from_ids(Person))
+
+        parser.add_argument('times', type=times_from_stringlist)
+
+        for k, v in parser.parse_args(request).items():
+            if v is not None:
+                setattr(venue, k, v)
+        db.session.commit()
 
     # def post(self, venue_id=None):
     #     if not venue_id: return 'Venue not found', 404
@@ -144,32 +199,15 @@ class ManageVenue(Resource):
         for field in Venue.__table__.columns:
             parser.add_argument(field.name, type=field.type.python_type)
 
-        def website_list_from_urls(urls):
-            return [Website(name="url%d" % n, url=url) for n, url in enumerate(urls)]
         parser.add_argument('websites', type=website_list_from_urls)
 
-        def mediums_from_names(names):
-            return [Medium.query.get(name) or Medium(name=name) for name in names]
         parser.add_argument('mediums', type=mediums_from_names)
-
-        def object_from_dict(class_name):
-            def wrapper(d):
-                return class_name(**d)
-            return wrapper
 
         parser.add_argument('address', type=object_from_dict(Address))
 
-        def objects_from_ids(class_name):
-            def wrapper(lst):
-                return [class_name.query.get(obj_id) for obj_id in lst]
-            return wrapper
         parser.add_argument('artists', type=objects_from_ids(Person))
         parser.add_argument('managers', type=objects_from_ids(Person))
 
-        def times_from_stringlist(stringlist):
-            # TODO(analytic): move that to common place
-            FORMAT = '%b %d %X %Z %Y'
-            return [LimitedTime(start=dtime.strptime(start, FORMAT)) for start in stringlist]
         parser.add_argument('times', type=times_from_stringlist)
 
         args = {k: v for k, v in parser.parse_args(request).items() if v is not None}
@@ -185,7 +223,10 @@ class ManageVenue(Resource):
         # app_ctx.get_geo_location(item.id)
 
     def delete(self, venue_id=None):
-        db.session.delete(self.MODEL.query.get(venue_id))
+        obj = self.MODEL.query.get(venue_id)
+        if not obj:
+            abort(404)
+        db.session.delete(obj)
         db.session.commit()
 
 
@@ -194,7 +235,7 @@ class ManagePerson(Resource):
 
     # Send SCIM requests to oxTrust
     #@cors.crossdomain(origin='*')
-    def put(self, person_id=None):
+    def put(self, person_id):
         try:
             app_ctx = ApplicationContext('Person')
             app_ctx.create_item_from_context(person_id)
@@ -203,13 +244,10 @@ class ManagePerson(Resource):
             return str(e),404
 
     #@cors.crossdomain(origin='*')
-    def post(self, person_id=None):
-        if not person_id: return 'Person not found', 404
-        else:
-            return None
-
-    #@cors.crossdomain(origin='*')
-    def delete(self, person_id=None):
-        db.session.delete(self.MODEL.query.get(person_id))
+    def delete(self, person_id):
+        obj = self.MODEL.query.get(person_id)
+        if not obj:
+            abort(404)
+        db.session.delete(obj)
         db.session.commit()
 

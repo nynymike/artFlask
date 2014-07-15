@@ -149,10 +149,128 @@ class VenueTestCase(TestCase):
         self.assertTrue(venue.ad_7)
         self.assertFalse(venue.ad_8)
 
-    def test_deletion(self):
+    def test_delete_nonexisting(self):
+        self.assertObjectCount(0)
+        response = self.client.delete(urljoin(self.MANAGE_API_URL, '%d/' % 5))
+        self.assert404(response)
+        self.FACTORY(id=4)
+        response = self.client.delete(urljoin(self.MANAGE_API_URL, '%d/' % 5))
+        self.assert404(response)
+
+    def test_delete_existing(self):
         self.assertObjectCount(0)
         self.FACTORY(id=5)
         db.session.commit()
         self.assertObjectCount(1)
         self.client.delete(urljoin(self.MANAGE_API_URL, '%d/' % 5))
         self.assertObjectCount(0)
+
+    def test_put(self):
+        venue_id = 77
+        self.assertObjectCount(0)
+        venue = self.FACTORY(id=venue_id)
+        PersonFactory(sub='112', role='artist')
+        PersonFactory(sub='223', role='staff')
+        EventFactory(id=8)
+        db.session.commit()
+        data = {
+            'site_id': "*modified* 101c",
+            'name': u"*modified* Gallery Happy",
+            'event_id': 8,
+            'picture': u'*modified* http://www.galleryhappy.com/logo.png',
+            'address': {
+                "street": u"*modified* 621 East Sixth Street",
+                "locality": u"*modified* Austin",
+                "region": u"*modified* TX",
+                "postal_code": 78702,
+                "country": u"*modified* US"
+            },
+            'twitter': '@modified_GalleryHappy',
+            'email': 'modified@galleryhappy.org',
+            'phone': '+1 512-555-1213',
+            'category': u'*modified* Artists & Studios',
+            'mediums': ["*modified* Ceramics"],
+            'description': u"*modified* Fun stuff made of clay by talented people.",
+            'artists': ['112'],
+            'websites': [u'http://www.modified.com', u'http://modified_google.com'],
+            'managers': ['223'],
+            'curated': False,
+            'times': ['Feb  4 12:41:00 UTC 2014', 'Feb  4 14:36:00 UTC 2014'],
+            'ad_1': False,
+            'ad_2': True,
+            'ad_3': True,
+            'ad_4': False,
+            'ad_5': False,
+            'ad_6': True,
+            'ad_7': False,
+            'ad_8': True,
+        }
+        self.assertNotEqual(venue.site_id, "*modified* 101c")
+        self.assertNotEqual(venue.name, u"*modified* Gallery Happy")
+        self.assertNotEqual(venue.event_id, 8)
+        self.assertNotEqual(venue.picture, u'*modified* http://www.galleryhappy.com/logo.png')
+        self.assertNotEqual({
+                             "street": u"*modified* 621 East Sixth Street",
+                             "locality": u"*modified* Austin",
+                             "region": u"*modified* TX",
+                             "postal_code": 78702,
+                             "country": u"*modified* US"
+                         },
+                         venue.address.as_dict(),)
+        self.assertNotEqual(venue.twitter, '@modified_GalleryHappy')
+        self.assertNotEqual(venue.email, 'modified@galleryhappy.org')
+        self.assertNotEqual(venue.phone, '+1 512-555-1213')
+        self.assertNotEqual(venue.category, u'*modified* Artists & Studios')
+        self.assertNotEqual([m.name for m in venue.mediums], ["*modified* Ceramics"])
+        self.assertNotEqual(venue.description, u"*modified* Fun stuff made of clay by talented people.")
+        self.assertNotEqual([a.sub for a in venue.artists], ['112'])
+        self.assertNotEqual([w.url for w in venue.websites], [u'http://www.modified.com', u'http://modified_google.com'])
+        self.assertNotEqual([m.sub for m in venue.managers], ['223'])
+        self.assertNotEqual(venue.curated, False)
+        self.assertNotEqual([t.start for t in venue.times],
+                         [dtime(2014, 2, 4, 12, 41, 0), dtime(2014, 2, 4, 14, 36, 00)])
+        self.assertNotEqual(venue.ad_1, False)
+        self.assertNotEqual(venue.ad_2, True)
+        self.assertNotEqual(venue.ad_3, True)
+        self.assertNotEqual(venue.ad_4, False)
+        self.assertNotEqual(venue.ad_5, False)
+        self.assertNotEqual(venue.ad_6, True)
+        self.assertNotEqual(venue.ad_7, False)
+        self.assertNotEqual(venue.ad_8, True)
+
+        self.client.put(urljoin(self.MANAGE_API_URL, '%d/' % venue_id),
+                        data=json.dumps(data),
+                        content_type='application/json')
+        self.assertEqual(venue.site_id, "*modified* 101c")
+        self.assertEqual(venue.name, u"*modified* Gallery Happy")
+        self.assertEqual(venue.event_id, 8)
+        self.assertEqual(venue.picture, u'*modified* http://www.galleryhappy.com/logo.png')
+        self.assertEqual({
+                             "street": u"*modified* 621 East Sixth Street",
+                             "locality": u"*modified* Austin",
+                             "region": u"*modified* TX",
+                             "postal_code": 78702,
+                             "country": u"*modified* US"
+                         },
+                         venue.address.as_dict(),)
+        self.assertEqual(venue.twitter, '@modified_GalleryHappy')
+        self.assertEqual(venue.email, 'modified@galleryhappy.org')
+        self.assertEqual(venue.phone, '+1 512-555-1213')
+        self.assertEqual(venue.category, u'*modified* Artists & Studios')
+        self.assertEqual([m.name for m in venue.mediums], ["*modified* Ceramics"])
+        self.assertEqual(venue.description, u"*modified* Fun stuff made of clay by talented people.")
+        self.assertEqual([a.sub for a in venue.artists], ['112'])
+        self.assertEqual([w.url for w in venue.websites], [u'http://www.modified.com', u'http://modified_google.com'])
+        self.assertEqual([m.sub for m in venue.managers], ['223'])
+        self.assertEqual(venue.curated, False)
+        self.assertEqual([t.start for t in venue.times],
+                         [dtime(2014, 2, 4, 12, 41, 0), dtime(2014, 2, 4, 14, 36, 00)])
+        self.assertEqual(venue.ad_1, False)
+        self.assertEqual(venue.ad_2, True)
+        self.assertEqual(venue.ad_3, True)
+        self.assertEqual(venue.ad_4, False)
+        self.assertEqual(venue.ad_5, False)
+        self.assertEqual(venue.ad_6, True)
+        self.assertEqual(venue.ad_7, False)
+        self.assertEqual(venue.ad_8, True)
+
