@@ -88,15 +88,24 @@ __author__ = 'Michael Schwartz'
 import json
 
 from flask import request, abort
-from flask.ext.restful import Resource
+from flask.ext.restful import Resource, reqparse
 from flask_restful.utils import cors
 
 from utils.helpers import upload_file
 from utils.app_ctx import ApplicationContext
 from bson import json_util
 
-from model import Artwork
+from model import Artwork, Person, Website
 from app import db
+
+
+# FIXME(analytic): copy-paste from artlist.py
+def website_list_from_dict(website_dict):
+    return [Website(name=name, url=url) for name, url in website_dict.items()]
+
+
+def art_list_from_ids(ids):
+    return Artwork.query.filter(Artwork.id.in_(ids)).all()
 
 
 class Art(Resource):
@@ -112,19 +121,31 @@ class Art(Resource):
 
     #@cors.crossdomain(origin='*')
     def put(self, art_id=None):
-        try:
-            app_ctx = ApplicationContext('Art')
-            item = app_ctx.create_item_from_context(art_id)
-            artist_context = ApplicationContext('Person')
-            if not item.artist:
-                return "Artist Not Found In Art", 400
-            artist = artist_context.get_item(item.artist)
-            artist_name = "%s %s" % (artist.given_name, artist.family_name)
-            if 'file' in request.files:
-                upload_file(art_id, artist_name)
-            return '', 200
-        except Exception, e:
-            return str(e), 404
+        artwork = self.MODEL.query.get(art_id)
+        if not artwork:
+            abort(404)
+
+        parser = reqparse.RequestParser()
+        for field in Artwork.__table__.columns:
+            if field.name == 'venue_id':
+                input_name = 'venue'
+            elif field.name == 'artist_id':
+                input_name = 'artist'
+            elif field.name == 'parent_id':
+                input_name = 'parent_work'
+            else:
+                input_name = field.name
+
+            parser.add_argument(input_name, type=field.type.python_type,
+                                dest=field.name)
+
+        parser.add_argument('alt_urls', type=website_list_from_dict)
+        parser.add_argument('series', type=art_list_from_ids)
+
+        for k, v in parser.parse_args(request).items():
+            if v is not None:
+                setattr(artwork, k, v)
+        db.session.commit()
 
     def delete(self, art_id=None):
         o = self.MODEL.query.get(art_id)

@@ -131,6 +131,7 @@ class VenueFactory(SQLAlchemyModelFactory):
             existing = len(self.mediums)
             if existing < required:
                 new_mediums = MediumFactory.create_batch(required - existing)
+                db.session.commit()
                 self.mediums += new_mediums
 
 

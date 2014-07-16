@@ -112,3 +112,57 @@ class ArtTest(TestCase):
         self.client.delete(urljoin(self.API_URL, '%d/' % 5))
         self.assertObjectCount(0)
 
+    def test_put_artwork(self):
+        self.assertObjectCount(0)
+        artwork_id = 25
+        artwork = self.FACTORY(id=artwork_id)
+        self.FACTORY(id=117)
+        VenueFactory(id=27)
+        db.session.commit()
+        self.assertObjectCount(2)
+
+        data = {
+            'title': u"*modified* Austin Sunrise Special",
+            'description': u"*modified* Third in a series of ...",
+            'buy_url': u'http://modified.com/item/3432840932',
+            'venue': 27,
+            'medium': 'Sculpture',
+            'sold_out': True,
+            'series': [117],
+            'parent_work': 117,
+            'alt_urls': {
+                'Detail': 'http://modif.ied/23A3fi',
+                'Back': 'http://modif.ied/xc3wyo',
+            },
+        }
+
+        self.assertNotEqual(artwork.title, u"*modified* Austin Sunrise Special")
+        self.assertNotEqual(artwork.description, u"*modified* Third in a series of ...")
+        self.assertNotEqual(artwork.buy_url, u'http://modified.com/item/3432840932')
+        self.assertNotEqual(artwork.venue.id, 27)
+        self.assertNotEqual(artwork.medium, 'Sculpture')
+        self.assertNotEqual(artwork.sold_out, True)
+        self.assertNotEqual([s.id for s in artwork.series], [117])
+        self.assertNotEqual(artwork.parent_id, 117)
+        self.assertNotEqual({u.name: u.url for u in artwork.alt_urls}, {
+            'Detail': 'http://modif.ied/23A3fi',
+            'Back': 'http://modif.ied/xc3wyo',
+            })
+
+        response = self.client.put(urljoin(self.API_URL, '%d/' % artwork_id),
+                                   data=json.dumps(data),
+                                   content_type='application/json')
+        self.assert200(response)
+
+        self.assertEqual(artwork.title, u"*modified* Austin Sunrise Special")
+        self.assertEqual(artwork.description, u"*modified* Third in a series of ...")
+        self.assertEqual(artwork.buy_url, u'http://modified.com/item/3432840932')
+        self.assertEqual(artwork.venue.id, 27)
+        self.assertEqual(artwork.medium, 'Sculpture')
+        self.assertEqual(artwork.sold_out, True)
+        self.assertListEqual([s.id for s in artwork.series], [117])
+        self.assertEqual(artwork.parent_id, 117)
+        self.assertDictEqual({u.name: u.url for u in artwork.alt_urls}, {
+            'Detail': 'http://modif.ied/23A3fi',
+            'Back': 'http://modif.ied/xc3wyo',
+        })
