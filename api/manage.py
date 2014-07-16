@@ -166,11 +166,6 @@ class ManageVenue(Resource):
     MODEL = Venue
     # REQUIRED = ["street", "city", "state", "zip"]
 
-    # @staticmethod
-    # def art_list_from_ids(ids):
-    #     return Artwork.query.filter(Artwork.id.in_(ids)).all()
-
-    #@cors.crossdomain(origin='*')
     def put(self, venue_id=None):
         venue = self.MODEL.query.get(venue_id)
         if not venue:
@@ -242,7 +237,6 @@ class ManagePerson(Resource):
     MODEL = Person
 
     # Send SCIM requests to oxTrust
-    #@cors.crossdomain(origin='*')
     def put(self, person_id):
         person = self.MODEL.query.get(person_id)
         if not person:
@@ -261,7 +255,6 @@ class ManagePerson(Resource):
                 setattr(person, k, v)
         db.session.commit()
 
-    #@cors.crossdomain(origin='*')
     def delete(self, person_id):
         obj = self.MODEL.query.get(person_id)
         if not obj:

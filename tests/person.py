@@ -1,6 +1,9 @@
 import json
 from urlparse import urljoin
 import hashlib
+import re
+
+from mail import mail
 
 from . import TestCase
 from factories import PersonFactory
@@ -12,6 +15,7 @@ class ArtistTestCase(TestCase):
     MODEL = Person
     FACTORY = PersonFactory
     MANAGE_API_URL = '/api/v1/manage/persons/'
+    REGISTER_URL = '/api/v1/register/'
 
     def test_empty_artist_list(self):
         result = self.client.get('/api/v1/artists/')
@@ -73,6 +77,81 @@ class ArtistTestCase(TestCase):
                 'sent': 'Mon Feb  3 10:10:31 2014'
             }
         })
+
+    def test_register_artist(self):
+        self.assertObjectCount(0)
+        data = {
+            'sub': '111',
+            'given_name': 'Michael',
+            'family_name': 'Schwartz',
+            'email': 'mike@gluu.org',
+            'phone_number': '1-512-555-1212',
+            'phone_number': '1-512-555-1212',
+            'picture': 'http://www.gluu.org/wp-content/uploads/2012/04/mike3.png',
+            "address": {
+                "street": u"621 East Sixth Street",
+                "locality": u"Austin",
+                "region": u"TX",
+                "postal_code": 78701,
+                "country": u"US",
+            },
+            'nickname': 'Mike',
+            'social_urls': {
+                'FB': 'https://www.facebook.com/nynymike',
+                'LinkedIn': 'http://www.linkedin.com/in/nynymike'
+            },
+            'twitter': '@nynymike',
+            'preferred_contact': 'Email',
+        }
+
+        with mail.record_messages() as outbox:
+            self.client.post(self.REGISTER_URL,
+                             data=json.dumps(data),
+                             content_type='application/json')
+            self.assertEqual(len(outbox), 1)
+            letter = outbox[0]
+
+        self.assertObjectCount(1)
+        artist = self.MODEL.query.first()
+
+        self.assertEqual(artist.given_name, 'Michael',)
+        self.assertEqual(artist.family_name, 'Schwartz',)
+        self.assertEqual(artist.email, 'mike@gluu.org',)
+        self.assertEqual(artist.phone_number, '1-512-555-1212',)
+        self.assertEqual(artist.picture,
+                         'http://www.gluu.org/wp-content/uploads/2012/04/mike3.png',)
+        self.assertEqual(artist.address.as_dict(),
+                         {
+                              "street": u"621 East Sixth Street",
+                              "locality": u"Austin",
+                              "region": u"TX",
+                              "postal_code": 78701,
+                              "country": u"US"
+                         })
+        self.assertEqual(artist.nickname, 'Mike',)
+        self.assertEqual({u.name: u.url for u in artist.social_urls},
+                         {
+                             'FB': 'https://www.facebook.com/nynymike',
+                             'LinkedIn': 'http://www.linkedin.com/in/nynymike'
+                         })
+        self.assertEqual(artist.twitter, '@nynymike',)
+        self.assertEqual(artist.preferred_contact, 'Email',)
+        # generated values
+        self.assertEqual(artist.status, 'pending')
+        self.assertIsNotNone(artist.registration_code)
+
+        # test a mail has been sent
+        res = re.search(r"Please click <a href='([^']*)'", letter.html)
+        self.assertIsNotNone(res)
+        activation_url = res.group(1)
+        wrong_activation_url = activation_url[:-2]  # let's forget 2 last chars
+        response = self.client.get(wrong_activation_url,
+                                   follow_redirects=True)
+        self.assert404(response)
+        response = self.client.get(activation_url,
+                                   follow_redirects=True)
+        self.assert200(response)
+        self.assertEqual(artist.status, 'active')
 
     def test_deletion(self):
         self.assertObjectCount(0)

@@ -114,9 +114,11 @@ class Person(db.Model, SimpleSerializeMixin):
         return d
 
 
-artwork_websites = db.Table('artwork_websites',
-                            db.Column('artwork_id', db.Integer, db.ForeignKey('artworks.id')),
-                            db.Column('website_id', db.String(128), db.ForeignKey('websites.id')))
+artwork_websites = db.Table(
+    'artwork_websites',
+    db.Column('artwork_id', db.Integer, db.ForeignKey('artworks.id')),
+    db.Column('website_id', db.String(128), db.ForeignKey('websites.id'))
+)
 
 
 class Event(db.Model, SimpleSerializeMixin):

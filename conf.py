@@ -260,15 +260,21 @@ class BaseConfig(object):
     # If true, do not generate a @detailmenu in the "Top" node's menu.
     #texinfo_no_detailmenu = False
 
-    MAIL_SERVER = 'smtp.gmail.com'
-    MAIL_PORT = 587
-    MAIL_USE_TLS = True
+    # MAIL_SERVER = 'smtp.gmail.com'
+    # MAIL_PORT = 587
+    # MAIL_USE_TLS = True
+    # MAIL_USE_SSL = False
+    # MAIL_DEBUG = False
+
+    MAIL_SERVER = 'localhost'
+    MAIL_PORT = 425
+    MAIL_USE_TLS = False
     MAIL_USE_SSL = False
-    MAIL_DEBUG = False
+    MAIL_DEBUG = True
 
     # Should put MAIL_USERNAME and MAIL_PASSWORD in production under instance folder.
-    MAIL_USERNAME = 'user@domain.tld'
-    MAIL_PASSWORD = 'changeme'
+    # MAIL_USERNAME = 'user@domain.tld'
+    # MAIL_PASSWORD = 'changeme'
     DEFAULT_MAIL_SENDER = 'user@domain.tld'
     MAIL_PROCESSORS = ['background']
 
@@ -286,6 +292,8 @@ class BaseConfig(object):
     LINKTRACK_API_LOGIN = ''
     LINKTRACK_API_PASS = ''
     MAPQUEST_API_KEY = ''
+    # FIXME(analytic): temporary
+    TESTING = True
 
 
 class TestingConfig(BaseConfig):

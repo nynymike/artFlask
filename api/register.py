@@ -29,63 +29,89 @@ Register API
 
 __author__ = 'Michael Schwartz'
 
-import datetime
+from datetime import datetime as dtime
+from urlparse import urljoin
+
 from bson.objectid import ObjectId
 from utils.app_ctx import ApplicationContext
-from db import mongo
+# from db import mongo
 from flask.ext.mail import Message
-from flask import current_app
+from flask import current_app, request, abort
 from mail import mail
 # from flask_restful.utils import cors
-from flask.ext.restful import Resource
+from flask.ext.restful import Resource, reqparse
+from sqlalchemy.exc import IntegrityError
+
+from model import RegistrationCode, Person, Website, Address
+from app import db
+
+
+def object_from_dict(class_name):
+    def wrapper(d):
+        return class_name(**d)
+    return wrapper
+
+
+def website_from_dict(d):
+    return [Website(name=k, url=v) for k, v in d.items()]
+
+
+def website_list_from_dict(url_dict):
+    return [Website(name=k, url=v) for k, v in url_dict.items()]
 
 
 class Register(Resource):
     #@cors.crossdomain(origin='*')
     def post(self):
-      #args = self.parser.parse_args()
-      #return None,200
-      # try:
-        required_fields = ['email',
-                          'given_name',
-                          'family_name',
-                          'phone_number',
-                          'sub']
+        required_fields = [
+            'sub',
+            'email',
+            'given_name',
+            'family_name',
+            'phone_number',
+        ]
         unique_fields = ['email']
-        app_ctx = ApplicationContext('Person')
-        code = "%s" % ObjectId()
-        registration = app_ctx.create_item_from_context(required_fields=required_fields,
-                                                        unique_fields=unique_fields)
-        data = {'status':'Pending',
-                'registration_code':{'code':code, 'sent': datetime.datetime.now(),
-                         'accepted': None}
-                }
-        mongo.db.Person.update({'_id': ObjectId(registration.id)}, {"$set": data}, upsert=False)
-        user = mongo.db.Person.find({'_id': ObjectId(registration.id)}).next()
-        url = current_app.config['BASE_URL'] + "api/v1/register/%s" % code
-        html = "Please click <a href='%s'>here</a> to verify your email address"\
-               " or copy paste %s in browser" % (url, url)
-        message = Message(subject='Verify your email address',
+        parser = reqparse.RequestParser()
+        for field in Person.__table__.columns:
+            if field.name != 'role':
+                parser.add_argument(field.name, type=field.type.python_type)
+        parser.add_argument('address', type=object_from_dict(Address))
+        parser.add_argument('website', type=website_from_dict)
+        parser.add_argument('social_urls', type=website_list_from_dict)
+
+        args = {k: v for k, v in parser.parse_args(request).items() if v is not None}
+        args.update({
+            'status': 'pending',
+            'registration_code': RegistrationCode(sent=dtime.now()),
+        })
+        try:
+            p = Person(**args)
+            db.session.add(p)
+            db.session.commit()
+        except IntegrityError:
+            abort(403)
+
+        url = urljoin(current_app.config['BASE_URL'],
+                      "api/v1/register/%s" % p.registration_code.hashed_id())
+        html = u"Please click <a href='%s'>here</a> to verify your email address"\
+               u" or copy paste %s in browser" % (url, url)
+        message = Message(subject=u'Verify your email address',
                           html=html,
-                          recipients=[user['email']],
+                          recipients=[p.email],
                           sender=current_app.config['DEFAULT_MAIL_SENDER'])
         mail.send(message)
         return '', 200
-      # except Exception, e:
-      #   return str(e),404
 
     #@cors.crossdomain(origin='*')
     def get(self, token):
-        try:
-            user = mongo.db.Person.find({'registration_code.code':token}).next()
-            mongo.db.Person.update({'_id': ObjectId("%s" % user['_id'])},
-                                   {"$set": {'status':'Active'}},
-                                   upsert=False)
-            return '', 200
-        except Exception, e:
-            print str(e)
-            return 'user not found', 404
+        # FIXME(analytic): ineffective, store hashed ids in DB as well
+        persons = Person.query.all()
+        for p in persons:
+            if token == p.registration_code.hashed_id():
+                break
+        else:
+            abort(404)
 
-
-
+        p.status = 'active'
+        db.session.commit()
 
