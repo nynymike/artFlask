@@ -210,13 +210,13 @@ class VenueTestCase(TestCase):
         self.assertNotEqual(venue.event_id, 8)
         self.assertNotEqual(venue.picture, u'*modified* http://www.galleryhappy.com/logo.png')
         self.assertNotEqual({
-                             "street": u"*modified* 621 East Sixth Street",
-                             "locality": u"*modified* Austin",
-                             "region": u"*modified* TX",
-                             "postal_code": 78702,
-                             "country": u"*modified* US"
-                         },
-                         venue.address.as_dict(),)
+                "street": u"*modified* 621 East Sixth Street",
+                "locality": u"*modified* Austin",
+                "region": u"*modified* TX",
+                "postal_code": 78702,
+                "country": u"*modified* US"
+            },
+            venue.address.as_dict(),)
         self.assertNotEqual(venue.twitter, '@modified_GalleryHappy')
         self.assertNotEqual(venue.email, 'modified@galleryhappy.org')
         self.assertNotEqual(venue.phone, '+1 512-555-1213')
@@ -228,7 +228,7 @@ class VenueTestCase(TestCase):
         self.assertNotEqual([m.sub for m in venue.managers], ['223'])
         self.assertNotEqual(venue.curated, False)
         self.assertNotEqual([t.start for t in venue.times],
-                         [dtime(2014, 2, 4, 12, 41, 0), dtime(2014, 2, 4, 14, 36, 00)])
+                            [dtime(2014, 2, 4, 12, 41, 0), dtime(2014, 2, 4, 14, 36, 00)])
         self.assertNotEqual(venue.ad_1, False)
         self.assertNotEqual(venue.ad_2, True)
         self.assertNotEqual(venue.ad_3, True)
@@ -273,4 +273,3 @@ class VenueTestCase(TestCase):
         self.assertEqual(venue.ad_6, True)
         self.assertEqual(venue.ad_7, False)
         self.assertEqual(venue.ad_8, True)
-

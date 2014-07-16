@@ -87,6 +87,10 @@ def website_list_from_urls(urls):
     return [Website(name="url%d" % n, url=url) for n, url in enumerate(urls)]
 
 
+def website_list_from_dict(url_dict):
+    return [Website(name=k, url=v) for k, v in url_dict.items()]
+
+
 def mediums_from_names(names):
     return [Medium.query.get(name) or Medium(name=name) for name in names]
 
@@ -107,6 +111,10 @@ def times_from_stringlist(stringlist):
     # TODO(analytic): move that to common place
     FORMAT = '%b %d %X %Z %Y'
     return [LimitedTime(start=dtime.strptime(start, FORMAT)) for start in stringlist]
+
+
+def website_from_dict(d):
+    return [Website(name=k, url=v) for k, v in d.items()]
 
 
 class ManageEvent(Resource):
@@ -169,7 +177,7 @@ class ManageVenue(Resource):
             abort(404)
 
         parser = reqparse.RequestParser()
-        for field in Venue.__table__.columns:
+        for field in self.MODEL.__table__.columns:
             parser.add_argument(field.name, type=field.type.python_type)
 
         parser.add_argument('websites', type=website_list_from_urls)
@@ -196,7 +204,7 @@ class ManageVenue(Resource):
     #@cors.crossdomain(origin='*')
     def post(self):
         parser = reqparse.RequestParser()
-        for field in Venue.__table__.columns:
+        for field in self.MODEL.__table__.columns:
             parser.add_argument(field.name, type=field.type.python_type)
 
         parser.add_argument('websites', type=website_list_from_urls)
@@ -236,12 +244,22 @@ class ManagePerson(Resource):
     # Send SCIM requests to oxTrust
     #@cors.crossdomain(origin='*')
     def put(self, person_id):
-        try:
-            app_ctx = ApplicationContext('Person')
-            app_ctx.create_item_from_context(person_id)
-            return '', 200
-        except Exception as e:
-            return str(e),404
+        person = self.MODEL.query.get(person_id)
+        if not person:
+            abort(404)
+
+        parser = reqparse.RequestParser()
+        for field in self.MODEL.__table__.columns:
+            if field.name != 'role':
+                parser.add_argument(field.name, type=field.type.python_type)
+        parser.add_argument('address', type=object_from_dict(Address))
+        parser.add_argument('website', type=website_from_dict)
+        parser.add_argument('social_urls', type=website_list_from_dict)
+
+        for k, v in parser.parse_args(request).items():
+            if v is not None:
+                setattr(person, k, v)
+        db.session.commit()
 
     #@cors.crossdomain(origin='*')
     def delete(self, person_id):
