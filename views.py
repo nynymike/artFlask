@@ -1,5 +1,6 @@
 from flask import render_template, url_for, request, session, redirect
 from flask.ext.restful import Resource, Api
+from flask_restful_swagger import swagger
 
 from api.artists import Artists
 from api.art import Art
@@ -26,6 +27,7 @@ def after_request(response):
 def index():
     return render_template('index.html')
 
+
 # todo: Should route for OpenID Connect Authn
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -34,6 +36,7 @@ def login():
         return redirect(url_for('index'))
     else:
         return render_template('login.html')
+
 
 @app.route('/api/v1/art/<string:art_id>/<string:action_type>', methods=['GET'])
 def render_image(art_id, action_type):
@@ -48,7 +51,7 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('index'))
 
-api = Api(app)
+api = swagger.docs(Api(app), apiVersion='0.1')
 
 api.add_resource(Art, '/api/v1/art/<string:art_id>/')
 # api.add_resource(ArtImage,'/api/v1/art/<string:art_id>/<string:action_type>')

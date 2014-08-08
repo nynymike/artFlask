@@ -86,7 +86,6 @@ class ArtistTestCase(TestCase):
             'family_name': 'Schwartz',
             'email': 'mike@gluu.org',
             'phone_number': '1-512-555-1212',
-            'phone_number': '1-512-555-1212',
             'picture': 'http://www.gluu.org/wp-content/uploads/2012/04/mike3.png',
             "address": {
                 "street": u"621 East Sixth Street",

@@ -90,6 +90,7 @@ import json
 from flask import request, abort
 from flask.ext.restful import Resource, reqparse
 from flask_restful.utils import cors
+from flask_restful_swagger import swagger
 
 from utils.helpers import upload_file
 from utils.app_ctx import ApplicationContext
@@ -109,9 +110,23 @@ def art_list_from_ids(ids):
 
 
 class Art(Resource):
+    """Art resource"""
     MODEL = Artwork
 
-    #@cors.crossdomain(origin='*')
+    @swagger.operation(
+        method='GET',
+        summary='get a single art object',
+        responseClass=MODEL.__name__,
+        nickname='getArtwork',
+        parameters=[
+            {
+                'name': 'art_id',
+                'dataType': 'integer',
+                'description': 'identifier of an art object',
+                'required': True,
+            }
+        ]
+    )
     def get(self, art_id):
         app_ctx = ApplicationContext('Art')
         item = app_ctx.get_item(art_id)
@@ -119,7 +134,20 @@ class Art(Resource):
             return {}, 404
         return item
 
-    #@cors.crossdomain(origin='*')
+    @swagger.operation(
+        method='PUT',
+        summary="update a single art object",
+        responseClass=MODEL.__name__,
+        nickname='updateArtwork',
+        parameters=[
+            {
+                'name': 'art_id',
+                'dataType': 'integer',
+                'description': 'identifier of an art object',
+                'required': True,
+            }
+        ]
+    )
     def put(self, art_id=None):
         artwork = self.MODEL.query.get(art_id)
         if not artwork:
@@ -147,6 +175,20 @@ class Art(Resource):
                 setattr(artwork, k, v)
         db.session.commit()
 
+    @swagger.operation(
+        method='DELETE',
+        summary="delete a single art object",
+        responseClass=MODEL.__name__,
+        nickname='delete',
+        parameters=[
+            {
+                'name': 'art_id',
+                'dataType': 'integer',
+                'description': 'identifier of an art object',
+                'required': True,
+            }
+        ]
+    )
     def delete(self, art_id=None):
         o = self.MODEL.query.get(art_id)
         if not o:

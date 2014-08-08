@@ -2,6 +2,9 @@ import json
 import hashlib
 from datetime import datetime as dtime, date
 
+from flask_restful_swagger import swagger
+from flask.ext.restful import fields
+
 from app import db
 
 
@@ -55,6 +58,14 @@ class Website(db.Model, SimpleSerializeMixin):
 class Address(db.Model, SimpleSerializeMixin):
     __tablename__ = "physical_addresses"
 
+    resource_fields = {
+        'street': fields.String,
+        'locality': fields.String,
+        'region': fields.String,
+        'postal_code': fields.Integer,
+        'country': fields.String,
+    }
+
     id = db.Column(db.Integer(), primary_key=True)
     street = db.Column(db.String(128))
     locality = db.Column(db.String(64))
@@ -68,8 +79,36 @@ person_websites = db.Table('person_websites',
                            db.Column('website_id', db.String(128), db.ForeignKey('websites.id')))
 
 
+@swagger.model
 class Person(db.Model, SimpleSerializeMixin):
     __tablename__ = "persons"
+
+    resource_fields = {
+        'sub': fields.String,
+        'given_name': fields.String,
+        'family_name': fields.String,
+        'middle_name': fields.String,
+        'name': fields.String,
+        'birthdate': fields.DateTime,
+        'email': fields.String,
+        'phone_number': fields.String,
+        'picture': fields.String,
+        # 'phone_number_verified': fields.Boolean
+        # 'address_id': fields.Integer, db.ForeignKey('physical_addresses.id'),
+        'address': fields.Nested(Address.resource_fields),
+        'nickname': fields.String,
+        # 'social_urls': db.relationship('Website', secondary=person_websites,
+        # 'role': fields.Enum('artist', 'staff'),
+        'twitter': fields.String,
+        'preferred_contact': fields.String,
+        'status': fields.String,
+        'registration_code': fields.String,
+        'website': fields.String,
+        'preferred_username': fields.String,
+        # 'zoneinfo': fields.String,
+        # 'updated_at': fields.DateTime,
+        'gender': fields.String,
+    }
 
     # OpenID Connect identifier, 256 should be enough for max len
     sub = db.Column(db.String(256), primary_key=True)
@@ -106,10 +145,10 @@ class Person(db.Model, SimpleSerializeMixin):
             d['address'] = self.address.as_dict()
         if 'registration_code_id' in d:
             del d['registration_code_id']
-            d['registration_code'] = self.registration_code.as_dict()
+            d['registration_code'] = self.registration_code.hashed_id()
         if 'website_id' in d:
             del d['website_id']
-            d['website'] = self.website.as_dict()
+            d['website'] = self.website.name
         d['social_urls'] = [u.as_dict() for u in self.social_urls]
         return d
 
@@ -121,6 +160,7 @@ artwork_websites = db.Table(
 )
 
 
+@swagger.model
 class Event(db.Model, SimpleSerializeMixin):
     """
     {
@@ -133,6 +173,15 @@ class Event(db.Model, SimpleSerializeMixin):
     }
     """
     __tablename__ = "art_events"
+
+    resource_fields = {
+        'id': fields.Integer,
+        'name': fields.String,
+        'start_date': fields.DateTime,
+        'end_date': fields.DateTime,
+        'description': fields.String,
+        'picture': fields.String,
+    }
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(256))
@@ -182,6 +231,7 @@ venue_limited_time = db.Table('venue_limited_time',
                               db.Column('time_id', db.Integer, db.ForeignKey('limitation_time.id')))
 
 
+@swagger.model
 class Venue(db.Model, SimpleSerializeMixin):
     """
     'id': 'd471b627-f7f3-4872-96e2-2af4d813673f',
@@ -212,12 +262,53 @@ class Venue(db.Model, SimpleSerializeMixin):
     """
     __tablename__ = "venues"
 
+    resource_fields = {
+        'id': fields.Integer,
+        'site_id': fields.String,
+        'name': fields.String,
+        'event': fields.Integer,
+        'picture': fields.String,
+        # 'address_id': fields.Integer, db.ForeignKey('physical_addresses.id'),
+        # 'address': db.relationship(Address, uselist=False,
+        # coordinates
+        'latitude': fields.Float,
+        'longitude': fields.Float,
+        'twitter': fields.String,
+        'email': fields.String,
+        'phone': fields.String,
+        'category': fields.String,
+        # 'mediums': db.relationship('Medium', secondary=venue_mediums,
+        'description': fields.String,
+        # 'artists': db.relationship('Person', secondary=venue_artists,
+        # 'websites': db.relationship('Website', secondary=venue_websites,
+        # 'managers': db.relationship('Person', secondary=venue_managers,
+        'curated': fields.Boolean,
+        # limited times
+        # 'times': db.relationship('LimitedTime', secondary=venue_limited_time,
+        # Parking: Official parking for the disabled
+        'ad_1': fields.Boolean,
+        # Entrance and interior: Minimum 32" doorway clearance space
+        'ad_2': fields.Boolean,
+        # Entrance and interior: Entry way without stairs, no lip & with a ramp
+        'ad_3': fields.Boolean,
+        # Entrance and interior: Path around studio with minimum 36" width
+        'ad_4': fields.Boolean,
+        # Restrooms: Entry way with minimum 36" wide clearance space
+        'ad_5': fields.Boolean,
+        # Restrooms: Minimum 56x60 inch clearance space for toilet
+        'ad_6': fields.Boolean,
+        # Restrooms: Grab bars
+        'ad_7': fields.Boolean,
+        # Other: Braille or raised letter signage
+        'ad_8': fields.Boolean,
+    }
+
     id = db.Column(db.Integer, primary_key=True)
     site_id = db.Column(db.String(64), unique=True)
     name = db.Column(db.String(256))
     event_id = db.Column(db.Integer, db.ForeignKey('art_events.id'))
     event = db.relationship('Event')
-    picture = db.Column(db.String(256))
+    picture = db.Column(db.String)
     address_id = db.Column(db.Integer, db.ForeignKey('physical_addresses.id'))
     address = db.relationship(Address, uselist=False)
     # coordinates
@@ -229,7 +320,7 @@ class Venue(db.Model, SimpleSerializeMixin):
     phone = db.Column(db.String(64))
     category = db.Column(db.String(128))
     mediums = db.relationship('Medium', secondary=venue_mediums)
-    description = db.Column(db.String(1024))
+    description = db.Column(db.String)
     artists = db.relationship('Person', secondary=venue_artists)
     websites = db.relationship('Website', secondary=venue_websites)
     managers = db.relationship('Person', secondary=venue_managers)
@@ -269,6 +360,7 @@ class Venue(db.Model, SimpleSerializeMixin):
         return d
 
 
+@swagger.model
 class Artwork(db.Model, SimpleSerializeMixin):
     """
         {
@@ -289,6 +381,26 @@ class Artwork(db.Model, SimpleSerializeMixin):
         }
     """
     __tablename__ = "artworks"
+
+    resource_fields = {
+        'id': fields.Integer,
+        'artist': fields.String,
+        'title': fields.String,
+        'description': fields.String,
+        'picture': fields.String,
+        'thumbnail': fields.String,
+        'buy_url': fields.String,
+        'venue': fields.Integer,
+        'medium': fields.String,
+        'sold_out': fields.Boolean,
+        # 'series': db.relationship('Artwork',
+        'parent_work': fields.Integer,
+        # size = fields.String,
+        'height': fields.Float,
+        'width': fields.Float,
+        'year': fields.Integer,
+        # 'alt_urls': db.relationship('Website', secondary=artwork_websites,
+    }
 
     id = db.Column(db.Integer, primary_key=True)
     artist_id = db.Column(db.String(256), db.ForeignKey('persons.sub'))

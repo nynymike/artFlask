@@ -72,9 +72,10 @@ from datetime import datetime as dtime
 
 from flask import request, abort
 from flask.ext.restful import Resource, reqparse
+from flask_restful_swagger import swagger
+
 from sqlalchemy.exc import IntegrityError
 
-from utils.app_ctx import ApplicationContext
 from model import *
 from app import db
 
@@ -118,8 +119,24 @@ def website_from_dict(d):
 
 
 class ManageEvent(Resource):
+    """
+    Management API
+    """
     MODEL = Event
 
+    @swagger.operation(
+        summary='update an event',
+        responseClass=MODEL.__name__,
+        nickname='update',
+        parameters=[
+            {
+                'name': 'event_id',
+                'dataType': 'integer',
+                'description': 'event identifier',
+                'required': True,
+            }
+        ]
+    )
     def put(self, event_id):
         event = self.MODEL.query.get(event_id)
         if not event:
@@ -136,6 +153,36 @@ class ManageEvent(Resource):
                 setattr(event, k, v)
         db.session.commit()
 
+    @swagger.operation(
+        method='POST',
+        summary="create an event",
+        notes="",
+        type='void',
+        responseClass=MODEL.__name__,
+        nickname='createEvent',
+        # "authorizations": {
+        # "oauth2": [
+        #     {
+        #         "scope": "test:anything",
+        #         "description": "anything"
+        #     }
+        # ]
+        parameters=[
+            {
+                "name": "body",
+                "description": "event to add",
+                "required": True,
+                "type": MODEL.__name__,
+                "paramType": "body"
+            }
+        ],
+        # responseMessages=[
+        #     {
+        #         "code": 400,
+        #         "message": "Invalid event"
+        #     }
+        # ]
+    )
     def post(self):
         parser = reqparse.RequestParser()
 
@@ -154,6 +201,19 @@ class ManageEvent(Resource):
         except IntegrityError:
             abort(403)
 
+    @swagger.operation(
+        summary='delete an event',
+        responseClass=MODEL.__name__,
+        nickname='deleteEvent',
+        parameters=[
+            {
+                'name': 'event_id',
+                'dataType': 'integer',
+                'description': 'event identifier',
+                'required': True,
+            }
+        ]
+    )
     def delete(self, event_id):
         o = self.MODEL.query.get(event_id)
         if not o:
@@ -166,7 +226,20 @@ class ManageVenue(Resource):
     MODEL = Venue
     # REQUIRED = ["street", "city", "state", "zip"]
 
-    def put(self, venue_id=None):
+    @swagger.operation(
+        summary='update a venue',
+        responseClass=MODEL.__name__,
+        nickname='updateVenue',
+        parameters=[
+            {
+                'name': 'venue_id',
+                'dataType': 'integer',
+                'description': 'venue identifier',
+                'required': True,
+            }
+        ]
+    )
+    def put(self, venue_id):
         venue = self.MODEL.query.get(venue_id)
         if not venue:
             abort(404)
@@ -191,12 +264,12 @@ class ManageVenue(Resource):
                 setattr(venue, k, v)
         db.session.commit()
 
-    # def post(self, venue_id=None):
-    #     if not venue_id: return 'Venue not found', 404
-    #     else:
-    #         return None
-
-    #@cors.crossdomain(origin='*')
+    @swagger.operation(
+        summary='create a venue',
+        responseClass=MODEL.__name__,
+        nickname='createVenue',
+        parameters=[]
+    )
     def post(self):
         parser = reqparse.RequestParser()
         for field in self.MODEL.__table__.columns:
@@ -225,7 +298,20 @@ class ManageVenue(Resource):
         # app_ctx = ApplicationContext('Venue')
         # app_ctx.get_geo_location(item.id)
 
-    def delete(self, venue_id=None):
+    @swagger.operation(
+        summary='delete a venue',
+        responseClass=MODEL.__name__,
+        nickname='deleteVenue',
+        parameters=[
+            {
+                'name': 'venue_id',
+                'dataType': 'integer',
+                'description': 'venue identifier',
+                'required': True,
+            }
+        ]
+    )
+    def delete(self, venue_id):
         obj = self.MODEL.query.get(venue_id)
         if not obj:
             abort(404)
@@ -237,6 +323,19 @@ class ManagePerson(Resource):
     MODEL = Person
 
     # Send SCIM requests to oxTrust
+    @swagger.operation(
+        summary='update a person',
+        responseClass=MODEL.__name__,
+        nickname='updatePerson',
+        parameters=[
+            {
+                'name': 'person_id',
+                'dataType': 'string',
+                'description': 'openid identifier',
+                'required': True,
+            }
+        ]
+    )
     def put(self, person_id):
         person = self.MODEL.query.get(person_id)
         if not person:
@@ -255,6 +354,19 @@ class ManagePerson(Resource):
                 setattr(person, k, v)
         db.session.commit()
 
+    @swagger.operation(
+        summary='delete a person',
+        responseClass=MODEL.__name__,
+        nickname='deletePerson',
+        parameters=[
+            {
+                'name': 'person_id',
+                'dataType': 'string',
+                'description': 'openid identifier',
+                'required': True,
+            }
+        ]
+    )
     def delete(self, person_id):
         obj = self.MODEL.query.get(person_id)
         if not obj:

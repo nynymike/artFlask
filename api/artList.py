@@ -1,5 +1,6 @@
 from flask import request, abort
 from flask.ext.restful import Resource, reqparse
+from flask_restful_swagger import swagger
 from flask.json import jsonify
 from sqlalchemy.exc import IntegrityError
 
@@ -20,8 +21,14 @@ def art_list_from_ids(ids):
 
 class ArtList(Resource):
     REQUIRED = ['title', 'description', 'buy_url', 'venue', 'medium', 'sold']
+    MODEL = Artwork
 
-    # @cors.crossdomain(origin='*')
+    @swagger.operation(
+        summary="get a list of art items",
+        responseClass=MODEL.__name__,
+        nickname='getArtworkList',
+        parameters=[],
+    )
     def get(self):
         app_ctx = ApplicationContext('Artwork')
         items = app_ctx.query_from_context(allowList=False)
@@ -29,7 +36,12 @@ class ArtList(Resource):
         # return json.dumps(items.all(), cls=JsonModelEncoder)
         return jsonify(item_list=[item.as_dict() for item in items])
 
-    # @cors.crossdomain(origin='*')
+    @swagger.operation(
+        summary="add a new art item",
+        responseClass=MODEL.__name__,
+        nickname='createArtwork',
+        parameters=[],
+    )
     def post(self):
         parser = reqparse.RequestParser()
         for field in Artwork.__table__.columns:
@@ -45,6 +57,7 @@ class ArtList(Resource):
 
             parser.add_argument(input_name, type=field.type.python_type,
                                 dest=field.name, required=required)
+
         parser.add_argument('alt_urls', type=website_list_from_dict, required=False)
         parser.add_argument('series', type=art_list_from_ids, required=False)
 

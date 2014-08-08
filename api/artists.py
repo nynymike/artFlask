@@ -26,13 +26,13 @@ Artists API
 """
 __author__ = 'Michael Schwartz'
 
-from flask.ext.restful import Resource, Api
-from flask import Request
-from flask.ext.restful import reqparse
-from utils.app_ctx import ApplicationContext
+from flask.ext.restful import Resource, marshal_with
+from flask_restful_swagger import swagger
 from bson import json_util
 import json
-from flask_restful.utils import cors
+
+from utils.app_ctx import ApplicationContext
+from model import Person
 
 
 def getAllArtists():
@@ -48,8 +48,25 @@ def queryResults(query):
 
 
 class Artists(Resource):
+    """
+    Artists API
+    """
+    MODEL = Person
 
-    #@cors.crossdomain(origin='*')
+    @swagger.operation(
+        notes='get a single artist',
+        responseClass=MODEL.__name__,
+        nickname='get',
+        parameters=[
+            {
+                'name': 'artist_id',
+                'dataType': 'string',
+                'description': 'openid identifier',
+                'required': True,
+            }
+        ]
+    )
+    # @marshal_with(resource_fields)
     def get(self, artist_id):
         app_ctx = ApplicationContext('Person')
         try:

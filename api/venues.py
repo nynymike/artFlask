@@ -22,19 +22,35 @@ Venues API
 """
 __author__ = 'Michael Schwartz'
 
-import json
 
-from flask.ext.restful import Resource, Api
-from flask import Request
-from flask_restful.utils import cors
+from flask.ext.restful import Resource
+from flask_restful_swagger import swagger
 
 from utils.helpers import jsonify
 from utils.app_ctx import ApplicationContext
-from bson import json_util
+
+from model import Venue
 
 
 class Venues(Resource):
-    #@cors.crossdomain(origin='*')
+    """
+    API to handle single venues
+    """
+    MODEL = Venue
+
+    @swagger.operation(
+        notes='get a single event object',
+        responseClass=MODEL.__name__,
+        nickname='get',
+        parameters=[
+            {
+                'name': 'venue_id',
+                'dataType': 'integer',
+                'description': 'identifier of a venue object',
+                'required': True,
+            }
+        ]
+    )
     def get(self, venue_id):
         app_ctx = ApplicationContext('Venue')
         item = app_ctx.get_item(venue_id)
@@ -44,7 +60,17 @@ class Venues(Resource):
 
 
 class VenueList(Resource):
-    #@cors.crossdomain(origin='*')
+    """
+    Bulk venues API.
+    """
+    MODEL = Venue
+
+    @swagger.operation(
+        notes='get a list of all venues',
+        responseClass=MODEL.__name__,
+        nickname='get list',
+        parameters=[]
+    )
     def get(self):
         app_ctx = ApplicationContext('Venue')
         venues = app_ctx.query_from_context(allowList=True)

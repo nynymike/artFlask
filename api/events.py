@@ -23,16 +23,34 @@ Events API
 """
 __author__ = 'Michael Schwartz'
 
-from flask.ext.restful import Resource, Api
-from utils.helpers import jsonify, request_to_dictonary
+from flask.ext.restful import Resource
+from flask_restful_swagger import swagger
+
+from utils.helpers import jsonify
 from utils.app_ctx import ApplicationContext
-import json
-from bson import json_util
-from flask_restful.utils import cors
+from model import Event
 
 
 class Event(Resource):
-    #@cors.crossdomain(origin='*')
+    """
+    API to handle single events
+    """
+
+    MODEL = Event
+
+    @swagger.operation(
+        notes='get a single event object',
+        responseClass=MODEL.__name__,
+        nickname='get list',
+        parameters=[
+            {
+                'name': 'event_id',
+                'dataType': 'integer',
+                'description': 'identifier of an event object',
+                'required': True,
+            }
+        ]
+    )
     def get(self, event_id):
         app_ctx = ApplicationContext('Event')
         item = app_ctx.get_item(event_id)
@@ -42,8 +60,19 @@ class Event(Resource):
 
 
 class EventList(Resource):
-    #@cors.crossdomain(origin='*')
-    def get(self, event_id=None):
+    """
+    Bulk events API.
+    """
+
+    MODEL = Event
+
+    @swagger.operation(
+        notes='get a list of all events',
+        responseClass=MODEL.__name__,
+        nickname='get list',
+        parameters=[]
+    )
+    def get(self):
         app_ctx = ApplicationContext('Event')
         events = app_ctx.query_from_context(allowList=True)
         return jsonify(item_list=[item.as_dict() for item in events])
