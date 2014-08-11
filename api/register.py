@@ -29,38 +29,30 @@ Register API
 
 __author__ = 'Michael Schwartz'
 
-from datetime import datetime as dtime
 from urlparse import urljoin
 
-from bson.objectid import ObjectId
-from utils.app_ctx import ApplicationContext
-# from db import mongo
 from flask.ext.mail import Message
 from flask import current_app, request, abort
 from mail import mail
-# from flask_restful.utils import cors
 from flask.ext.restful import Resource, reqparse
+from flask_restful_swagger import swagger
 from sqlalchemy.exc import IntegrityError
 
-from model import RegistrationCode, Person, Website, Address
+from model import RegistrationCode, Person, Address
 from app import db
-
-
-def object_from_dict(class_name):
-    def wrapper(d):
-        return class_name(**d)
-    return wrapper
-
-
-def website_from_dict(d):
-    return [Website(name=k, url=v) for k, v in d.items()]
-
-
-def website_list_from_dict(url_dict):
-    return [Website(name=k, url=v) for k, v in url_dict.items()]
+from . import *
 
 
 class Register(Resource):
+    MODEL = Person
+
+    @swagger.operation(
+        method='POST',
+        summary='register new artist',
+        responseClass=MODEL.__name__,
+        nickname='register',
+        parameters=[]
+    )
     #@cors.crossdomain(origin='*')
     def post(self):
         required_fields = [
@@ -103,6 +95,18 @@ class Register(Resource):
         return '', 200
 
     #@cors.crossdomain(origin='*')
+    @swagger.operation(
+        method='GET',
+        summary='confirm registration based on token',
+        responseClass=MODEL.__name__,
+        nickname='registerConfirm',
+        parameters=[{
+            'name': 'token',
+            'dataType': 'string',
+            'description': "token sent to registrant's email for verification",
+            'required': True,
+        }]
+    )
     def get(self, token):
         # FIXME(analytic): ineffective, store hashed ids in DB as well
         persons = Person.query.all()

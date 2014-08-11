@@ -5,6 +5,7 @@ from logging.handlers import RotatingFileHandler
 import sys
 from mail import mail
 from conf import BaseConfig
+import jinja2
 
 from flask import Flask
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -13,6 +14,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 def configure_extensions(app):
     # mongo.init_app(app)
     mail.init_app(app)
+    app.jinja_loader = jinja2.FileSystemLoader('templates')
 
 
 def configure_logger(app):

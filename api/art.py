@@ -128,7 +128,7 @@ class Art(Resource):
         ]
     )
     def get(self, art_id):
-        app_ctx = ApplicationContext('Art')
+        app_ctx = ApplicationContext('Artwork')
         item = app_ctx.get_item(art_id)
         if not item:
             return {}, 404

@@ -124,7 +124,7 @@ class VenueTestCase(TestCase):
                 "postal_code": 78701,
                 "country": u"US"
             },
-            venue.address.as_dict())
+            venue.address.as_dict(include_id=False))
         self.assertEqual('@GalleryHappy', venue.twitter)
         self.assertEqual('info@galleryhappy.org', venue.email)
         self.assertEqual('+1 512-555-1212', venue.phone)
@@ -216,7 +216,7 @@ class VenueTestCase(TestCase):
                 "postal_code": 78702,
                 "country": u"*modified* US"
             },
-            venue.address.as_dict(),)
+            venue.address.as_dict(include_id=False),)
         self.assertNotEqual(venue.twitter, '@modified_GalleryHappy')
         self.assertNotEqual(venue.email, 'modified@galleryhappy.org')
         self.assertNotEqual(venue.phone, '+1 512-555-1213')
@@ -252,7 +252,7 @@ class VenueTestCase(TestCase):
                              "postal_code": 78702,
                              "country": u"*modified* US"
                          },
-                         venue.address.as_dict(),)
+                         venue.address.as_dict(include_id=False),)
         self.assertEqual(venue.twitter, '@modified_GalleryHappy')
         self.assertEqual(venue.email, 'modified@galleryhappy.org')
         self.assertEqual(venue.phone, '+1 512-555-1213')

@@ -23,28 +23,45 @@ Staff API
 """
 __author__ = 'Michael Schwartz'
 
-import json
-
 from flask.ext.restful import Resource, Api, abort
-from flask_restful.utils import cors
-from bson import json_util
+from flask_restful_swagger import swagger
 
-from utils.app_ctx import ApplicationContext
 from utils.helpers import jsonify
 from model import Person
 
 
 class Staff(Resource):
-    #@cors.crossdomain(origin='*')
+    MODEL = Person
+
+    @swagger.operation(
+        summary='Get staff member details',
+        responseClass=MODEL.__name__,
+        nickname='getStaffPerson',
+        parameters=[
+            {
+                'name': 'person_id',
+                'dataType': 'integer',
+                'description': 'person identifier',
+                'required': True,
+            }
+        ]
+    )
     def get(self, person_id):
-        p = Person.query.get(person_id)
+        p = Person.query.get(person_id, role='staff')
         if not p:
             abort(404)
         return p.as_dict()
 
 
 class StaffList(Resource):
-    #@cors.crossdomain(origin='*')
+    MODEL = Person
+
+    @swagger.operation(
+        summary='Get staff member details',
+        responseClass=MODEL.__name__,
+        nickname='getStaffPerson',
+        parameters=[]
+    )
     def get(self):
         staff = Person.query.filter_by(role='staff')
         if len(staff) == 0:

@@ -7,7 +7,7 @@ from api.art import Art
 from api.artList import ArtList
 from api.artImage import get_image
 from api.venues import Venues, VenueList
-from api.events import Event, EventList
+from api.events import Events, EventList
 from api.manage import ManageEvent, ManageVenue, ManagePerson
 from api.staff import Staff, StaffList
 from api.profile import Profile
@@ -63,12 +63,12 @@ api.add_resource(ArtistList, '/api/v1/artists/')
 api.add_resource(Register, '/api/v1/register/<string:token>', '/api/v1/register/')
 
 api.add_resource(EventList, '/api/v1/events/')
-api.add_resource(Event, '/api/v1/event/<string:event_id>/')
+api.add_resource(Events, '/api/v1/events/<string:event_id>/')
 
 api.add_resource(VenueList, '/api/v1/venues/')
 api.add_resource(Venues, '/api/v1/venues/<string:venue_id>/')
 
-api.add_resource(Profile, '/api/v1/profile/')
+# api.add_resource(Profile, '/api/v1/profile/')
 api.add_resource(StaffList, '/api/v1/staff/')
 api.add_resource(Staff, '/api/v1/staff/<string:person_id>/')
 api.add_resource(ManageEvent, '/api/v1/manage/events/', '/api/v1/manage/events/<string:event_id>/')

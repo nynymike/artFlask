@@ -31,7 +31,7 @@ from utils.app_ctx import ApplicationContext
 from model import Event
 
 
-class Event(Resource):
+class Events(Resource):
     """
     API to handle single events
     """
@@ -39,9 +39,9 @@ class Event(Resource):
     MODEL = Event
 
     @swagger.operation(
-        notes='get a single event object',
+        summary='get a single event object',
         responseClass=MODEL.__name__,
-        nickname='get list',
+        nickname='getEvent',
         parameters=[
             {
                 'name': 'event_id',
@@ -67,9 +67,9 @@ class EventList(Resource):
     MODEL = Event
 
     @swagger.operation(
-        notes='get a list of all events',
+        summary='get a list of all events',
         responseClass=MODEL.__name__,
-        nickname='get list',
+        nickname='getEventList',
         parameters=[]
     )
     def get(self):

@@ -54,9 +54,9 @@ class Artists(Resource):
     MODEL = Person
 
     @swagger.operation(
-        notes='get a single artist',
+        summary='get a single artist',
         responseClass=MODEL.__name__,
-        nickname='get',
+        nickname='getArtist',
         parameters=[
             {
                 'name': 'artist_id',

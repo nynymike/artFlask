@@ -29,18 +29,19 @@ from utils.helpers import jsonify
 from utils.app_ctx import ApplicationContext
 from flask_restful.utils import cors
 
-class Profile(Resource):
-    #@cors.crossdomain(origin='*')
-    def get(self):
-      app_ctx =ApplicationContext('Person')
-      try:
-        item = app_ctx.get_item(event_id)
-        return jsonify(item)
-      except:
-        return 'Person not found', 404
 
+# class Profile(Resource):
     #@cors.crossdomain(origin='*')
-    def put(self, person=None):
-        return None
+    # def get(self):
+    #   app_ctx =ApplicationContext('Person')
+    #   try:
+    #     item = app_ctx.get_item(event_id)
+    #     return jsonify(item)
+    #   except:
+    #     return 'Person not found', 404
+    #
+    # #@cors.crossdomain(origin='*')
+    # def put(self, person=None):
+    #     return None
 
 

@@ -9,7 +9,7 @@ from app import db
 
 
 class SimpleSerializeMixin(object):
-    def as_dict(self, include_id=False):
+    def as_dict(self, include_id=True):
         d = {}
         for c in self.__table__.columns:
             v = getattr(self, c.name)
@@ -41,7 +41,7 @@ class RegistrationCode(db.Model, SimpleSerializeMixin):
         return hashlib.sha224(str(self.id)).hexdigest()
 
     def as_dict(self, include_id=False):
-        d = super(RegistrationCode, self).as_dict(False)
+        d = super(RegistrationCode, self).as_dict(include_id)
         return {
             self.hashed_id(): d,
         }
@@ -93,11 +93,17 @@ class Person(db.Model, SimpleSerializeMixin):
         'email': fields.String,
         'phone_number': fields.String,
         'picture': fields.String,
-        # 'phone_number_verified': fields.Boolean
-        # 'address_id': fields.Integer, db.ForeignKey('physical_addresses.id'),
+        'phone_number_verified': fields.Boolean,
         'address': fields.Nested(Address.resource_fields),
         'nickname': fields.String,
-        # 'social_urls': db.relationship('Website', secondary=person_websites,
+        # 'social_urls': fields.Nested({
+        #     'name': {
+        #
+        #     }
+        #     'url': {
+        #
+        #     }
+        # })
         # 'role': fields.Enum('artist', 'staff'),
         'twitter': fields.String,
         'preferred_contact': fields.String,
@@ -138,18 +144,18 @@ class Person(db.Model, SimpleSerializeMixin):
     updated_at = db.Column(db.DateTime)
     gender = db.Column(db.String(1))
 
-    def as_dict(self, include_id=False):
+    def as_dict(self, include_id=True):
         d = super(Person, self).as_dict(include_id)
         if 'address_id' in d:
             del d['address_id']
-            d['address'] = self.address.as_dict()
+            d['address'] = self.address.as_dict(include_id=False)
         if 'registration_code_id' in d:
             del d['registration_code_id']
             d['registration_code'] = self.registration_code.hashed_id()
         if 'website_id' in d:
             del d['website_id']
             d['website'] = self.website.name
-        d['social_urls'] = [u.as_dict() for u in self.social_urls]
+        d['social_urls'] = {u.name: u.url for u in self.social_urls}
         return d
 
 
@@ -164,7 +170,7 @@ artwork_websites = db.Table(
 class Event(db.Model, SimpleSerializeMixin):
     """
     {
-        'id': 'happy2014',
+        'id': '132',
         'name': 'Happy Tour 2014',
         'startDate': 'Feb  3 00:00:00 UTC 2014',
         'endDate': 'Feb  5 00:00:00 UTC 2014',
@@ -344,14 +350,14 @@ class Venue(db.Model, SimpleSerializeMixin):
     # Other: Braille or raised letter signage
     ad_8 = db.Column(db.Boolean)
 
-    def as_dict(self, include_id=False):
-        d = super(Venue, self).as_dict()
+    def as_dict(self, include_id=True):
+        d = super(Venue, self).as_dict(include_id)
         if 'event_id' in d:
             del d['event_id']
             d['event'] = self.event_id
         if 'address_id' in d:
             del d['address_id']
-            d['address'] = self.address.as_dict()
+            d['address'] = self.address.as_dict(include_id=False)
         d['mediums'] = [m.name for m in self.mediums]
         d['artists'] = [a.sub for a in self.artists]
         d['websites'] = [w.url for w in self.websites]
@@ -423,8 +429,8 @@ class Artwork(db.Model, SimpleSerializeMixin):
     year = db.Column(db.Integer)
     alt_urls = db.relationship('Website', secondary=artwork_websites)
 
-    def as_dict(self, include_id=False):
-        d = super(Artwork, self).as_dict()
+    def as_dict(self, include_id=True):
+        d = super(Artwork, self).as_dict(include_id)
         d['artist'] = self.artist_id
         d['venue'] = self.venue_id
         d['parent_work'] = self.parent_id

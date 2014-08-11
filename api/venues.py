@@ -39,9 +39,9 @@ class Venues(Resource):
     MODEL = Venue
 
     @swagger.operation(
-        notes='get a single event object',
+        summary='get a single event object',
         responseClass=MODEL.__name__,
-        nickname='get',
+        nickname='getVenue',
         parameters=[
             {
                 'name': 'venue_id',
@@ -66,9 +66,9 @@ class VenueList(Resource):
     MODEL = Venue
 
     @swagger.operation(
-        notes='get a list of all venues',
+        summary='get a list of all venues',
         responseClass=MODEL.__name__,
-        nickname='get list',
+        nickname='getVenueList',
         parameters=[]
     )
     def get(self):

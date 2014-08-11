@@ -59,16 +59,12 @@ class ArtistTestCase(TestCase):
 
         self.assertEqual(result_person['nickname'], 'Mike')
 
-        self.assertListEqual(result_person['social_urls'], [
+        self.assertDictEqual(result_person['social_urls'],
             {
-                'name': 'FB',
-                'url': 'https://www.facebook.com/nynymike',
-            },
-            {
-                'name': 'LinkedIn',
-                'url': 'http://www.linkedin.com/in/nynymike',
+                'FB': 'https://www.facebook.com/nynymike',
+                'LinkedIn': 'http://www.linkedin.com/in/nynymike',
             }
-        ])
+        )
         self.assertEqual(result_person['twitter'], '@nynymike')
 
         self.assertEqual(result_person['registration_code'], {
