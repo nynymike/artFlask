@@ -10,12 +10,11 @@ from api.venues import Venues, VenueList
 from api.events import Events, EventList
 from api.manage import ManageEvent, ManageVenue, ManagePerson
 from api.staff import Staff, StaffList
-from api.profile import Profile
+# from api.profile import Profile
 from api.register import Register
 from api.artistlist import ArtistList
 
-from app import app, db
-import model
+from app import app
 
 
 @app.after_request

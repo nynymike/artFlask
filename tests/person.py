@@ -67,12 +67,11 @@ class ArtistTestCase(TestCase):
         )
         self.assertEqual(result_person['twitter'], '@nynymike')
 
-        self.assertEqual(result_person['registration_code'], {
-            hashlib.sha224('1').hexdigest(): {
-                'accepted': 'Mon Feb  3 10:15:09 2014',
-                'sent': 'Mon Feb  3 10:10:31 2014'
-            }
-        })
+        self.assertEqual(result_person['registration_code'],
+            hashlib.sha224('1').hexdigest())
+                # 'accepted': 'Mon Feb  3 10:15:09 2014',
+                # 'sent': 'Mon Feb  3 10:10:31 2014'
+            # }
 
     def test_register_artist(self):
         self.assertObjectCount(0)
@@ -115,7 +114,7 @@ class ArtistTestCase(TestCase):
         self.assertEqual(artist.phone_number, '1-512-555-1212',)
         self.assertEqual(artist.picture,
                          'http://www.gluu.org/wp-content/uploads/2012/04/mike3.png',)
-        self.assertEqual(artist.address.as_dict(),
+        self.assertEqual(artist.address.as_dict(include_id=False),
                          {
                               "street": u"621 East Sixth Street",
                               "locality": u"Austin",
@@ -221,7 +220,7 @@ class ArtistTestCase(TestCase):
             }})
 
         # remember reg code before update
-        reg_code = person.registration_code.as_dict()
+        reg_code = person.registration_code.as_dict(include_id=False)
 
         response = self.client.put(urljoin(self.MANAGE_API_URL, '%s/' % person_sub),
                                    data=json.dumps(data),
@@ -240,7 +239,7 @@ class ArtistTestCase(TestCase):
                 "postal_code": 78702,
                 "country": "*modified* US"
             },
-            person.address.as_dict())
+            person.address.as_dict(include_id=False))
         self.assertEqual(person.nickname, u'*modified* Mike')
         self.assertEqual({u.name: u.url for u in person.social_urls}, {
             'FB': u'https://www.facebook.com/modified_nynymike',
@@ -253,4 +252,4 @@ class ArtistTestCase(TestCase):
 
         # TODO(analytic): interface for changing reg code
         # verify registration code didn't change
-        self.assertEqual(person.registration_code.as_dict(), reg_code)
+        self.assertEqual(person.registration_code.as_dict(include_id=False), reg_code)

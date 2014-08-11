@@ -8,6 +8,17 @@ from flask.ext.restful import fields
 from app import db
 
 
+class DictField(fields.Raw):
+    def __init__(self, default=None, attribute=None):
+        super(DictField, self).__init__(default, attribute)
+        self.default = self.default or {}
+
+    def format(self, value):
+        if not isinstance(value, dict):
+            raise fields.MarshallingException
+        return value
+
+
 class SimpleSerializeMixin(object):
     def as_dict(self, include_id=True):
         d = {}
@@ -96,14 +107,7 @@ class Person(db.Model, SimpleSerializeMixin):
         'phone_number_verified': fields.Boolean,
         'address': fields.Nested(Address.resource_fields),
         'nickname': fields.String,
-        # 'social_urls': fields.Nested({
-        #     'name': {
-        #
-        #     }
-        #     'url': {
-        #
-        #     }
-        # })
+        'social_urls': DictField,
         # 'role': fields.Enum('artist', 'staff'),
         'twitter': fields.String,
         'preferred_contact': fields.String,
@@ -111,8 +115,8 @@ class Person(db.Model, SimpleSerializeMixin):
         'registration_code': fields.String,
         'website': fields.String,
         'preferred_username': fields.String,
-        # 'zoneinfo': fields.String,
-        # 'updated_at': fields.DateTime,
+        'zoneinfo': fields.String,
+        'updated_at': fields.DateTime,
         'gender': fields.String,
     }
 
@@ -274,8 +278,7 @@ class Venue(db.Model, SimpleSerializeMixin):
         'name': fields.String,
         'event': fields.Integer,
         'picture': fields.String,
-        # 'address_id': fields.Integer, db.ForeignKey('physical_addresses.id'),
-        # 'address': db.relationship(Address, uselist=False,
+        'address': fields.Nested(Address.resource_fields),
         # coordinates
         'latitude': fields.Float,
         'longitude': fields.Float,
@@ -283,14 +286,14 @@ class Venue(db.Model, SimpleSerializeMixin):
         'email': fields.String,
         'phone': fields.String,
         'category': fields.String,
-        # 'mediums': db.relationship('Medium', secondary=venue_mediums,
+        'mediums': fields.List(fields.String),
         'description': fields.String,
-        # 'artists': db.relationship('Person', secondary=venue_artists,
-        # 'websites': db.relationship('Website', secondary=venue_websites,
-        # 'managers': db.relationship('Person', secondary=venue_managers,
+        'artists': fields.List(fields.Integer),
+        'websites': fields.List(fields.String),
+        'managers': fields.List(fields.Integer),
         'curated': fields.Boolean,
         # limited times
-        # 'times': db.relationship('LimitedTime', secondary=venue_limited_time,
+        'times': fields.List(fields.DateTime),
         # Parking: Official parking for the disabled
         'ad_1': fields.Boolean,
         # Entrance and interior: Minimum 32" doorway clearance space
@@ -399,13 +402,12 @@ class Artwork(db.Model, SimpleSerializeMixin):
         'venue': fields.Integer,
         'medium': fields.String,
         'sold_out': fields.Boolean,
-        # 'series': db.relationship('Artwork',
+        'series': fields.List(fields.Integer),
         'parent_work': fields.Integer,
-        # size = fields.String,
         'height': fields.Float,
         'width': fields.Float,
         'year': fields.Integer,
-        # 'alt_urls': db.relationship('Website', secondary=artwork_websites,
+        'alt_urls': DictField,
     }
 
     id = db.Column(db.Integer, primary_key=True)
